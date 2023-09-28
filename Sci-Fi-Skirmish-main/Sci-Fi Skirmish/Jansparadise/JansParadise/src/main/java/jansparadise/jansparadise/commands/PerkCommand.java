@@ -44,9 +44,10 @@ public class PerkCommand implements CommandExecutor, TabCompleter {
                     this.plugin.getDatabase().createPlayerStats(stats);
                 }
 
-                Inventory Perks = Bukkit.createInventory(p, 45, "§c§lPerks");
-                for(int i = 0; i <= 9; i++){
-                    Perks.setItem(i, Füllerglas.Glas());
+                Inventory Perks = Bukkit.createInventory(p, 36, "§c§lPerks");
+                     for(int i = 0; i <= 9; i++) {
+                        Perks.setItem(i, Füllerglas.Glas());
+                     }
 
                     //Armorerperk
                     ItemStack ArmorerPerk = new ItemStack(Material.LODESTONE);
@@ -65,7 +66,32 @@ public class PerkCommand implements CommandExecutor, TabCompleter {
 
                     Perks.setItem(10, ArmorerPerk);
 
-                }
+                    ItemStack CS = new ItemStack(Material.BARRIER);
+                    ItemMeta meta = CS.getItemMeta();
+                    meta.setDisplayName("§c§l§oCooming Soon...");
+                    CS.setItemMeta(meta);
+                    for(int i1 = 11; i1 <= 16; i1++){
+                        Perks.setItem(i1, CS);
+                    }
+                    Perks.setItem(17, Füllerglas.Glas());
+                    Perks.setItem(18, Füllerglas.Glas());
+
+                    Boolean b1 = stats.getPerk1();
+
+                    Boolean b2 = stats.getPerk2();
+
+                    Boolean b3 = stats.getPerk3();
+
+                    Boolean b4 = stats.getPerk4();
+
+                    Boolean b5 = stats.getPerk5();
+
+
+
+                    for(int i2 = 26; i2 <= 35; i2++){
+                        Perks.setItem(i2, Füllerglas.Glas());
+                    }
+
                 p.openInventory(Perks);
 
             }catch (SQLException e){
