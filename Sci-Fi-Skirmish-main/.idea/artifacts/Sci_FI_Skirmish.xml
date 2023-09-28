@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="Sci-FI Skirmish">
+    <output-path>$USER_HOME$/Documents/1.19.2 Minecraft Server/plugins</output-path>
+    <root id="archive" name="Sci-FI Skirmish.jar">
+      <element id="module-output" name="JansParadise" />
+    </root>
+  </artifact>
+</component>
