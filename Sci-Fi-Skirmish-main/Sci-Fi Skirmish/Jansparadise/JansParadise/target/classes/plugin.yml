@@ -12,11 +12,9 @@ commands:
   sign:
   fix:
   uwu:
-  nick:
   invsee:
   spawn:
   ec:
-  unnick:
   workbench:
     aliases: "wb"
   anvil:
@@ -41,6 +39,7 @@ commands:
   cratestats:
     aliases: "cs"
   top:
+  perks:
 permissions:
   permission.mod:
     default: op

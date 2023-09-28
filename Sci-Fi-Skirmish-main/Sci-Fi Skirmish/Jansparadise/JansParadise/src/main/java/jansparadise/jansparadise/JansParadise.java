@@ -7,6 +7,7 @@ import jansparadise.jansparadise.commands.CoreCommands.*;
 import jansparadise.jansparadise.commands.InventoryCommands.GUIs.RezepteCommand;
 import jansparadise.jansparadise.commands.InventoryCommands.SpecialitemCommand;
 import jansparadise.jansparadise.commands.InventoryCommands.TrashCommand;
+import jansparadise.jansparadise.commands.PerkCommand;
 import jansparadise.jansparadise.commands.QoLCommands.*;
 import jansparadise.jansparadise.events.InventoryEvents.ClickEvent;
 import jansparadise.jansparadise.events.InventoryEvents.Rezepte.RezeptClickEvent;
@@ -157,7 +158,7 @@ public final class JansParadise extends JavaPlugin {
         getCommand("modify").setExecutor((CommandExecutor) new ModifyCommand());
         getCommand("cratestats").setExecutor((CommandExecutor) new CrateStatsCommand(this));
         getCommand("top").setExecutor((CommandExecutor) new TopCommand(this));
-
+        getCommand("perks").setExecutor((CommandExecutor) new PerkCommand(this));
 
 
     }
