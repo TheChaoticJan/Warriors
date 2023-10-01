@@ -3,6 +3,7 @@ package jansparadise.jansparadise.events.PlayerOrEntityEvents.PvPEvents;
 import com.destroystokyo.paper.Title;
 import jansparadise.jansparadise.JansParadise;
 import jansparadise.jansparadise.models.PlayerStats;
+import jansparadise.jansparadise.sonstiges.Actionbar;
 import net.kyori.adventure.audience.Audience;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -86,7 +87,7 @@ public class PlayerReceiveDamageEvent implements Listener{
 
                 if (stats1 == null) {
 
-                    stats1 = new PlayerStats(p.getUniqueId().toString(), d.getName(), "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false);
+                    stats1 = new PlayerStats(d.getUniqueId().toString(), d.getName(), "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false);
 
                     this.plugin.getDatabase().createPlayerStats(stats1);
 
@@ -184,44 +185,13 @@ public class PlayerReceiveDamageEvent implements Listener{
                             }}, 20 * 11);
                     }
                 }
+
+                d.sendActionBar(Actionbar.Actionbar(p, d,0 , 0));
+
             }catch (SQLException e){
                 e.printStackTrace();
             }
 
-
-            int xp = 0;
-            int pearls = 0;
-            for (int m = 0; m <= 35; m++) {
-                if (p.getInventory().getItem(m) != null) {
-                    if (p.getInventory().getItem(m).getType().equals(Material.EXPERIENCE_BOTTLE)) {
-                        xp = xp + p.getInventory().getItem(m).getAmount();
-                    }
-                    if (p.getInventory().getItem(m).getType().equals(Material.ENDER_PEARL)) {
-                        pearls = pearls + p.getInventory().getItem(m).getAmount();
-                    }
-                }
-            }
-
-
-
-
-                if (!(p.getInventory().getLeggings() == null) && !(p.getInventory().getBoots() == null) && !(p.getInventory().getChestplate() == null) && !(p.getInventory().getHelmet() == null)) {
-                    if (LDura <= HDura && LDura <= CDura && LDura <= BDura) {
-                        int i = p.getInventory().getLeggings().getType().getMaxDurability();
-                        d.sendActionBar("§cⓘ §8<§5Pearls§8> §5" + pearls + " §7| §8(§4Hose§8)§c " + (i + (p.getInventory().getLeggings().getMaxItemUseDuration() - p.getInventory().getLeggings().getDurability())) + " §7| §8<§aXP§8> §2" + xp);
-                    } else if (BDura <= HDura && BDura <= CDura && BDura <= LDura) {
-                        int i = p.getInventory().getBoots().getType().getMaxDurability();
-                        d.sendActionBar("§cⓘ §8<§5Pearls§8> §5" + pearls + " §7| §8(§4Schuhe§8)§c " + (i + (p.getInventory().getBoots().getMaxItemUseDuration() - p.getInventory().getBoots().getDurability())) + " §7| §8<§aXP§8> §2" + xp);
-                    } else if (CDura <= LDura && CDura <= BDura && CDura <= HDura) {
-                        int i = p.getInventory().getChestplate().getType().getMaxDurability();
-                        d.sendActionBar("§cⓘ §8<§5Pearls§8> §5" + pearls + " §7| §8(§4Chest§8)§c " + (i + (p.getInventory().getChestplate().getMaxItemUseDuration() - p.getInventory().getChestplate().getDurability())) + " §7| §8<§aXP§8> §2" + xp);
-                    } else if (HDura <= BDura && HDura <= LDura && HDura <= CDura) {
-                        int i = p.getInventory().getHelmet().getType().getMaxDurability();
-                        d.sendActionBar("§cⓘ §8<§5Pearls§8> §5" + pearls + " §7| §8(§4Helm§8)§c " + (i + (p.getInventory().getHelmet().getMaxItemUseDuration() - p.getInventory().getHelmet().getDurability())) + " §7| §8<§aXP§8> §2" + xp);
-                    }
-                } else {
-                    d.sendActionBar("§c" + Math.round(p.getHealth() / 2) + " §c❤ §7| §8<§5Pearls§8> §5" + pearls);
-                }
 
 
                 if (event.getEntity().getType() == EntityType.ENDER_CRYSTAL) {
