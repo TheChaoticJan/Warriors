@@ -79,7 +79,7 @@ public class UwUCommand implements CommandExecutor, TabCompleter {
                 PlayerStats stats = this.plugin.getDatabase().findPlayerStatsByUUID(r.getUniqueId().toString());
 
                 if(stats == null){
-                    stats = new PlayerStats(r.getUniqueId().toString(), r.getName(), "", 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false);
+                    stats = new PlayerStats(r.getUniqueId().toString(), r.getName(), "", 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false, 1, 2, 3);
                     this.plugin.getDatabase().createPlayerStats(stats);
                 }else {
                     stats.setUwu(stats.getUwu() + 1);

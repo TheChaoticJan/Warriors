@@ -60,7 +60,7 @@ public class CrateDeathEvent implements Listener {
 
                     if (stats == null) {
 
-                        stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "", 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, "", false, false, false,false, false);
+                        stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "", 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, "", false, false, false,false, false, 1,2, 3);
 
                         this.plugin.getDatabase().createPlayerStats(stats);
 

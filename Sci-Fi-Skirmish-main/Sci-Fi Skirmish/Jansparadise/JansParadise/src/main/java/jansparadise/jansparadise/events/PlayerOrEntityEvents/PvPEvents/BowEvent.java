@@ -209,7 +209,7 @@ public class BowEvent implements Listener{
 
                     if (stats == null) {
 
-                        stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false);
+                        stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false, 1, 2, 3);
 
                         this.plugin.getDatabase().createPlayerStats(stats);
                     }
@@ -221,7 +221,7 @@ public class BowEvent implements Listener{
 
                     if (stats1 == null) {
 
-                        stats1 = new PlayerStats(p.getUniqueId().toString(), d.getName(), "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false);
+                        stats1 = new PlayerStats(p.getUniqueId().toString(), d.getName(), "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false, 1, 2, 3);
 
                         this.plugin.getDatabase().createPlayerStats(stats1);
 
@@ -242,7 +242,7 @@ public class BowEvent implements Listener{
                     }
                 }
 
-                d.sendActionBar(Actionbar.Actionbar(p, d, 0, 0));
+                d.sendActionBar(Actionbar.Actionbar(p, stats, d, stats1.getInfobar1(), stats1.getInfobar2(), stats1.getInfobar3()));
 
             }catch (SQLException s){
                 s.printStackTrace();
