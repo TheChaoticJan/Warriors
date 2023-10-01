@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="target">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Sci-Fi-Skirmish-main/Sci-Fi Skirmish/Jansparadise/JansParadise/target/JansParadise-1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Sci-Fi-Skirmish-main/Sci-Fi Skirmish/Jansparadise/JansParadise/target/original-JansParadise-1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Sci-Fi-Skirmish-main/Sci-Fi Skirmish/Jansparadise/JansParadise/target/JansParadise-1.0-shaded.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

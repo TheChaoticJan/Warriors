@@ -23,8 +23,6 @@ public class PlayerHitEvent implements Listener{
                             }
                         }
                     }
-
-
                 }
             }else{return;}
 

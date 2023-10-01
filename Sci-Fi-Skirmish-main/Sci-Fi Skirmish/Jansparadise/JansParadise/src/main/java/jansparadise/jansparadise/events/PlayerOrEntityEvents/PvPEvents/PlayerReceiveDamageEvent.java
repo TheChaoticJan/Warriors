@@ -5,6 +5,7 @@ import jansparadise.jansparadise.JansParadise;
 import jansparadise.jansparadise.models.PlayerStats;
 import net.kyori.adventure.audience.Audience;
 import org.bukkit.*;
+import org.bukkit.block.Block;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
@@ -16,6 +17,8 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.sql.SQLException;
 
@@ -97,7 +100,7 @@ public class PlayerReceiveDamageEvent implements Listener{
                 }
 
                 if(stats.getPerk1()){
-                    int rndm = (int) (1 + Math.random() * 500);
+                    int rndm = (int) (1 + Math.random() * 380);
 
                     if(rndm == 1) {
                         String value = "";
@@ -134,6 +137,51 @@ public class PlayerReceiveDamageEvent implements Listener{
                             }
                         }
                         showBossBar5(p, value);
+                    }
+                }
+
+                if(stats.getPerk3()){
+                    if(HDura < 30 | BDura < 30 | CDura < 30 | LDura < 30){
+                        PotionEffect effect1 = new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 200, 1);
+                        PotionEffect effect2 = new PotionEffect(PotionEffectType.SPEED, 200, 1);
+
+                        p.addPotionEffect(effect1);
+                        p.addPotionEffect(effect2);
+
+                        p.playSound(p.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_BREAK, 20, 1);
+                    }
+                }
+
+                if(stats1.getPerk4()){
+                    int random = (int) (1 + Math.random() * 240);
+                    if(random == 1){
+
+                        Block block1 = p.getWorld().getBlockAt(p.getLocation().getBlockX(), p.getLocation().getBlockY(), p.getLocation().getBlockZ());
+                        Block block2 = p.getWorld().getBlockAt(p.getLocation().getBlockX(), p.getLocation().getBlockY() + 1, p.getLocation().getBlockZ());
+
+                        block1.setType(Material.COBWEB);
+                        block2.setType(Material.COBWEB);
+
+                        d.playSound(d.getLocation(), Sound.ENTITY_FROG_LONG_JUMP, 20, 1);
+
+                        Bukkit.getScheduler().scheduleSyncDelayedTask(JansParadise.getInstance(), new Runnable() {
+                            @Override
+                            public void run() {
+                                int i = 5;
+                                while (i > 0) {
+                                    i--;
+                                }
+                                if(block1.getType() != Material.AIR) {
+                                    block1.setType(Material.AIR);
+                                    block1.getWorld().spawnParticle(Particle.CRIT, new Location(Bukkit.getWorld("world"), p.getLocation().getBlockX(), p.getLocation().getBlockY(), p.getLocation().getBlockZ()), 15);
+                                }
+
+                                if(block2.getType() != Material.AIR) {
+                                    block2.setType(Material.AIR);
+                                    block2.getWorld().spawnParticle(Particle.CRIT, new Location(Bukkit.getWorld("world"), p.getLocation().getBlockX(), p.getLocation().getBlockY() + 1, p.getLocation().getBlockZ()), 15);
+                                }
+
+                            }}, 20 * 11);
                     }
                 }
             }catch (SQLException e){

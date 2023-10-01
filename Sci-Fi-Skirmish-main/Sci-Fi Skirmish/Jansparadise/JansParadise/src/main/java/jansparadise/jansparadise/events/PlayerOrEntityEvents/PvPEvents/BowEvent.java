@@ -14,6 +14,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.sql.SQLException;
 
@@ -35,6 +37,8 @@ public class BowEvent implements Listener{
         }
 
         Player  d = (Player) e.getEntity().getShooter();
+
+
 
         if (e.getHitEntity().getType() == EntityType.ARMOR_STAND) {
             if(e.getEntity().getType() == EntityType.ARROW) {
@@ -230,6 +234,14 @@ public class BowEvent implements Listener{
                         return;
                     }
                 }
+
+                if(e.getEntity().getType().equals(EntityType.ARROW)){
+                    if(stats1.getPerk2()){
+                        PotionEffect effect = new PotionEffect(PotionEffectType.SLOW, 200, 0);
+                        p.addPotionEffect(effect);
+                    }
+                }
+
             }catch (SQLException s){
                 s.printStackTrace();
             }
