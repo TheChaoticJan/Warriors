@@ -47,7 +47,7 @@ public class LegendaryLoot {
         ItemStack Drop10 = new ItemStack(Material.POTION);
         PotionMeta potionMeta = (PotionMeta) Drop10.getItemMeta();
         potionMeta.setDisplayName("§bSpeed");
-        potionMeta.setColor(Color.PURPLE);
+        potionMeta.setColor(Color.AQUA);
         PotionEffect potionEffect = new PotionEffect(PotionEffectType.SPEED, 3600, 1);
         potionMeta.addCustomEffect(potionEffect, true);
         Drop10.setItemMeta(potionMeta);
