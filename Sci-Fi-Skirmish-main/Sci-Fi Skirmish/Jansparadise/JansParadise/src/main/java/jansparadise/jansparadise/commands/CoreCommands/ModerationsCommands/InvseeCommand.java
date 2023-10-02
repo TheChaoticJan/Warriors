@@ -35,6 +35,10 @@ public class InvseeCommand implements CommandExecutor, TabCompleter {
         if(!(sender instanceof Player)){
             sender.sendMessage("§cDu musst ein Spieler sein um §7´/invsee´§c ausführen zu können!");
         }else{
+            if(args.length == 0){
+                sender.sendMessage("§cWem genaut willst du denn so ins Inventar schauen? Bitte nutze §7'§e/invsee <Spielername>§7'");
+                return true;
+            }
             Player p = (Player) sender;
             String playername = args[0];
             if(Bukkit.getServer().getPlayerExact(playername) == null || plugin.VanishList.contains(playername)){
