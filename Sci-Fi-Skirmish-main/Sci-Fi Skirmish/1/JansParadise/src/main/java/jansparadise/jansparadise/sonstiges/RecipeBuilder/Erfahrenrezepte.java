@@ -1,10 +1,8 @@
 package jansparadise.jansparadise.sonstiges.RecipeBuilder;
 
 import jansparadise.jansparadise.Main;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Erfahren.ErfahrenAxt;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Erfahren.ErfahrenBogen;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Erfahren.ErfahrenSchwert;
 
+import jansparadise.jansparadise.sonstiges.ItemBuilder.ErfahrenItems;
 import jansparadise.jansparadise.sonstiges.ItemBuilder.SpecialResources;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -19,7 +17,7 @@ public class Erfahrenrezepte {
     }
 
     public static ShapedRecipe Recipe1(){
-    ShapedRecipe recipe = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "supergold"), SpecialResources.ErfahrenFragment());
+    ShapedRecipe recipe = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "ErfahrenFragment"), SpecialResources.ErfahrenFragment());
         recipe.shape("XXX","XFX","XXX");
         recipe.setIngredient('X',Material.GOLD_NUGGET);
         recipe.setIngredient('F',Material.EXPERIENCE_BOTTLE);
@@ -27,7 +25,7 @@ public class Erfahrenrezepte {
 }
 
     public static ShapedRecipe Recipe2(){
-    ShapedRecipe recipe2 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "supergoldblock"), SpecialResources.ErfahrenBarren());
+    ShapedRecipe recipe2 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "ErfahrenBarren"), SpecialResources.ErfahrenBarren());
         recipe2.shape("xxx", "xFx", "xxx");
         recipe2.setIngredient('x', SpecialResources.ErfahrenFragment());
         recipe2.setIngredient('F', Material.EXPERIENCE_BOTTLE);
@@ -35,7 +33,7 @@ public class Erfahrenrezepte {
                 }
 
     public static ShapedRecipe Recipe3(){
-    ShapedRecipe recipe3 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "ErfahrenAxt"), ErfahrenAxt.ErfahrenBeil());
+    ShapedRecipe recipe3 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "ErfahrenAxt"), ErfahrenItems.Axt());
         recipe3.shape("xFF", "xSF", "xSx");
         recipe3.setIngredient('x', Material.AIR);
         recipe3.setIngredient('F', SpecialResources.ErfahrenBarren());
@@ -43,7 +41,7 @@ public class Erfahrenrezepte {
         return recipe3;
                 }
     public static ShapedRecipe Recipe4(){
-    ShapedRecipe recipe4 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "supergoldblock1"), ErfahrenSchwert.ErfahrenKatana());
+    ShapedRecipe recipe4 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "ErfahrenSchwert"), ErfahrenItems.Schwert());
         recipe4.shape("xFx", "xFx", "xSx");
         recipe4.setIngredient('x', Material.AIR);
         recipe4.setIngredient('F', SpecialResources.ErfahrenBarren());
@@ -52,7 +50,7 @@ public class Erfahrenrezepte {
                 }
 
     public static ShapedRecipe Recipe5(){
-    ShapedRecipe recipe5 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "supergoldblock2"), ErfahrenBogen.ErfahrenBow());
+    ShapedRecipe recipe5 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "ErfahrenBogen"), ErfahrenItems.Bogen());
         recipe5.shape("xSF", "SxF", "xSF");
         recipe5.setIngredient('x', Material.AIR);
         recipe5.setIngredient('F', SpecialResources.ErfahrenBarren());

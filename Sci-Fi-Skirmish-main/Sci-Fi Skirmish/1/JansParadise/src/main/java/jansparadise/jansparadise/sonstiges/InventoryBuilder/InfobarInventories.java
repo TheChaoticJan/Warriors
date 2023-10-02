@@ -2,7 +2,7 @@ package jansparadise.jansparadise.sonstiges.InventoryBuilder;
 
 import jansparadise.jansparadise.Infobar.Infobar;
 import jansparadise.jansparadise.models.PlayerStats;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.InventoryEssentials.Fuellerglas;
+import jansparadise.jansparadise.sonstiges.ItemBuilder.InventoryEssentials.Inventarteile;
 import jansparadise.jansparadise.sonstiges.ItemBuilder.InventoryEssentials.ZurückButton;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -38,24 +38,24 @@ public class InfobarInventories {
         i.setItem(0, ZurückButton.Zurück());
 
         for(int i1 = 1; i1<= 12; i1++){
-            i.setItem(i1, Fuellerglas.Glas());
+            i.setItem(i1, Inventarteile.Glas());
         }
         i.setItem(13, current);
 
         for(int i2 = 14; i2 <= 27; i2++){
-            i.setItem(i2, Fuellerglas.Glas());
+            i.setItem(i2, Inventarteile.Glas());
         }
 
         i.setItem(28, Infobar.Dura());
         i.setItem(29, Infobar.XP());
         i.setItem(30, Infobar.Enderpearl());
-        i.setItem(31, Fuellerglas.Glas());
+        i.setItem(31, Inventarteile.Glas());
         i.setItem(32, Infobar.Konto());
         i.setItem(33, Infobar.tnt());
         i.setItem(34, Infobar.Webs());
 
         for(int i3 = 35; i3 <= 44; i3++){
-            i.setItem(i3, Fuellerglas.Glas());
+            i.setItem(i3, Inventarteile.Glas());
         }
 
        return i;
@@ -66,7 +66,7 @@ public class InfobarInventories {
 
         Inventory Configuration = Bukkit.createInventory(p, 36, "§6§lConfiguriere deine Infobar!");
         for(int i = 0; i <= 9; i++){
-            Configuration.setItem(i, Fuellerglas.Glas());
+            Configuration.setItem(i, Inventarteile.Glas());
         }
 
         ItemStack ModuleItem = new ItemStack(Material.LEGACY_EMPTY_MAP);
@@ -82,22 +82,22 @@ public class InfobarInventories {
         ModuleItem.setItemMeta(ModuleMeta);
         Configuration.setItem(11, ModuleItem);
 
-        Configuration.setItem(10, Fuellerglas.Glas());
-        Configuration.setItem(12, Fuellerglas.Glas());
+        Configuration.setItem(10, Inventarteile.Glas());
+        Configuration.setItem(12, Inventarteile.Glas());
 
         ModuleMeta.setDisplayName("§3Modul 2");
         ModuleItem.setItemMeta(ModuleMeta);
         Configuration.setItem(13, ModuleItem);
 
-        Configuration.setItem(14, Fuellerglas.Glas());
-        Configuration.setItem(16, Fuellerglas.Glas());
+        Configuration.setItem(14, Inventarteile.Glas());
+        Configuration.setItem(16, Inventarteile.Glas());
 
         ModuleMeta.setDisplayName("§3Modul 3");
         ModuleItem.setItemMeta(ModuleMeta);
         Configuration.setItem(15, ModuleItem);
 
         for(int i = 17; i <= 35; i++){
-            Configuration.setItem(i, Fuellerglas.Glas());
+            Configuration.setItem(i, Inventarteile.Glas());
         }
 
         Configuration.setItem(20, Infobar.neededItemstack(stats).get(0));

@@ -1,8 +1,7 @@
 package jansparadise.jansparadise.sonstiges.RecipeBuilder;
 
 import jansparadise.jansparadise.Main;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Explosiv.ExplosivAngel;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Explosiv.ExplosivPicke;
+import jansparadise.jansparadise.sonstiges.ItemBuilder.ExplosivItems;
 import jansparadise.jansparadise.sonstiges.ItemBuilder.SpecialResources;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -34,7 +33,7 @@ public class ExplosivRezepte {
     }
 
     public static ShapedRecipe Recipe3(){
-        ShapedRecipe recipe3 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "ExplosivAngel"), ExplosivAngel.ExplosivAngel());
+        ShapedRecipe recipe3 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "ExplosivAngel"), ExplosivItems.Angel());
         recipe3.shape("xxS", "xSF", "SxF");
         recipe3.setIngredient('x', Material.AIR);
         recipe3.setIngredient('F', SpecialResources.ExplosivBarren());
@@ -42,7 +41,7 @@ public class ExplosivRezepte {
         return recipe3;
     }
     public static ShapedRecipe Recipe4(){
-        ShapedRecipe recipe4 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "ExplivPicke"), ExplosivPicke.ErfahrenBow());
+        ShapedRecipe recipe4 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "ExplivPicke"), ExplosivItems.Spitzhacke());
         recipe4.shape("FFF", "xSx", "xSx");
         recipe4.setIngredient('x', Material.AIR);
         recipe4.setIngredient('F', SpecialResources.ExplosivBarren());

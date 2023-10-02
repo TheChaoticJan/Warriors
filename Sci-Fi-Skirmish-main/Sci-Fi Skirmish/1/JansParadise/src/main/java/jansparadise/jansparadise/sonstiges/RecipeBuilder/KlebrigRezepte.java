@@ -1,9 +1,7 @@
 package jansparadise.jansparadise.sonstiges.RecipeBuilder;
 
 import jansparadise.jansparadise.Main;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Klebrig.KlebrigAngel;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Klebrig.KlebrigBogen;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Klebrig.KlebrigSchwert;
+import jansparadise.jansparadise.sonstiges.ItemBuilder.KlebrigItems;
 import jansparadise.jansparadise.sonstiges.ItemBuilder.SpecialResources;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -18,7 +16,7 @@ public class KlebrigRezepte {
     }
 
     public static ShapedRecipe Recipe1(){
-        ShapedRecipe recipe = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "superball"), SpecialResources.KlebrigFragment());
+        ShapedRecipe recipe = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "KlebrigFragment"), SpecialResources.KlebrigFragment());
         recipe.shape("XXX","XFX","XXX");
         recipe.setIngredient('X', Material.SCUTE);
         recipe.setIngredient('F', Material.COBWEB);
@@ -26,7 +24,7 @@ public class KlebrigRezepte {
     }
 
     public static ShapedRecipe Recipe2(){
-        ShapedRecipe recipe2 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "superemerald"), SpecialResources.KlebrigBarren());
+        ShapedRecipe recipe2 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "KlebrigBarren"), SpecialResources.KlebrigBarren());
         recipe2.shape("xxx", "xFx", "xxx");
         recipe2.setIngredient('x', SpecialResources.KlebrigFragment());
         recipe2.setIngredient('F', Material.COBWEB);
@@ -34,7 +32,7 @@ public class KlebrigRezepte {
     }
 
     public static ShapedRecipe Recipe3(){
-        ShapedRecipe recipe3 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "KlebrigSchwert"), KlebrigSchwert.KlebrigBogen());
+        ShapedRecipe recipe3 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "KlebrigSchwert"), KlebrigItems.Schwert());
         recipe3.shape("xFx", "xFx", "xSx");
         recipe3.setIngredient('x', Material.AIR);
         recipe3.setIngredient('F', SpecialResources.KlebrigBarren());
@@ -42,7 +40,7 @@ public class KlebrigRezepte {
         return recipe3;
     }
     public static ShapedRecipe Recipe4(){
-        ShapedRecipe recipe4 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "KlebrigAngel"), KlebrigAngel.KlebrigAngel());
+        ShapedRecipe recipe4 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "KlebrigAngel"), KlebrigItems.Angel());
         recipe4.shape("xxS", "xSF", "SxF");
         recipe4.setIngredient('x', Material.AIR);
         recipe4.setIngredient('F', SpecialResources.KlebrigBarren());
@@ -51,7 +49,7 @@ public class KlebrigRezepte {
     }
 
     public static ShapedRecipe Recipe5(){
-        ShapedRecipe recipe5 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "KlebrigBogen"), KlebrigBogen.KlebrigBogen());
+        ShapedRecipe recipe5 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "KlebrigBogen"), KlebrigItems.Bogen());
         recipe5.shape("xSF", "SxF", "xSF");
         recipe5.setIngredient('x', Material.AIR);
         recipe5.setIngredient('F', SpecialResources.KlebrigBarren());

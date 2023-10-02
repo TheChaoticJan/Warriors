@@ -1,10 +1,7 @@
 package jansparadise.jansparadise.sonstiges.RecipeBuilder;
 
 import jansparadise.jansparadise.Main;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.SciFi.SciFiAxt;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.SciFi.SciFiBogen;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.SciFi.SciFiSilencer;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.SciFi.SciFiWand;
+import jansparadise.jansparadise.sonstiges.ItemBuilder.SciFiItems;
 import jansparadise.jansparadise.sonstiges.ItemBuilder.SpecialResources;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -13,7 +10,7 @@ import org.bukkit.inventory.ShapedRecipe;
 public class SciFiRezepte {
 
     public static ShapedRecipe Recipe1(){
-        ShapedRecipe recipe = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "SciFiFrag"), SpecialResources.SciFiFragment());
+        ShapedRecipe recipe = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "SciFiFragment"), SpecialResources.SciFiFragment());
         recipe.shape("XXX","XFX","XXX");
         recipe.setIngredient('X', Material.AMETHYST_SHARD);
         recipe.setIngredient('F',Material.ENDER_PEARL);
@@ -21,7 +18,7 @@ public class SciFiRezepte {
     }
 
     public static ShapedRecipe Recipe2(){
-        ShapedRecipe recipe2 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "SciFiKrista"), SpecialResources.SciFiBarren());
+        ShapedRecipe recipe2 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "SciFiBarren"), SpecialResources.SciFiBarren());
         recipe2.shape("xxx", "xFx", "xxx");
         recipe2.setIngredient('x', SpecialResources.SciFiFragment());
         recipe2.setIngredient('F', Material.ENDER_PEARL);
@@ -29,7 +26,7 @@ public class SciFiRezepte {
     }
 
     public static ShapedRecipe Recipe3(){
-        ShapedRecipe recipe3 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "SciFi"), SciFiAxt.SciFiSchwert());
+        ShapedRecipe recipe3 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "SciFiAxt"), SciFiItems.Axt());
         recipe3.shape("xFF", "xSF", "xSx");
         recipe3.setIngredient('x', Material.AIR);
         recipe3.setIngredient('F', SpecialResources.SciFiBarren());
@@ -37,7 +34,7 @@ public class SciFiRezepte {
         return recipe3;
     }
     public static ShapedRecipe Recipe4(){
-        ShapedRecipe recipe4 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "SciFi2"), SciFiSilencer.SciFiSchwert());
+        ShapedRecipe recipe4 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "SciFiSchwert"), SciFiItems.Schwert());
         recipe4.shape("xFx", "xFx", "xSx");
         recipe4.setIngredient('x', Material.AIR);
         recipe4.setIngredient('F', SpecialResources.SciFiBarren());
@@ -46,7 +43,7 @@ public class SciFiRezepte {
     }
 
     public static ShapedRecipe Recipe5(){
-        ShapedRecipe recipe5 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "SciFi3"), SciFiWand.Wand());
+        ShapedRecipe recipe5 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "SciFiZauberstab"), SciFiItems.Zauberstab());
         recipe5.shape("xFx", "xFx", "xFx");
         recipe5.setIngredient('x', Material.AIR);
         recipe5.setIngredient('F', SpecialResources.SciFiBarren());
@@ -54,7 +51,7 @@ public class SciFiRezepte {
     }
 
     public static ShapedRecipe Recipe6(){
-        ShapedRecipe recipe5 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "SciFi4"), SciFiBogen.SciFiSchwert());
+        ShapedRecipe recipe5 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "SciFiBogen"), SciFiItems.Bogen());
         recipe5.shape("xSF", "SxF", "xSF");
         recipe5.setIngredient('x', Material.AIR);
         recipe5.setIngredient('F', SpecialResources.SciFiBarren());

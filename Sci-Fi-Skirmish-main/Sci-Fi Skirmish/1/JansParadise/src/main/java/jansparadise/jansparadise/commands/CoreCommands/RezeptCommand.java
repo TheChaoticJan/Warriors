@@ -4,19 +4,7 @@ import jansparadise.jansparadise.sonstiges.InventoryBuilder.Rezepte.ErfahrenReze
 import jansparadise.jansparadise.sonstiges.InventoryBuilder.Rezepte.ExplosivRezeptInventare;
 import jansparadise.jansparadise.sonstiges.InventoryBuilder.Rezepte.KlebrigRezeptInventare;
 import jansparadise.jansparadise.sonstiges.InventoryBuilder.Rezepte.SciFiRezeptInventare;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Erfahren.ErfahrenAxt;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Erfahren.ErfahrenBogen;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Erfahren.ErfahrenSchwert;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Explosiv.ExplosivAngel;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Explosiv.ExplosivPicke;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Klebrig.KlebrigAngel;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Klebrig.KlebrigBogen;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Klebrig.KlebrigSchwert;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.SciFi.SciFiAxt;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.SciFi.SciFiBogen;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.SciFi.SciFiSilencer;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.SciFi.SciFiWand;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.SpecialResources;
+import jansparadise.jansparadise.sonstiges.ItemBuilder.*;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -46,16 +34,16 @@ public class RezeptCommand implements CommandExecutor, TabCompleter {
                     p.openInventory(SciFiRezeptInventare.Fragment(p, null, SpecialResources.SciFiFragment()));
                     break;
                 case "Sci-Fi_Schwert":
-                    p.openInventory(SciFiRezeptInventare.Schwert(p, null, SciFiSilencer.SciFiSchwert()));
+                    p.openInventory(SciFiRezeptInventare.Schwert(p, null, SciFiItems.Schwert()));
                     break;
                 case "Sci-Fi_Bogen":
-                    p.openInventory(SciFiRezeptInventare.Bogen(p, null, SciFiBogen.SciFiSchwert()));
+                    p.openInventory(SciFiRezeptInventare.Bogen(p, null, SciFiItems.Bogen()));
                     break;
                 case "Sci-Fi_Axt":
-                    p.openInventory(SciFiRezeptInventare.Axt(p, null, SciFiAxt.SciFiSchwert()));
+                    p.openInventory(SciFiRezeptInventare.Axt(p, null, SciFiItems.Axt()));
                     break;
                 case "Sci-Fi_Wand":
-                    p.openInventory(SciFiRezeptInventare.Zauberstab(p, null, SciFiWand.Wand()));
+                    p.openInventory(SciFiRezeptInventare.Zauberstab(p, null, SciFiItems.Zauberstab()));
                     break;
                 case "Erfahrenfragment":
                     p.openInventory(ErfahrenRezeptInventare.Fragment(p, null, SpecialResources.ErfahrenFragment()));
@@ -64,13 +52,13 @@ public class RezeptCommand implements CommandExecutor, TabCompleter {
                     p.openInventory(ErfahrenRezeptInventare.Barren(p, null, SpecialResources.ErfahrenBarren()));
                     break;
                 case "Erfahrenschwert":
-                    p.openInventory(ErfahrenRezeptInventare.Schwert(p, null, ErfahrenSchwert.ErfahrenKatana()));
+                    p.openInventory(ErfahrenRezeptInventare.Schwert(p, null, ErfahrenItems.Schwert()));
                     break;
                 case "Erfahrenaxt":
-                    p.openInventory(ErfahrenRezeptInventare.Axt(p, null, ErfahrenAxt.ErfahrenBeil()));
+                    p.openInventory(ErfahrenRezeptInventare.Axt(p, null, ErfahrenItems.Axt()));
                     break;
                 case "Erfahrenbogen":
-                    p.openInventory(ErfahrenRezeptInventare.Bogen(p, null, ErfahrenBogen.ErfahrenBow()));
+                    p.openInventory(ErfahrenRezeptInventare.Bogen(p, null, ErfahrenItems.Bogen()));
                     break;
                 case "Explosivpuder":
                     p.openInventory(ExplosivRezeptInventare.Fragment(p, null, SpecialResources.ExplosivPuder()));
@@ -79,10 +67,10 @@ public class RezeptCommand implements CommandExecutor, TabCompleter {
                     p.openInventory(ExplosivRezeptInventare.Barren(p, null, SpecialResources.ExplosivBarren()));
                     break;
                 case "Explosivbohrer":
-                    p.openInventory(ExplosivRezeptInventare.Picke(p, null, ExplosivPicke.ErfahrenBow()));
+                    p.openInventory(ExplosivRezeptInventare.Picke(p, null, ExplosivItems.Spitzhacke()));
                     break;
                 case "Explosivangel":
-                    p.openInventory(ExplosivRezeptInventare.Angel(p, null, ExplosivAngel.ExplosivAngel()));
+                    p.openInventory(ExplosivRezeptInventare.Angel(p, null, ExplosivItems.Angel()));
                     break;
                 case "Klebriger_Schleim":
                     p.openInventory(KlebrigRezeptInventare.Fragment(p, null, SpecialResources.KlebrigFragment()));
@@ -91,13 +79,13 @@ public class RezeptCommand implements CommandExecutor, TabCompleter {
                     p.openInventory(KlebrigRezeptInventare.Barren(p, null, SpecialResources.KlebrigBarren()));
                     break;
                 case "Klebrig_Schwert":
-                    p.openInventory(KlebrigRezeptInventare.Schwert(p, null, KlebrigSchwert.KlebrigBogen()));
+                    p.openInventory(KlebrigRezeptInventare.Schwert(p, null, KlebrigItems.Schwert()));
                     break;
                 case "Klebrig_Angel":
-                    p.openInventory(KlebrigRezeptInventare.Angel(p, null, KlebrigAngel.KlebrigAngel()));
+                    p.openInventory(KlebrigRezeptInventare.Angel(p, null, KlebrigItems.Angel()));
                     break;
                 case "Klebrig_Bogen":
-                    p.openInventory(KlebrigRezeptInventare.Bogen(p, null, KlebrigBogen.KlebrigBogen()));
+                    p.openInventory(KlebrigRezeptInventare.Bogen(p, null, KlebrigItems.Angel()));
                     break;
                 default:
                     p.sendMessage("§cDies ist kein Servereigenes Specialitem!");

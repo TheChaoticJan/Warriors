@@ -2,7 +2,7 @@ package jansparadise.jansparadise.commands.CoreCommands.ModerationsCommands;
 
 import jansparadise.jansparadise.Main;
 import jansparadise.jansparadise.models.PlayerStats;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.InventoryEssentials.Fuellerglas;
+import jansparadise.jansparadise.sonstiges.ItemBuilder.InventoryEssentials.Inventarteile;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -45,7 +45,7 @@ public class PerkCommand implements CommandExecutor, TabCompleter {
 
                 Inventory Perks = Bukkit.createInventory(p, 36, "§c§lPerks");
                      for(int i = 0; i <= 9; i++) {
-                        Perks.setItem(i, Fuellerglas.Glas());
+                        Perks.setItem(i, Inventarteile.Glas());
                      }
 
                     //Armorer-Perk
@@ -106,8 +106,8 @@ public class PerkCommand implements CommandExecutor, TabCompleter {
                     for(int i1 = 15; i1 <= 16; i1++){
                         Perks.setItem(i1, CS);
                     }
-                    Perks.setItem(17, Fuellerglas.Glas());
-                    Perks.setItem(18, Fuellerglas.Glas());
+                    Perks.setItem(17, Inventarteile.Glas());
+                    Perks.setItem(18, Inventarteile.Glas());
 
                     //Buyed
                     ItemStack buyed = new ItemStack(Material.EMERALD);
@@ -202,7 +202,7 @@ public class PerkCommand implements CommandExecutor, TabCompleter {
 
 
                     for(int i2 = 26; i2 <= 35; i2++){
-                        Perks.setItem(i2, Fuellerglas.Glas());
+                        Perks.setItem(i2, Inventarteile.Glas());
                     }
 
                 p.openInventory(Perks);

@@ -4,7 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class Fuellerglas {
+public class Inventarteile {
 
     public static ItemStack Glas(){
         ItemStack Glas = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);

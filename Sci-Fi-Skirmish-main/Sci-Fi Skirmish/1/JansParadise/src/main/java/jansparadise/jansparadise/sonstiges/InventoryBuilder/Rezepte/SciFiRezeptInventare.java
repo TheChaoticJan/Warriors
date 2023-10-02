@@ -1,11 +1,8 @@
 package jansparadise.jansparadise.sonstiges.InventoryBuilder.Rezepte;
 
-import jansparadise.jansparadise.sonstiges.ItemBuilder.InventoryEssentials.Fuellerglas;
+import jansparadise.jansparadise.sonstiges.ItemBuilder.InventoryEssentials.Inventarteile;
 import jansparadise.jansparadise.sonstiges.ItemBuilder.InventoryEssentials.ZurückButton;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.SciFi.SciFiAxt;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.SciFi.SciFiBogen;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.SciFi.SciFiSilencer;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.SciFi.SciFiWand;
+import jansparadise.jansparadise.sonstiges.ItemBuilder.SciFiItems;
 import jansparadise.jansparadise.sonstiges.ItemBuilder.SpecialResources;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -25,22 +22,22 @@ public class SciFiRezeptInventare {
             i = Bukkit.createInventory(p,45, a.getItemMeta().getDisplayName() + "§f");
         }
         for(int i1 = 0; i1 <= 10; i1++){
-            i.setItem(i1 , Fuellerglas.Glas());
+            i.setItem(i1 , Inventarteile.Glas());
         }
 
         i.setItem(12, SpecialResources.SciFiBarren());
         for(int i2 = 14; i2 <= 19; i2++){
-            i.setItem(i2, Fuellerglas.Glas());
+            i.setItem(i2, Inventarteile.Glas());
         }
         i.setItem(21, SpecialResources.SciFiBarren());
-        i.setItem(23, Fuellerglas.Glas());
-        i.setItem(24, SciFiWand.Wand());
+        i.setItem(23, Inventarteile.Glas());
+        i.setItem(24, SciFiItems.Zauberstab());
         for(int i3 = 25; i3 <= 28; i3++){
-            i.setItem(i3, Fuellerglas.Glas());
+            i.setItem(i3, Inventarteile.Glas());
         }
         i.setItem(30, SpecialResources.SciFiBarren());
         for(int i4 = 32; i4 <= 43; i4++){
-            i.setItem(i4, Fuellerglas.Glas());
+            i.setItem(i4, Inventarteile.Glas());
         }
         i.setItem(44, ZurückButton.Zurück());
         return i;
@@ -54,21 +51,21 @@ public class SciFiRezeptInventare {
             i = Bukkit.createInventory(p,45, a.getItemMeta().getDisplayName() + "§f");
         }
         for(int i1 = 0; i1 <= 10; i1++){
-            i.setItem(i1 , Fuellerglas.Glas());
+            i.setItem(i1 , Inventarteile.Glas());
         }
         i.setItem(12, SpecialResources.SciFiBarren());
         for(int i2 = 14; i2 <= 19; i2++){
-            i.setItem(i2, Fuellerglas.Glas());
+            i.setItem(i2, Inventarteile.Glas());
         }
         i.setItem(21, SpecialResources.SciFiBarren());
-        i.setItem(23, Fuellerglas.Glas());
-        i.setItem(24, SciFiSilencer.SciFiSchwert());
+        i.setItem(23, Inventarteile.Glas());
+        i.setItem(24, SciFiItems.Schwert());
         for(int i3 = 25; i3 <= 28; i3++){
-            i.setItem(i3, Fuellerglas.Glas());
+            i.setItem(i3, Inventarteile.Glas());
         }
         i.setItem(30, new ItemStack(Material.STICK));
         for(int i4 = 32; i4 <= 43; i4++){
-            i.setItem(i4, Fuellerglas.Glas());
+            i.setItem(i4, Inventarteile.Glas());
         }
         i.setItem(44, ZurückButton.Zurück());
         return i;
@@ -82,26 +79,26 @@ public class SciFiRezeptInventare {
             i = Bukkit.createInventory(p,45, a.getItemMeta().getDisplayName() + "§f");
         }
         for(int i1 = 0; i1 <= 10; i1++){
-            i.setItem(i1 , Fuellerglas.Glas());
+            i.setItem(i1 , Inventarteile.Glas());
         }
         i.setItem(12, new ItemStack(Material.STICK));
         i.setItem(13, SpecialResources.SciFiBarren());
         for(int i2 = 14; i2 <= 19; i2++){
-            i.setItem(i2, Fuellerglas.Glas());
+            i.setItem(i2, Inventarteile.Glas());
         }
         i.setItem(20, new ItemStack(Material.STICK));
         i.setItem(22, SpecialResources.SciFiBarren());
 
-        i.setItem(23, Fuellerglas.Glas());
-        i.setItem(24, SciFiBogen.SciFiSchwert());
+        i.setItem(23, Inventarteile.Glas());
+        i.setItem(24, SciFiItems.Bogen());
 
         for(int i3 = 25; i3 <= 28; i3++){
-            i.setItem(i3, Fuellerglas.Glas());
+            i.setItem(i3, Inventarteile.Glas());
         }
         i.setItem(30, new ItemStack(Material.STICK));
         i.setItem(31, SpecialResources.SciFiBarren());
         for(int i4 = 32; i4 <= 43; i4++){
-            i.setItem(i4, Fuellerglas.Glas());
+            i.setItem(i4, Inventarteile.Glas());
         }
         i.setItem(44, ZurückButton.Zurück());
         return i;
@@ -115,23 +112,23 @@ public class SciFiRezeptInventare {
             i = Bukkit.createInventory(p,45, a.getItemMeta().getDisplayName() + "§f");
         }
         for(int i1 = 0; i1 <= 10; i1++){
-            i.setItem(i1 , Fuellerglas.Glas());
+            i.setItem(i1 , Inventarteile.Glas());
         }
         i.setItem(12, SpecialResources.SciFiBarren());
         i.setItem(13, SpecialResources.SciFiBarren());
         for(int i2 = 14; i2 <= 19; i2++){
-            i.setItem(i2, Fuellerglas.Glas());
+            i.setItem(i2, Inventarteile.Glas());
         }
         i.setItem(21, new ItemStack(Material.STICK));
         i.setItem(22, SpecialResources.SciFiBarren());
-        i.setItem(23, Fuellerglas.Glas());
-        i.setItem(24, SciFiAxt.SciFiSchwert());
+        i.setItem(23, Inventarteile.Glas());
+        i.setItem(24, SciFiItems.Axt());
         for(int i3 = 25; i3 <= 28; i3++){
-            i.setItem(i3, Fuellerglas.Glas());
+            i.setItem(i3, Inventarteile.Glas());
         }
         i.setItem(30, new ItemStack(Material.STICK));
         for(int i4 = 32; i4 <= 43; i4++){
-            i.setItem(i4, Fuellerglas.Glas());
+            i.setItem(i4, Inventarteile.Glas());
         }
         i.setItem(44, ZurückButton.Zurück());
         return i;
@@ -145,7 +142,7 @@ public class SciFiRezeptInventare {
             i = Bukkit.createInventory(p,45, a.getItemMeta().getDisplayName() + "§f");
         }
         for(int i1 = 0; i1 <= 10; i1++){
-            i.setItem(i1 , Fuellerglas.Glas());
+            i.setItem(i1 , Inventarteile.Glas());
         }
         i.setItem(11, SpecialResources.SciFiFragment());
         i.setItem(12, SpecialResources.SciFiFragment());
@@ -160,14 +157,14 @@ public class SciFiRezeptInventare {
         i.setItem(24, SpecialResources.SciFiBarren());
 
         for(int i2 = 14; i2 <= 19; i2++){
-            i.setItem(i2, Fuellerglas.Glas());
+            i.setItem(i2, Inventarteile.Glas());
         }
-        i.setItem(23, Fuellerglas.Glas());
+        i.setItem(23, Inventarteile.Glas());
         for(int i3 = 25; i3 <= 28; i3++){
-            i.setItem(i3, Fuellerglas.Glas());
+            i.setItem(i3, Inventarteile.Glas());
         }
         for(int i4 = 32; i4 <= 43; i4++){
-            i.setItem(i4, Fuellerglas.Glas());
+            i.setItem(i4, Inventarteile.Glas());
         }
         i.setItem(44, ZurückButton.Zurück());
         return i;
@@ -181,7 +178,7 @@ public class SciFiRezeptInventare {
             i = Bukkit.createInventory(p,45, a.getItemMeta().getDisplayName() + "§f");
         }
         for(int i1 = 0; i1 <= 10; i1++){
-            i.setItem(i1 , Fuellerglas.Glas());
+            i.setItem(i1 , Inventarteile.Glas());
         }
         i.setItem(11, new ItemStack(Material.AMETHYST_SHARD));
         i.setItem(12, new ItemStack(Material.AMETHYST_SHARD));
@@ -196,14 +193,14 @@ public class SciFiRezeptInventare {
         i.setItem(24, SpecialResources.SciFiFragment());
 
         for(int i2 = 14; i2 <= 19; i2++){
-            i.setItem(i2, Fuellerglas.Glas());
+            i.setItem(i2, Inventarteile.Glas());
         }
-        i.setItem(23, Fuellerglas.Glas());
+        i.setItem(23, Inventarteile.Glas());
         for(int i3 = 25; i3 <= 28; i3++){
-            i.setItem(i3, Fuellerglas.Glas());
+            i.setItem(i3, Inventarteile.Glas());
         }
         for(int i4 = 32; i4 <= 43; i4++){
-            i.setItem(i4, Fuellerglas.Glas());
+            i.setItem(i4, Inventarteile.Glas());
         }
         i.setItem(44, ZurückButton.Zurück());
         return i;

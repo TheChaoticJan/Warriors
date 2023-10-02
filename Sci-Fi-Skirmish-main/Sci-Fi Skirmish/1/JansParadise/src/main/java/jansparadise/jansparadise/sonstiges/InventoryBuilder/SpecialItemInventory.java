@@ -1,19 +1,7 @@
 package jansparadise.jansparadise.sonstiges.InventoryBuilder;
 
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Erfahren.ErfahrenAxt;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Erfahren.ErfahrenBogen;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Erfahren.ErfahrenSchwert;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Explosiv.ExplosivAngel;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Explosiv.ExplosivPicke;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.InventoryEssentials.Fuellerglas;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Klebrig.KlebrigAngel;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Klebrig.KlebrigBogen;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Klebrig.KlebrigSchwert;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.SciFi.SciFiAxt;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.SciFi.SciFiBogen;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.SciFi.SciFiSilencer;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.SciFi.SciFiWand;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.SpecialResources;
+import jansparadise.jansparadise.sonstiges.ItemBuilder.*;
+import jansparadise.jansparadise.sonstiges.ItemBuilder.InventoryEssentials.Inventarteile;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -25,19 +13,19 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class SpecialItemInventory {
 
     public static Inventory inventory(Player p, String name){
-        Inventory rezepte = Bukkit.createInventory(p, 54 , name);
+        Inventory rezepte = Bukkit.createInventory(p,54 , name);
 
         for(int i = 0; i <= 9; i++){
-            rezepte.setItem(i, Fuellerglas.Glas());
+            rezepte.setItem(i, Inventarteile.Glas());
         }
-        rezepte.setItem(17, Fuellerglas.Glas());
-        rezepte.setItem(18, Fuellerglas.Glas());
-        rezepte.setItem(26, Fuellerglas.Glas());
-        rezepte.setItem(27, Fuellerglas.Glas());
-        rezepte.setItem(35, Fuellerglas.Glas());
-        rezepte.setItem(36, Fuellerglas.Glas());
+        rezepte.setItem(17, Inventarteile.Glas());
+        rezepte.setItem(18, Inventarteile.Glas());
+        rezepte.setItem(26, Inventarteile.Glas());
+        rezepte.setItem(27, Inventarteile.Glas());
+        rezepte.setItem(35, Inventarteile.Glas());
+        rezepte.setItem(36, Inventarteile.Glas());
         for(int i2 = 44; i2 <= 53; i2++){
-            rezepte.setItem(i2, Fuellerglas.Glas());
+            rezepte.setItem(i2, Inventarteile.Glas());
         }
 
         //Sci-Fi
@@ -49,10 +37,10 @@ public class SpecialItemInventory {
         rezepte.setItem(10, SciGlass);
         rezepte.setItem(11, SpecialResources.SciFiFragment());
         rezepte.setItem(12, SpecialResources.SciFiBarren());
-        rezepte.setItem(13, SciFiSilencer.SciFiSchwert());
-        rezepte.setItem(14, SciFiAxt.SciFiSchwert());
-        rezepte.setItem(15, SciFiBogen.SciFiSchwert());
-        rezepte.setItem(16, SciFiWand.Wand());
+        rezepte.setItem(13, SciFiItems.Schwert());
+        rezepte.setItem(14, SciFiItems.Axt());
+        rezepte.setItem(15, SciFiItems.Bogen());
+        rezepte.setItem(16, SciFiItems.Zauberstab());
 
         //Erfahren
         ItemStack EGlass = new ItemStack(Material.YELLOW_STAINED_GLASS_PANE);
@@ -63,9 +51,9 @@ public class SpecialItemInventory {
         rezepte.setItem(19, EGlass);
         rezepte.setItem(20, SpecialResources.ErfahrenFragment());
         rezepte.setItem(21, SpecialResources.ErfahrenBarren());
-        rezepte.setItem(22, ErfahrenSchwert.ErfahrenKatana());
-        rezepte.setItem(23, ErfahrenAxt.ErfahrenBeil());
-        rezepte.setItem(24, ErfahrenBogen.ErfahrenBow());
+        rezepte.setItem(22, ErfahrenItems.Schwert());
+        rezepte.setItem(23, ErfahrenItems.Axt());
+        rezepte.setItem(24, ErfahrenItems.Bogen());
 
         //Explosiv
         ItemStack ExGlass = new ItemStack(Material.ORANGE_STAINED_GLASS_PANE);
@@ -75,9 +63,9 @@ public class SpecialItemInventory {
         ExGlass.setItemMeta(ExMeta);
         rezepte.setItem(28, ExGlass);
         rezepte.setItem(29, SpecialResources.ExplosivPuder());
-        rezepte.setItem(30, SpecialResources.ErfahrenBarren());
-        rezepte.setItem(31, ExplosivPicke.ErfahrenBow());
-        rezepte.setItem(32, ExplosivAngel.ExplosivAngel());
+        rezepte.setItem(30, SpecialResources.ExplosivBarren());
+        rezepte.setItem(31, ExplosivItems.Spitzhacke());
+        rezepte.setItem(32, ExplosivItems.Angel());
 
         //Klebrig
         ItemStack KGlass = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
@@ -88,9 +76,11 @@ public class SpecialItemInventory {
         rezepte.setItem(37, KGlass);
         rezepte.setItem(38, SpecialResources.KlebrigFragment());
         rezepte.setItem(39, SpecialResources.KlebrigBarren());
-        rezepte.setItem(40, KlebrigSchwert.KlebrigBogen());
-        rezepte.setItem(41, KlebrigAngel.KlebrigAngel());
-        rezepte.setItem(42, KlebrigBogen.KlebrigBogen());
+        rezepte.setItem(40, KlebrigItems.Schwert());
+        rezepte.setItem(41, KlebrigItems.Angel());
+        rezepte.setItem(42, KlebrigItems.Bogen());
+
+        p.openInventory(rezepte);
 
         return rezepte;
 
