@@ -33,12 +33,10 @@ import jansparadise.jansparadise.sonstiges.Recipes.Erfahrenrezepte;
 import jansparadise.jansparadise.sonstiges.Recipes.ExplosivRezepte;
 import jansparadise.jansparadise.sonstiges.Recipes.KlebrigRezepte;
 import jansparadise.jansparadise.sonstiges.Recipes.SciFiRezepte;
-import jansparadise.jansparadise.sonstiges.tablist.TablistManager;
+import jansparadise.jansparadise.sonstiges.Scores.TablistManager;
 import org.bukkit.Bukkit;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.SQLException;
@@ -116,7 +114,6 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ClickEvent(), this);
         getServer().getPluginManager().registerEvents(new MoveEvent(), this );
         getServer().getPluginManager().registerEvents(new BlockPlacedEvent(this), this );
-        getServer().getPluginManager().registerEvents(new PlayerHitEvent(), this );
         getServer().getPluginManager().registerEvents(new ExplodeEvent(), this );
         getServer().getPluginManager().registerEvents(new RodEvent(this), this );
         getServer().getPluginManager().registerEvents(new PlayerReceiveDamageEvent(this), this );
@@ -160,7 +157,6 @@ public final class Main extends JavaPlugin {
         getCommand("top").setExecutor(new TopCommand(this));
         getCommand("perks").setExecutor(new PerkCommand(this));
         getCommand("infobar").setExecutor(new InfobarCommand(this));
-
 
     }
     public static Main getInstance(){

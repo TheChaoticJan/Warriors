@@ -2,7 +2,7 @@ package jansparadise.jansparadise.events.PlayerOrEntityEvents.PvPEvents;
 
 import jansparadise.jansparadise.Main;
 import jansparadise.jansparadise.models.PlayerStats;
-import jansparadise.jansparadise.sonstiges.Scoreboardbuilder.ScoreBoardBuilder;
+import jansparadise.jansparadise.sonstiges.Scores.ScoreBoardBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;

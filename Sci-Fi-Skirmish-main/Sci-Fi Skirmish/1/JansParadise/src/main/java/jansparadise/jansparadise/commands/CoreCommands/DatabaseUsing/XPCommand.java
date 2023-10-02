@@ -2,7 +2,8 @@ package jansparadise.jansparadise.commands.CoreCommands.DatabaseUsing;
 
 import jansparadise.jansparadise.Main;
 import jansparadise.jansparadise.models.PlayerStats;
-import jansparadise.jansparadise.sonstiges.Scoreboardbuilder.ScoreBoardBuilder;
+import jansparadise.jansparadise.sonstiges.Counters;
+import jansparadise.jansparadise.sonstiges.Scores.ScoreBoardBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -147,15 +148,8 @@ public class XPCommand implements CommandExecutor, TabCompleter {
 
                                 try{
 
-                                    int xp = 0;
+                                    int xp = Counters.Counters(p).get(0);
                                     int amount = Integer.parseInt(args[1]);
-                                    for(int i = 0; i <= 35; i++){
-                                        if(p.getInventory().getItem(i) != null){
-                                            if (p.getInventory().getItem(i).getType() == Material.EXPERIENCE_BOTTLE) {
-                                                xp = xp + p.getInventory().getItem(i).getAmount();
-                                            }
-                                        }
-                                    }
 
                                      if(Integer.parseInt(args[1]) > xp){
                                         p.sendMessage("§cTransaktion fehlgeschlagen §7<§c"+ xp + "§7/" + amount + ">");
@@ -270,10 +264,6 @@ public class XPCommand implements CommandExecutor, TabCompleter {
                 }
 
             }
-
-
-
-
         }
 
         return true;

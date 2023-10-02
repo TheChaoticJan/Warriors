@@ -26,21 +26,15 @@ public class InfoCommand implements CommandExecutor, TabCompleter {
                         p.sendMessage("\n§f" +
                                 "§7Informationen von §d" + playername + "§7: \n§f" +
                                 "\n§7UUID: §b" + r.getUniqueId() +
-                                "\n§7Operator: §a✔" + "\n§7Aktueller Ping: §e" +r.getPing() + "\n§7IP: §e" + p.getAddress() + "\n§f");
+                                "\n§7Operator: §a✔" + "\n§7Aktueller Ping: §e" +r.getPing() + "\n§7IP: §e" + p.getAddress().getAddress() + "\n§f");
                     }else {
                         p.sendMessage("\n§f" +
                                 "§7Informationen von §d" + playername + "§7: \n§f"  +
                                 "\n§7UUID: §b" + r.getUniqueId() +
-                                "\n§7Operator: §c❌" + "\n§7Aktueller Ping: §e" + r.getPing() + "\n§7IP: §e" + p.getAddress() + "\n§f");
+                                "\n§7Operator: §c❌" + "\n§7Aktueller Ping: §e" + r.getPing() + "\n§7IP: §e" + p.getAddress().getAddress() + "\n§f");
                     }
                 }
-
-
-
         }
-
-
-
         return true;
     }
 

@@ -3,7 +3,7 @@ package jansparadise.jansparadise.events.PlayerOrEntityEvents;
 import jansparadise.jansparadise.Main;
 import jansparadise.jansparadise.LootSystem.CrateEntities.ArmorstandRotation;
 import jansparadise.jansparadise.models.PlayerStats;
-import jansparadise.jansparadise.sonstiges.Scoreboardbuilder.ScoreBoardBuilder;
+import jansparadise.jansparadise.sonstiges.Scores.ScoreBoardBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;

@@ -1,4 +1,4 @@
-package jansparadise.jansparadise.sonstiges.tablist;
+package jansparadise.jansparadise.sonstiges.Scores;
 
 import jansparadise.jansparadise.Main;
 import org.bukkit.Bukkit;

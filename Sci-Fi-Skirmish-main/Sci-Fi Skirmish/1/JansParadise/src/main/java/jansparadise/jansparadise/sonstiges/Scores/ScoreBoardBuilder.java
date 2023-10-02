@@ -1,4 +1,4 @@
-package jansparadise.jansparadise.sonstiges.Scoreboardbuilder;
+package jansparadise.jansparadise.sonstiges.Scores;
 
 import jansparadise.jansparadise.models.PlayerStats;
 import org.bukkit.Bukkit;

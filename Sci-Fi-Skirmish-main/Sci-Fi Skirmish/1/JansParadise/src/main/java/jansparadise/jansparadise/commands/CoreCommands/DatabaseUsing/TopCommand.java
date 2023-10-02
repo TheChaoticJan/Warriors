@@ -141,9 +141,7 @@ public class TopCommand implements CommandExecutor, TabCompleter {
             }
 
         }
-
-
-        return false;
+        return true;
     }
 
     @Override

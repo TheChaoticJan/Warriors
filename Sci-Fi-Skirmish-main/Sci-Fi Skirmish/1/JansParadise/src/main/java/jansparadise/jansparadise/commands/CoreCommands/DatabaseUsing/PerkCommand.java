@@ -35,7 +35,6 @@ public class PerkCommand implements CommandExecutor, TabCompleter {
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
 
         if(commandSender instanceof Player p){
-
             try{
                 PlayerStats stats = this.plugin.getDatabase().findPlayerStatsByUUID(p.getUniqueId().toString());
 
@@ -49,8 +48,6 @@ public class PerkCommand implements CommandExecutor, TabCompleter {
             }catch (SQLException e){
                 e.printStackTrace();
             }
-
-
         }
 
         return true;

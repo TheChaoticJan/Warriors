@@ -158,8 +158,6 @@ public class InfobarClick implements Listener{
                     }
                     event.setCancelled(true);
                 }
-
-
             }
 
             }catch(SQLException e){

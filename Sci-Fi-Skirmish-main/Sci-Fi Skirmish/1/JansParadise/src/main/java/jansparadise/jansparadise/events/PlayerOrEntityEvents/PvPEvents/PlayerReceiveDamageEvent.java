@@ -4,16 +4,17 @@ import jansparadise.jansparadise.Main;
 import jansparadise.jansparadise.models.PlayerStats;
 import jansparadise.jansparadise.Infobar.Actionbar;
 import jansparadise.jansparadise.sonstiges.Bossbars;
+import jansparadise.jansparadise.sonstiges.CheckSpecialItems;
 import jansparadise.jansparadise.sonstiges.Counters;
 import org.bukkit.*;
 import org.bukkit.block.Block;
-import org.bukkit.boss.BarColor;
-import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -50,6 +51,19 @@ public class PlayerReceiveDamageEvent implements Listener{
 
         if(event.getEntity().getType() == EntityType.PLAYER){
             Player p = (Player) event.getEntity();
+
+
+
+                if(p.getInventory().getBoots() != null && p.getInventory().getBoots().getItemMeta().hasEnchant(Enchantment.PROTECTION_ENVIRONMENTAL) && p.getInventory().getBoots().getEnchantmentLevel(Enchantment.PROTECTION_ENVIRONMENTAL) == 4) {
+                    if (p.getInventory().getChestplate() != null && p.getInventory().getChestplate().getItemMeta().hasEnchant(Enchantment.PROTECTION_ENVIRONMENTAL) && p.getInventory().getChestplate().getEnchantmentLevel(Enchantment.PROTECTION_ENVIRONMENTAL) == 4) {
+                        if (p.getInventory().getLeggings() != null && p.getInventory().getLeggings().getItemMeta().hasEnchant(Enchantment.PROTECTION_ENVIRONMENTAL) && p.getInventory().getLeggings().getEnchantmentLevel(Enchantment.PROTECTION_ENVIRONMENTAL) == 4) {
+                            if (p.getInventory().getHelmet() != null && p.getInventory().getHelmet().getItemMeta().hasEnchant(Enchantment.PROTECTION_ENVIRONMENTAL) && p.getInventory().getHelmet().getEnchantmentLevel(Enchantment.PROTECTION_ENVIRONMENTAL) == 4) {
+                                event.setDamage(EntityDamageEvent.DamageModifier.ARMOR, -1000);
+                            }
+                        }
+                    }
+                }
+
 
                 int HDura = Counters.Counters(p).get(4);
                 int CDura = Counters.Counters(p).get(5);
@@ -173,117 +187,16 @@ public class PlayerReceiveDamageEvent implements Listener{
                 if (event.getEntity().getType() == EntityType.ENDER_CRYSTAL) {
                     event.setCancelled(true);
                 }
+
+                CheckSpecialItems.CheckDrops(d);
+
             }
 
 
 
-            if(d.getItemInHand().getItemMeta() != null) {
-                if (d.getItemInHand().getItemMeta().getLore() != null) {
-                    if (d.getItemInHand().getItemMeta().getLore().contains("§eSci-Fi")) {
-
-                        String s = "false";
-                        int i = (int) (Math.random() * 300) + 1;
-                        if (i == 1) {
-                            for (int l = 0; l <= 35; l++) {
-                                if (d.getInventory().getItem(l) == null || d.getInventory().getItem(l).getType() == Material.ENDER_PEARL && d.getInventory().getItem(l).getAmount() <= 15) {
-                                    s = "true";
-                                }
-                            }
-                            if (s == "true") {
-                                d.getInventory().addItem(new ItemStack(Material.ENDER_PEARL));
-                            } else {
-                                int x = d.getLocation().getBlockX();
-                                int y = d.getLocation().getBlockY();
-                                int z = d.getLocation().getBlockZ();
-
-                                d.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), new ItemStack(Material.ENDER_PEARL));
-                            }
-                            new Bossbars().SciFiBar(d);
-                        }
-                    }
-
-                    if (d.getItemInHand().getItemMeta().getLore().contains("§eErfahren")) {
-
-                        String s = "false";
-                        int i = (int) (Math.random() * 300) + 1;
-                        if (i == 1) {
-                            for (int m = 0; m <= 5; m++) {
-                                for (int l = 0; l <= 35; l++) {
-                                    if (d.getInventory().getItem(l) == null || d.getInventory().getItem(l).getType() == Material.EXPERIENCE_BOTTLE && d.getInventory().getItem(l).getAmount() <= 63) {
-                                        s = "true";
-                                    }
-                                }
-                                if (s == "true") {
-                                    d.getInventory().addItem(new ItemStack(Material.EXPERIENCE_BOTTLE));
-                                } else {
-                                    int x = d.getLocation().getBlockX();
-                                    int y = d.getLocation().getBlockY();
-                                    int z = d.getLocation().getBlockZ();
-
-                                    d.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), new ItemStack(Material.EXPERIENCE_BOTTLE));
-                                }
-
-                            }
-                            new Bossbars().ErfahrenBar(d);
-                        }
-                    }
-
-                    if (d.getItemInHand().getItemMeta().getLore().contains("§eKlebrig")) {
-
-                        String s = "false";
-                        int i = (int) (Math.random() * 300) + 1;
-                        if (i == 1) {
-                            for (int m = 0; m <= 3; m++) {
-                                for (int l = 0; l <= 35; l++) {
-                                    if (d.getInventory().getItem(l) == null || d.getInventory().getItem(l).getType() == Material.COBWEB && d.getInventory().getItem(l).getAmount() <= 63) {
-                                        s = "true";
-                                    }
-                                }
-                                if (s == "true") {
-                                    d.getInventory().addItem(new ItemStack(Material.COBWEB));
-                                } else {
-                                    int x = d.getLocation().getBlockX();
-                                    int y = d.getLocation().getBlockY();
-                                    int z = d.getLocation().getBlockZ();
-
-                                    d.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), new ItemStack(Material.COBWEB));
-                                }
-                            }
-                            new Bossbars().KlebrigBar(d);
-                        }
-                    }
-
-                    if (d.getItemInHand().getItemMeta().getLore().contains("§eExplosiv")) {
-
-                        String s = "false";
-                        int i = (int) (Math.random() * 300) + 1;
-                        if (i == 1) {
-                            for (int m = 0; m <= 2; m++) {
-                                for (int l = 0; l <= 35; l++) {
-                                    if (d.getInventory().getItem(l) == null || d.getInventory().getItem(l).getType() == Material.TNT && d.getInventory().getItem(l).getAmount() <= 63) {
-                                        s = "true";
-                                    }
-                                }
-                                if (s == "true") {
-                                    d.getInventory().addItem(new ItemStack(Material.TNT));
-                                } else {
-                                    int x = d.getLocation().getBlockX();
-                                    int y = d.getLocation().getBlockY();
-                                    int z = d.getLocation().getBlockZ();
-
-                                    d.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), new ItemStack(Material.TNT));
-                                }
-                            }
-                            new Bossbars().ExplosivBar(d);
-                        }
-                    }
-                }
-
-
-                }
-
-        }
-
+    }
 
 }
+
+
 
