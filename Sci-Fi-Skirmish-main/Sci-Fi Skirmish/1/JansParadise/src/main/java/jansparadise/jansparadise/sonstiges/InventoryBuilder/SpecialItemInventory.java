@@ -1,7 +1,7 @@
 package jansparadise.jansparadise.sonstiges.InventoryBuilder;
 
 import jansparadise.jansparadise.sonstiges.ItemBuilder.*;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.InventoryEssentials.Inventarteile;
+import jansparadise.jansparadise.sonstiges.ItemBuilder.Inventarteile;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

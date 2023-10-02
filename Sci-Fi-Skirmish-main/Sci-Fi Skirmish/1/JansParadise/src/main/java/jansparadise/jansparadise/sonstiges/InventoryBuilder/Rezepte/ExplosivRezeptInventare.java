@@ -2,8 +2,7 @@ package jansparadise.jansparadise.sonstiges.InventoryBuilder.Rezepte;
 
 
 import jansparadise.jansparadise.sonstiges.ItemBuilder.ExplosivItems;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.InventoryEssentials.Inventarteile;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.InventoryEssentials.ZurückButton;
+import jansparadise.jansparadise.sonstiges.ItemBuilder.Inventarteile;
 import jansparadise.jansparadise.sonstiges.ItemBuilder.SpecialResources;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -48,7 +47,7 @@ public class ExplosivRezeptInventare {
         for(int i4 = 32; i4 <= 43; i4++){
             i.setItem(i4, Inventarteile.Glas());
         }
-        i.setItem(44, ZurückButton.Zurück());
+        i.setItem(44, Inventarteile.Zurück());
         return i;
     }
 
@@ -85,7 +84,7 @@ public class ExplosivRezeptInventare {
         for(int i4 = 32; i4 <= 43; i4++){
             i.setItem(i4, Inventarteile.Glas());
         }
-        i.setItem(44, ZurückButton.Zurück());
+        i.setItem(44, Inventarteile.Zurück());
         return i;
     }
 
@@ -122,7 +121,7 @@ public class ExplosivRezeptInventare {
         for(int i4 = 32; i4 <= 43; i4++){
             i.setItem(i4, Inventarteile.Glas());
         }
-        i.setItem(44, ZurückButton.Zurück());
+        i.setItem(44, Inventarteile.Zurück());
         return i;
     }
 
@@ -159,7 +158,7 @@ public class ExplosivRezeptInventare {
         for(int i4 = 32; i4 <= 43; i4++){
             i.setItem(i4, Inventarteile.Glas());
         }
-        i.setItem(44, ZurückButton.Zurück());
+        i.setItem(44, Inventarteile.Zurück());
         return i;
     }
 }

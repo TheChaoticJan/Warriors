@@ -2,7 +2,7 @@ package jansparadise.jansparadise.commands.CoreCommands.ModerationsCommands;
 
 import jansparadise.jansparadise.Main;
 import jansparadise.jansparadise.models.PlayerStats;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.InventoryEssentials.Inventarteile;
+import jansparadise.jansparadise.sonstiges.ItemBuilder.Inventarteile;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;

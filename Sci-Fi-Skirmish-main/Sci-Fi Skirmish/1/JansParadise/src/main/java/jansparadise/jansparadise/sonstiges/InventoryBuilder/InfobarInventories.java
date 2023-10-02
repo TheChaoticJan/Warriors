@@ -2,8 +2,7 @@ package jansparadise.jansparadise.sonstiges.InventoryBuilder;
 
 import jansparadise.jansparadise.Infobar.Infobar;
 import jansparadise.jansparadise.models.PlayerStats;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.InventoryEssentials.Inventarteile;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.InventoryEssentials.ZurückButton;
+import jansparadise.jansparadise.sonstiges.ItemBuilder.Inventarteile;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -35,7 +34,7 @@ public class InfobarInventories {
             current = list.get(2);
         }
 
-        i.setItem(0, ZurückButton.Zurück());
+        i.setItem(0, Inventarteile.Zurück());
 
         for(int i1 = 1; i1<= 12; i1++){
             i.setItem(i1, Inventarteile.Glas());

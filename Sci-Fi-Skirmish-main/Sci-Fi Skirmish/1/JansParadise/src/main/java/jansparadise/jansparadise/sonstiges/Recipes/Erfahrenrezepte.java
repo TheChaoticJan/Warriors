@@ -1,4 +1,4 @@
-package jansparadise.jansparadise.sonstiges.RecipeBuilder;
+package jansparadise.jansparadise.sonstiges.Recipes;
 
 import jansparadise.jansparadise.Main;
 

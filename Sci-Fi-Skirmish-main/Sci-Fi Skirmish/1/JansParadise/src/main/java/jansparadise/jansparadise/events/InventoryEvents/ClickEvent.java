@@ -1,7 +1,7 @@
 package jansparadise.jansparadise.events.InventoryEvents;
 
 import jansparadise.jansparadise.sonstiges.InventoryBuilder.SpecialItemInventory;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.InventoryEssentials.BuildingBlocks;
+import jansparadise.jansparadise.sonstiges.ItemBuilder.Inventarteile;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.enchantments.Enchantment;
@@ -100,7 +100,7 @@ public class ClickEvent implements Listener {
                      i.setItem(34, Arrows);
                      i.setItem(35, Arrows);
 
-                     i.setItem(8, BuildingBlocks.Blocks());
+                     i.setItem(8, Inventarteile.Baublöcke());
                      i.getItem(8).setAmount(32);
 
 
