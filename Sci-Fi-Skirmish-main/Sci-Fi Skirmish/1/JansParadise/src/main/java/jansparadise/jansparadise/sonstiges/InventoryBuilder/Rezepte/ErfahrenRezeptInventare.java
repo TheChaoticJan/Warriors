@@ -2,7 +2,6 @@ package jansparadise.jansparadise.sonstiges.InventoryBuilder.Rezepte;
 
 import jansparadise.jansparadise.sonstiges.ItemBuilder.ErfahrenItems;
 import jansparadise.jansparadise.sonstiges.ItemBuilder.Inventarteile;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.InventoryEssentials.ZurückButton;
 import jansparadise.jansparadise.sonstiges.ItemBuilder.SpecialResources;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
