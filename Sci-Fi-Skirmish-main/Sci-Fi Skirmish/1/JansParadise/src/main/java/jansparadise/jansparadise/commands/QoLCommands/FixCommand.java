@@ -16,11 +16,10 @@ public class FixCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
-        if(!(commandSender instanceof Player)){
+        if(!(commandSender instanceof Player p)){
             commandSender.sendMessage("§cDu musst ein Spieler sein um §7´/fix´ §cauführen zu können!");
         }
         else {
-            Player p = (Player) commandSender;
             if (p.getItemInHand().getAmount() == 0){
                 p.sendMessage("§cDu musst ein Item in der Hand halten, um es reparieren zu können!");
             }

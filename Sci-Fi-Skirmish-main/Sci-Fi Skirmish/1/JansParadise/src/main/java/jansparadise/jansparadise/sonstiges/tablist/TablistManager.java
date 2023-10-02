@@ -57,7 +57,6 @@ public class TablistManager{
                 ops.addEntry(target.getName());
                 continue;
             }
-
               players.addEntry(target.getName());
 
             }

@@ -22,7 +22,7 @@ import java.util.List;
 
 public class UwUCommand implements CommandExecutor, TabCompleter {
 
-    private Main plugin;
+    private final Main plugin;
 
     public UwUCommand(Main plugin) {
         this.plugin = plugin;
@@ -91,8 +91,6 @@ public class UwUCommand implements CommandExecutor, TabCompleter {
             }catch (SQLException e){
                 e.printStackTrace();
             }
-
-
         }
 
         return false;

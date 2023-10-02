@@ -33,7 +33,7 @@ public class BlockPlacedEvent implements Listener {
             return;
         }
 
-        Player p = (Player) b.getPlayer();
+        Player p = b.getPlayer();
 
        try{
            PlayerStats stats = this.plugin.getDatabase().findPlayerStatsByUUID(p.getUniqueId().toString());

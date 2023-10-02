@@ -21,7 +21,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class XPCommand implements CommandExecutor, TabCompleter {
-    private Main plugin;
+    private final Main plugin;
 
     public XPCommand(Main plugin) {
         this.plugin = plugin;
@@ -30,9 +30,7 @@ public class XPCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
 
-        if(sender instanceof Player){
-
-            Player p = (Player) sender;
+        if(sender instanceof Player p){
 
             if(args.length == 0){
                 p.sendMessage("§cBitte verwende: \n§f" + "\n§7Auszahlung: §e/xp auszahlen <Zahl> " + "\n§7Kontostand: §e/xp balance" + "\n§7Einzahlung: §e/xp einzahlen <Zahl> ");

@@ -15,13 +15,12 @@ public class FeedCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
-        if(!(sender instanceof Player)){
+        if(!(sender instanceof Player p)){
             sender.sendMessage("§cDu musst ein Spieler sein, um §7´/feed´§c ausführen zu können!");
             return true;
         }
         else{
-           Player p = (Player) sender;
-          if(p.getFoodLevel() >= 20) {
+            if(p.getFoodLevel() >= 20) {
              if(p.getSaturation() >= 20){
                  p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 5, 1);
                  p.sendActionBar("§cDu hast bereits vollen Hunger!");

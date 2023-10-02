@@ -21,13 +21,12 @@ import java.util.List;
 public class KitCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
-        if(!(sender instanceof Player)){
+        if(!(sender instanceof Player p)){
             sender.sendMessage("§cDu musst ein Spieler sein um §7´/kit´ §causführen zu können!");
             return true;
         }
         else {
             //Player to command
-            Player p = (Player) sender;
 
             //Inventory creation
             Inventory i = Bukkit.createInventory(p, 9, "§6WW§7-§eReloaded §7Kit");

@@ -1,56 +1,23 @@
 package jansparadise.jansparadise.Infobar;
 
 import jansparadise.jansparadise.models.PlayerStats;
+import jansparadise.jansparadise.sonstiges.Counters;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+
 public class Actionbar {
+
 
     public static String Actionbar(Player p, PlayerStats stats, Player d, int module1, int module2, int module3){
         String Actionbar = "";
 
-        //Creating different values to display
-        int xp = 0;
-        int pearls = 0;
-        int webs = 0;
-        int tnt = 0;
-        for(int m = 0; m <= 35; m++){
-            if(p.getInventory().getItem(m) != null){
-                if(p.getInventory().getItem(m).getType().equals(Material.EXPERIENCE_BOTTLE)){
-                    xp = xp + p.getInventory().getItem(m).getAmount();
-                }
-                if(p.getInventory().getItem(m).getType().equals(Material.ENDER_PEARL)){
-                    pearls = pearls + p.getInventory().getItem(m).getAmount();
-                }
-                if(p.getInventory().getItem(m).getType().equals(Material.TNT)){
-                    tnt = tnt + p.getInventory().getItem(m).getAmount();
-                }
-                if(p.getInventory().getItem(m).getType().equals(Material.COBWEB)){
-                    webs = webs + p.getInventory().getItem(m).getAmount();
-                }
-            }
-        }
-
-            int HDura = 0;
-            int BDura = 0;
-            int CDura = 0;
-            int LDura = 0;
-            String Piece = "";
-            if(!(p.getInventory().getHelmet() == null)){
-                HDura = p.getInventory().getHelmet().getType().getMaxDurability() - p.getInventory().getHelmet().getDurability();
-            }
-
-            if(!(p.getInventory().getBoots() == null)){
-                BDura = p.getInventory().getBoots().getType().getMaxDurability() - p.getInventory().getBoots().getDurability();
-            }
-
-            if(!(p.getInventory().getChestplate() == null)){
-                CDura = p.getInventory().getChestplate().getType().getMaxDurability() - p.getInventory().getChestplate().getDurability();
-            }
-
-            if(!(p.getInventory().getLeggings() == null)){
-                LDura = p.getInventory().getLeggings().getType().getMaxDurability() - p.getInventory().getLeggings().getDurability();
-            }
+        int HDura = Counters.Counters(p).get(4);
+        int CDura = Counters.Counters(p).get(5);
+        int LDura = Counters.Counters(p).get(6);
+        int BDura = Counters.Counters(p).get(7);
+        String Piece = "";
 
             if(!(p.getInventory().getLeggings() == null) && !(p.getInventory().getBoots() == null)  && !(p.getInventory().getChestplate() == null)  && !(p.getInventory().getHelmet() == null)){
                 if(LDura <= HDura && LDura <= CDura && LDura <= BDura){
@@ -78,10 +45,10 @@ public class Actionbar {
                 stats.setClan("§cClanlos");
             }
         String clan = "§8<§6Konto§8> §e" + stats.getXp() + " §6✧";
-        String xp1 = "§8<§aXP§8> §2" + xp;
-        String pearls1 = "§8<§5Pearls§8> §x§D§6§5§B§E§9" + pearls;
-        String tnt1 = "§8<§x§9§E§1§B§5§0T§x§C§F§0§E§5§2N§x§F§F§0§0§5§3T§8> §x§C§F§0§E§5§2" + tnt;
-        String webs1 = "§8<§fWebs§8> §§x§C§2§F§A§E§F" + webs;
+        String xp1 = "§8<§aXP§8> §2" + Counters.Counters(p).get(0);
+        String pearls1 = "§8<§5Pearls§8> §x§D§6§5§B§E§9" + Counters.Counters(p).get(1);
+        String tnt1 = "§8<§x§9§E§1§B§5§0T§x§C§F§0§E§5§2N§x§F§F§0§0§5§3T§8> §x§C§F§0§E§5§2" + Counters.Counters(p).get(2);
+        String webs1 = "§8<§fWebs§8> §§x§C§2§F§A§E§F" + Counters.Counters(p).get(3);
 
         //Assigning Strings to Modules
 

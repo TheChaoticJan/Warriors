@@ -37,7 +37,7 @@ public class CrateStatsCommand implements CommandExecutor, TabCompleter{
                     this.plugin.getDatabase().createPlayerStats(stats);
 
                 }
-
+                //Gathering Cratestats
                 int c = stats.getCommon_crates();
                 int u = stats.getUncommon_crates();
                 int e = stats.getEpic_crates();
@@ -59,9 +59,6 @@ public class CrateStatsCommand implements CommandExecutor, TabCompleter{
                 e.printStackTrace();
             }
         }
-
-
-
         return true;
     }
 

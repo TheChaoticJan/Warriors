@@ -15,8 +15,7 @@ import java.util.List;
 public class SpawnCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
-        if(sender instanceof Player){
-            Player p = (Player) sender;
+        if(sender instanceof Player p){
             Location l = new Location(p.getWorld(),-971, 73, 34);
             p.teleport(l);
             p.setRotation(180, 0);

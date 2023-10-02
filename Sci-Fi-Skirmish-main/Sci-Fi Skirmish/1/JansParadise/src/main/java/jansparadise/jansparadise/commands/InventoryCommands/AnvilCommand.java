@@ -14,8 +14,7 @@ import java.util.List;
 public class AnvilCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
-        if(sender instanceof Player){
-            Player p = (Player) sender;
+        if(sender instanceof Player p){
             p.openInventory(p.openAnvil(p.getLocation(), true));
         }
         return true;

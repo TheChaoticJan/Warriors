@@ -3,6 +3,8 @@ package jansparadise.jansparadise.events.PlayerOrEntityEvents.PvPEvents;
 import jansparadise.jansparadise.Main;
 import jansparadise.jansparadise.models.PlayerStats;
 import jansparadise.jansparadise.Infobar.Actionbar;
+import jansparadise.jansparadise.sonstiges.Bossbars;
+import jansparadise.jansparadise.sonstiges.Counters;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.boss.BarColor;
@@ -27,6 +29,7 @@ public class PlayerReceiveDamageEvent implements Listener{
     }
 
     private BossBar bossBar;
+
     @EventHandler
     public void damageEvent(EntityDamageByEntityEvent event){
 
@@ -42,31 +45,16 @@ public class PlayerReceiveDamageEvent implements Listener{
         if(event.getDamager().getType() != EntityType.PLAYER){
             return;
         }
+
         Player d = (Player) event.getDamager();
 
         if(event.getEntity().getType() == EntityType.PLAYER){
             Player p = (Player) event.getEntity();
 
-            if (!(p.getInventory().getArmorContents() == null)) {
-                int HDura = 0;
-                int BDura = 0;
-                int CDura = 0;
-                int LDura = 0;
-                if (!(p.getInventory().getHelmet() == null)) {
-                    HDura = p.getInventory().getHelmet().getType().getMaxDurability() - p.getInventory().getHelmet().getDurability();
-                }
-
-                if (!(p.getInventory().getBoots() == null)) {
-                    BDura = p.getInventory().getBoots().getType().getMaxDurability() - p.getInventory().getBoots().getDurability();
-                }
-
-                if (!(p.getInventory().getChestplate() == null)) {
-                    CDura = p.getInventory().getChestplate().getType().getMaxDurability() - p.getInventory().getChestplate().getDurability();
-                }
-
-                if (!(p.getInventory().getLeggings() == null)) {
-                    LDura = p.getInventory().getLeggings().getType().getMaxDurability() - p.getInventory().getLeggings().getDurability();
-                }
+                int HDura = Counters.Counters(p).get(4);
+                int CDura = Counters.Counters(p).get(5);
+                int LDura = Counters.Counters(p).get(6);
+                int BDura = Counters.Counters(p).get(7);
 
             try {
                 PlayerStats stats = this.plugin.getDatabase().findPlayerStatsByUUID(p.getUniqueId().toString());
@@ -132,7 +120,7 @@ public class PlayerReceiveDamageEvent implements Listener{
                                 value = "Schuhe";
                             }
                         }
-                        showBossBar5(p, value);
+                        new Bossbars().HealBar(p, value);
                     }
                 }
 
@@ -152,11 +140,9 @@ public class PlayerReceiveDamageEvent implements Listener{
                     int random = (int) (1 + Math.random() * 240);
                     if(random == 1){
 
-                        Block block1 = p.getWorld().getBlockAt(p.getLocation().getBlockX(), p.getLocation().getBlockY(), p.getLocation().getBlockZ());
-                        Block block2 = p.getWorld().getBlockAt(p.getLocation().getBlockX(), p.getLocation().getBlockY() + 1, p.getLocation().getBlockZ());
+                        Block block1 = p.getWorld().getBlockAt(p.getLocation().getBlockX(), p.getLocation().getBlockY() + 1, p.getLocation().getBlockZ());
 
                         block1.setType(Material.COBWEB);
-                        block2.setType(Material.COBWEB);
 
                         d.playSound(d.getLocation(), Sound.ENTITY_FROG_LONG_JUMP, 20, 1);
 
@@ -170,11 +156,6 @@ public class PlayerReceiveDamageEvent implements Listener{
                                 if(block1.getType() != Material.AIR) {
                                     block1.setType(Material.AIR);
                                     block1.getWorld().spawnParticle(Particle.CRIT, new Location(Bukkit.getWorld("world"), p.getLocation().getBlockX(), p.getLocation().getBlockY(), p.getLocation().getBlockZ()), 15);
-                                }
-
-                                if(block2.getType() != Material.AIR) {
-                                    block2.setType(Material.AIR);
-                                    block2.getWorld().spawnParticle(Particle.CRIT, new Location(Bukkit.getWorld("world"), p.getLocation().getBlockX(), p.getLocation().getBlockY() + 1, p.getLocation().getBlockZ()), 15);
                                 }
 
                             }}, 20 * 11);
@@ -193,24 +174,9 @@ public class PlayerReceiveDamageEvent implements Listener{
                     event.setCancelled(true);
                 }
             }
-        }
 
 
 
-
-
-
-
-
-
-
-
-
-
-        if(event.getDamager().getType().equals(EntityType.PLAYER)) {
-            if (event.getEntity().getType().equals(EntityType.PLAYER)) {
-
-            }
             if(d.getItemInHand().getItemMeta() != null) {
                 if (d.getItemInHand().getItemMeta().getLore() != null) {
                     if (d.getItemInHand().getItemMeta().getLore().contains("§eSci-Fi")) {
@@ -225,20 +191,17 @@ public class PlayerReceiveDamageEvent implements Listener{
                             }
                             if (s == "true") {
                                 d.getInventory().addItem(new ItemStack(Material.ENDER_PEARL));
-                                showBossBar(d);
                             } else {
                                 int x = d.getLocation().getBlockX();
                                 int y = d.getLocation().getBlockY();
                                 int z = d.getLocation().getBlockZ();
 
                                 d.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), new ItemStack(Material.ENDER_PEARL));
-                                showBossBar(d);
                             }
+                            new Bossbars().SciFiBar(d);
                         }
                     }
-                }
 
-                if (d.getItemInHand().getItemMeta().getLore() != null) {
                     if (d.getItemInHand().getItemMeta().getLore().contains("§eErfahren")) {
 
                         String s = "false";
@@ -252,21 +215,19 @@ public class PlayerReceiveDamageEvent implements Listener{
                                 }
                                 if (s == "true") {
                                     d.getInventory().addItem(new ItemStack(Material.EXPERIENCE_BOTTLE));
-                                    showBossBar2(d);
                                 } else {
                                     int x = d.getLocation().getBlockX();
                                     int y = d.getLocation().getBlockY();
                                     int z = d.getLocation().getBlockZ();
 
                                     d.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), new ItemStack(Material.EXPERIENCE_BOTTLE));
-                                    showBossBar2(d);
                                 }
+
                             }
+                            new Bossbars().ErfahrenBar(d);
                         }
                     }
-                }
 
-                if (d.getItemInHand().getItemMeta().getLore() != null) {
                     if (d.getItemInHand().getItemMeta().getLore().contains("§eKlebrig")) {
 
                         String s = "false";
@@ -280,21 +241,18 @@ public class PlayerReceiveDamageEvent implements Listener{
                                 }
                                 if (s == "true") {
                                     d.getInventory().addItem(new ItemStack(Material.COBWEB));
-                                    showBossBar3(d);
                                 } else {
                                     int x = d.getLocation().getBlockX();
                                     int y = d.getLocation().getBlockY();
                                     int z = d.getLocation().getBlockZ();
 
                                     d.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), new ItemStack(Material.COBWEB));
-                                    showBossBar3(d);
                                 }
                             }
+                            new Bossbars().KlebrigBar(d);
                         }
                     }
-                }
 
-                if (d.getItemInHand().getItemMeta().getLore() != null) {
                     if (d.getItemInHand().getItemMeta().getLore().contains("§eExplosiv")) {
 
                         String s = "false";
@@ -308,97 +266,23 @@ public class PlayerReceiveDamageEvent implements Listener{
                                 }
                                 if (s == "true") {
                                     d.getInventory().addItem(new ItemStack(Material.TNT));
-                                    showBossBar4(d);
                                 } else {
                                     int x = d.getLocation().getBlockX();
                                     int y = d.getLocation().getBlockY();
                                     int z = d.getLocation().getBlockZ();
 
                                     d.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), new ItemStack(Material.TNT));
-                                    showBossBar4(d);
                                 }
                             }
+                            new Bossbars().ExplosivBar(d);
                         }
                     }
                 }
-            }
+
+
+                }
 
         }
-
-
-    }    private void showBossBar(Player player) {
-        if (bossBar != null) {
-            bossBar.removeAll();
-        }
-
-        bossBar = Bukkit.createBossBar("§x§0§0§8§D§F§F§lS§x§1§E§5§5§F§F§lc§x§3§D§1§C§F§F§li§x§6§4§0§2§F§E§l-§x§9§5§0§7§F§B§lF§x§C§6§0§B§F§9§li §7§lDrop", BarColor.PURPLE, BarStyle.SOLID);
-        bossBar.addPlayer(player);
-
-        Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
-            bossBar.removeAll();
-            bossBar = null;
-        }, 60); // 40 ticks = 2 seconds
-    }
-
-    private void showBossBar2 (Player player) {
-        if (bossBar != null) {
-            bossBar.removeAll();
-        }
-
-        bossBar = Bukkit.createBossBar("§x§E§B§D§7§7§B§lE§x§E§5§D§7§7§6§lr§x§D§E§D§6§7§0§lf§x§D§8§D§6§6§B§la§x§D§1§D§6§6§6§lh§x§C§B§D§6§6§1§lr§x§C§4§D§5§5§B§le§x§B§E§D§5§5§6§ln §7§lDrop", BarColor.WHITE, BarStyle.SOLID);
-        bossBar.addPlayer(player);
-
-        Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
-            bossBar.removeAll();
-            bossBar = null;
-        }, 60); // 40 ticks = 2 seconds
-    }
-
-    private void showBossBar3 (Player player) {
-        if (bossBar != null) {
-            bossBar.removeAll();
-        }
-
-        bossBar = Bukkit.createBossBar("§x§5§A§D§D§2§D§lK§x§5§8§C§5§2§5§ll§x§5§7§A§C§1§E§le§x§5§5§9§4§1§6§lb§x§4§E§9§B§1§8§lr§x§4§7§A§3§1§A§li§x§4§0§A§A§1§C§lg §7§lDrop", BarColor.GREEN, BarStyle.SOLID);
-        bossBar.addPlayer(player);
-
-        Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
-            bossBar.removeAll();
-            bossBar = null;
-        }, 60); // 40 ticks = 2 seconds
-    }
-
-    private void showBossBar4 (Player player) {
-        if (bossBar != null) {
-            bossBar.removeAll();
-        }
-
-        bossBar = Bukkit.createBossBar("§x§D§D§2§D§2§D§lE§x§C§8§3§E§2§6§lx§x§B§3§4§F§2§0§lp§x§9§E§6§0§1§9§ll§x§9§7§6§A§1§7§lo§x§9§D§6§F§1§9§ls§x§A§4§7§3§1§A§li§x§A§A§7§8§1§C§lv §7§lDrop", BarColor.RED, BarStyle.SOLID);
-        bossBar.addPlayer(player);
-
-        Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
-            bossBar.removeAll();
-            bossBar = null;
-        }, 60); // 40 ticks = 2 seconds
-    }
-
-    private void showBossBar5 (Player player, String value) {
-        if (bossBar != null) {
-            bossBar.removeAll();
-        }
-
-
-        bossBar = Bukkit.createBossBar("§7" + value + " geheilt §8» §a+10 Dura ", BarColor.GREEN, BarStyle.SEGMENTED_6);
-        if(value == "§cNichts"){
-            bossBar = Bukkit.createBossBar(value + " geheilt, deine Rüstung ist kaputt!", BarColor.RED, BarStyle.SOLID);
-        }
-        bossBar.addPlayer(player);
-
-        Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
-            bossBar.removeAll();
-            bossBar = null;
-        }, 60); // 40 ticks = 2 seconds
-    }
 
 
 }

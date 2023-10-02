@@ -20,7 +20,7 @@ public class SignCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
-        if(!(commandSender instanceof Player)){
+        if(!(commandSender instanceof Player p)){
             commandSender.sendMessage("§cDu musst ein Spieler sein um §7´/sign´§c ausführen zu können!");
             return true;
         }
@@ -28,7 +28,6 @@ public class SignCommand implements CommandExecutor, TabCompleter {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
             String date = simpleDateFormat.format(new Date());
 
-            Player p = (Player) commandSender;
             if(p.getItemInHand().getAmount() == 0){
                 p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 5, 1);
                 p.sendMessage("§cDu hast kein Item in der Hand!");

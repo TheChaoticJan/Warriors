@@ -44,6 +44,13 @@ public class InfobarClick implements Listener{
                 }
             }
 
+            if(event.getView().getTitle().equals("§c§lPerks")){
+                if(event.getCurrentItem().getItemMeta().getDisplayName().equals("§6§lKaufen?")){
+                    p.sendMessage("UwU");
+                }
+                event.setCancelled(true);
+            }
+
             if (event.getView().getTitle().startsWith("§7Bearbeite hier")) {
 
                 if(event.getCurrentItem().getType().equals(Material.RED_DYE)){

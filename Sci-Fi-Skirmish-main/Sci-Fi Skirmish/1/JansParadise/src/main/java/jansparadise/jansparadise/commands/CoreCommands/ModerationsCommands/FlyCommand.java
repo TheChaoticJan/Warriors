@@ -15,14 +15,13 @@ public class FlyCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
-        if(!(commandSender instanceof Player)){
+        if(!(commandSender instanceof Player p)){
             commandSender.sendMessage("§cDu musst ein Spieler sein um §7´/fly´§c ausführen zu können!");
             return true;
         }
         else{
-            Player p = (Player) commandSender;
 
-            if(p.getAllowFlight() == true){
+            if(p.getAllowFlight()){
                 p.setAllowFlight(false);
                 p.sendActionBar("§7Flugmodus §8» §cDeaktiviert");
             }

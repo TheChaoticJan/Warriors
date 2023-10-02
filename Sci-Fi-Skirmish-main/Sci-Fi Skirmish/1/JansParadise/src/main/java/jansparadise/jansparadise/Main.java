@@ -113,53 +113,53 @@ public final class Main extends JavaPlugin {
         Bukkit.addRecipe(ExplosivRezepte.Recipe4());
 
         //events
-        getServer().getPluginManager().registerEvents((Listener) new ClickEvent(), this);
-        getServer().getPluginManager().registerEvents((Listener) new MoveEvent(), this );
-        getServer().getPluginManager().registerEvents((Listener) new BlockPlacedEvent(this), this );
-        getServer().getPluginManager().registerEvents((Listener) new PlayerHitEvent(), this );
-        getServer().getPluginManager().registerEvents((Listener) new ExplodeEvent(), this );
-        getServer().getPluginManager().registerEvents((Listener) new RodEvent(this), this );
-        getServer().getPluginManager().registerEvents((Listener) new PlayerReceiveDamageEvent(this), this );
-        getServer().getPluginManager().registerEvents((Listener) new InventoryChangeEvent(this), this );
-        getServer().getPluginManager().registerEvents((Listener) new BlockBreakEvent(), this );
-        getServer().getPluginManager().registerEvents((Listener) new JoinEvent(this), this );
-        getServer().getPluginManager().registerEvents((Listener) new ChatEvent(), this );
-        getServer().getPluginManager().registerEvents((Listener) new BowEvent(this), this );
-        getServer().getPluginManager().registerEvents((Listener) new PlayerDeathEvent(this), this);
-        getServer().getPluginManager().registerEvents((Listener) new CrateDeathEvent(this), this);
-        getServer().getPluginManager().registerEvents((Listener) new RightClickEvent(this), this);
-        getServer().getPluginManager().registerEvents((Listener) new RezeptClickEvent(), this);
-        getServer().getPluginManager().registerEvents((Listener) new DropEvent(), this);
-        getServer().getPluginManager().registerEvents((Listener) new PlayerFishingEvent(), this);
-        getServer().getPluginManager().registerEvents((Listener) new CrateHitEvent(), this);
-        getServer().getPluginManager().registerEvents((Listener) new InfobarClick(this), this);
+        getServer().getPluginManager().registerEvents(new ClickEvent(), this);
+        getServer().getPluginManager().registerEvents(new MoveEvent(), this );
+        getServer().getPluginManager().registerEvents(new BlockPlacedEvent(this), this );
+        getServer().getPluginManager().registerEvents(new PlayerHitEvent(), this );
+        getServer().getPluginManager().registerEvents(new ExplodeEvent(), this );
+        getServer().getPluginManager().registerEvents(new RodEvent(this), this );
+        getServer().getPluginManager().registerEvents(new PlayerReceiveDamageEvent(this), this );
+        getServer().getPluginManager().registerEvents(new InventoryChangeEvent(this), this );
+        getServer().getPluginManager().registerEvents(new BlockBreakEvent(), this );
+        getServer().getPluginManager().registerEvents(new JoinEvent(this), this );
+        getServer().getPluginManager().registerEvents(new ChatEvent(), this );
+        getServer().getPluginManager().registerEvents(new BowEvent(this), this );
+        getServer().getPluginManager().registerEvents(new PlayerDeathEvent(this), this);
+        getServer().getPluginManager().registerEvents(new CrateDeathEvent(this), this);
+        getServer().getPluginManager().registerEvents(new RightClickEvent(this), this);
+        getServer().getPluginManager().registerEvents(new RezeptClickEvent(), this);
+        getServer().getPluginManager().registerEvents(new DropEvent(), this);
+        getServer().getPluginManager().registerEvents(new PlayerFishingEvent(), this);
+        getServer().getPluginManager().registerEvents(new CrateHitEvent(), this);
+        getServer().getPluginManager().registerEvents(new InfobarClick(this), this);
 
 
         //commands
         getCommand("heal").setExecutor(new HealCommand());
-        getCommand("fly").setExecutor((CommandExecutor) new FlyCommand());
-        getCommand("feed").setExecutor((CommandExecutor) new FeedCommand());
-        getCommand("kit").setExecutor((CommandExecutor) new KitCommand());
-        getCommand("sign").setExecutor((CommandExecutor) new SignCommand());
-        getCommand("fix").setExecutor((CommandExecutor) new FixCommand());
-        getCommand("uwu").setExecutor((CommandExecutor) new UwUCommand(this));
-        getCommand("invsee").setExecutor((CommandExecutor) new InvseeCommand(this));
-        getCommand("spawn").setExecutor((CommandExecutor) new SpawnCommand());
-        getCommand("ec").setExecutor((CommandExecutor) new EnderchestCommand());
-        getCommand("workbench").setExecutor((CommandExecutor) new WorkbenchCommand());
-        getCommand("anvil").setExecutor((CommandExecutor) new AnvilCommand());
-        getCommand("specialitems").setExecutor((CommandExecutor) new SpecialitemCommand());
-        getCommand("vanish").setExecutor((CommandExecutor) new VanishCommand(this));
-        getCommand("rezepte").setExecutor((CommandExecutor)  new RezepteCommand());
-        getCommand("playerinfo").setExecutor((CommandExecutor) new InfoCommand());
-        getCommand("xp").setExecutor((CommandExecutor) new XPCommand(this));
-        getCommand("rezept").setExecutor((CommandExecutor) new RezeptCommand());
-        getCommand("trash").setExecutor((CommandExecutor) new TrashCommand());
-        getCommand("modify").setExecutor((CommandExecutor) new ModifyCommand());
-        getCommand("cratestats").setExecutor((CommandExecutor) new CrateStatsCommand(this));
-        getCommand("top").setExecutor((CommandExecutor) new TopCommand(this));
-        getCommand("perks").setExecutor((CommandExecutor) new PerkCommand(this));
-        getCommand("infobar").setExecutor((CommandExecutor) new InfobarCommand(this));
+        getCommand("fly").setExecutor(new FlyCommand());
+        getCommand("feed").setExecutor(new FeedCommand());
+        getCommand("kit").setExecutor(new KitCommand());
+        getCommand("sign").setExecutor(new SignCommand());
+        getCommand("fix").setExecutor(new FixCommand());
+        getCommand("uwu").setExecutor(new UwUCommand(this));
+        getCommand("invsee").setExecutor(new InvseeCommand(this));
+        getCommand("spawn").setExecutor(new SpawnCommand());
+        getCommand("ec").setExecutor(new EnderchestCommand());
+        getCommand("workbench").setExecutor(new WorkbenchCommand());
+        getCommand("anvil").setExecutor(new AnvilCommand());
+        getCommand("specialitems").setExecutor(new SpecialitemCommand());
+        getCommand("vanish").setExecutor(new VanishCommand(this));
+        getCommand("rezepte").setExecutor(new RezepteCommand());
+        getCommand("playerinfo").setExecutor(new InfoCommand());
+        getCommand("xp").setExecutor(new XPCommand(this));
+        getCommand("rezept").setExecutor(new RezeptCommand());
+        getCommand("trash").setExecutor(new TrashCommand());
+        getCommand("modify").setExecutor(new ModifyCommand());
+        getCommand("cratestats").setExecutor(new CrateStatsCommand(this));
+        getCommand("top").setExecutor(new TopCommand(this));
+        getCommand("perks").setExecutor(new PerkCommand(this));
+        getCommand("infobar").setExecutor(new InfobarCommand(this));
 
 
     }

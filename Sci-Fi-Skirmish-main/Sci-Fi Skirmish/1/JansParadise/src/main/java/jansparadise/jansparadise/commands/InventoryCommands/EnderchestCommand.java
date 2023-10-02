@@ -15,8 +15,7 @@ import java.util.List;
 public class EnderchestCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
-        if(sender instanceof Player){
-            Player p = (Player) sender;
+        if(sender instanceof Player p){
             if(args.length == 0) {
                 p.openInventory(p.getEnderChest());
             }else if(!p.isOp()){

@@ -12,7 +12,7 @@ public class PlayerHitEvent implements Listener{
     @EventHandler
     public void hitEvent(EntityDamageEvent d){
 
-            if(d.getEntity().getType() == EntityType.PLAYER){
+              if(d.getEntity().getType() == EntityType.PLAYER){
                 Player p = (Player) d.getEntity();
                 if(p.getInventory().getBoots() != null && p.getInventory().getBoots().getItemMeta().hasEnchant(Enchantment.PROTECTION_ENVIRONMENTAL) && p.getInventory().getBoots().getEnchantmentLevel(Enchantment.PROTECTION_ENVIRONMENTAL) == 4){
                     if(p.getInventory().getChestplate() != null && p.getInventory().getChestplate().getItemMeta().hasEnchant(Enchantment.PROTECTION_ENVIRONMENTAL) && p.getInventory().getChestplate().getEnchantmentLevel(Enchantment.PROTECTION_ENVIRONMENTAL) == 4){
@@ -23,12 +23,6 @@ public class PlayerHitEvent implements Listener{
                         }
                     }
                 }
-            }else{return;}
-
-
+              }
             }
-
-        }
-
-
-
+}

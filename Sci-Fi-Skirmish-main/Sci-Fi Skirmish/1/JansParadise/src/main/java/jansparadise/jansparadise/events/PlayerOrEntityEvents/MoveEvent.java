@@ -61,7 +61,7 @@ public class MoveEvent implements Listener {
                                 }
                                 block.setType(blockmaterial);
 
-                            }}, 5 * 1);
+                            }}, 5);
                     }
 
 
@@ -95,7 +95,7 @@ public class MoveEvent implements Listener {
                                 }
                                 block.setType(blockmaterial);
 
-                            }}, 5 * 1);
+                            }}, 5);
                     }
 
             }

@@ -15,9 +15,8 @@ import java.util.List;
 public class InfoCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
-        if(commandSender instanceof Player){
+        if(commandSender instanceof Player p){
 
-            Player p = (Player) commandSender;
             String playername = args[0];
             Player r = Bukkit.getServer().getPlayerExact(playername);
                 if(r == null){

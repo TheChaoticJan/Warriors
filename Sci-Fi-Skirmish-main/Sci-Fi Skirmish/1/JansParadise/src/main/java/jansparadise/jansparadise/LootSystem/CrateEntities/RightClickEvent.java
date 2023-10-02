@@ -18,7 +18,7 @@ public class RightClickEvent implements Listener{
 
     @EventHandler
     public void clickEvent(PlayerInteractEvent e){
-        Player p = (Player) e.getPlayer();
+        Player p = e.getPlayer();
         if(p.getItemInHand().getType() == Material.STICK && p.getItemInHand().getItemFlags().contains(ItemFlag.HIDE_ENCHANTS)){
 
             ArmorstandBuilder.spawnArmorstand(p, p.getLocation().getBlockX(), (float) (p.getLocation().getBlockY() - 0.7), p.getLocation().getBlockZ());

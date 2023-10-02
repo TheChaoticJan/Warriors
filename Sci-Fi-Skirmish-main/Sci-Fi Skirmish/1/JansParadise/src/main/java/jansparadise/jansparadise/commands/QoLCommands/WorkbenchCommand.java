@@ -9,8 +9,7 @@ import org.jetbrains.annotations.NotNull;
 public class WorkbenchCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
-        if(commandSender instanceof Player){
-            Player p = (Player) commandSender;
+        if(commandSender instanceof Player p){
             p.openInventory(p.openWorkbench(p.getLocation(), true));
         }
         return true;

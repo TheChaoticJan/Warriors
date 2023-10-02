@@ -39,13 +39,12 @@ public class CrateHitEvent implements Listener {
 
                 if (((LivingEntity) e).getHealth() <= 0) {
                     e.setCustomNameVisible(false);
-                    ((LivingEntity) e).setCustomName(event.getDamager().getName());
+                    e.setCustomName(event.getDamager().getName());
                     int x1 = e.getLocation().getBlockX();
                     int y1 = e.getLocation().getBlockY();
                     int z1 = e.getLocation().getBlockZ();
                     e.getWorld().spawnParticle(Particle.CRIT, new Location(Bukkit.getWorld("world"), x1, y1, z1), 15);
                     e.remove();
-                    return;
                 }
 
             }

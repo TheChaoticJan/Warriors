@@ -22,7 +22,7 @@ public class ChatEvent implements Listener{
 
         for(int i = 0; i < Böslist.size(); i++){
         if(     event.getMessage().toLowerCase().contains(Böslist.get(i))){
-            Player p = (Player) event.getPlayer();
+            Player p = event.getPlayer();
             event.setCancelled(true);
             p.sendMessage("§cDeine Nachricht wurde nicht abgesendet, da sie gegen unsere Regeln verstößt!");
         }}

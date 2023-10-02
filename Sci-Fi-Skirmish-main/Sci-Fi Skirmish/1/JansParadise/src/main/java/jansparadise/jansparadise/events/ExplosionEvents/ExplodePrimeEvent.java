@@ -13,7 +13,7 @@ public class ExplodePrimeEvent implements Listener{
     @EventHandler
     public void primeEvent(ExplosionPrimeEvent event){
         if(event.getEntity().getType() == EntityType.PRIMED_TNT){
-            Entity tnt = (TNTPrimed) event.getEntity();
+            Entity tnt = event.getEntity();
             event.setCancelled(true);
             tnt.getLocation().createExplosion(1);
 

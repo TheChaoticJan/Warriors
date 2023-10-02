@@ -88,7 +88,7 @@ public class PlayerStats {
     }
 
     public long getUwu() {
-        return (long) uwu;
+        return uwu;
     }
 
     public int getCommon_crates() {

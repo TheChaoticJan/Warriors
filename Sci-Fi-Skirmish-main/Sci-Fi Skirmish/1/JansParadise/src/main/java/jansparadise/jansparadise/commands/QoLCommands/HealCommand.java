@@ -14,11 +14,10 @@ public class HealCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
 
-        if (!(commandSender instanceof Player)) {
+        if (!(commandSender instanceof Player p)) {
             commandSender.sendMessage("§cDu musst ein Spieler sein um §7´/heal´§c ausführen zu können!");
             return true;
         } else {
-            Player p = (Player) commandSender;
 
             if (args.length == 0) {
 
