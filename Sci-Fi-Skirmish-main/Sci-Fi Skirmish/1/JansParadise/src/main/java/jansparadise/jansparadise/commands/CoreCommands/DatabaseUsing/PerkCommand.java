@@ -1,4 +1,4 @@
-package jansparadise.jansparadise.commands.CoreCommands.ModerationsCommands;
+package jansparadise.jansparadise.commands.CoreCommands.DatabaseUsing;
 
 import jansparadise.jansparadise.Main;
 import jansparadise.jansparadise.models.PlayerStats;
@@ -97,6 +97,18 @@ public class PerkCommand implements CommandExecutor, TabCompleter {
                    lore3.add("§910 Sekunden §bSpeed II §7und §cStärke II§7.w     ");
                    RiskMeta.setLore(lore3);
 
+                   //Spionagemeister
+                   ItemStack InfoPerk = new ItemStack(Material.SPYGLASS);
+                   ItemMeta InfoMeta = InfoPerk.getItemMeta();
+                   InfoMeta.setDisplayName("§5§oSpionagemeister");
+                   ArrayList<String> lore6 = new ArrayList<>();
+                   lore6.add("");
+                   lore6.add("§7Mit dem §5Spionagemeister §7Perk");
+                   lore6.add("§7kannst du den §e/infobar §7Command");
+                   lore6.add("§7nutzen, und somit deine §6Infobar");
+                   lore6.add("§7modular §aanpassen §7und nutzen.");
+                   InfoMeta.setLore(lore6);
+
 
                     //Cooming Soon
                     ItemStack CS = new ItemStack(Material.BARRIER);
@@ -116,7 +128,7 @@ public class PerkCommand implements CommandExecutor, TabCompleter {
                     ArrayList<String> lore4 = new ArrayList<>();
                     lore4.add("");
                     lore4.add("§7Du §abesitzt §7dieses Perk bereits.");
-                    lore4.add("§7Dadurch ist es automatisch §aaktiv§7!");
+                    lore4.add("§7dadurch ist es automatisch §aaktiv§7!");
                     lore4.add("");
                     buyedMeta.setLore(lore4);
                     buyed.setItemMeta(buyedMeta);
@@ -198,9 +210,21 @@ public class PerkCommand implements CommandExecutor, TabCompleter {
                      Perks.setItem(13, CobwebPerk);
 
                     Boolean b5 = stats.getPerk5();
-
-
-
+                    if(b5){
+                        InfoMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+                        InfoMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+                        InfoPerk.setItemMeta(InfoMeta);
+                        Perks.setItem(23, buyed);
+                    }else{
+                        InfoPerk.setItemMeta(InfoMeta);
+                        lore5.add(3, "§7Kosten: §e450 §6✧");
+                        toBuyMeta.setLore(lore5);
+                        toBuy.setItemMeta(toBuyMeta);
+                        Perks.setItem(23, toBuy);
+                        lore5.remove(3);
+                    }
+                    Perks.setItem(14, InfoPerk);
+                    
                     for(int i2 = 26; i2 <= 35; i2++){
                         Perks.setItem(i2, Inventarteile.Glas());
                     }

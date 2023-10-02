@@ -11,7 +11,7 @@ import jansparadise.jansparadise.commands.CoreCommands.DatabaseUsing.XPCommand;
 import jansparadise.jansparadise.commands.InventoryCommands.GUIs.RezepteCommand;
 import jansparadise.jansparadise.commands.InventoryCommands.SpecialitemCommand;
 import jansparadise.jansparadise.commands.InventoryCommands.TrashCommand;
-import jansparadise.jansparadise.commands.CoreCommands.ModerationsCommands.PerkCommand;
+import jansparadise.jansparadise.commands.CoreCommands.DatabaseUsing.PerkCommand;
 import jansparadise.jansparadise.commands.QoLCommands.*;
 import jansparadise.jansparadise.events.InventoryEvents.ClickEvent;
 import jansparadise.jansparadise.events.InventoryEvents.InfobarClick;
