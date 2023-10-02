@@ -4,12 +4,12 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class Füllerglas {
+public class Fuellerglas {
 
     public static ItemStack Glas(){
         ItemStack Glas = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
         ItemMeta GlasMeta = Glas.getItemMeta();
-        GlasMeta.setDisplayName("");
+        GlasMeta.setDisplayName("_");
         Glas.setItemMeta(GlasMeta);
         return Glas;
     }

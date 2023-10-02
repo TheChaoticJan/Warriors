@@ -6,7 +6,7 @@ import jansparadise.jansparadise.sonstiges.ItemBuilder.Erfahren.ErfahrenBogen;
 import jansparadise.jansparadise.sonstiges.ItemBuilder.Erfahren.ErfahrenSchwert;
 import jansparadise.jansparadise.sonstiges.ItemBuilder.Explosiv.ExplosivAngel;
 import jansparadise.jansparadise.sonstiges.ItemBuilder.Explosiv.ExplosivPicke;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.InventoryEssentials.Füllerglas;
+import jansparadise.jansparadise.sonstiges.ItemBuilder.InventoryEssentials.Fuellerglas;
 import jansparadise.jansparadise.sonstiges.ItemBuilder.Klebrig.KlebrigAngel;
 import jansparadise.jansparadise.sonstiges.ItemBuilder.Klebrig.KlebrigBogen;
 import jansparadise.jansparadise.sonstiges.ItemBuilder.Klebrig.KlebrigSchwert;
@@ -28,16 +28,16 @@ public class SpecialItemInventory {
         Inventory rezepte = Bukkit.createInventory(p, 54 , "§x§0§0§F§F§E§0§l§nS§x§0§8§7§4§F§1§l§np§x§1§6§0§1§F§2§l§ne§x§4§9§0§6§A§1§l§nc§x§7§9§0§C§7§7§l§ni§x§A§7§1§5§9§B§l§na§x§B§E§1§6§8§1§l§nl§x§B§E§0§F§2§A§l§ni§x§D§6§5§4§0§8§l§nt§x§F§9§B§D§0§1§l§ne§x§9§4§B§D§0§B§l§nm§x§1§4§A§8§1§8§l§ns");
 
         for(int i = 0; i <= 9; i++){
-            rezepte.setItem(i, Füllerglas.Glas());
+            rezepte.setItem(i, Fuellerglas.Glas());
         }
-        rezepte.setItem(17, Füllerglas.Glas());
-        rezepte.setItem(18, Füllerglas.Glas());
-        rezepte.setItem(26, Füllerglas.Glas());
-        rezepte.setItem(27, Füllerglas.Glas());
-        rezepte.setItem(35, Füllerglas.Glas());
-        rezepte.setItem(36, Füllerglas.Glas());
+        rezepte.setItem(17, Fuellerglas.Glas());
+        rezepte.setItem(18, Fuellerglas.Glas());
+        rezepte.setItem(26, Fuellerglas.Glas());
+        rezepte.setItem(27, Fuellerglas.Glas());
+        rezepte.setItem(35, Fuellerglas.Glas());
+        rezepte.setItem(36, Fuellerglas.Glas());
         for(int i2 = 44; i2 <= 53; i2++){
-            rezepte.setItem(i2, Füllerglas.Glas());
+            rezepte.setItem(i2, Fuellerglas.Glas());
         }
 
         //Sci-Fi

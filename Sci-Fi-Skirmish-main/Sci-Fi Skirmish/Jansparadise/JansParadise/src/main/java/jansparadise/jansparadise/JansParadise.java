@@ -10,6 +10,7 @@ import jansparadise.jansparadise.commands.InventoryCommands.TrashCommand;
 import jansparadise.jansparadise.commands.CoreCommands.ModerationsCommands.PerkCommand;
 import jansparadise.jansparadise.commands.QoLCommands.*;
 import jansparadise.jansparadise.events.InventoryEvents.ClickEvent;
+import jansparadise.jansparadise.events.InventoryEvents.InfobarClick;
 import jansparadise.jansparadise.events.InventoryEvents.Rezepte.RezeptClickEvent;
 import jansparadise.jansparadise.LootSystem.CrateEntities.CrateDeathEvent;
 import jansparadise.jansparadise.LootSystem.CrateEntities.RightClickEvent;
@@ -131,7 +132,7 @@ public final class JansParadise extends JavaPlugin {
         getServer().getPluginManager().registerEvents((Listener) new DropEvent(), this);
         getServer().getPluginManager().registerEvents((Listener) new PlayerFishingEvent(), this);
         getServer().getPluginManager().registerEvents((Listener) new CrateHitEvent(), this);
-
+        getServer().getPluginManager().registerEvents((Listener) new InfobarClick(this), this);
 
 
         //commands

@@ -101,7 +101,7 @@ public class PlayerReceiveDamageEvent implements Listener{
                 }
 
                 if(stats.getPerk1()){
-                    int rndm = (int) (1 + Math.random() * 380);
+                    int rndm = (int) (1 + Math.random() * 111);
 
                     if(rndm == 1) {
                         String value = "";

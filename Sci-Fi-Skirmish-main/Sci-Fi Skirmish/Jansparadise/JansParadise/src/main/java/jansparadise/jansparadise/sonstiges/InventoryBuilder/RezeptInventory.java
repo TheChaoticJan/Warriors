@@ -6,7 +6,7 @@ import jansparadise.jansparadise.sonstiges.ItemBuilder.Erfahren.ErfahrenBogen;
 import jansparadise.jansparadise.sonstiges.ItemBuilder.Erfahren.ErfahrenSchwert;
 import jansparadise.jansparadise.sonstiges.ItemBuilder.Explosiv.ExplosivAngel;
 import jansparadise.jansparadise.sonstiges.ItemBuilder.Explosiv.ExplosivPicke;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.InventoryEssentials.Füllerglas;
+import jansparadise.jansparadise.sonstiges.ItemBuilder.InventoryEssentials.Fuellerglas;
 import jansparadise.jansparadise.sonstiges.ItemBuilder.Klebrig.KlebrigAngel;
 import jansparadise.jansparadise.sonstiges.ItemBuilder.Klebrig.KlebrigBogen;
 import jansparadise.jansparadise.sonstiges.ItemBuilder.Klebrig.KlebrigSchwert;
@@ -29,16 +29,16 @@ public class RezeptInventory {
         Inventory rezepte = Bukkit.createInventory(p, 54 , "§x§F§F§5§9§F§4R§x§F§4§5§8§F§6e§x§E§9§5§6§F§8z§x§D§E§5§5§F§Ae§x§D§3§5§4§F§Bp§x§C§8§5§2§F§Dt§x§B§D§5§1§F§Fe");
 
         for(int i = 0; i <= 9; i++){
-            rezepte.setItem(i, Füllerglas.Glas());
+            rezepte.setItem(i, Fuellerglas.Glas());
         }
-        rezepte.setItem(17, Füllerglas.Glas());
-        rezepte.setItem(18, Füllerglas.Glas());
-        rezepte.setItem(26, Füllerglas.Glas());
-        rezepte.setItem(27, Füllerglas.Glas());
-        rezepte.setItem(35, Füllerglas.Glas());
-        rezepte.setItem(36, Füllerglas.Glas());
+        rezepte.setItem(17, Fuellerglas.Glas());
+        rezepte.setItem(18, Fuellerglas.Glas());
+        rezepte.setItem(26, Fuellerglas.Glas());
+        rezepte.setItem(27, Fuellerglas.Glas());
+        rezepte.setItem(35, Fuellerglas.Glas());
+        rezepte.setItem(36, Fuellerglas.Glas());
         for(int i2 = 44; i2 <= 53; i2++){
-            rezepte.setItem(i2, Füllerglas.Glas());
+            rezepte.setItem(i2, Fuellerglas.Glas());
         }
 
         //Sci-Fi

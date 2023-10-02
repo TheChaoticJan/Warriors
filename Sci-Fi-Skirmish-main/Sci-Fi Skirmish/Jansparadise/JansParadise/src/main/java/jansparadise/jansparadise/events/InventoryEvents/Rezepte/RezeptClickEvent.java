@@ -4,29 +4,11 @@ import jansparadise.jansparadise.sonstiges.InventoryBuilder.Rezepte.ErfahrenReze
 import jansparadise.jansparadise.sonstiges.InventoryBuilder.Rezepte.ExplosivRezeptInventare;
 import jansparadise.jansparadise.sonstiges.InventoryBuilder.Rezepte.KlebrigRezeptInventare;
 import jansparadise.jansparadise.sonstiges.InventoryBuilder.Rezepte.SciFiRezeptInventare;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.CraftingEssentials.*;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Erfahren.ErfahrenAxt;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Erfahren.ErfahrenBogen;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Erfahren.ErfahrenSchwert;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Explosiv.ExplosivAngel;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Explosiv.ExplosivPicke;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.InventoryEssentials.Füllerglas;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Klebrig.KlebrigAngel;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Klebrig.KlebrigBogen;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.Klebrig.KlebrigSchwert;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.SciFi.SciFiAxt;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.SciFi.SciFiBogen;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.SciFi.SciFiSilencer;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.SciFi.SciFiWand;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.InventoryEssentials.ZurückButton;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 
 public class RezeptClickEvent implements Listener{
 

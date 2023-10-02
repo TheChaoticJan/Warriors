@@ -77,9 +77,9 @@ public class Actionbar {
         if(stats.getClan() == ""){
                 stats.setClan("§cClanlos");
             }
-        String clan = "§8<§6Clan§8> §e" + stats.getClan();
+        String clan = "§8<§6Kontostand§8> §e" + stats.getXp() + " §6✧";
         String xp1 = "§8<§aXP§8> §2" + xp;
-        String pearls1 = "§8<§5Pearls§8> §5" + pearls;
+        String pearls1 = "§8<§5Pearls§8> §x§D§6§5§B§E§9" + pearls;
         String tnt1 = "§8<§x§9§E§1§B§5§0T§x§C§F§0§E§5§2N§x§F§F§0§0§5§3T§8> §x§C§F§0§E§5§2" + tnt;
         String webs1 = "§8<§fWebs§8> §§x§C§2§F§A§E§F" + webs;
 

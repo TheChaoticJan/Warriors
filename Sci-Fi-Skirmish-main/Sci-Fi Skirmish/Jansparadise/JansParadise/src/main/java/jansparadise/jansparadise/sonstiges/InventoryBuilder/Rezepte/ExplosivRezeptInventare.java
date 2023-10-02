@@ -4,7 +4,7 @@ import jansparadise.jansparadise.sonstiges.ItemBuilder.CraftingEssentials.Explos
 import jansparadise.jansparadise.sonstiges.ItemBuilder.CraftingEssentials.ExplosivPowder;
 import jansparadise.jansparadise.sonstiges.ItemBuilder.Explosiv.ExplosivAngel;
 import jansparadise.jansparadise.sonstiges.ItemBuilder.Explosiv.ExplosivPicke;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.InventoryEssentials.Füllerglas;
+import jansparadise.jansparadise.sonstiges.ItemBuilder.InventoryEssentials.Fuellerglas;
 import jansparadise.jansparadise.sonstiges.ItemBuilder.InventoryEssentials.ZurückButton;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -24,7 +24,7 @@ public class ExplosivRezeptInventare {
             i = Bukkit.createInventory(p,45, a.getItemMeta().getDisplayName() + "§f");
         }
         for(int i1 = 0; i1 <= 10; i1++){
-            i.setItem(i1 ,Füllerglas.Glas());
+            i.setItem(i1 , Fuellerglas.Glas());
         }
 
         i.setItem(11, new ItemStack(Material.GUNPOWDER));
@@ -40,14 +40,14 @@ public class ExplosivRezeptInventare {
         i.setItem(24, ExplosivPowder.Powder());
 
         for(int i2 = 14; i2 <= 19; i2++){
-            i.setItem(i2, Füllerglas.Glas());
+            i.setItem(i2, Fuellerglas.Glas());
         }
-        i.setItem(23, Füllerglas.Glas());
+        i.setItem(23, Fuellerglas.Glas());
         for(int i3 = 25; i3 <= 28; i3++){
-            i.setItem(i3, Füllerglas.Glas());
+            i.setItem(i3, Fuellerglas.Glas());
         }
         for(int i4 = 32; i4 <= 43; i4++){
-            i.setItem(i4, Füllerglas.Glas());
+            i.setItem(i4, Fuellerglas.Glas());
         }
         i.setItem(44, ZurückButton.Zurück());
         return i;
@@ -61,7 +61,7 @@ public class ExplosivRezeptInventare {
             i = Bukkit.createInventory(p,45, a.getItemMeta().getDisplayName() + "§f");
         }
         for(int i1 = 0; i1 <= 10; i1++){
-            i.setItem(i1 ,Füllerglas.Glas());
+            i.setItem(i1 , Fuellerglas.Glas());
         }
 
         i.setItem(11, new ItemStack(ExplosivPowder.Powder()));
@@ -77,14 +77,14 @@ public class ExplosivRezeptInventare {
         i.setItem(24, ExplosivKelp.DriedKelp());
 
         for(int i2 = 14; i2 <= 19; i2++){
-            i.setItem(i2, Füllerglas.Glas());
+            i.setItem(i2, Fuellerglas.Glas());
         }
-        i.setItem(23, Füllerglas.Glas());
+        i.setItem(23, Fuellerglas.Glas());
         for(int i3 = 25; i3 <= 28; i3++){
-            i.setItem(i3, Füllerglas.Glas());
+            i.setItem(i3, Fuellerglas.Glas());
         }
         for(int i4 = 32; i4 <= 43; i4++){
-            i.setItem(i4, Füllerglas.Glas());
+            i.setItem(i4, Fuellerglas.Glas());
         }
         i.setItem(44, ZurückButton.Zurück());
         return i;
@@ -98,7 +98,7 @@ public class ExplosivRezeptInventare {
             i = Bukkit.createInventory(p,45, a.getItemMeta().getDisplayName() + "§f");
         }
         for(int i1 = 0; i1 <= 10; i1++){
-            i.setItem(i1 ,Füllerglas.Glas());
+            i.setItem(i1 , Fuellerglas.Glas());
         }
 
         i.setItem(11, new ItemStack(Material.AIR));
@@ -114,14 +114,14 @@ public class ExplosivRezeptInventare {
         i.setItem(24, ExplosivAngel.ExplosivAngel());
 
         for(int i2 = 14; i2 <= 19; i2++){
-            i.setItem(i2, Füllerglas.Glas());
+            i.setItem(i2, Fuellerglas.Glas());
         }
-        i.setItem(23, Füllerglas.Glas());
+        i.setItem(23, Fuellerglas.Glas());
         for(int i3 = 25; i3 <= 28; i3++){
-            i.setItem(i3, Füllerglas.Glas());
+            i.setItem(i3, Fuellerglas.Glas());
         }
         for(int i4 = 32; i4 <= 43; i4++){
-            i.setItem(i4, Füllerglas.Glas());
+            i.setItem(i4, Fuellerglas.Glas());
         }
         i.setItem(44, ZurückButton.Zurück());
         return i;
@@ -135,7 +135,7 @@ public class ExplosivRezeptInventare {
             i = Bukkit.createInventory(p,45, a.getItemMeta().getDisplayName() + "§f");
         }
         for(int i1 = 0; i1 <= 10; i1++){
-            i.setItem(i1 ,Füllerglas.Glas());
+            i.setItem(i1 , Fuellerglas.Glas());
         }
 
         i.setItem(11, new ItemStack(ExplosivKelp.DriedKelp()));
@@ -151,14 +151,14 @@ public class ExplosivRezeptInventare {
         i.setItem(24, ExplosivPicke.ErfahrenBow());
 
         for(int i2 = 14; i2 <= 19; i2++){
-            i.setItem(i2, Füllerglas.Glas());
+            i.setItem(i2, Fuellerglas.Glas());
         }
-        i.setItem(23, Füllerglas.Glas());
+        i.setItem(23, Fuellerglas.Glas());
         for(int i3 = 25; i3 <= 28; i3++){
-            i.setItem(i3, Füllerglas.Glas());
+            i.setItem(i3, Fuellerglas.Glas());
         }
         for(int i4 = 32; i4 <= 43; i4++){
-            i.setItem(i4, Füllerglas.Glas());
+            i.setItem(i4, Fuellerglas.Glas());
         }
         i.setItem(44, ZurückButton.Zurück());
         return i;

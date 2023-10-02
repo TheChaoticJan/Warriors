@@ -2,8 +2,7 @@ package jansparadise.jansparadise.commands.CoreCommands.ModerationsCommands;
 
 import jansparadise.jansparadise.JansParadise;
 import jansparadise.jansparadise.models.PlayerStats;
-import jansparadise.jansparadise.sonstiges.ItemBuilder.InventoryEssentials.Füllerglas;
-import jansparadise.jansparadise.sonstiges.Scoreboardbuilder.ScoreBoardBuilder;
+import jansparadise.jansparadise.sonstiges.ItemBuilder.InventoryEssentials.Fuellerglas;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -16,7 +15,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.checkerframework.checker.units.qual.A;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -47,7 +45,7 @@ public class PerkCommand implements CommandExecutor, TabCompleter {
 
                 Inventory Perks = Bukkit.createInventory(p, 36, "§c§lPerks");
                      for(int i = 0; i <= 9; i++) {
-                        Perks.setItem(i, Füllerglas.Glas());
+                        Perks.setItem(i, Fuellerglas.Glas());
                      }
 
                     //Armorer-Perk
@@ -108,8 +106,8 @@ public class PerkCommand implements CommandExecutor, TabCompleter {
                     for(int i1 = 15; i1 <= 16; i1++){
                         Perks.setItem(i1, CS);
                     }
-                    Perks.setItem(17, Füllerglas.Glas());
-                    Perks.setItem(18, Füllerglas.Glas());
+                    Perks.setItem(17, Fuellerglas.Glas());
+                    Perks.setItem(18, Fuellerglas.Glas());
 
                     //Buyed
                     ItemStack buyed = new ItemStack(Material.EMERALD);
@@ -204,7 +202,7 @@ public class PerkCommand implements CommandExecutor, TabCompleter {
 
 
                     for(int i2 = 26; i2 <= 35; i2++){
-                        Perks.setItem(i2, Füllerglas.Glas());
+                        Perks.setItem(i2, Fuellerglas.Glas());
                     }
 
                 p.openInventory(Perks);

@@ -2,17 +2,27 @@ package jansparadise.jansparadise.commands.CoreCommands;
 
 import jansparadise.jansparadise.JansParadise;
 import jansparadise.jansparadise.models.PlayerStats;
+import jansparadise.jansparadise.sonstiges.InventoryBuilder.InfobarIntroduction;
+import jansparadise.jansparadise.sonstiges.ItemBuilder.Infobar;
+import jansparadise.jansparadise.sonstiges.ItemBuilder.InventoryEssentials.Fuellerglas;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.checkerframework.checker.units.qual.A;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class InfobarCommand implements CommandExecutor, TabCompleter {
@@ -44,12 +54,8 @@ public class InfobarCommand implements CommandExecutor, TabCompleter {
                     p.sendMessage("\n§cDu musst erst das Perk §7'Spionagemeister' §ckaufen, um die Infobar bearbeiten zu können!\n§f");
                     return true;
                 }else{
-
-                    Inventory Configuration = Bukkit.createInventory(p, 54, "§6§lConfiguriere deine Infobar!");
-                    p.openInventory(Configuration);
-
+                   p.openInventory(InfobarIntroduction.introduction(p, stats));
                 }
-
             }catch (SQLException e){
                 e.printStackTrace();
             }
