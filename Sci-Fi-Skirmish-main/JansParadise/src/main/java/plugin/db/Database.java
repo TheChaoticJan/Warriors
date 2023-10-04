@@ -4,6 +4,7 @@ import plugin.models.PlayerStats;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Database {
     private Connection connection;
@@ -145,7 +146,6 @@ public class Database {
 
             list.add(name);
             list.add(xp);
-
         }
         statement.close();
         return list;

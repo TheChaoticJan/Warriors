@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
 import java.util.List;
 
 public class FeedCommand implements CommandExecutor, TabCompleter {
@@ -20,30 +21,22 @@ public class FeedCommand implements CommandExecutor, TabCompleter {
             return true;
         }
         else{
-            if(p.getFoodLevel() >= 20) {
-             if(p.getSaturation() >= 20){
-                 p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 5, 1);
-                 p.sendActionBar("§cDu hast bereits vollen Hunger!");
-                 return true;
+            if(p.getFoodLevel() < 20 | p.getSaturation() < 20) {
+                p.setFoodLevel(20);
+                p.setSaturation(20);
+                p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_YES, 5, 1);
+                p.sendActionBar("§aErfolgreich deinen Hunger aufgefüllt!");
+                return true;
+            }else{
+                p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 5, 1);
+                p.sendActionBar("§cDu hast bereits vollen Hunger!");
+                return true;
              }
-             else{
-                 p.setFoodLevel(20);
-                 p.setSaturation(20);
-                 p.sendActionBar("§aErfolgreich deinen Hunger aufgefüllt!");
-                 return true;
-             }
-          }
-          else{
-              p.setFoodLevel(20);
-              p.setSaturation(20);
-              p.sendActionBar("§aErfolgreich deinen Hunger aufgefüllt!");
-              return true;
           }
         }
-    }
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
-        return null;
+        return Collections.singletonList("");
     }
 }
