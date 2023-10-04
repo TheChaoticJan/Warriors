@@ -8,7 +8,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 
 public class ErfahrenItems {
-
     private static ArrayList<String> lore(){
         ArrayList<String> lore = new ArrayList<String>();
         lore.add("§eErfahren");
@@ -21,8 +20,6 @@ public class ErfahrenItems {
         lore.add("");
         return lore;
     }
-
-
 
     public static ItemStack Axt(){
 

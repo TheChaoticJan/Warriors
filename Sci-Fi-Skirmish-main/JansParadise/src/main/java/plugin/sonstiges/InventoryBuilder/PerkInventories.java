@@ -18,7 +18,7 @@ public class PerkInventories {
     public static Inventory Overview(Player p, PlayerStats stats){
         Inventory Perks = Bukkit.createInventory(p, 36, "§c§lPerks");
         for(int i = 0; i <= 9; i++) {
-            Perks.setItem(i, Inventarteile.Glas());
+            Perks.setItem(i, Inventarteile.Glass());
         }
 
         //Armorer-Perk
@@ -91,8 +91,8 @@ public class PerkInventories {
         for(int i1 = 15; i1 <= 16; i1++){
             Perks.setItem(i1, CS);
         }
-        Perks.setItem(17, Inventarteile.Glas());
-        Perks.setItem(18, Inventarteile.Glas());
+        Perks.setItem(17, Inventarteile.Glass());
+        Perks.setItem(18, Inventarteile.Glass());
 
         //Buyed
         ItemStack buyed = new ItemStack(Material.EMERALD);
@@ -199,7 +199,7 @@ public class PerkInventories {
         Perks.setItem(14, InfoPerk);
 
         for(int i2 = 26; i2 <= 35; i2++){
-            Perks.setItem(i2, Inventarteile.Glas());
+            Perks.setItem(i2, Inventarteile.Glass());
         }
 
         return Perks;
@@ -209,9 +209,6 @@ public class PerkInventories {
 
         Inventory i = Bukkit.createInventory(p, 9, "");
         return i;
-
-
-
 
     }
 }

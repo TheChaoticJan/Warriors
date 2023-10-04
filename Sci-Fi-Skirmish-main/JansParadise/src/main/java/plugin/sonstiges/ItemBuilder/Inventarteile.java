@@ -8,7 +8,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class Inventarteile {
 
-    public static ItemStack Glas() {
+    public static ItemStack Glass() {
         ItemStack Glas = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
         ItemMeta GlasMeta = Glas.getItemMeta();
         GlasMeta.setDisplayName("_".replace("_", " "));

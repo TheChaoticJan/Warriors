@@ -76,7 +76,6 @@ public class Bossbars {
             bossBar.removeAll();
         }
 
-
         bossBar = Bukkit.createBossBar("§7" + value + " geheilt §8» §a+10 Dura ", BarColor.GREEN, BarStyle.SEGMENTED_6);
         if(value == "§cNichts"){
             bossBar = Bukkit.createBossBar(value + " geheilt, deine Rüstung ist kaputt!", BarColor.RED, BarStyle.SOLID);

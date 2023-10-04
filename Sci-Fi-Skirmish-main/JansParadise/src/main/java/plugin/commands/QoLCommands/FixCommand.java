@@ -32,10 +32,7 @@ public class FixCommand implements CommandExecutor, TabCompleter {
                 else{
                     p.sendMessage("§cDas Item, was du reparieren willst, hat bereits volle Haltbarkeit!");
                 }
-
             }
-
-
         }
         return false;
     }

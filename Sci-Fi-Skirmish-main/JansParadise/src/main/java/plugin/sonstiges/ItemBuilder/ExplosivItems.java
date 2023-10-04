@@ -8,7 +8,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 
 public class ExplosivItems {
-
     private static ArrayList<String> lore(){
         ArrayList<String> lore = new ArrayList<String>();
         lore.add("§eExplosiv");

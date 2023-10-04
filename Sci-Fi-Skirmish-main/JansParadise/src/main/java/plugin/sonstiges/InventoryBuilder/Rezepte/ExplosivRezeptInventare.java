@@ -22,7 +22,7 @@ public class ExplosivRezeptInventare {
             i = Bukkit.createInventory(p,45, a.getItemMeta().getDisplayName() + "§f");
         }
         for(int i1 = 0; i1 <= 10; i1++){
-            i.setItem(i1 , Inventarteile.Glas());
+            i.setItem(i1 , Inventarteile.Glass());
         }
 
         i.setItem(11, new ItemStack(Material.GUNPOWDER));
@@ -38,14 +38,14 @@ public class ExplosivRezeptInventare {
         i.setItem(24, SpecialResources.ExplosivPuder());
 
         for(int i2 = 14; i2 <= 19; i2++){
-            i.setItem(i2, Inventarteile.Glas());
+            i.setItem(i2, Inventarteile.Glass());
         }
-        i.setItem(23, Inventarteile.Glas());
+        i.setItem(23, Inventarteile.Glass());
         for(int i3 = 25; i3 <= 28; i3++){
-            i.setItem(i3, Inventarteile.Glas());
+            i.setItem(i3, Inventarteile.Glass());
         }
         for(int i4 = 32; i4 <= 43; i4++){
-            i.setItem(i4, Inventarteile.Glas());
+            i.setItem(i4, Inventarteile.Glass());
         }
         i.setItem(44, Inventarteile.Zurück());
         return i;
@@ -59,7 +59,7 @@ public class ExplosivRezeptInventare {
             i = Bukkit.createInventory(p,45, a.getItemMeta().getDisplayName() + "§f");
         }
         for(int i1 = 0; i1 <= 10; i1++){
-            i.setItem(i1 , Inventarteile.Glas());
+            i.setItem(i1 , Inventarteile.Glass());
         }
 
         i.setItem(11, new ItemStack(SpecialResources.ExplosivPuder()));
@@ -75,14 +75,14 @@ public class ExplosivRezeptInventare {
         i.setItem(24, SpecialResources.ExplosivBarren());
 
         for(int i2 = 14; i2 <= 19; i2++){
-            i.setItem(i2, Inventarteile.Glas());
+            i.setItem(i2, Inventarteile.Glass());
         }
-        i.setItem(23, Inventarteile.Glas());
+        i.setItem(23, Inventarteile.Glass());
         for(int i3 = 25; i3 <= 28; i3++){
-            i.setItem(i3, Inventarteile.Glas());
+            i.setItem(i3, Inventarteile.Glass());
         }
         for(int i4 = 32; i4 <= 43; i4++){
-            i.setItem(i4, Inventarteile.Glas());
+            i.setItem(i4, Inventarteile.Glass());
         }
         i.setItem(44, Inventarteile.Zurück());
         return i;
@@ -96,7 +96,7 @@ public class ExplosivRezeptInventare {
             i = Bukkit.createInventory(p,45, a.getItemMeta().getDisplayName() + "§f");
         }
         for(int i1 = 0; i1 <= 10; i1++){
-            i.setItem(i1 , Inventarteile.Glas());
+            i.setItem(i1 , Inventarteile.Glass());
         }
 
         i.setItem(11, new ItemStack(Material.AIR));
@@ -112,14 +112,14 @@ public class ExplosivRezeptInventare {
         i.setItem(24, ExplosivItems.Angel());
 
         for(int i2 = 14; i2 <= 19; i2++){
-            i.setItem(i2, Inventarteile.Glas());
+            i.setItem(i2, Inventarteile.Glass());
         }
-        i.setItem(23, Inventarteile.Glas());
+        i.setItem(23, Inventarteile.Glass());
         for(int i3 = 25; i3 <= 28; i3++){
-            i.setItem(i3, Inventarteile.Glas());
+            i.setItem(i3, Inventarteile.Glass());
         }
         for(int i4 = 32; i4 <= 43; i4++){
-            i.setItem(i4, Inventarteile.Glas());
+            i.setItem(i4, Inventarteile.Glass());
         }
         i.setItem(44, Inventarteile.Zurück());
         return i;
@@ -133,7 +133,7 @@ public class ExplosivRezeptInventare {
             i = Bukkit.createInventory(p,45, a.getItemMeta().getDisplayName() + "§f");
         }
         for(int i1 = 0; i1 <= 10; i1++){
-            i.setItem(i1 , Inventarteile.Glas());
+            i.setItem(i1 , Inventarteile.Glass());
         }
 
         i.setItem(11, new ItemStack(SpecialResources.ExplosivBarren()));
@@ -149,14 +149,14 @@ public class ExplosivRezeptInventare {
         i.setItem(24, ExplosivItems.Spitzhacke());
 
         for(int i2 = 14; i2 <= 19; i2++){
-            i.setItem(i2, Inventarteile.Glas());
+            i.setItem(i2, Inventarteile.Glass());
         }
-        i.setItem(23, Inventarteile.Glas());
+        i.setItem(23, Inventarteile.Glass());
         for(int i3 = 25; i3 <= 28; i3++){
-            i.setItem(i3, Inventarteile.Glas());
+            i.setItem(i3, Inventarteile.Glass());
         }
         for(int i4 = 32; i4 <= 43; i4++){
-            i.setItem(i4, Inventarteile.Glas());
+            i.setItem(i4, Inventarteile.Glass());
         }
         i.setItem(44, Inventarteile.Zurück());
         return i;

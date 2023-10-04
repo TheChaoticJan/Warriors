@@ -37,24 +37,24 @@ public class InfobarInventories {
         i.setItem(0, Inventarteile.Zurück());
 
         for(int i1 = 1; i1<= 12; i1++){
-            i.setItem(i1, Inventarteile.Glas());
+            i.setItem(i1, Inventarteile.Glass());
         }
         i.setItem(13, current);
 
         for(int i2 = 14; i2 <= 27; i2++){
-            i.setItem(i2, Inventarteile.Glas());
+            i.setItem(i2, Inventarteile.Glass());
         }
 
         i.setItem(28, Infobar.Dura());
         i.setItem(29, Infobar.XP());
         i.setItem(30, Infobar.Enderpearl());
-        i.setItem(31, Inventarteile.Glas());
+        i.setItem(31, Inventarteile.Glass());
         i.setItem(32, Infobar.Konto());
         i.setItem(33, Infobar.tnt());
         i.setItem(34, Infobar.Webs());
 
         for(int i3 = 35; i3 <= 44; i3++){
-            i.setItem(i3, Inventarteile.Glas());
+            i.setItem(i3, Inventarteile.Glass());
         }
 
        return i;
@@ -65,7 +65,7 @@ public class InfobarInventories {
 
         Inventory Configuration = Bukkit.createInventory(p, 36, "§6§lConfiguriere deine Infobar!");
         for(int i = 0; i <= 9; i++){
-            Configuration.setItem(i, Inventarteile.Glas());
+            Configuration.setItem(i, Inventarteile.Glass());
         }
 
         ItemStack ModuleItem = new ItemStack(Material.LEGACY_EMPTY_MAP);
@@ -81,22 +81,22 @@ public class InfobarInventories {
         ModuleItem.setItemMeta(ModuleMeta);
         Configuration.setItem(11, ModuleItem);
 
-        Configuration.setItem(10, Inventarteile.Glas());
-        Configuration.setItem(12, Inventarteile.Glas());
+        Configuration.setItem(10, Inventarteile.Glass());
+        Configuration.setItem(12, Inventarteile.Glass());
 
         ModuleMeta.setDisplayName("§3Modul 2");
         ModuleItem.setItemMeta(ModuleMeta);
         Configuration.setItem(13, ModuleItem);
 
-        Configuration.setItem(14, Inventarteile.Glas());
-        Configuration.setItem(16, Inventarteile.Glas());
+        Configuration.setItem(14, Inventarteile.Glass());
+        Configuration.setItem(16, Inventarteile.Glass());
 
         ModuleMeta.setDisplayName("§3Modul 3");
         ModuleItem.setItemMeta(ModuleMeta);
         Configuration.setItem(15, ModuleItem);
 
         for(int i = 17; i <= 35; i++){
-            Configuration.setItem(i, Inventarteile.Glas());
+            Configuration.setItem(i, Inventarteile.Glass());
         }
 
         Configuration.setItem(20, Infobar.neededItemstack(stats).get(0));

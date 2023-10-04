@@ -1,7 +1,7 @@
 package plugin.Infobar;
 
 import plugin.models.PlayerStats;
-import plugin.sonstiges.Counters;
+import plugin.sonstiges.Count;
 import org.bukkit.entity.Player;
 
 public class Actionbar {
@@ -10,10 +10,10 @@ public class Actionbar {
     public static String Actionbar(Player p, PlayerStats stats, Player d, int module1, int module2, int module3){
         String Actionbar = "";
 
-        int HDura = Counters.Counters(p).get(4);
-        int CDura = Counters.Counters(p).get(5);
-        int LDura = Counters.Counters(p).get(6);
-        int BDura = Counters.Counters(p).get(7);
+        int HDura = Count.CountValues(p).get(4);
+        int CDura = Count.CountValues(p).get(5);
+        int LDura = Count.CountValues(p).get(6);
+        int BDura = Count.CountValues(p).get(7);
         String Piece = "";
 
             if(!(p.getInventory().getLeggings() == null) && !(p.getInventory().getBoots() == null)  && !(p.getInventory().getChestplate() == null)  && !(p.getInventory().getHelmet() == null)){
@@ -42,10 +42,10 @@ public class Actionbar {
                 stats.setClan("§cClanlos");
             }
         String clan = "§8<§6Konto§8> §e" + stats.getXp() + " §6✧";
-        String xp1 = "§8<§aXP§8> §2" + Counters.Counters(p).get(0);
-        String pearls1 = "§8<§5Pearls§8> §x§D§6§5§B§E§9" + Counters.Counters(p).get(1);
-        String tnt1 = "§8<§x§9§E§1§B§5§0T§x§C§F§0§E§5§2N§x§F§F§0§0§5§3T§8> §x§C§F§0§E§5§2" + Counters.Counters(p).get(2);
-        String webs1 = "§8<§fWebs§8> §§x§C§2§F§A§E§F" + Counters.Counters(p).get(3);
+        String xp1 = "§8<§aXP§8> §2" + Count.CountValues(p).get(0);
+        String pearls1 = "§8<§5Pearls§8> §x§D§6§5§B§E§9" + Count.CountValues(p).get(1);
+        String tnt1 = "§8<§x§9§E§1§B§5§0T§x§C§F§0§E§5§2N§x§F§F§0§0§5§3T§8> §x§C§F§0§E§5§2" + Count.CountValues(p).get(2);
+        String webs1 = "§8<§fWebs§8> §§x§C§2§F§A§E§F" + Count.CountValues(p).get(3);
 
         //Assigning Strings to Modules
 

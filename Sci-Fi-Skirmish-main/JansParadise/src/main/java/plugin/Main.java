@@ -1,6 +1,5 @@
 package plugin;
 
-
 import plugin.Infobar.InfobarCommand;
 import plugin.LootSystem.CrateEntities.CrateHitEvent;
 import plugin.LootSystem.CrateEntities.Crates;

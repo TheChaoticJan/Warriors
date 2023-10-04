@@ -5,9 +5,9 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
-public class Counters {
+public class Count {
 
-    public static ArrayList<Integer> Counters(Player p){
+    public static ArrayList<Integer> CountValues(Player p){
 
         ArrayList<Integer> count = new ArrayList<>();
         int xp = 0;

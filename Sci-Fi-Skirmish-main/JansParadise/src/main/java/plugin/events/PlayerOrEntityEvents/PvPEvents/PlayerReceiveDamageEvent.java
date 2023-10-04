@@ -5,7 +5,7 @@ import plugin.models.PlayerStats;
 import plugin.Infobar.Actionbar;
 import plugin.sonstiges.Bossbars;
 import plugin.sonstiges.CheckSpecialItems;
-import plugin.sonstiges.Counters;
+import plugin.sonstiges.Count;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.boss.BossBar;
@@ -68,10 +68,10 @@ public class PlayerReceiveDamageEvent implements Listener{
         if(event.getEntity().getType() == EntityType.PLAYER){
             Player p = (Player) event.getEntity();
 
-                int HDura = Counters.Counters(p).get(4);
-                int CDura = Counters.Counters(p).get(5);
-                int LDura = Counters.Counters(p).get(6);
-                int BDura = Counters.Counters(p).get(7);
+                int HDura = Count.CountValues(p).get(4);
+                int CDura = Count.CountValues(p).get(5);
+                int LDura = Count.CountValues(p).get(6);
+                int BDura = Count.CountValues(p).get(7);
 
             try {
                 PlayerStats stats = this.plugin.getDatabase().findPlayerStatsByUUID(p.getUniqueId().toString());

@@ -22,7 +22,7 @@ public class ModifyCommand implements CommandExecutor, TabCompleter {
         if (commandSender instanceof Player p) {
             switch (args[0].toLowerCase()) {
                 case "name":
-                    if(!(p.getItemInHand() == null)){
+                    if(p.getItemInHand() != null){
                         ItemMeta RenameMeta = p.getItemInHand().getItemMeta();
                         for(int i = 1; i <= args.length; i++){
                             if(i == 2){
@@ -41,6 +41,7 @@ public class ModifyCommand implements CommandExecutor, TabCompleter {
                 case "lore":
                     if(p.getItemInHand().equals(null)){
                         p.sendMessage("§cDu musst ein Item in der Hand halten");
+                        return true;
                     }else{
                         int length = args.length;
                         ArrayList lore = new ArrayList();
@@ -78,7 +79,7 @@ public class ModifyCommand implements CommandExecutor, TabCompleter {
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if(strings.length == 1){
-            ArrayList sc = new ArrayList();
+            ArrayList<String> sc = new ArrayList<>();
             sc.add("name");
             sc.add("lore");
             sc.add("glow");

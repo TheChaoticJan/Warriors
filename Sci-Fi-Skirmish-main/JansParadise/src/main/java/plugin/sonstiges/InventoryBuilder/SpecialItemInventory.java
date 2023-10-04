@@ -16,16 +16,16 @@ public class SpecialItemInventory {
         Inventory rezepte = Bukkit.createInventory(p,54 , name);
 
         for(int i = 0; i <= 9; i++){
-            rezepte.setItem(i, Inventarteile.Glas());
+            rezepte.setItem(i, Inventarteile.Glass());
         }
-        rezepte.setItem(17, Inventarteile.Glas());
-        rezepte.setItem(18, Inventarteile.Glas());
-        rezepte.setItem(26, Inventarteile.Glas());
-        rezepte.setItem(27, Inventarteile.Glas());
-        rezepte.setItem(35, Inventarteile.Glas());
-        rezepte.setItem(36, Inventarteile.Glas());
+        rezepte.setItem(17, Inventarteile.Glass());
+        rezepte.setItem(18, Inventarteile.Glass());
+        rezepte.setItem(26, Inventarteile.Glass());
+        rezepte.setItem(27, Inventarteile.Glass());
+        rezepte.setItem(35, Inventarteile.Glass());
+        rezepte.setItem(36, Inventarteile.Glass());
         for(int i2 = 44; i2 <= 53; i2++){
-            rezepte.setItem(i2, Inventarteile.Glas());
+            rezepte.setItem(i2, Inventarteile.Glass());
         }
 
         //Sci-Fi

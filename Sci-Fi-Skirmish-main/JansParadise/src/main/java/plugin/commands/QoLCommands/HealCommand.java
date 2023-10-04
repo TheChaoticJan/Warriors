@@ -14,12 +14,8 @@ public class HealCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
 
-        if (!(commandSender instanceof Player p)) {
-            commandSender.sendMessage("§cDu musst ein Spieler sein um §7´/heal´§c ausführen zu können!");
-            return true;
-        } else {
-
-            if (args.length == 0) {
+        if (commandSender instanceof Player p) {
+            if (args.length == 0){
 
                 if (p.getHealth() >= p.getMaxHealth()) {
                     p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 5, 1);
@@ -28,7 +24,6 @@ public class HealCommand implements CommandExecutor {
                     p.setHealth(p.getMaxHealth());
                     p.sendActionBar("§aErfolgreich deine Herzen aufgefüllt!");
                 }
-
 
             } else if (args.length == 1) {
                 String playername = args[0];
@@ -47,11 +42,10 @@ public class HealCommand implements CommandExecutor {
                 }
 
 
-            } else if(args.length > 1){
+            } else {
                 p.sendMessage("§cBitte benutze: §7`§e/heal§7´ §coder §7§e/heal <Name>§7`");
             }
-
-            return false;
         }
+        return true;
     }
 }

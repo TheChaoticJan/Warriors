@@ -2,7 +2,7 @@ package plugin.commands.CoreCommands.DatabaseUsing;
 
 import plugin.Main;
 import plugin.models.PlayerStats;
-import plugin.sonstiges.Counters;
+import plugin.sonstiges.Count;
 import plugin.sonstiges.Scores.ScoreBoardBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -152,7 +152,7 @@ public class XPCommand implements CommandExecutor, TabCompleter {
 
                                 try{
 
-                                    int xp = Counters.Counters(p).get(0);
+                                    int xp = Count.CountValues(p).get(0);
                                     if(args[1].equals("max")){
                                        args[1] = String.valueOf(xp);
                                     }
