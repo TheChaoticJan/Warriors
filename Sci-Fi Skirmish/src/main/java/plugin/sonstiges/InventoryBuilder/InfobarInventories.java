@@ -1,6 +1,6 @@
 package plugin.sonstiges.InventoryBuilder;
 
-import plugin.Infobar.Infobar;
+import plugin.sonstiges.Infobar.Infobar;
 import plugin.models.PlayerStats;
 import plugin.sonstiges.ItemBuilder.Inventarteile;
 import org.bukkit.Bukkit;

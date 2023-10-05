@@ -3,7 +3,7 @@ package plugin.events.InventoryEvents;
 import plugin.Main;
 import plugin.models.PlayerStats;
 import plugin.sonstiges.InventoryBuilder.InfobarInventories;
-import plugin.Infobar.Infobar;
+import plugin.sonstiges.Infobar.Infobar;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

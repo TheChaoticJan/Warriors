@@ -1,33 +1,35 @@
 package plugin;
 
-import plugin.Infobar.InfobarCommand;
+import plugin.commands.InventoryCommands.GUIs.RezeptCommand;
+import plugin.sonstiges.Infobar.InfobarCommand;
 import plugin.LootSystem.CrateEntities.CrateHitEvent;
 import plugin.LootSystem.CrateEntities.Crates;
-import plugin.commands.CoreCommands.*;
-import plugin.commands.CoreCommands.DatabaseUsing.CrateStatsCommand;
-import plugin.commands.CoreCommands.DatabaseUsing.TopCommand;
-import plugin.commands.CoreCommands.DatabaseUsing.XPCommand;
+import plugin.commands.DatabaseUsing.CrateStatsCommand;
+import plugin.commands.DatabaseUsing.TopCommand;
+import plugin.commands.DatabaseUsing.XPCommand;
 import plugin.commands.InventoryCommands.GUIs.RezepteCommand;
-import plugin.commands.InventoryCommands.SpecialitemCommand;
-import plugin.commands.InventoryCommands.TrashCommand;
-import plugin.commands.CoreCommands.DatabaseUsing.PerkCommand;
+import plugin.commands.InventoryCommands.GUIs.SpecialitemCommand;
+import plugin.commands.InventoryCommands.CommonInventories.TrashCommand;
+import plugin.commands.DatabaseUsing.PerkCommand;
 import plugin.commands.QoLCommands.*;
 import plugin.events.InventoryEvents.ClickEvent;
 import plugin.events.InventoryEvents.InfobarClick;
 import plugin.events.InventoryEvents.Rezepte.RezeptClickEvent;
 import plugin.LootSystem.CrateEntities.CrateDeathEvent;
-import plugin.events.PlayerOrEntityEvents.RightClickEvent;
-import plugin.commands.CoreCommands.ModerationsCommands.*;
+import plugin.events.PlayerOrEntityEvents.Interactions.ChatEvent;
+import plugin.events.PlayerOrEntityEvents.Interactions.DropEvent;
+import plugin.events.PlayerOrEntityEvents.Interactions.JoinEvent;
+import plugin.events.PlayerOrEntityEvents.Interactions.RightClickEvent;
+import plugin.commands.ModerationsCommands.*;
 import plugin.commands.FunCommands.*;
 import plugin.commands.InventoryCommands.GUIs.KitCommand;
-import plugin.commands.InventoryCommands.AnvilCommand;
-import plugin.commands.InventoryCommands.EnderchestCommand;
+import plugin.commands.InventoryCommands.CommonInventories.AnvilCommand;
+import plugin.commands.InventoryCommands.CommonInventories.EnderchestCommand;
 import plugin.db.Database;
 import plugin.events.BlockEvents.BlockBreakEvent;
 import plugin.events.BlockEvents.BlockPlacedEvent;
 import plugin.events.ExplosionEvents.ExplodeEvent;
-import plugin.events.PlayerOrEntityEvents.*;
-import plugin.events.PlayerOrEntityEvents.PvPEvents.*;
+import plugin.events.PlayerOrEntityEvents.PvP.*;
 import plugin.sonstiges.Recipes.Erfahrenrezepte;
 import plugin.sonstiges.Recipes.ExplosivRezepte;
 import plugin.sonstiges.Recipes.KlebrigRezepte;
@@ -103,7 +105,6 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new BlockPlacedEvent(this), this );
         getServer().getPluginManager().registerEvents(new ExplodeEvent(), this );
         getServer().getPluginManager().registerEvents(new PlayerGetHitEvent(this), this );
-        getServer().getPluginManager().registerEvents(new InventoryChangeEvent(this), this );
         getServer().getPluginManager().registerEvents(new BlockBreakEvent(), this );
         getServer().getPluginManager().registerEvents(new JoinEvent(this), this );
         getServer().getPluginManager().registerEvents(new ChatEvent(), this );
@@ -120,7 +121,6 @@ public final class Main extends JavaPlugin {
 
         //commands
         getCommand("heal").setExecutor(new HealCommand());
-        getCommand("fly").setExecutor(new FlyCommand());
         getCommand("feed").setExecutor(new FeedCommand());
         getCommand("kit").setExecutor(new KitCommand());
         getCommand("sign").setExecutor(new SignCommand());
