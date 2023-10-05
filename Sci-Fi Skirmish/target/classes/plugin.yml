@@ -5,8 +5,6 @@ api-version: 1.19
 commands:
   heal:
     permission: permission.mod
-  fly:
-    permission: permission.mod
   feed:
   kit:
   sign:

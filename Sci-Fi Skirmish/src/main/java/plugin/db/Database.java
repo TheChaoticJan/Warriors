@@ -4,7 +4,6 @@ import plugin.models.PlayerStats;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Database {
     private Connection connection;
@@ -27,7 +26,6 @@ public class Database {
                 String sql = "CREATE TABLE IF NOT EXISTS player_stats(uuid varchar(36) primary key, name varchar(16), rank varchar(16), xp int, uwu long, deaths int, kills int, blocks_placed int, common_crates int, uncommon_crates int, epic_crates int, rare_crates int, mythic_crates int, clan varchar(16), perk1 boolean, perk2 boolean, perk3 boolean, perk4 boolean, perk5 boolean, infobar1 tinyint(6), infobar2 tinyint(6), infobar3 tinyint(6))";
                 statement.execute(sql);
                 statement.close();
-
         }
 
     public PlayerStats findPlayerStatsByUUID(String uuid) throws SQLException{
@@ -134,15 +132,15 @@ public class Database {
         statement.close();
     }
 
-    public ArrayList getTopTenStats(String columname) throws SQLException {
+    public ArrayList<String> getTopTenStats(String columname) throws SQLException {
         PreparedStatement statement = getConnection().prepareStatement("SELECT * FROM `player_stats` ORDER BY `player_stats`.`"+ columname +"` DESC LIMIT 7");
         ResultSet results = statement.executeQuery();
 
 
-        ArrayList list = new ArrayList();
+        ArrayList<String> list = new ArrayList<>();
         while (results.next()) {
             String name = results.getString("name");
-            int xp = results.getInt(columname);
+            String xp = String.valueOf(results.getInt(columname));
 
             list.add(name);
             list.add(xp);

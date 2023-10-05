@@ -95,7 +95,7 @@ public class BlockPlacedEvent implements Listener {
 
         }
         if(b.getBlockPlaced().getType() == Material.SANDSTONE){
-            Bukkit.getScheduler().runTaskLater(Main.getInstance(), new Runnable() {
+            Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
                 @Override
                 public void run() {
                     int i = 5;

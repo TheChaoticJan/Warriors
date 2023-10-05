@@ -24,6 +24,9 @@ public class RightClickEvent implements Listener{
     @EventHandler
     public void clickEvent(PlayerInteractEvent e){
         Player p = e.getPlayer();
+        if(p.getItemInHand().getItemMeta() == null | p.getItemInHand().getItemMeta().getLore() == null){
+            return;
+        }
         if(p.getItemInHand().getType() == Material.STICK && p.getItemInHand().getItemFlags().contains(ItemFlag.HIDE_ENCHANTS)){
 
             Crates.spawnArmorstand(p, p.getLocation().getBlockX(), (float) (p.getLocation().getBlockY() - 0.7), p.getLocation().getBlockZ());
