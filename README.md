@@ -8,9 +8,9 @@ It´s not actually the mode, wich is called "Westernwars", but heavily inspired 
 
 Here some things this plugin does:
 
-- Enabling "No-Damage" while wearing a full Protection IV Armor
-- Usual QoL Commands, like /feed, /heal, /enderchest and much more
-- An own Ecosystem using Experience Bottles as a Ressource
+- Enabling "No-Damage" while wearing a full `Protection IV` Armor
+- Usual QoL Commands, like `/feed`, `/heal`, `/enderchest` and much more...
+- An own `Ecosystem` using Experience Bottles as a Ressource
 
 And a lot more...
 
