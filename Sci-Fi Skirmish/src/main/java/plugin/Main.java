@@ -66,7 +66,8 @@ public final class Main extends JavaPlugin {
             database.initiliazeDatabase();
 
         }catch (SQLException e){
-            System.out.println("Unable to connect to Database and crate Tables");
+            System.out.println("\u001B[31m Konnte sich nicht mit der Datenbank verbinden!");
+            System.out.println("\u001B[31m Mögliche Quellen: Falsche Tabellen, Datenbank abgeschalten");
             e.printStackTrace();
         }
         

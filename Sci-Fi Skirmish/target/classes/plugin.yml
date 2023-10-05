@@ -1,5 +1,5 @@
 name: SciFi_Skirmish
-version: "Alpha 0.2.4"
+version: "\u001B[35m Alpha 0.2.4"
 main: plugin.Main
 api-version: 1.19
 commands:
