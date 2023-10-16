@@ -1,45 +1,50 @@
 package plugin;
 
-import plugin.commands.InventoryCommands.GUIs.RezeptCommand;
-import plugin.sonstiges.Infobar.InfobarCommand;
-import plugin.LootSystem.CrateEntities.CrateHitEvent;
-import plugin.LootSystem.CrateEntities.Crates;
-import plugin.commands.DatabaseUsing.CrateStatsCommand;
-import plugin.commands.DatabaseUsing.TopCommand;
-import plugin.commands.DatabaseUsing.XPCommand;
-import plugin.commands.InventoryCommands.GUIs.RezepteCommand;
-import plugin.commands.InventoryCommands.GUIs.SpecialitemCommand;
-import plugin.commands.InventoryCommands.CommonInventories.TrashCommand;
-import plugin.commands.DatabaseUsing.PerkCommand;
-import plugin.commands.QoLCommands.*;
-import plugin.events.InventoryEvents.ClickEvent;
-import plugin.events.InventoryEvents.InfobarClick;
-import plugin.events.InventoryEvents.Rezepte.RezeptClickEvent;
-import plugin.LootSystem.CrateEntities.CrateDeathEvent;
-import plugin.events.PlayerOrEntityEvents.Interactions.ChatEvent;
-import plugin.events.PlayerOrEntityEvents.Interactions.DropEvent;
-import plugin.events.PlayerOrEntityEvents.Interactions.JoinEvent;
-import plugin.events.PlayerOrEntityEvents.Interactions.RightClickEvent;
-import plugin.commands.ModerationsCommands.*;
-import plugin.commands.FunCommands.*;
-import plugin.commands.InventoryCommands.GUIs.KitCommand;
-import plugin.commands.InventoryCommands.CommonInventories.AnvilCommand;
-import plugin.commands.InventoryCommands.CommonInventories.EnderchestCommand;
-import plugin.db.Database;
-import plugin.events.BlockEvents.BlockBreakEvent;
-import plugin.events.BlockEvents.BlockPlacedEvent;
-import plugin.events.ExplosionEvents.ExplodeEvent;
-import plugin.events.PlayerOrEntityEvents.PvP.*;
-import plugin.sonstiges.Recipes.Erfahrenrezepte;
-import plugin.sonstiges.Recipes.ExplosivRezepte;
-import plugin.sonstiges.Recipes.KlebrigRezepte;
-import plugin.sonstiges.Recipes.SciFiRezepte;
-import plugin.sonstiges.Scores.TablistManager;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import plugin.LootSystem.CrateEntities.CrateDeathEvent;
+import plugin.LootSystem.CrateEntities.CrateHitEvent;
+import plugin.LootSystem.CrateEntities.Crates;
+import plugin.commands.DatabaseUsing.CrateStatsCommand;
+import plugin.commands.DatabaseUsing.PerkCommand;
+import plugin.commands.DatabaseUsing.TopCommand;
+import plugin.commands.DatabaseUsing.XPCommand;
+import plugin.commands.FunCommands.SignCommand;
+import plugin.commands.FunCommands.UwUCommand;
+import plugin.commands.InventoryCommands.CommonInventories.AnvilCommand;
+import plugin.commands.InventoryCommands.CommonInventories.EnderchestCommand;
+import plugin.commands.InventoryCommands.CommonInventories.TrashCommand;
+import plugin.commands.InventoryCommands.GUIs.KitCommand;
+import plugin.commands.InventoryCommands.GUIs.RezeptCommand;
+import plugin.commands.InventoryCommands.GUIs.RezepteCommand;
+import plugin.commands.InventoryCommands.GUIs.SpecialitemCommand;
+import plugin.commands.ModerationsCommands.InfoCommand;
+import plugin.commands.ModerationsCommands.InvseeCommand;
+import plugin.commands.ModerationsCommands.VanishCommand;
+import plugin.commands.QoLCommands.*;
+import plugin.db.Database;
+import plugin.events.BlockEvents.BlockBreakEvent;
+import plugin.events.BlockEvents.BlockPlacedEvent;
+import plugin.events.ExplosionEvents.ExplodeEvent;
+import plugin.events.InventoryEvents.ClickEvent;
+import plugin.events.InventoryEvents.InfobarClick;
+import plugin.events.InventoryEvents.Rezepte.RezeptClickEvent;
+import plugin.events.PlayerOrEntityEvents.Interactions.ChatEvent;
+import plugin.events.PlayerOrEntityEvents.Interactions.DropEvent;
+import plugin.events.PlayerOrEntityEvents.Interactions.JoinEvent;
+import plugin.events.PlayerOrEntityEvents.Interactions.RightClickEvent;
+import plugin.events.PlayerOrEntityEvents.PvP.PlayerDeathEvent;
+import plugin.events.PlayerOrEntityEvents.PvP.PlayerFishingEvent;
+import plugin.events.PlayerOrEntityEvents.PvP.PlayerGetHitEvent;
+import plugin.events.PlayerOrEntityEvents.PvP.ProjectileHitEvent;
+import plugin.utils.Infobar.InfobarCommand;
+import plugin.utils.Recipes.Erfahrenrezepte;
+import plugin.utils.Recipes.ExplosivRezepte;
+import plugin.utils.Recipes.KlebrigRezepte;
+import plugin.utils.Recipes.SciFiRezepte;
+import plugin.utils.Scores.TablistManager;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -53,6 +58,7 @@ public final class Main extends JavaPlugin {
         return tablistManager;
     }
     private Database database;
+
 
     @Override
     public void onEnable() {
@@ -156,7 +162,9 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+
     }
+
+
 }
 

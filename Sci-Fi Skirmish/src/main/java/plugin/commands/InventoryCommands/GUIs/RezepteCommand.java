@@ -1,6 +1,6 @@
 package plugin.commands.InventoryCommands.GUIs;
 
-import plugin.sonstiges.InventoryBuilder.SpecialItemInventory;
+import plugin.utils.InventoryBuilder.SpecialItemInventory;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

@@ -2,7 +2,7 @@ package plugin.events.PlayerOrEntityEvents.PvP;
 
 import plugin.Main;
 import plugin.models.PlayerStats;
-import plugin.sonstiges.Scores.ScoreBoardBuilder;
+import plugin.utils.Scores.ScoreBoardBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;

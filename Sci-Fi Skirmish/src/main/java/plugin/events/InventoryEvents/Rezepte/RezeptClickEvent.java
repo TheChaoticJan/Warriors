@@ -5,10 +5,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import plugin.sonstiges.InventoryBuilder.Rezepte.ErfahrenRezeptInventare;
-import plugin.sonstiges.InventoryBuilder.Rezepte.ExplosivRezeptInventare;
-import plugin.sonstiges.InventoryBuilder.Rezepte.KlebrigRezeptInventare;
-import plugin.sonstiges.InventoryBuilder.Rezepte.SciFiRezeptInventare;
+import plugin.utils.InventoryBuilder.Rezepte.ErfahrenRezeptInventare;
+import plugin.utils.InventoryBuilder.Rezepte.ExplosivRezeptInventare;
+import plugin.utils.InventoryBuilder.Rezepte.KlebrigRezeptInventare;
+import plugin.utils.InventoryBuilder.Rezepte.SciFiRezeptInventare;
 
 public class RezeptClickEvent implements Listener{
 

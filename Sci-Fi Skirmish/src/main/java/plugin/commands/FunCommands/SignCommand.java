@@ -16,7 +16,10 @@ import java.util.*;
 
 
 public class SignCommand implements CommandExecutor, TabCompleter {
-
+    private final HashMap<UUID, Long> cooldown;
+    public SignCommand() {
+        this.cooldown = new HashMap<>();
+    }
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {

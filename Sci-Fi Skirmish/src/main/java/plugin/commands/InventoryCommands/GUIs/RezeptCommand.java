@@ -1,10 +1,10 @@
 package plugin.commands.InventoryCommands.GUIs;
 
-import plugin.sonstiges.InventoryBuilder.Rezepte.ErfahrenRezeptInventare;
-import plugin.sonstiges.InventoryBuilder.Rezepte.ExplosivRezeptInventare;
-import plugin.sonstiges.InventoryBuilder.Rezepte.KlebrigRezeptInventare;
-import plugin.sonstiges.InventoryBuilder.Rezepte.SciFiRezeptInventare;
-import plugin.sonstiges.ItemBuilder.*;
+import plugin.utils.InventoryBuilder.Rezepte.ErfahrenRezeptInventare;
+import plugin.utils.InventoryBuilder.Rezepte.ExplosivRezeptInventare;
+import plugin.utils.InventoryBuilder.Rezepte.KlebrigRezeptInventare;
+import plugin.utils.InventoryBuilder.Rezepte.SciFiRezeptInventare;
+import plugin.utils.ItemBuilder.*;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

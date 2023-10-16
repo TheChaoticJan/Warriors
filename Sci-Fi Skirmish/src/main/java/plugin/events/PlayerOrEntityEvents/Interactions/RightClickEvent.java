@@ -10,8 +10,8 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import plugin.LootSystem.CrateEntities.Crates;
 import plugin.Main;
-import plugin.sonstiges.essentials.Count;
-import plugin.sonstiges.essentials.InventoryInteracts;
+import plugin.utils.essentials.Count;
+import plugin.utils.essentials.InventoryInteracts;
 
 public class RightClickEvent implements Listener{
 

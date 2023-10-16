@@ -2,8 +2,8 @@ package plugin.events.PlayerOrEntityEvents.PvP;
 
 import plugin.Main;
 import plugin.models.PlayerStats;
-import plugin.sonstiges.Infobar.Actionbar;
-import plugin.sonstiges.essentials.InventoryInteracts;
+import plugin.utils.Infobar.Actionbar;
+import plugin.utils.essentials.InventoryInteracts;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;

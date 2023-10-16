@@ -2,8 +2,8 @@ package plugin.commands.DatabaseUsing;
 
 import plugin.Main;
 import plugin.models.PlayerStats;
-import plugin.sonstiges.essentials.Count;
-import plugin.sonstiges.Scores.ScoreBoardBuilder;
+import plugin.utils.essentials.Count;
+import plugin.utils.Scores.ScoreBoardBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;

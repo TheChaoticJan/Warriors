@@ -14,11 +14,11 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import plugin.sonstiges.Infobar.Actionbar;
+import plugin.utils.Infobar.Actionbar;
 import plugin.Main;
 import plugin.models.PlayerStats;
-import plugin.sonstiges.essentials.Count;
-import plugin.sonstiges.essentials.InventoryInteracts;
+import plugin.utils.essentials.Count;
+import plugin.utils.essentials.InventoryInteracts;
 
 import java.sql.SQLException;
 

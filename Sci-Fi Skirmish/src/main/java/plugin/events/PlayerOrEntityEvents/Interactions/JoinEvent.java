@@ -3,7 +3,7 @@ package plugin.events.PlayerOrEntityEvents.Interactions;
 import plugin.LootSystem.CrateEntities.Crates;
 import plugin.Main;
 import plugin.models.PlayerStats;
-import plugin.sonstiges.Scores.ScoreBoardBuilder;
+import plugin.utils.Scores.ScoreBoardBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;

@@ -2,7 +2,7 @@ package plugin.commands.DatabaseUsing;
 
 import plugin.Main;
 import plugin.models.PlayerStats;
-import plugin.sonstiges.InventoryBuilder.PerkInventories;
+import plugin.utils.InventoryBuilder.PerkInventories;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
