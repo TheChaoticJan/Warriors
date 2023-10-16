@@ -87,13 +87,26 @@ public class Infobar {
     public static ItemStack Dura(){
         ItemStack pearl = new ItemStack(Material.DIAMOND_HELMET);
         ItemMeta pearlMeta = pearl.getItemMeta();
-        pearlMeta.setDisplayName("§4Haltbarkeit");
+        pearlMeta.setDisplayName("§7Haltbarkeit - §4Rüstung");
         ArrayList<String> pearllore = new ArrayList<>();
         pearllore.add("");
         pearllore.add("§7Dieses Modul zeigt an");
         pearllore.add("§7wieviel §4Haltbarkeit §7das");
         pearllore.add("§7lowste Piece deines Gegners hat.");
+        pearlMeta.setLore(pearllore);
+        pearl.setItemMeta(pearlMeta);
+        return pearl;
+    }
+
+    public static ItemStack MainHand(){
+        ItemStack pearl = new ItemStack(Material.DIAMOND_SWORD);
+        ItemMeta pearlMeta = pearl.getItemMeta();
+        pearlMeta.setDisplayName("§7Haltbarkeit - §bMainhand");
+        ArrayList<String> pearllore = new ArrayList<>();
         pearllore.add("");
+        pearllore.add("§7Dieses Modul zeigt an");
+        pearllore.add("§7wieviel §bHaltbarkeit §7das Item");
+        pearllore.add("§7in der Hand deines Gegners hat.");
         pearlMeta.setLore(pearllore);
         pearl.setItemMeta(pearlMeta);
         return pearl;
@@ -113,6 +126,8 @@ public class Infobar {
             stack = Infobar.tnt();
         }else if(stats.getInfobar1() == 6){
             stack = Infobar.Webs();
+        }else if (stats.getInfobar1() == 7){
+            stack = Infobar.MainHand();
         }
 
         ItemStack stack1 = null;
@@ -128,6 +143,8 @@ public class Infobar {
             stack1 = Infobar.tnt();
         }else if(stats.getInfobar2() == 6){
             stack1 = Infobar.Webs();
+        }else if (stats.getInfobar2() == 7){
+            stack1 = Infobar.MainHand();
         }
 
         ItemStack stack2 = null;
@@ -143,6 +160,8 @@ public class Infobar {
             stack2 = Infobar.tnt();
         }else if(stats.getInfobar3() == 6){
             stack2 = Infobar.Webs();
+        }else if (stats.getInfobar3() == 7){
+            stack2 = Infobar.MainHand();
         }
 
         ArrayList<ItemStack> stacks = new ArrayList<>();

@@ -2,6 +2,7 @@ package plugin.utils.essentials;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 
@@ -63,6 +64,13 @@ public class Count {
             }
         }
 
+        @Nullable int mainHandDura;
+        if(p.getInventory().getItemInMainHand() != null){
+            mainHandDura = p.getInventory().getItemInMainHand().getType().getMaxDurability() - p.getInventory().getItemInMainHand().getDurability();
+        }else{
+            mainHandDura = Integer.parseInt(null);
+        }
+
         count.add(xp);
         count.add(pearls);
         count.add(webs);
@@ -71,6 +79,7 @@ public class Count {
         count.add(ChestDura);
         count.add(LeggingsDura);
         count.add(BootsDura);
+        count.add(mainHandDura);
         return count;
     }
 

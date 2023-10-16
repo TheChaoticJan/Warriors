@@ -44,10 +44,10 @@ public class InfobarInventories {
         i.setItem(28, Infobar.Dura());
         i.setItem(29, Infobar.XP());
         i.setItem(30, Infobar.Enderpearl());
-        i.setItem(31, Inventarteile.Glass());
-        i.setItem(32, Infobar.Konto());
-        i.setItem(33, Infobar.tnt());
-        i.setItem(34, Infobar.Webs());
+        i.setItem(31, Infobar.Konto());
+        i.setItem(32, Infobar.tnt());
+        i.setItem(33, Infobar.Webs());
+        i.setItem(34, Infobar.MainHand());
 
         for(int i3 = 35; i3 <= 44; i3++){
             i.setItem(i3, Inventarteile.Glass());

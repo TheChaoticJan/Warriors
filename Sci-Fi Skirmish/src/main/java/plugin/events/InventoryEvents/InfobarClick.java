@@ -60,7 +60,7 @@ public class InfobarClick implements Listener{
                 }
 
                 if (event.getView().getTitle().endsWith("1")) {
-                    if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith("§4")){
+                    if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§7Haltbarkeit - §4Rüstung")){
                         stats.setInfobar1(1);
                         this.plugin.getDatabase().updatePlayerStats(stats);
                         p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier §3Modul 1"));
@@ -90,10 +90,15 @@ public class InfobarClick implements Listener{
                         this.plugin.getDatabase().updatePlayerStats(stats);
                         p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier §3Modul 1"));
                     }
+                    if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§7Haltbarkeit - §bMainhand")){
+                        stats.setInfobar1(7);
+                        this.plugin.getDatabase().updatePlayerStats(stats);
+                        p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier §3Modul 1"));
+                    }
                     event.setCancelled(true);
                 }
                 if (event.getView().getTitle().endsWith("2")) {
-                    if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith("§4")){
+                    if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§7Haltbarkeit - §4Rüstung")){
                         stats.setInfobar2(1);
                         this.plugin.getDatabase().updatePlayerStats(stats);
                         p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier §3Modul 2"));
@@ -123,10 +128,15 @@ public class InfobarClick implements Listener{
                         this.plugin.getDatabase().updatePlayerStats(stats);
                         p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier §3Modul 2"));
                     }
+                    if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§7Haltbarkeit - §bMainhand")){
+                        stats.setInfobar2(7);
+                        this.plugin.getDatabase().updatePlayerStats(stats);
+                        p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier §3Modul 2"));
+                    }
                     event.setCancelled(true);
                 }
                 if (event.getView().getTitle().endsWith("3")) {
-                    if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith("§4")){
+                    if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§7Haltbarkeit - §4Rüstung")){
                         stats.setInfobar3(1);
                         this.plugin.getDatabase().updatePlayerStats(stats);
                         p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier §3Modul 3"));
@@ -153,6 +163,11 @@ public class InfobarClick implements Listener{
                     }
                     if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith("§f")){
                         stats.setInfobar3(6);
+                        this.plugin.getDatabase().updatePlayerStats(stats);
+                        p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier §3Modul 3"));
+                    }
+                    if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§7Haltbarkeit - §bMainhand")){
+                        stats.setInfobar3(7);
                         this.plugin.getDatabase().updatePlayerStats(stats);
                         p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier §3Modul 3"));
                     }

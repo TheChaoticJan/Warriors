@@ -41,6 +41,9 @@ public class Actionbar {
         if(stats.getClan() == ""){
                 stats.setClan("§cClanlos");
             }
+
+        int mainHandDura = Count.CountValues(p).get(8);
+        String mainhand = "§8<§bMainhand§8> §9" + mainHandDura;
         
         String clan = "§8<§6Konto§8> §e" + stats.getXp() + " §6✧";
         String xp1 = "§8<§aXP§8> §2" + Count.CountValues(p).get(0);
@@ -68,6 +71,7 @@ public class Actionbar {
             else if(val == 4){ var = clan; }
             else if(val == 5){ var = tnt1; }
             else if(val == 6){ var = webs1; }
+            else if(val == 7){ var = mainhand; }
             //Assigning to pieceX
             if(i == 1) { piece1 = var; }
             if(i == 2) { piece2 = var; }
