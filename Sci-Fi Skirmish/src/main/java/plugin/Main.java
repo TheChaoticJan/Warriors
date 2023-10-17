@@ -3,6 +3,7 @@ package plugin;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
+import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
 import plugin.LootSystem.CrateEntities.CrateDeathEvent;
 import plugin.LootSystem.CrateEntities.CrateHitEvent;
@@ -25,8 +26,7 @@ import plugin.commands.ModerationsCommands.InvseeCommand;
 import plugin.commands.ModerationsCommands.VanishCommand;
 import plugin.commands.QoLCommands.*;
 import plugin.db.Database;
-import plugin.events.BlockEvents.BlockBreakEvent;
-import plugin.events.BlockEvents.BlockPlacedEvent;
+import plugin.events.BlockEvents.BlockEvents;
 import plugin.events.ExplosionEvents.ExplodeEvent;
 import plugin.events.InventoryEvents.ClickEvent;
 import plugin.events.InventoryEvents.InfobarClick;
@@ -49,10 +49,12 @@ import plugin.utils.Scores.TablistManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public final class Main extends JavaPlugin {
+public final class Main extends JavaPlugin{
 
     private TablistManager tablistManager;
     public static Main instance;
+
+    public static MetadataValue metadataValue;
     public ArrayList<Player> VanishList = new ArrayList<>();
     public TablistManager getTablistManager() {
         return tablistManager;
@@ -109,10 +111,9 @@ public final class Main extends JavaPlugin {
 
         //events
         getServer().getPluginManager().registerEvents(new ClickEvent(), this);
-        getServer().getPluginManager().registerEvents(new BlockPlacedEvent(this), this );
+        getServer().getPluginManager().registerEvents(new BlockEvents(this), this );
         getServer().getPluginManager().registerEvents(new ExplodeEvent(), this );
         getServer().getPluginManager().registerEvents(new PlayerGetHitEvent(this), this );
-        getServer().getPluginManager().registerEvents(new BlockBreakEvent(), this );
         getServer().getPluginManager().registerEvents(new JoinEvent(this), this );
         getServer().getPluginManager().registerEvents(new ChatEvent(), this );
         getServer().getPluginManager().registerEvents(new ProjectileHitEvent(this), this );
@@ -152,7 +153,6 @@ public final class Main extends JavaPlugin {
         getCommand("infobar").setExecutor(new InfobarCommand(this));
 
     }
-
     public static Main getInstance(){
         return instance;
     }
@@ -164,7 +164,5 @@ public final class Main extends JavaPlugin {
     public void onDisable() {
 
     }
-
-
 }
 

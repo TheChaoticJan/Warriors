@@ -72,10 +72,10 @@ public class InventoryInteracts {
 
     public static void healArmorPieces(Player p, int amount){
         String value = "§cNichts";
-        int HDura = Count.CountValues(p).get(4);
-        int CDura = Count.CountValues(p).get(5);
-        int LDura = Count.CountValues(p).get(6);
-        int BDura = Count.CountValues(p).get(7);
+        int HDura = Count.countValues(p).get(4);
+        int CDura = Count.countValues(p).get(5);
+        int LDura = Count.countValues(p).get(6);
+        int BDura = Count.countValues(p).get(7);
 
         if(HDura == CDura && HDura == LDura && HDura == BDura && HDura == 10000){
             new Bossbars().HealBar(p, value, 0);

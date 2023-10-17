@@ -9,10 +9,10 @@ public class Actionbar {
 
     public static String Actionbar(Player p, PlayerStats stats, Player d, int module1, int module2, int module3){
 
-        int HDura = Count.CountValues(p).get(4);
-        int CDura = Count.CountValues(p).get(5);
-        int LDura = Count.CountValues(p).get(6);
-        int BDura = Count.CountValues(p).get(7);
+        int HDura = Count.countValues(p).get(4);
+        int CDura = Count.countValues(p).get(5);
+        int LDura = Count.countValues(p).get(6);
+        int BDura = Count.countValues(p).get(7);
 
         String Piece = "";
 
@@ -42,14 +42,14 @@ public class Actionbar {
                 stats.setClan("§cClanlos");
             }
 
-        int mainHandDura = Count.CountValues(p).get(8);
+        int mainHandDura = Count.countValues(p).get(8);
         String mainhand = "§8<§bMainhand§8> §9" + mainHandDura;
         
         String clan = "§8<§6Konto§8> §e" + stats.getXp() + " §6✧";
-        String xp1 = "§8<§aXP§8> §2" + Count.CountValues(p).get(0);
-        String pearls1 = "§8<§5Pearls§8> §x§D§6§5§B§E§9" + Count.CountValues(p).get(1);
-        String tnt1 = "§8<§x§9§E§1§B§5§0T§x§C§F§0§E§5§2N§x§F§F§0§0§5§3T§8> §x§C§F§0§E§5§2" + Count.CountValues(p).get(2);
-        String webs1 = "§8<§fWebs§8> §§x§C§2§F§A§E§F" + Count.CountValues(p).get(3);
+        String xp1 = "§8<§aXP§8> §2" + Count.countValues(p).get(0);
+        String pearls1 = "§8<§5Pearls§8> §x§D§6§5§B§E§9" + Count.countValues(p).get(1);
+        String tnt1 = "§8<§x§9§E§1§B§5§0T§x§C§F§0§E§5§2N§x§F§F§0§0§5§3T§8> §x§C§F§0§E§5§2" + Count.countValues(p).get(2);
+        String webs1 = "§8<§fWebs§8> §§x§C§2§F§A§E§F" + Count.countValues(p).get(3);
 
         //Assigning Strings to Modules
 

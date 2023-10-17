@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Count {
 
-    public static ArrayList<Integer> CountValues(Player p){
+    public static ArrayList<Integer> countValues(Player p){
 
         ArrayList<Integer> count = new ArrayList<>();
         int xp = 0;
@@ -65,10 +65,10 @@ public class Count {
         }
 
         @Nullable int mainHandDura;
-        if(p.getInventory().getItemInMainHand() != null){
-            mainHandDura = p.getInventory().getItemInMainHand().getType().getMaxDurability() - p.getInventory().getItemInMainHand().getDurability();
+        if(p.getItemInHand().getType().equals(Material.AIR)){
+            mainHandDura = 0;
         }else{
-            mainHandDura = Integer.parseInt(null);
+            mainHandDura = p.getInventory().getItemInMainHand().getType().getMaxDurability() - p.getInventory().getItemInMainHand().getDurability();
         }
 
         count.add(xp);

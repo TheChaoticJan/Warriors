@@ -76,10 +76,10 @@ public class PlayerGetHitEvent implements Listener{
         if(event.getEntity().getType() == EntityType.PLAYER){
             Player p = (Player) event.getEntity();
 
-                int HDura = Count.CountValues(p).get(4);
-                int CDura = Count.CountValues(p).get(5);
-                int LDura = Count.CountValues(p).get(6);
-                int BDura = Count.CountValues(p).get(7);
+                int HDura = Count.countValues(p).get(4);
+                int CDura = Count.countValues(p).get(5);
+                int LDura = Count.countValues(p).get(6);
+                int BDura = Count.countValues(p).get(7);
 
             try {
                 PlayerStats stats = this.plugin.getDatabase().findPlayerStatsByUUID(p.getUniqueId().toString());

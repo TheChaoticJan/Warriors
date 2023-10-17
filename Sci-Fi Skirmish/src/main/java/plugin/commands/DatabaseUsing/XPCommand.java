@@ -152,7 +152,7 @@ public class XPCommand implements CommandExecutor, TabCompleter {
 
                                 try{
 
-                                    int xp = Count.CountValues(p).get(0);
+                                    int xp = Count.countValues(p).get(0);
                                     if(args[1].equals("max")){
                                        args[1] = String.valueOf(xp);
                                     }

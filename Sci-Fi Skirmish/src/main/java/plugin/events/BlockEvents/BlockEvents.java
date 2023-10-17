@@ -11,19 +11,33 @@ import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.plugin.Plugin;
 import plugin.Main;
 import plugin.models.PlayerStats;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
-public class BlockPlacedEvent implements Listener {
+public class BlockEvents implements Listener {
 
     private final Main plugin;
 
-    public BlockPlacedEvent(Main plugin) {
+    private ArrayList<Block> blocks = new ArrayList<>();
+
+    public BlockEvents(Main plugin) {
         this.plugin = plugin;
     }
 
+    @EventHandler
+    public void breakEvent(org.bukkit.event.block.BlockBreakEvent event){
+
+        if(!blocks.contains(event.getBlock())){
+            event.setCancelled(true);
+        }else{
+            blocks.remove(event.getBlock());
+        }
+        event.setDropItems(false);
+    }
 
     @EventHandler
     public void placeEvent(BlockPlaceEvent b){
@@ -79,7 +93,7 @@ public class BlockPlacedEvent implements Listener {
          int y1 = s.getY();
          int z1 = s.getZ();
 
-            Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
+            Bukkit.getScheduler().scheduleSyncDelayedTask((Plugin) Main.getInstance(), new Runnable() {
                 @Override
                 public void run() {
                     int i = 5;
@@ -95,7 +109,7 @@ public class BlockPlacedEvent implements Listener {
 
         }
         if(b.getBlockPlaced().getType() == Material.SANDSTONE){
-            Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
+            Bukkit.getScheduler().scheduleSyncDelayedTask((Plugin) Main.getInstance(), new Runnable() {
                 @Override
                 public void run() {
                     int i = 5;
@@ -108,8 +122,8 @@ public class BlockPlacedEvent implements Listener {
 
             }, 20 * 2);
         }
-        if(b.getBlockPlaced().getType() == Material.SANDSTONE){
-            b.getBlock().setType(Material.CHISELED_SANDSTONE);
+        if(b.getBlockPlaced().getType() == Material.SANDSTONE || b.getBlockPlaced().getType() == Material.COBWEB){
+            blocks.add(b.getBlock());
         }
 
         }}

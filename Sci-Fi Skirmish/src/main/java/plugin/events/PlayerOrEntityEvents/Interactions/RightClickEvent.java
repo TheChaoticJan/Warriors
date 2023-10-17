@@ -34,16 +34,16 @@ public class RightClickEvent implements Listener{
 
         if(p.getItemInHand().getItemMeta().getLore().contains("§eErfahren") && p.getItemInHand().getType().equals(Material.BLAZE_ROD) && e.getAction().isRightClick()){
 
-            if(Count.CountValues(p).get(0) < 32){
+            if(Count.countValues(p).get(0) < 32){
                 p.sendActionBar("§cDu hast nicht genug XP im Inventar");
                 p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 20, 1);
                 return;
             }else{
                 p.getInventory().removeItem(new ItemStack(Material.EXPERIENCE_BOTTLE, 32));
-                int Helmet = Count.CountValues(p).get(4);
-                int Chest = Count.CountValues(p).get(5);
-                int Leggings = Count.CountValues(p).get(6);
-                int Boots = Count.CountValues(p).get(7);
+                int Helmet = Count.countValues(p).get(4);
+                int Chest = Count.countValues(p).get(5);
+                int Leggings = Count.countValues(p).get(6);
+                int Boots = Count.countValues(p).get(7);
 
                 int lowest = Count.getLowestPiece(Helmet, Chest, Leggings, Boots);
 
