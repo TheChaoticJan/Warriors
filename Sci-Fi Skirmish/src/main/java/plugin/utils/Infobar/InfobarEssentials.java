@@ -7,7 +7,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
-public class Infobar {
+public class InfobarEssentials {
 
     public static ItemStack Enderpearl(){
         ItemStack pearl = new ItemStack(Material.ENDER_PEARL);
@@ -114,61 +114,35 @@ public class Infobar {
 
     public static ArrayList<ItemStack> neededItemstack(PlayerStats stats){
         ItemStack stack = null;
-        if(stats.getInfobar1() == 1){
-            stack = Infobar.Dura();
-        }else if(stats.getInfobar1() == 2){
-            stack = Infobar.XP();
-        }else if(stats.getInfobar1() == 3){
-            stack = Infobar.Enderpearl();
-        }else if(stats.getInfobar1() == 4){
-            stack = Infobar.Konto();
-        }else if(stats.getInfobar1() == 5){
-            stack = Infobar.tnt();
-        }else if(stats.getInfobar1() == 6){
-            stack = Infobar.Webs();
-        }else if (stats.getInfobar1() == 7){
-            stack = Infobar.MainHand();
-        }
-
-        ItemStack stack1 = null;
-        if(stats.getInfobar2() == 1){
-            stack1 = Infobar.Dura();
-        }else if(stats.getInfobar2() == 2){
-            stack1 = Infobar.XP();
-        }else if(stats.getInfobar2() == 3){
-            stack1 = Infobar.Enderpearl();
-        }else if(stats.getInfobar2() == 4){
-            stack1 = Infobar.Konto();
-        }else if(stats.getInfobar2() == 5){
-            stack1 = Infobar.tnt();
-        }else if(stats.getInfobar2() == 6){
-            stack1 = Infobar.Webs();
-        }else if (stats.getInfobar2() == 7){
-            stack1 = Infobar.MainHand();
-        }
-
-        ItemStack stack2 = null;
-        if(stats.getInfobar3() == 1){
-            stack2 = Infobar.Dura();
-        }else if(stats.getInfobar3() == 2){
-            stack2 = Infobar.XP();
-        }else if(stats.getInfobar3() == 3){
-            stack2 = Infobar.Enderpearl();
-        }else if(stats.getInfobar3() == 4){
-            stack2 = Infobar.Konto();
-        }else if(stats.getInfobar3() == 5){
-            stack2 = Infobar.tnt();
-        }else if(stats.getInfobar3() == 6){
-            stack2 = Infobar.Webs();
-        }else if (stats.getInfobar3() == 7){
-            stack2 = Infobar.MainHand();
-        }
-
         ArrayList<ItemStack> stacks = new ArrayList<>();
-        stacks.add(stack);
-        stacks.add(stack1);
-        stacks.add(stack2);
+        for(int i = 1; i <= 3; i++) {
+            int infobar;
+            if(i == 1) {
+                infobar = stats.getInfobar1();
+            }else if(i == 2){
+                infobar = stats.getInfobar2();
+            }else{
+                infobar = stats.getInfobar3();
+            }
 
+            if (infobar == 1) {
+                stack = InfobarEssentials.Dura();
+            } else if (infobar == 2) {
+                stack = InfobarEssentials.XP();
+            } else if (infobar == 3) {
+                stack = InfobarEssentials.Enderpearl();
+            } else if (infobar == 4) {
+                stack = InfobarEssentials.Konto();
+            } else if (infobar == 5) {
+                stack = InfobarEssentials.tnt();
+            } else if (infobar == 6) {
+                stack = InfobarEssentials.Webs();
+            } else if (infobar == 7) {
+                stack = InfobarEssentials.MainHand();
+            }
+
+            stacks.add(stack);
+        }
         return stacks;
     }
 

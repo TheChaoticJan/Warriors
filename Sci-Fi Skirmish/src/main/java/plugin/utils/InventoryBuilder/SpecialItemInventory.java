@@ -82,9 +82,7 @@ public class SpecialItemInventory {
         rezepte.setItem(42, KlebrigItems.Bogen());
 
         p.openInventory(rezepte);
-
         return rezepte;
-
 
     }
 }

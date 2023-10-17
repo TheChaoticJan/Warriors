@@ -40,7 +40,7 @@ public class InfobarCommand implements CommandExecutor, TabCompleter {
                 }
 
                 if(!stats.getPerk5()){
-                    p.sendMessage("\n§cDu musst erst das Perk §7'Spionagemeister' §ckaufen, um die Infobar bearbeiten zu können!\n§f");
+                    p.sendMessage("\n§cDu musst erst das Perk §7'Spionagemeister' §ckaufen, um die InfobarEssentials bearbeiten zu können!\n§f");
                     return true;
                 }else{
                    p.openInventory(InfobarInventories.introduction(p, stats));

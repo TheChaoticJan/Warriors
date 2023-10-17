@@ -2,8 +2,8 @@ package plugin.events.InventoryEvents;
 
 import plugin.Main;
 import plugin.models.PlayerStats;
+import plugin.utils.Infobar.InfobarEssentials;
 import plugin.utils.InventoryBuilder.InfobarInventories;
-import plugin.utils.Infobar.Infobar;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -35,9 +35,9 @@ public class InfobarClick implements Listener{
             }
 
 
-            if (event.getView().getTitle().equals("§6§lConfiguriere deine Infobar!")) {
+            if (event.getView().getTitle().equals("§6§lConfiguriere deine InfobarEssentials!")) {
                 if (event.getClick().isRightClick() && event.getCurrentItem().hasItemFlag(ItemFlag.HIDE_ENCHANTS)) {
-                    p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier " + event.getCurrentItem().getItemMeta().getDisplayName()));
+                    p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier " + event.getCurrentItem().getItemMeta().getDisplayName()));
                     event.setCancelled(true);
                 }else{
                     event.setCancelled(true);
@@ -63,37 +63,37 @@ public class InfobarClick implements Listener{
                     if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§7Haltbarkeit - §4Rüstung")){
                         stats.setInfobar1(1);
                         this.plugin.getDatabase().updatePlayerStats(stats);
-                        p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier §3Modul 1"));
+                        p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 1"));
                     }
                     if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith("§a")){
                         stats.setInfobar1(2);
                         this.plugin.getDatabase().updatePlayerStats(stats);
-                        p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier §3Modul 1"));
+                        p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 1"));
                     }
                     if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith("§5")){
                         stats.setInfobar1(3);
                         this.plugin.getDatabase().updatePlayerStats(stats);
-                        p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier §3Modul 1"));
+                        p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 1"));
                     }
                     if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith("§6")){
                         stats.setInfobar1(4);
                         this.plugin.getDatabase().updatePlayerStats(stats);
-                        p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier §3Modul 1"));
+                        p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 1"));
                     }
                     if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith("§c")){
                         stats.setInfobar1(5);
                         this.plugin.getDatabase().updatePlayerStats(stats);
-                        p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier §3Modul 1"));
+                        p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 1"));
                     }
                     if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith("§f")){
                         stats.setInfobar1(6);
                         this.plugin.getDatabase().updatePlayerStats(stats);
-                        p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier §3Modul 1"));
+                        p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 1"));
                     }
                     if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§7Haltbarkeit - §bMainhand")){
                         stats.setInfobar1(7);
                         this.plugin.getDatabase().updatePlayerStats(stats);
-                        p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier §3Modul 1"));
+                        p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 1"));
                     }
                     event.setCancelled(true);
                 }
@@ -101,37 +101,37 @@ public class InfobarClick implements Listener{
                     if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§7Haltbarkeit - §4Rüstung")){
                         stats.setInfobar2(1);
                         this.plugin.getDatabase().updatePlayerStats(stats);
-                        p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier §3Modul 2"));
+                        p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 2"));
                     }
                     if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith("§a")){
                         stats.setInfobar2(2);
                         this.plugin.getDatabase().updatePlayerStats(stats);
-                        p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier §3Modul 2"));
+                        p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 2"));
                     }
                     if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith("§5")){
                         stats.setInfobar2(3);
                         this.plugin.getDatabase().updatePlayerStats(stats);
-                        p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier §3Modul 2"));
+                        p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 2"));
                     }
                     if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith("§6")){
                         stats.setInfobar2(4);
                         this.plugin.getDatabase().updatePlayerStats(stats);
-                        p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier §3Modul 2"));
+                        p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 2"));
                     }
                     if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith("§c")){
                         stats.setInfobar2(5);
                         this.plugin.getDatabase().updatePlayerStats(stats);
-                        p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier §3Modul 2"));
+                        p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 2"));
                     }
                     if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith("§f")){
                         stats.setInfobar2(6);
                         this.plugin.getDatabase().updatePlayerStats(stats);
-                        p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier §3Modul 2"));
+                        p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 2"));
                     }
                     if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§7Haltbarkeit - §bMainhand")){
                         stats.setInfobar2(7);
                         this.plugin.getDatabase().updatePlayerStats(stats);
-                        p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier §3Modul 2"));
+                        p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 2"));
                     }
                     event.setCancelled(true);
                 }
@@ -139,37 +139,37 @@ public class InfobarClick implements Listener{
                     if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§7Haltbarkeit - §4Rüstung")){
                         stats.setInfobar3(1);
                         this.plugin.getDatabase().updatePlayerStats(stats);
-                        p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier §3Modul 3"));
+                        p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 3"));
                     }
                     if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith("§a")){
                         stats.setInfobar3(2);
                         this.plugin.getDatabase().updatePlayerStats(stats);
-                        p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier §3Modul 3"));
+                        p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 3"));
                     }
                     if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith("§5")){
                         stats.setInfobar3(3);
                         this.plugin.getDatabase().updatePlayerStats(stats);
-                        p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier §3Modul 3"));
+                        p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 3"));
                     }
                     if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith("§6")){
                         stats.setInfobar3(4);
                         this.plugin.getDatabase().updatePlayerStats(stats);
-                        p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier §3Modul 3"));
+                        p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 3"));
                     }
                     if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith("§c")){
                         stats.setInfobar3(5);
                         this.plugin.getDatabase().updatePlayerStats(stats);
-                        p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier §3Modul 3"));
+                        p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 3"));
                     }
                     if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith("§f")){
                         stats.setInfobar3(6);
                         this.plugin.getDatabase().updatePlayerStats(stats);
-                        p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier §3Modul 3"));
+                        p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 3"));
                     }
                     if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§7Haltbarkeit - §bMainhand")){
                         stats.setInfobar3(7);
                         this.plugin.getDatabase().updatePlayerStats(stats);
-                        p.openInventory(InfobarInventories.edit(p, Infobar.neededItemstack(stats), "§7Bearbeite hier §3Modul 3"));
+                        p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 3"));
                     }
                     event.setCancelled(true);
                 }

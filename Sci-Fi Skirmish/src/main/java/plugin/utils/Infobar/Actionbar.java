@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 public class Actionbar {
 
 
-    public static String Actionbar(Player p, PlayerStats stats, Player d, int module1, int module2, int module3){
+    public static String buildActionbar(Player p, PlayerStats stats, Player d, int module1, int module2, int module3){
 
         int HDura = Count.countValues(p).get(4);
         int CDura = Count.countValues(p).get(5);

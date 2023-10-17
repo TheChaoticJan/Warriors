@@ -1,6 +1,6 @@
 package plugin.utils.InventoryBuilder;
 
-import plugin.utils.Infobar.Infobar;
+import plugin.utils.Infobar.InfobarEssentials;
 import plugin.models.PlayerStats;
 import plugin.utils.ItemBuilder.Inventarteile;
 import org.bukkit.Bukkit;
@@ -41,13 +41,13 @@ public class InfobarInventories {
         for(int i2 = 14; i2 <= 27; i2++){
             i.setItem(i2, Inventarteile.Glass());
         }
-        i.setItem(28, Infobar.Dura());
-        i.setItem(29, Infobar.XP());
-        i.setItem(30, Infobar.Enderpearl());
-        i.setItem(31, Infobar.Konto());
-        i.setItem(32, Infobar.tnt());
-        i.setItem(33, Infobar.Webs());
-        i.setItem(34, Infobar.MainHand());
+        i.setItem(28, InfobarEssentials.Dura());
+        i.setItem(29, InfobarEssentials.XP());
+        i.setItem(30, InfobarEssentials.Enderpearl());
+        i.setItem(31, InfobarEssentials.Konto());
+        i.setItem(32, InfobarEssentials.tnt());
+        i.setItem(33, InfobarEssentials.Webs());
+        i.setItem(34, InfobarEssentials.MainHand());
 
         for(int i3 = 35; i3 <= 44; i3++){
             i.setItem(i3, Inventarteile.Glass());
@@ -59,7 +59,7 @@ public class InfobarInventories {
     public static Inventory introduction(Player p, PlayerStats stats){
 
 
-        Inventory Configuration = Bukkit.createInventory(p, 36, "§6§lConfiguriere deine Infobar!");
+        Inventory Configuration = Bukkit.createInventory(p, 36, "§6§lConfiguriere deine InfobarEssentials!");
         for(int i = 0; i <= 9; i++){
             Configuration.setItem(i, Inventarteile.Glass());
         }
@@ -77,15 +77,15 @@ public class InfobarInventories {
         ModuleItem.setItemMeta(ModuleMeta);
         Configuration.setItem(11, ModuleItem);
 
-        Configuration.setItem(10, Inventarteile.Glass());
-        Configuration.setItem(12, Inventarteile.Glass());
+
 
         ModuleMeta.setDisplayName("§3Modul 2");
         ModuleItem.setItemMeta(ModuleMeta);
         Configuration.setItem(13, ModuleItem);
 
-        Configuration.setItem(14, Inventarteile.Glass());
-        Configuration.setItem(16, Inventarteile.Glass());
+        for(int i = 10; i <= 16; i = i + 2){
+            Configuration.setItem(i, Inventarteile.Glass());
+        }
 
         ModuleMeta.setDisplayName("§3Modul 3");
         ModuleItem.setItemMeta(ModuleMeta);
@@ -95,9 +95,9 @@ public class InfobarInventories {
             Configuration.setItem(i, Inventarteile.Glass());
         }
 
-        Configuration.setItem(20, Infobar.neededItemstack(stats).get(0));
-        Configuration.setItem(22, Infobar.neededItemstack(stats).get(1));
-        Configuration.setItem(24, Infobar.neededItemstack(stats).get(2));
+        Configuration.setItem(20, InfobarEssentials.neededItemstack(stats).get(0));
+        Configuration.setItem(22, InfobarEssentials.neededItemstack(stats).get(1));
+        Configuration.setItem(24, InfobarEssentials.neededItemstack(stats).get(2));
 
         return Configuration;
 

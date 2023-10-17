@@ -96,7 +96,7 @@ public class ProjectileHitEvent implements Listener{
                         }
                     }
 
-                    d.sendActionBar(Actionbar.Actionbar(p, stats, d, stats1.getInfobar1(), stats1.getInfobar2(), stats1.getInfobar3()));
+                    d.sendActionBar(Actionbar.buildActionbar(p, stats, d, stats1.getInfobar1(), stats1.getInfobar2(), stats1.getInfobar3()));
 
                 } catch (SQLException s) {
                     s.printStackTrace();
