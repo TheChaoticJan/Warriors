@@ -40,8 +40,6 @@ public class HealCommand implements CommandExecutor {
                         p.sendActionBar("§aErfolgreich §7" + args[0] + " §ageheilt");
                     }
                 }
-
-
             } else {
                 p.sendMessage("§cBitte benutze: §7`§e/heal§7´ §coder §7§e/heal <Name>§7`");
             }

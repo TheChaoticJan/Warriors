@@ -33,7 +33,6 @@ public class CrateDeathEvent implements Listener {
             Player p = Bukkit.getServer().getPlayerExact(playername);
 
             if(p == null){
-                System.out.println("§cDer Crates wurde nicht von einem Spieler getötet");
                 return;
             }
             event.getEntity().getPassengers().clear();

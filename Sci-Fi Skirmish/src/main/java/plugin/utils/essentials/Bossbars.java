@@ -11,7 +11,7 @@ public class Bossbars {
 
     private BossBar bossBar;
 
-    public BossBar SciFiBar(Player player) {
+    public BossBar sciFiBar(Player player) {
         if (bossBar != null) {
             bossBar.removeAll();
         }
@@ -26,7 +26,7 @@ public class Bossbars {
         return bossBar;
     }
 
-    public BossBar ErfahrenBar (Player player) {
+    public BossBar erfahrenBar(Player player) {
         if (bossBar != null) {
             bossBar.removeAll();
         }
@@ -41,7 +41,7 @@ public class Bossbars {
         return bossBar;
     }
 
-    public BossBar KlebrigBar (Player player) {
+    public BossBar klebrigBar(Player player) {
         if (bossBar != null) {
             bossBar.removeAll();
         }
@@ -56,7 +56,7 @@ public class Bossbars {
         return bossBar;
     }
 
-    public BossBar ExplosivBar (Player player) {
+    public BossBar explosivBar(Player player) {
         if (bossBar != null) {
             bossBar.removeAll();
         }
@@ -71,7 +71,7 @@ public class Bossbars {
         return bossBar;
     }
 
-    public BossBar HealBar (Player player, String value, int amount) {
+    public BossBar healBar(Player player, String value, int amount) {
         if (bossBar != null) {
             bossBar.removeAll();
         }

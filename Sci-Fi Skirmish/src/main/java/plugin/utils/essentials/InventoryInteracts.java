@@ -55,13 +55,13 @@ public class InventoryInteracts {
                                 }
                             }
                             if(f == 0) {
-                                new Bossbars().SciFiBar(d);
+                                new Bossbars().sciFiBar(d);
                             }else if(f == 1){
-                                new Bossbars().ErfahrenBar(d);
+                                new Bossbars().erfahrenBar(d);
                             }else if(f == 2){
-                                new Bossbars().KlebrigBar(d);
+                                new Bossbars().klebrigBar(d);
                             }else if(f == 3){
-                                new Bossbars().ExplosivBar(d);
+                                new Bossbars().explosivBar(d);
                             }
                         }
                     }
@@ -78,7 +78,7 @@ public class InventoryInteracts {
         int BDura = Count.countValues(p).get(7);
 
         if(HDura == CDura && HDura == LDura && HDura == BDura && HDura == 10000){
-            new Bossbars().HealBar(p, value, 0);
+            new Bossbars().healBar(p, value, 0);
             p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 20, 1);
             return;
         }
@@ -108,6 +108,6 @@ public class InventoryInteracts {
                 value = "Schuhe";
             }
         }
-        new Bossbars().HealBar(p, value, amount);
+        new Bossbars().healBar(p, value, amount);
     }
 }

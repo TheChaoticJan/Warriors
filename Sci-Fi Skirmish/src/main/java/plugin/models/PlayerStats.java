@@ -3,7 +3,6 @@ package plugin.models;
 //perk1, perk2, perk3, perk4, perk5
 
 public class PlayerStats {
-
     private String uuid;
     private String name;
     private String rank;
@@ -23,7 +22,6 @@ public class PlayerStats {
     private Boolean perk3;
     private Boolean perk4;
     private Boolean perk5;
-
     private int infobar1;
     private int infobar2;
     private int infobar3;
