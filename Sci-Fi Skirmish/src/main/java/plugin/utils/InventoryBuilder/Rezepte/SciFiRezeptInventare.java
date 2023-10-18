@@ -30,7 +30,7 @@ public class SciFiRezeptInventare {
         }
         i.setItem(21, SpecialResources.SciFiBarren());
         i.setItem(23, Inventarteile.Glass());
-        i.setItem(24, SciFiItems.Zauberstab());
+        i.setItem(24, SciFiItems.Zahlungsvorschuss());
         for(int i3 = 25; i3 <= 28; i3++){
             i.setItem(i3, Inventarteile.Glass());
         }

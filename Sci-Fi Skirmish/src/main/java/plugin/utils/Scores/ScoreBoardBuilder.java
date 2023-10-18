@@ -4,6 +4,7 @@ import plugin.models.PlayerStats;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.*;
+import plugin.utils.CombatLogger;
 
 public class ScoreBoardBuilder {
 
@@ -38,15 +39,13 @@ public class ScoreBoardBuilder {
         Score score8 = objective.getScore("§h §8· §7Deine §dUwU§7-Punkte:");
         Score score9 = objective.getScore("§i   §8ᐅ§d " + stats.getUwu() + " ♛");
         Score score10 = objective.getScore("§j  ");
-        Score score11 = objective.getScore("§o §8[§cKein Clan§8]");
-        if(stats.getClan() != ""){
-            score11 = objective.getScore("§s §8[§6" + stats.getClan() + "§8]");
+        Score score13 = objective.getScore("§k §8· §7K/D:");
+        Score score14 = objective.getScore("§l   §8ᐅ§c " + Math.round(kd) + " ⚔");
+        Score score15 = objective.getScore("§p");
+        Score score11 = objective.getScore("§q    §8[§aNicht in Combat§8]");
+        if(CombatLogger.isInCombat(p)){
+            score11 = objective.getScore("§q       §8[§cIn Combat§8]");
         }
-        Score score13 = objective.getScore("§o §8· §7K/D:");
-
-        Score score12 = objective.getScore("§q");
-        Score score14 = objective.getScore("§p   §8ᐅ§c " + Math.round(kd) + " ⚔");
-        Score score15 = objective.getScore("§r");
 
         score1.setScore(0);
         score2.setScore(0);
@@ -59,7 +58,6 @@ public class ScoreBoardBuilder {
         score9.setScore(0);
         score10.setScore(0);
         score11.setScore(0);
-        score12.setScore(0);
         score13.setScore(0);
         score14.setScore(0);
         score15.setScore(0);

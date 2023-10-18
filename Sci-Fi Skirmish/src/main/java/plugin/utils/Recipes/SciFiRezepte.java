@@ -43,7 +43,7 @@ public class SciFiRezepte {
     }
 
     public static ShapedRecipe Recipe5(){
-        ShapedRecipe recipe5 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "SciFiZauberstab"), SciFiItems.Zauberstab());
+        ShapedRecipe recipe5 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "SciFiZauberstab"), SciFiItems.Zahlungsvorschuss());
         recipe5.shape("xFx", "xFx", "xFx");
         recipe5.setIngredient('x', Material.AIR);
         recipe5.setIngredient('F', SpecialResources.SciFiBarren());

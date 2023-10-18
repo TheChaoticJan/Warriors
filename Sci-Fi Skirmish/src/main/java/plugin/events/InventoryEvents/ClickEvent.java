@@ -36,7 +36,7 @@ public class ClickEvent implements Listener {
             if(e.getCurrentItem() == null){
                 return;
             }
-            if(e.getCurrentItem().getType().isTransparent()){
+            if(e.getCurrentItem().getType().isTransparent() | e.getClickedInventory().equals(p.getInventory())){
                 e.setCancelled(true);
             }else{
                 ItemStack i = new ItemStack(e.getCurrentItem());

@@ -43,7 +43,7 @@ public class RezeptCommand implements CommandExecutor, TabCompleter {
                     p.openInventory(SciFiRezeptInventare.Axt(p, null, SciFiItems.Axt()));
                     break;
                 case "Sci-Fi_Zauberstab":
-                    p.openInventory(SciFiRezeptInventare.Zauberstab(p, null, SciFiItems.Zauberstab()));
+                    p.openInventory(SciFiRezeptInventare.Zauberstab(p, null, SciFiItems.Zahlungsvorschuss()));
                     break;
                 case "Erfahrenfragment":
                     p.openInventory(ErfahrenRezeptInventare.Fragment(p, null, SpecialResources.ErfahrenFragment()));

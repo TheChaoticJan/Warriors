@@ -4,7 +4,6 @@ import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.boss.BossBar;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,9 +13,11 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import plugin.utils.Infobar.Actionbar;
 import plugin.Main;
+import plugin.events.BlockEvents.BlockEvents;
 import plugin.models.PlayerStats;
+import plugin.utils.CombatLogger;
+import plugin.utils.Infobar.Actionbar;
 import plugin.utils.essentials.Count;
 import plugin.utils.essentials.InventoryInteracts;
 
@@ -39,6 +40,9 @@ public class PlayerGetHitEvent implements Listener{
 
     @EventHandler
     public void noDamageEvent(EntityDamageEvent event){
+        if(event.getEntity().getType() != EntityType.PLAYER){
+            return;
+        }
         Player p = (Player) event.getEntity();
 
         if(p.getInventory().getBoots() != null && p.getInventory().getBoots().getItemMeta().hasEnchant(Enchantment.PROTECTION_ENVIRONMENTAL) && p.getInventory().getBoots().getEnchantmentLevel(Enchantment.PROTECTION_ENVIRONMENTAL) == 4) {
@@ -61,12 +65,12 @@ public class PlayerGetHitEvent implements Listener{
         }
 
         if(event.getDamager().getType().equals(EntityType.PRIMED_TNT)){
-            Entity e = event.getEntity();
-            e.setVelocity(e.getLocation().getDirection().setY(0.05).multiply(3));
+            Player e = (Player) event.getEntity();
+            e.setVelocity(e.getLocation().getDirection().multiply(3).setY(0.05));
 
         }
 
-        if(event.getDamager().getType() != EntityType.PLAYER){
+        if(event.getDamager().getType() != EntityType.PLAYER | event.getEntity().getType() != EntityType.PLAYER){
             return;
         }
 
@@ -75,6 +79,7 @@ public class PlayerGetHitEvent implements Listener{
 
         if(event.getEntity().getType() == EntityType.PLAYER){
             Player p = (Player) event.getEntity();
+
 
                 int HDura = Count.countValues(p).get(4);
                 int CDura = Count.countValues(p).get(5);
@@ -100,6 +105,8 @@ public class PlayerGetHitEvent implements Listener{
                     this.plugin.getDatabase().createPlayerStats(stats1);
 
                 }
+
+                CombatLogger.setInCombat(p, d);
 
                 if(stats.getClan() != "" | stats1.getClan() != "" ){
                     if(stats.getClan().equals(stats1.getClan())){
@@ -134,6 +141,7 @@ public class PlayerGetHitEvent implements Listener{
                         Block block1 = p.getWorld().getBlockAt(p.getLocation().getBlockX(), p.getLocation().getBlockY() + 1, p.getLocation().getBlockZ());
 
                         block1.setType(Material.COBWEB);
+                        BlockEvents.addBlockToList(block1);
 
                         d.playSound(d.getLocation(), Sound.ENTITY_FROG_LONG_JUMP, 20, 1);
 
@@ -147,6 +155,7 @@ public class PlayerGetHitEvent implements Listener{
                                 if(block1.getType() != Material.AIR) {
                                     block1.setType(Material.AIR);
                                     block1.getWorld().spawnParticle(Particle.CRIT, new Location(Bukkit.getWorld("world"), p.getLocation().getBlockX(), p.getLocation().getBlockY(), p.getLocation().getBlockZ()), 15);
+                                    BlockEvents.removeBlockFromList(block1);
                                 }
 
                             }}, 20 * 11);

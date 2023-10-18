@@ -40,7 +40,7 @@ public class SpecialItemInventory {
         rezepte.setItem(13, SciFiItems.Schwert());
         rezepte.setItem(14, SciFiItems.Axt());
         rezepte.setItem(15, SciFiItems.Bogen());
-        rezepte.setItem(16, SciFiItems.Zauberstab());
+        rezepte.setItem(16, SciFiItems.Zahlungsvorschuss());
 
         //Erfahren
         ItemStack EGlass = new ItemStack(Material.YELLOW_STAINED_GLASS_PANE);
@@ -67,6 +67,7 @@ public class SpecialItemInventory {
         rezepte.setItem(30, SpecialResources.ExplosivBarren());
         rezepte.setItem(31, ExplosivItems.Spitzhacke());
         rezepte.setItem(32, ExplosivItems.Angel());
+        rezepte.setItem(34, ExplosivItems.Zündkerze());
 
         //Klebrig
         ItemStack KGlass = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
@@ -80,6 +81,7 @@ public class SpecialItemInventory {
         rezepte.setItem(40, KlebrigItems.Schwert());
         rezepte.setItem(41, KlebrigItems.Angel());
         rezepte.setItem(42, KlebrigItems.Bogen());
+        rezepte.setItem(43, KlebrigItems.Peilsender());
 
         p.openInventory(rezepte);
         return rezepte;

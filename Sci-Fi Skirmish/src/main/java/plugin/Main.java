@@ -151,6 +151,7 @@ public final class Main extends JavaPlugin{
         getCommand("top").setExecutor(new TopCommand(this));
         getCommand("perks").setExecutor(new PerkCommand(this));
         getCommand("infobar").setExecutor(new InfobarCommand(this));
+        getCommand("crate").setExecutor(new SpawnArmorstandCommand());
 
     }
     public static Main getInstance(){

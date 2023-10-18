@@ -38,6 +38,9 @@ commands:
   top:
   perks:
   infobar:
+  crate:
+    aliases: "spawnarmorstand"
+    permission: permission.mod
 permissions:
   permission.mod:
     default: op

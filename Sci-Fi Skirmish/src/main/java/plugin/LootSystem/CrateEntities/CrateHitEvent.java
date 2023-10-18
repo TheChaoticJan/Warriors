@@ -56,6 +56,10 @@ public class CrateHitEvent implements Listener {
     @EventHandler
     public void crateProjectileEvent(ProjectileHitEvent event){
 
+        if(event.getHitEntity() == null || !(event.getEntity().getShooter() instanceof Player)){
+            return;
+        }
+
         Player d = (Player) event.getEntity().getShooter();
 
         if (event.getHitEntity().getType() == EntityType.ARMOR_STAND) {

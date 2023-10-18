@@ -22,12 +22,18 @@ public class BlockEvents implements Listener {
 
     private final Main plugin;
 
-    private ArrayList<Block> blocks = new ArrayList<>();
+    public static ArrayList<Block> blocks = new ArrayList<>();
 
     public BlockEvents(Main plugin) {
         this.plugin = plugin;
     }
 
+    public static void addBlockToList(Block b){
+        blocks.add(b);
+    }
+    public static void removeBlockFromList(Block b){
+        blocks.remove(b);
+    }
     @EventHandler
     public void breakEvent(org.bukkit.event.block.BlockBreakEvent event){
 
@@ -109,18 +115,16 @@ public class BlockEvents implements Listener {
 
         }
         if(b.getBlockPlaced().getType() == Material.SANDSTONE){
-            Bukkit.getScheduler().scheduleSyncDelayedTask((Plugin) Main.getInstance(), new Runnable() {
+
+            Runnable runnable = new Runnable() {
                 @Override
                 public void run() {
-                    int i = 5;
-                    while (i > 0) {
-                        i--;
-                    }
                     p.getInventory().setItem(8, p.getInventory().getItem(8).add(1));
-
                 }
+            };
 
-            }, 20 * 2);
+            Bukkit.getScheduler().getPendingTasks().remove(runnable);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), runnable, 20 * 2);
         }
         if(b.getBlockPlaced().getType() == Material.SANDSTONE || b.getBlockPlaced().getType() == Material.COBWEB){
             blocks.add(b.getBlock());

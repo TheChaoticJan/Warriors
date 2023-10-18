@@ -1,15 +1,15 @@
 package plugin.events.PlayerOrEntityEvents.Interactions;
 
-import plugin.LootSystem.CrateEntities.Crates;
-import plugin.Main;
-import plugin.models.PlayerStats;
-import plugin.utils.Scores.ScoreBoardBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import plugin.LootSystem.CrateEntities.Crates;
+import plugin.Main;
+import plugin.models.PlayerStats;
+import plugin.utils.Scores.ScoreBoardBuilder;
 
 import java.sql.SQLException;
 
@@ -23,7 +23,6 @@ public class JoinEvent implements Listener {
     public JoinEvent(Main plugin) {
         this.plugin = plugin;
     }
-
 
     @EventHandler
     public void joinEvent(PlayerJoinEvent event) throws SQLException {

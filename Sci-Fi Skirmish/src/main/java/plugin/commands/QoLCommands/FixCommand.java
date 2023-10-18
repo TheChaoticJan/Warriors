@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
 import java.util.List;
 
 public class FixCommand implements CommandExecutor, TabCompleter {
@@ -18,6 +19,15 @@ public class FixCommand implements CommandExecutor, TabCompleter {
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if(!(commandSender instanceof Player p)){
             commandSender.sendMessage("§cDu musst ein Spieler sein um §7´/fix´ §cauführen zu können!");
+        }else if(strings.length == 1){
+            if(strings[0].equals("armor")){
+                p.getInventory().getHelmet().setDurability((short) p.getInventory().getHelmet().getMaxItemUseDuration());
+                p.getInventory().getChestplate().setDurability((short) p.getInventory().getChestplate().getMaxItemUseDuration());
+                p.getInventory().getLeggings().setDurability((short) p.getInventory().getLeggings().getMaxItemUseDuration());
+                p.getInventory().getBoots().setDurability((short) p.getInventory().getBoots().getMaxItemUseDuration());
+                p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_USE, 5, 1);
+                p.sendActionBar("§aErfolgreich deine Rüstung repariert");
+            }
         }
         else {
             if (p.getItemInHand().getAmount() == 0){
@@ -39,6 +49,9 @@ public class FixCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
-        return null;
+        if(strings.length == 1){
+            return Collections.singletonList("armor");
+        }
+        return Collections.singletonList("");
     }
 }
