@@ -23,7 +23,7 @@ public class Crates {
         this.plugin = plugin;
     }
 
-    public static ArmorStand spawnArmorstand(Entity p, int x, float y, int z){
+    public static void spawnArmorstand(Entity p, int x, float y, int z){
 
             ArmorStand Crate = (ArmorStand) p.getLocation().getBlock().getWorld().spawnEntity(new Location(Bukkit.getWorld("world"), x, y, z), EntityType.ARMOR_STAND);
 
@@ -38,13 +38,10 @@ public class Crates {
             skullMeta.setPlayerProfile(playerProfile);
             stack.setItemMeta(skullMeta);
             Crate.setHelmet(stack);
-
             Crate.setCustomName("§x§F§F§E§2§5§9N§x§F§F§D§E§5§8a§x§F§F§D§A§5§8c§x§F§F§D§5§5§7h§x§F§F§D§1§5§7s§x§F§F§C§D§5§6c§x§F§F§C§9§5§6h§x§F§F§C§5§5§5u§x§F§F§C§0§5§4b§x§F§F§B§C§5§4s§x§F§F§B§8§5§3k§x§F§F§B§4§5§3i§x§F§F§A§F§5§2s§x§F§F§A§B§5§2t§x§F§F§A§7§5§1e §8» §7???");
             Crate.setCustomNameVisible(true);
 
             startRotation(Crate);
-
-            return Crate;
     }
 
     public static void startRotation(ArmorStand Crate){

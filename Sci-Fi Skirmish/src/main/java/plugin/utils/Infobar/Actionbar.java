@@ -4,17 +4,19 @@ import plugin.models.PlayerStats;
 import plugin.utils.essentials.Count;
 import org.bukkit.entity.Player;
 
+import java.util.Objects;
+
 public class Actionbar {
 
 
-    public static String buildActionbar(Player p, PlayerStats stats, Player d, int module1, int module2, int module3){
+    public static String buildActionbar(Player p, PlayerStats stats, int module1, int module2, int module3){
 
         int HDura = Count.countValues(p).get(4);
         int CDura = Count.countValues(p).get(5);
         int LDura = Count.countValues(p).get(6);
         int BDura = Count.countValues(p).get(7);
 
-        String Piece = "";
+        String Piece;
 
             if(!(p.getInventory().getLeggings() == null) && !(p.getInventory().getBoots() == null)  && !(p.getInventory().getChestplate() == null)  && !(p.getInventory().getHelmet() == null)){
                 if(LDura <= HDura && LDura <= CDura && LDura <= BDura){
@@ -38,7 +40,7 @@ public class Actionbar {
                 Piece ="§c" + Math.round(p.getHealth()/2) + " §c❤";
             }
 
-        if(stats.getClan() == ""){
+        if(Objects.equals(stats.getClan(), "")){
                 stats.setClan("§cClanlos");
             }
 
@@ -78,7 +80,7 @@ public class Actionbar {
             if(i == 3) { piece3 = var; }
         }
 
-        String Actionbar = "";
+        String Actionbar;
         Actionbar = piece1 + " §7| " + piece2 + " §7| " + piece3;
 
         return Actionbar;

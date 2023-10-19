@@ -29,13 +29,12 @@ public class TopCommand implements CommandExecutor, TabCompleter {
             }
 
             try {
-                switch (strings[0].toLowerCase()){
-                    case "xp":
+                switch (strings[0].toLowerCase()) {
+                    case "xp" -> {
 
                         //getting Data
-                        ArrayList topXp = this.plugin.getDatabase().getTopTenStats("xp");
-
-                        for(int i = 14 - topXp.size(); i <= 14; i++){
+                        ArrayList<String> topXp = this.plugin.getDatabase().getTopTenStats("xp");
+                        for (int i = 14 - topXp.size(); i <= 14; i++) {
                             topXp.add("§c---");
                         }
 
@@ -53,15 +52,12 @@ public class TopCommand implements CommandExecutor, TabCompleter {
                         String line10 = "\n§f";
                         //sending Text Message
                         p.sendMessage(line0 + line1 + line2 + line3 + line4 + line5 + line6 + line7 + line8 + line9 + line10);
-
-                        break;
-
-                    case "mythische":
+                    }
+                    case "mythische" -> {
 
                         //getting Data
-                        ArrayList topMythics = this.plugin.getDatabase().getTopTenStats("mythic_crates");
-
-                        for(int i = 14 - topMythics.size(); i <= 14; i++){
+                        ArrayList<String> topMythics = this.plugin.getDatabase().getTopTenStats("mythic_crates");
+                        for (int i = 14 - topMythics.size(); i <= 14; i++) {
                             topMythics.add("§c---");
                         }
 
@@ -80,15 +76,12 @@ public class TopCommand implements CommandExecutor, TabCompleter {
 
                         //sending Text Message
                         p.sendMessage(line01 + line11 + line21 + line31 + line41 + line51 + line61 + line71 + line81 + line91 + line101);
-
-                        break;
-
-                    case "kills":
+                    }
+                    case "kills" -> {
 
                         //getting Data
-                        ArrayList topKills = this.plugin.getDatabase().getTopTenStats("kills");
-
-                        for(int i = 14 - topKills.size(); i <= 14; i++){
+                        ArrayList<String> topKills = this.plugin.getDatabase().getTopTenStats("kills");
+                        for (int i = 14 - topKills.size(); i <= 14; i++) {
                             topKills.add("§c---");
                         }
 
@@ -107,15 +100,12 @@ public class TopCommand implements CommandExecutor, TabCompleter {
 
                         //sending Text Message
                         p.sendMessage(line02 + line12 + line22 + line32 + line42 + line52 + line62 + line72 + line82 + line92 + line102);
-
-                        break;
-
-                    case "uwu":
+                    }
+                    case "uwu" -> {
 
                         //getting Data
-                        ArrayList topUwU = this.plugin.getDatabase().getTopTenStats("uwu");
-
-                        for(int i = 14 - topUwU.size(); i <= 14; i++){
+                        ArrayList<String> topUwU = this.plugin.getDatabase().getTopTenStats("uwu");
+                        for (int i = 14 - topUwU.size(); i <= 14; i++) {
                             topUwU.add("§c---");
                         }
 
@@ -134,9 +124,7 @@ public class TopCommand implements CommandExecutor, TabCompleter {
 
                         //sending Text Message
                         p.sendMessage(line03 + line13 + line23 + line33 + line43 + line53 + line63 + line73 + line83 + line93 + line103);
-
-                        break;
-
+                    }
                 }
 
 
@@ -153,7 +141,7 @@ public class TopCommand implements CommandExecutor, TabCompleter {
     public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
 
         if(strings.length == 1){
-            ArrayList sc = new ArrayList();
+            ArrayList<String> sc = new ArrayList<>();
             sc.add("xp");
             sc.add("uwu");
             sc.add("mythische");

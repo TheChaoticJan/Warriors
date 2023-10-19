@@ -21,7 +21,7 @@ public class EnchantmentBuilder {
         EnchantList.add(Enchantment.OXYGEN);
         EnchantList.add(Enchantment.THORNS);
         EnchantList.add(Enchantment.DIG_SPEED);
-        Enchantment Enchantment = (Enchantment) EnchantList.get(new Random().nextInt(EnchantList.size())); {
+        Enchantment Enchantment = EnchantList.get(new Random().nextInt(EnchantList.size())); {
         }
 
        return Enchantment;
@@ -37,7 +37,7 @@ public class EnchantmentBuilder {
         EnchantList.add(Enchantment.DURABILITY);
         EnchantList.add(Enchantment.OXYGEN);
         EnchantList.add(Enchantment.MENDING);
-        Enchantment Enchantment = (Enchantment) EnchantList.get(new Random().nextInt(EnchantList.size())); {
+        Enchantment Enchantment = EnchantList.get(new Random().nextInt(EnchantList.size())); {
         }
 
         return Enchantment;

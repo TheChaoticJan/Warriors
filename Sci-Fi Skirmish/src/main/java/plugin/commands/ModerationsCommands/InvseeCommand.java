@@ -33,17 +33,18 @@ public class InvseeCommand implements CommandExecutor, TabCompleter {
             sender.sendMessage("§cDu musst ein Spieler sein um §7´/invsee´§c ausführen zu können!");
         }else{
             if(args.length == 0){
-                sender.sendMessage("§cWem genaut willst du denn so ins Inventar schauen? Bitte nutze §7'§e/invsee <Spieler>§7'");
+                sender.sendMessage("§cWem genau willst du denn so ins Inventar schauen? Bitte nutze §7'§e/invsee <Spieler>§7'");
+                return true;
             }
-            String playername = args[0];
-            if(Bukkit.getServer().getPlayerExact(playername) == null || plugin.VanishList.contains(playername)){
+            String playerName = args[0];
+            if(Bukkit.getServer().getPlayerExact(playerName) == null || plugin.VanishList.contains(playerName)){
                 p.sendMessage("§cBitte benutze: §7`§e/invsee <Spieler>§7`");
                 return true;
-            }else if(Bukkit.getPlayerExact(playername) == p) {
+            }else if(Bukkit.getPlayerExact(playerName) == p) {
                 p.sendMessage("§cDas ergibt keinen Sinn, oder?");
                 return true;
             }else{
-                Player r = Bukkit.getServer().getPlayerExact(playername);
+                Player r = Bukkit.getServer().getPlayerExact(playerName);
             Inventory PlayerInv = Bukkit.createInventory(p, 54, "§8Inventar von " + r.getDisplayName());
 
                 for(int l = 0; l <= 35; l++){

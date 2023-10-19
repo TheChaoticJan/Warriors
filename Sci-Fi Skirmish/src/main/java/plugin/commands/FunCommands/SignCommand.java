@@ -16,16 +16,11 @@ import java.util.*;
 
 
 public class SignCommand implements CommandExecutor, TabCompleter {
-    private final HashMap<UUID, Long> cooldown;
-    public SignCommand() {
-        this.cooldown = new HashMap<>();
-    }
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if(!(commandSender instanceof Player p)){
             commandSender.sendMessage("§cDu musst ein Spieler sein um §7´/sign´§c ausführen zu können!");
-            return true;
         }
         else{
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
@@ -50,8 +45,8 @@ public class SignCommand implements CommandExecutor, TabCompleter {
                 p.sendMessage("§cItems mit Beschreibung können nicht signiert werden!");
                 return true;
             }
-           return true;
         }
+        return true;
     }
 
     @Override

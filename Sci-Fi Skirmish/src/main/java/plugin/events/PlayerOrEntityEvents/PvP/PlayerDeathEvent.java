@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class PlayerDeathEvent implements Listener{
 
@@ -35,7 +36,7 @@ public class PlayerDeathEvent implements Listener{
         //Dropping & Clearing Inventory
         for(int i = 0; i <= 35; i++) {
             if (p.getInventory().getItem(i) != null) {
-                p.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), p.getInventory().getItem(i));
+                p.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), Objects.requireNonNull(p.getInventory().getItem(i)));
                 }
             }
 

@@ -12,10 +12,10 @@ import java.util.Date;
 
 public class SciFiItems {
 
-    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-    private static String date = "§8• §7§oGecraftet: §9§o" + simpleDateFormat.format(new Date());
+    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+    private static final String date = "§8• §7§oGecraftet: §9§o" + simpleDateFormat.format(new Date());
     private static ArrayList<String> lore(){
-        ArrayList<String> lore = new ArrayList<String>();
+        ArrayList<String> lore = new ArrayList<>();
         lore.add("§eSci-Fi");
         lore.add("");
         lore.add("§8• §7Aus ferner §x§0§0§8§D§F§FZ§x§1§9§5§E§F§Fu§x§3§3§2§F§F§Fk§x§4§C§0§0§F§Fu§x§7§5§0§4§F§Dn§x§9§D§0§7§F§Bf§x§C§6§0§B§F§9t§7...");
@@ -72,7 +72,7 @@ public class SciFiItems {
         wandMeta.setDisplayName("§x§C§6§0§B§F§9§ka§x§0§0§8§D§F§F§ka §8§l[§x§0§0§8§D§F§F§lS§x§1§E§5§5§F§F§lc§x§3§D§1§C§F§F§li§x§6§4§0§2§F§E§l-§x§9§5§0§7§F§B§lF§x§C§6§0§B§F§9§li§8§l] §x§0§0§4§4§F§C§lZ§x§0§E§3§C§F§9§la§x§1§B§3§5§F§6§lh§x§2§9§2§D§F§3§ll§x§3§6§2§5§F§0§lu§x§4§4§1§D§E§D§ln§x§5§1§1§6§E§A§lg§x§5§F§0§E§E§7§ls§x§6§C§0§6§E§4§lv§x§7§5§0§5§E§7§lo§x§7§E§0§5§E§B§lr§x§8§7§0§4§E§E§ls§x§9§0§0§3§F§2§lc§x§9§8§0§2§F§5§lh§x§A§1§0§2§F§8§lu§x§A§A§0§1§F§C§ls§x§B§3§0§0§F§F§ls §x§0§0§8§D§F§F§ka§x§C§6§0§B§F§9§ka");
         wandMeta.addEnchant(Enchantment.DIG_SPEED, 1, true);
         wandMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        ArrayList<String> lore = new ArrayList<String>();
+        ArrayList<String> lore = new ArrayList<>();
         lore.add("");
         lore.add("§8• §7Aus ferner §x§0§0§8§D§F§FZ§x§1§9§5§E§F§Fu§x§3§3§2§F§F§Fk§x§4§C§0§0§F§Fu§x§7§5§0§4§F§Dn§x§9§D§0§7§F§Bf§x§C§6§0§B§F§9t§7...");
         lore.add("   §8▸ §7Mit dem §x§0§0§4§4§F§CZ§x§0§E§3§C§F§9a§x§1§B§3§5§F§6h§x§2§9§2§D§F§3l§x§3§6§2§5§F§0u§x§4§4§1§D§E§Dn§x§5§1§1§6§E§Ag§x§5§F§0§E§E§7s§x§6§C§0§6§E§4v§x§7§5§0§5§E§7o§x§7§E§0§5§E§Br§x§8§7§0§4§E§Es§x§9§0§0§3§F§2c§x§9§8§0§2§F§5h§x§A§1§0§2§F§8u§x§A§A§0§1§F§Cs§x§B§3§0§0§F§Fs");

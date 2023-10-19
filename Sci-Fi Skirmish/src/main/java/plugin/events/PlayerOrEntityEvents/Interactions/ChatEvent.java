@@ -10,22 +10,23 @@ import java.util.ArrayList;
 public class ChatEvent implements Listener{
 
     @EventHandler
-    public void ChatEvent (PlayerChatEvent event){
-        ArrayList<String> Böslist = new ArrayList();
+    public void onChatEvent (PlayerChatEvent event){
+        ArrayList<String> Boeslist = new ArrayList<>();
 
-        Böslist.add("hitler");
-        Böslist.add("nigger");
-        Böslist.add("nigga");
-        Böslist.add("hurensohn");
-        Böslist.add("bastard");
+        Boeslist.add("hitler");
+        Boeslist.add("nigger");
+        Boeslist.add("nigga");
+        Boeslist.add("hurensohn");
+        Boeslist.add("bastard");
 
 
-        for(int i = 0; i < Böslist.size(); i++){
-        if(     event.getMessage().toLowerCase().contains(Böslist.get(i))){
-            Player p = event.getPlayer();
-            event.setCancelled(true);
-            p.sendMessage("§cDeine Nachricht wurde nicht abgesendet, da sie gegen unsere Regeln verstößt!");
-        }}
+        for (String s : Boeslist) {
+            if (event.getMessage().toLowerCase().contains(s)) {
+                Player p = event.getPlayer();
+                event.setCancelled(true);
+                p.sendMessage("§cDeine Nachricht wurde nicht abgesendet, da sie gegen unsere Regeln verstößt!");
+            }
+        }
         event.setMessage(event.getMessage().replace("&", "§"));
 
         if(event.getMessage().startsWith("7")){

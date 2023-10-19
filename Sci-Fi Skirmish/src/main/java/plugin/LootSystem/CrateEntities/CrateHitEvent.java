@@ -21,7 +21,7 @@ public class CrateHitEvent implements Listener {
             if (event.getDamager().getType() == EntityType.PLAYER | event.getDamager().getType().equals(EntityType.ARROW)) {
                 Entity e = event.getEntity();
                 Player d = (Player) event.getDamager();
-                Double life = ((LivingEntity) e).getHealth();
+                double life = ((LivingEntity) e).getHealth();
                 int Scale = (int) Math.pow(10, 1);
                 int i = (int) ((Math.random() * 2) + 1);
                 int Damage = 20;
@@ -56,16 +56,14 @@ public class CrateHitEvent implements Listener {
     @EventHandler
     public void crateProjectileEvent(ProjectileHitEvent event){
 
-        if(event.getHitEntity() == null || !(event.getEntity().getShooter() instanceof Player)){
+        if(event.getHitEntity() == null || !(event.getEntity().getShooter() instanceof Player d)){
             return;
         }
-
-        Player d = (Player) event.getEntity().getShooter();
 
         if (event.getHitEntity().getType() == EntityType.ARMOR_STAND) {
             if (event.getEntity().getType() == EntityType.ARROW) {
                 Entity e1 = event.getHitEntity();
-                Double life = ((LivingEntity) e1).getHealth();
+                double life = ((LivingEntity) e1).getHealth();
                 int Scale = (int) Math.pow(10, 1);
                 int i = (int) ((Math.random() * 2) + 1);
                 int Damage = 20;
@@ -90,7 +88,6 @@ public class CrateHitEvent implements Listener {
                     int z1 = e1.getLocation().getBlockZ();
                     e1.getWorld().spawnParticle(Particle.CRIT, new Location(Bukkit.getWorld("world"), x1, y1, z1), 15);
                     e1.remove();
-                    return;
                 }
             }
         }

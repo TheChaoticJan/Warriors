@@ -5,18 +5,17 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.plugin.Plugin;
 import plugin.Main;
 import plugin.models.PlayerStats;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class BlockEvents implements Listener {
 
@@ -89,8 +88,8 @@ public class BlockEvents implements Listener {
         if(b.getBlockPlaced().getType() == Material.TNT){
             Block block = b.getBlockPlaced();
             block.setType(Material.AIR);
-            Entity tnt = block.getWorld().spawn(block.getLocation(), TNTPrimed.class);
-            ((TNTPrimed)tnt).setFuseTicks(30);
+            TNTPrimed tnt = block.getWorld().spawn(block.getLocation(), TNTPrimed.class);
+            tnt.setFuseTicks(30);
         }
 
         if(b.getBlockPlaced().getType() == Material.COBWEB || b.getBlockPlaced().getType() == Material.SANDSTONE){
@@ -99,31 +98,23 @@ public class BlockEvents implements Listener {
          int y1 = s.getY();
          int z1 = s.getZ();
 
-            Bukkit.getScheduler().scheduleSyncDelayedTask((Plugin) Main.getInstance(), new Runnable() {
-                @Override
-                public void run() {
-                    int i = 5;
-                    while (i > 0) {
-                        i--;
-                    }
-                    if(s.getType() != Material.AIR) {
-                        s.setType(Material.AIR);
-                        s.getWorld().spawnParticle(Particle.CRIT, new Location(Bukkit.getWorld("world"), x1, y1, z1), 15);
-                    }
+            Bukkit.getScheduler().scheduleSyncDelayedTask( Main.getInstance(), () -> {
+                int i = 5;
+                while (i > 0) {
+                    i--;
+                }
+                if(s.getType() != Material.AIR) {
+                    s.setType(Material.AIR);
+                    s.getWorld().spawnParticle(Particle.CRIT, new Location(Bukkit.getWorld("world"), x1, y1, z1), 15);
+                }
 
-          }}, 20 * 11);
+      }, 20 * 11);
 
         }
         if(b.getBlockPlaced().getType() == Material.SANDSTONE){
 
-            Runnable runnable = new Runnable() {
-                @Override
-                public void run() {
-                    p.getInventory().setItem(8, p.getInventory().getItem(8).add(1));
-                }
-            };
-
-            Bukkit.getScheduler().getPendingTasks().remove(runnable);
+            Runnable runnable = () -> p.getInventory().setItem(8, Objects.requireNonNull(p.getInventory().getItem(8)).add(1));
+            
             Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), runnable, 20 * 2);
         }
         if(b.getBlockPlaced().getType() == Material.SANDSTONE || b.getBlockPlaced().getType() == Material.COBWEB){

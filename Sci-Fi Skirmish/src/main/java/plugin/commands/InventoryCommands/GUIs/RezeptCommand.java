@@ -26,73 +26,53 @@ public class RezeptCommand implements CommandExecutor, TabCompleter {
                 p.sendMessage("§cBitte benutze: §e/rezept <Rezept>");
                 return true;
             }
-            switch (args[0]){
-                case "Sci-Fi_Barren":
-                    p.openInventory(SciFiRezeptInventare.Barren(p, null, SpecialResources.SciFiBarren()));
-                    break;
-                case "Sci-Fi_Fragment":
-                    p.openInventory(SciFiRezeptInventare.Fragment(p, null, SpecialResources.SciFiFragment()));
-                    break;
-                case "Sci-Fi_Schwert":
-                    p.openInventory(SciFiRezeptInventare.Schwert(p, null, SciFiItems.Schwert()));
-                    break;
-                case "Sci-Fi_Bogen":
-                    p.openInventory(SciFiRezeptInventare.Bogen(p, null, SciFiItems.Bogen()));
-                    break;
-                case "Sci-Fi_Axt":
-                    p.openInventory(SciFiRezeptInventare.Axt(p, null, SciFiItems.Axt()));
-                    break;
-                case "Sci-Fi_Zauberstab":
-                    p.openInventory(SciFiRezeptInventare.Zauberstab(p, null, SciFiItems.Zahlungsvorschuss()));
-                    break;
-                case "Erfahrenfragment":
-                    p.openInventory(ErfahrenRezeptInventare.Fragment(p, null, SpecialResources.ErfahrenFragment()));
-                    break;
-                case "Erfahrenbarren":
-                    p.openInventory(ErfahrenRezeptInventare.Barren(p, null, SpecialResources.ErfahrenBarren()));
-                    break;
-                case "Erfahrenschwert":
-                    p.openInventory(ErfahrenRezeptInventare.Schwert(p, null, ErfahrenItems.Schwert()));
-                    break;
-                case "Erfahrenaxt":
-                    p.openInventory(ErfahrenRezeptInventare.Axt(p, null, ErfahrenItems.Axt()));
-                    break;
-                case "Erfahrenbogen":
-                    p.openInventory(ErfahrenRezeptInventare.Bogen(p, null, ErfahrenItems.Bogen()));
-                    break;
-                case "Explosivpuder":
-                    p.openInventory(ExplosivRezeptInventare.Fragment(p, null, SpecialResources.ExplosivPuder()));
-                    break;
-                case "Explosivbarren":
-                    p.openInventory(ExplosivRezeptInventare.Barren(p, null, SpecialResources.ExplosivBarren()));
-                    break;
-                case "Explosivbohrer":
-                    p.openInventory(ExplosivRezeptInventare.Picke(p, null, ExplosivItems.Spitzhacke()));
-                    break;
-                case "Explosivangel":
-                    p.openInventory(ExplosivRezeptInventare.Angel(p, null, ExplosivItems.Angel()));
-                    break;
-                case "Klebriger_Schleim":
-                    p.openInventory(KlebrigRezeptInventare.Fragment(p, null, SpecialResources.KlebrigFragment()));
-                    break;
-                case "Klebriger_Kristall":
-                    p.openInventory(KlebrigRezeptInventare.Barren(p, null, SpecialResources.KlebrigBarren()));
-                    break;
-                case "Klebrig_Schwert":
-                    p.openInventory(KlebrigRezeptInventare.Schwert(p, null, KlebrigItems.Schwert()));
-                    break;
-                case "Klebrig_Angel":
-                    p.openInventory(KlebrigRezeptInventare.Angel(p, null, KlebrigItems.Angel()));
-                    break;
-                case "Klebrig_Bogen":
-                    p.openInventory(KlebrigRezeptInventare.Bogen(p, null, KlebrigItems.Bogen()));
-                    break;
-                case "Erfahren_Zauberstab":
-                    p.openInventory(ErfahrenRezeptInventare.Zauberstab(p, null, ErfahrenItems.Zauberstab()));
-                    break;
-                default:
+            switch (args[0]) {
+                case "Sci-Fi_Barren" ->
+                        p.openInventory(SciFiRezeptInventare.Barren(p, null, SpecialResources.SciFiBarren()));
+                case "Sci-Fi_Fragment" ->
+                        p.openInventory(SciFiRezeptInventare.Fragment(p, null, SpecialResources.SciFiFragment()));
+                case "Sci-Fi_Schwert" ->
+                        p.openInventory(SciFiRezeptInventare.Schwert(p, null, SciFiItems.Schwert()));
+                case "Sci-Fi_Bogen" ->
+                        p.openInventory(SciFiRezeptInventare.Bogen(p, null, SciFiItems.Bogen()));
+                case "Sci-Fi_Axt" ->
+                        p.openInventory(SciFiRezeptInventare.Axt(p, null, SciFiItems.Axt()));
+                case "Sci-Fi_Zauberstab" ->
+                        p.openInventory(SciFiRezeptInventare.Zauberstab(p, null, SciFiItems.Zahlungsvorschuss()));
+                case "Erfahrenfragment" ->
+                        p.openInventory(ErfahrenRezeptInventare.Fragment(p, null, SpecialResources.ErfahrenFragment()));
+                case "Erfahrenbarren" ->
+                        p.openInventory(ErfahrenRezeptInventare.Barren(p, null, SpecialResources.ErfahrenBarren()));
+                case "Erfahrenschwert" ->
+                        p.openInventory(ErfahrenRezeptInventare.Schwert(p, null, ErfahrenItems.Schwert()));
+                case "Erfahrenaxt" ->
+                        p.openInventory(ErfahrenRezeptInventare.Axt(p, null, ErfahrenItems.Axt()));
+                case "Erfahrenbogen" ->
+                        p.openInventory(ErfahrenRezeptInventare.Bogen(p, null, ErfahrenItems.Bogen()));
+                case "Explosivpuder" ->
+                        p.openInventory(ExplosivRezeptInventare.Fragment(p, null, SpecialResources.ExplosivPuder()));
+                case "Explosivbarren" ->
+                        p.openInventory(ExplosivRezeptInventare.Barren(p, null, SpecialResources.ExplosivBarren()));
+                case "Explosivbohrer" ->
+                        p.openInventory(ExplosivRezeptInventare.Picke(p, null, ExplosivItems.Spitzhacke()));
+                case "Explosivangel" ->
+                        p.openInventory(ExplosivRezeptInventare.Angel(p, null, ExplosivItems.Angel()));
+                case "Klebriger_Schleim" ->
+                        p.openInventory(KlebrigRezeptInventare.Fragment(p, null, SpecialResources.KlebrigFragment()));
+                case "Klebriger_Kristall" ->
+                        p.openInventory(KlebrigRezeptInventare.Barren(p, null, SpecialResources.KlebrigBarren()));
+                case "Klebrig_Schwert" ->
+                        p.openInventory(KlebrigRezeptInventare.Schwert(p, null, KlebrigItems.Schwert()));
+                case "Klebrig_Angel" ->
+                        p.openInventory(KlebrigRezeptInventare.Angel(p, null, KlebrigItems.Angel()));
+                case "Klebrig_Bogen" ->
+                        p.openInventory(KlebrigRezeptInventare.Bogen(p, null, KlebrigItems.Bogen()));
+                case "Erfahren_Zauberstab" ->
+                        p.openInventory(ErfahrenRezeptInventare.Zauberstab(p, null, ErfahrenItems.Zauberstab()));
+                default -> {
                     p.sendMessage("§cDies ist kein Servereigenes Specialitem!");
                     p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 2, 1);
+                }
             }
         }
         return true;

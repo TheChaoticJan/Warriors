@@ -21,10 +21,10 @@ public class EnderchestCommand implements CommandExecutor, TabCompleter {
             }else if(!p.isOp()){
                 p.sendMessage("§cBitte benutze §e/ec");
             }else{
-                String playername = args[0];
-                Player r = Bukkit.getPlayerExact(playername);
+                String playerName = args[0];
+                Player r = Bukkit.getPlayerExact(playerName);
                 if(r == null){
-                    p.sendMessage("§cDer Spieler §7" + playername + " §cist nicht online!");
+                    p.sendMessage("§cDer Spieler §7" + playerName + " §cist nicht online!");
                 }else{
                     p.openInventory(r.getEnderChest());
                 }

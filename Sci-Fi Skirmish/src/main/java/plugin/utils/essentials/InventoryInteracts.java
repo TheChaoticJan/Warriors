@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class InventoryInteracts {
 
@@ -40,11 +41,11 @@ public class InventoryInteracts {
                         if (i == 1) {
                             for(int k = 0; k <= amounts.get(f); k++) {
                                 for (int l = 0; l <= 35; l++) {
-                                    if (d.getInventory().getItem(l) == null || d.getInventory().getItem(l).getType() == materials.get(f) && d.getInventory().getItem(l).getAmount() <= 15) {
+                                    if (d.getInventory().getItem(l) == null || Objects.requireNonNull(d.getInventory().getItem(l)).getType() == materials.get(f) && Objects.requireNonNull(d.getInventory().getItem(l)).getAmount() <= 15) {
                                         s = "true";
                                     }
                                 }
-                                if (s == "true") {
+                                if (s.equals("true")) {
                                     d.getInventory().addItem(new ItemStack(materials.get(f)));
                                 } else {
                                     int x = d.getLocation().getBlockX();

@@ -12,12 +12,12 @@ import java.util.Date;
 
 public class KlebrigItems {
 
-    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-    private static String date = "§8• §7§oGecraftet: §a§o" + simpleDateFormat.format(new Date());
+    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+    private static final String date = "§8• §7§oGecraftet: §a§o" + simpleDateFormat.format(new Date());
 
     private static ArrayList<String> lore(){
 
-        ArrayList<String> lore = new ArrayList<String>();
+        ArrayList<String> lore = new ArrayList<>();
         lore.add("§eKlebrig");
         lore.add("");
         lore.add("§8• §7Lag lange in §x§5§A§D§D§2§DS§x§5§8§C§5§2§5c§x§5§7§A§C§1§Eh§x§5§5§9§4§1§6l§x§4§E§9§B§1§8e§x§4§7§A§3§1§Ai§x§4§0§A§A§1§Cm§7...");
@@ -74,7 +74,7 @@ public class KlebrigItems {
         wandMeta.setDisplayName("§x§5§A§D§D§2§D§ka§x§4§0§A§A§1§C§ka §8§l[§x§5§A§D§D§2§D§lK§x§5§8§C§5§2§5§ll§x§5§7§A§C§1§E§le§x§5§5§9§4§1§6§lb§x§4§E§9§B§1§8§lr§x§4§7§A§3§1§A§li§x§4§0§A§A§1§C§lg§8§l] §x§5§A§D§D§2§D§lP§x§5§9§C§D§2§8§le§x§5§8§B§D§2§3§li§x§5§7§A§C§1§E§ll§x§5§6§9§C§1§9§ls§x§5§3§9§6§1§7§le§x§4§E§9§B§1§8§ln§x§4§9§A§0§1§9§ld§x§4§5§A§5§1§B§le§x§4§0§A§A§1§C§lr §x§4§0§A§A§1§C§ka§x§5§A§D§D§2§D§ka");
         wandMeta.addEnchant(Enchantment.DIG_SPEED, 1, true);
         wandMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        ArrayList<String> lore = new ArrayList<String>();
+        ArrayList<String> lore = new ArrayList<>();
         lore.add("");
         lore.add("§8• §7Lag lange in §x§5§A§D§D§2§DS§x§5§8§C§5§2§5c§x§5§7§A§C§1§Eh§x§5§5§9§4§1§6l§x§4§E§9§B§1§8e§x§4§7§A§3§1§Ai§x§4§0§A§A§1§Cm§7...");
         lore.add("   §8▸ §7Mit dem §x§5§A§D§D§2§DP§x§5§9§C§D§2§8e§x§5§8§B§D§2§3i§x§5§7§A§C§1§El§x§5§6§9§C§1§9s§x§5§3§9§6§1§7e§x§4§E§9§B§1§8n§x§4§9§A§0§1§9d§x§4§5§A§5§1§Be§x§4§0§A§A§1§Cr");

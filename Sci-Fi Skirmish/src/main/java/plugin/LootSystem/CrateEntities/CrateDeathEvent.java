@@ -2,6 +2,7 @@ package plugin.LootSystem.CrateEntities;
 
 import com.destroystokyo.paper.Title;
 import com.destroystokyo.paper.event.entity.EntityRemoveFromWorldEvent;
+import org.jetbrains.annotations.NotNull;
 import plugin.LootSystem.Loot;
 import plugin.Main;
 import plugin.models.PlayerStats;
@@ -14,11 +15,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class CrateDeathEvent implements Listener {
-
-    String t = null;
-
     public CrateDeathEvent(Main plugin) {
         this.plugin = plugin;
     }
@@ -29,25 +28,23 @@ public class CrateDeathEvent implements Listener {
     public void DeathEvent(EntityRemoveFromWorldEvent event){
         if(event.getEntity().getType().equals(EntityType.ARMOR_STAND)){
 
-            String playername = event.getEntity().getCustomName();
-            Player p = Bukkit.getServer().getPlayerExact(playername);
+            @NotNull String playerName = Objects.requireNonNull(event.getEntity().getCustomName());
+            Player p = Bukkit.getServer().getPlayerExact(playerName);
 
             if(p == null){
                 return;
             }
             event.getEntity().getPassengers().clear();
 
-            Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-                @Override
-                public void run() {
-                    int i = 5;
-                    while (i > 0) {
-                        i--;
-                    }
+            Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> {
+                int i = 5;
+                while (i > 0) {
+                    i--;
+                }
 
-                    Crates.spawnArmorstand(event.getEntity(), event.getEntity().getLocation().getBlockX(), event.getEntity().getLocation().getBlockY(), event.getEntity().getLocation().getBlockZ());
+                Crates.spawnArmorstand(event.getEntity(), event.getEntity().getLocation().getBlockX(), event.getEntity().getLocation().getBlockY(), event.getEntity().getLocation().getBlockZ());
 
-                }}, 20 * 30);
+            }, 20 * 30);
 
 
 
@@ -78,48 +75,48 @@ public class CrateDeathEvent implements Listener {
                     p.sendActionBar("§8<§cTot§8> §x§F§F§E§2§5§9N§x§F§F§D§E§5§8a§x§F§F§D§A§5§8c§x§F§F§D§5§5§7h§x§F§F§D§1§5§7s§x§F§F§C§D§5§6c§x§F§F§C§9§5§6h§x§F§F§C§5§5§5u§x§F§F§C§0§5§4b§x§F§F§B§C§5§4s§x§F§F§B§8§5§3k§x§F§F§B§4§5§3i§x§F§F§A§F§5§2s§x§F§F§A§B§5§2t§x§F§F§A§7§5§1e §8» §x§0§0§B§9§3§AG§x§0§4§B§0§3§4e§x§0§8§A§7§2§Ew§x§0§C§9§E§2§9ö§x§1§0§9§5§2§3h§x§1§4§8§D§1§Dn§x§1§8§8§4§1§7l§x§1§C§7§B§1§2i§x§2§0§7§2§0§Cc§x§2§4§6§9§0§6h");
 
                     for(int i = (int) (Math.random() * 2) ; i < 2; i++) {
-                        e.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), Loot.CommonDrop());
+                        e.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), Loot.commonDrop());
 
                 }
-                    stats.setCommon_crates(stats.getCommon_crates() + 1);
+                    Objects.requireNonNull(stats).setCommon_crates(stats.getCommon_crates() + 1);
                     }
                 if(rarity <= 70 && rarity > 42) {
                     p.sendActionBar("§8<§cTot§8> §x§F§F§E§2§5§9N§x§F§F§D§E§5§8a§x§F§F§D§A§5§8c§x§F§F§D§5§5§7h§x§F§F§D§1§5§7s§x§F§F§C§D§5§6c§x§F§F§C§9§5§6h§x§F§F§C§5§5§5u§x§F§F§C§0§5§4b§x§F§F§B§C§5§4s§x§F§F§B§8§5§3k§x§F§F§B§4§5§3i§x§F§F§A§F§5§2s§x§F§F§A§B§5§2t§x§F§F§A§7§5§1e §8» §x§0§0§8§D§D§FS§x§0§1§7§F§C§7e§x§0§2§7§0§B§0l§x§0§4§6§2§9§8t§x§0§5§5§3§8§1e§x§0§6§4§5§6§9n");
 
                     for (int i = (int) (Math.random() * 2); i < 2; i++) {
-                        e.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), Loot.UncommonDrop());
+                        e.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), Loot.uncommonDrop());
                     }
-                    stats.setUncommon_crates(stats.getUncommon_crates() + 1);
+                    Objects.requireNonNull(stats).setUncommon_crates(stats.getUncommon_crates() + 1);
                 }
                 if (rarity <= 89 && rarity > 70) {
                     p.sendActionBar("§8<§cTot§8> §x§F§F§E§2§5§9N§x§F§F§D§E§5§8a§x§F§F§D§A§5§8c§x§F§F§D§5§5§7h§x§F§F§D§1§5§7s§x§F§F§C§D§5§6c§x§F§F§C§9§5§6h§x§F§F§C§5§5§5u§x§F§F§C§0§5§4b§x§F§F§B§C§5§4s§x§F§F§B§8§5§3k§x§F§F§B§4§5§3i§x§F§F§A§F§5§2s§x§F§F§A§B§5§2t§x§F§F§A§7§5§1e §8» §x§7§8§0§0§D§FE§x§7§3§0§1§C§7p§x§6§E§0§2§B§0i§x§6§A§0§4§9§8s§x§6§5§0§5§8§1c§x§6§0§0§6§6§9h");
 
                     for (int i = (int) (Math.random() * 3); i < 3; i++) {
-                        e.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), Loot.RareDrop());
+                        e.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), Loot.epicDrop());
                     }
-                    stats.setEpic_crates(stats.getEpic_crates() + 1);
+                    Objects.requireNonNull(stats).setEpic_crates(stats.getEpic_crates() + 1);
                 }
                 if (rarity <= 98 && rarity > 89) {
                     p.sendActionBar("§8<§cTot§8> §x§F§F§E§2§5§9N§x§F§F§D§E§5§8a§x§F§F§D§A§5§8c§x§F§F§D§5§5§7h§x§F§F§D§1§5§7s§x§F§F§C§D§5§6c§x§F§F§C§9§5§6h§x§F§F§C§5§5§5u§x§F§F§C§0§5§4b§x§F§F§B§C§5§4s§x§F§F§B§8§5§3k§x§F§F§B§4§5§3i§x§F§F§A§F§5§2s§x§F§F§A§B§5§2t§x§F§F§A§7§5§1e §8» §x§D§3§D§F§0§0L§x§D§7§D§2§0§1e§x§D§B§C§4§0§3g§x§D§F§B§7§0§4e§x§E§2§A§9§0§5n§x§E§6§9§C§0§6d§x§E§A§8§E§0§8ä§x§E§E§8§1§0§9r");
                     p.sendTitle(new Title("§6§kaa §x§D§3§D§F§0§0L§x§D§7§D§2§0§1e§x§D§B§C§4§0§3g§x§D§F§B§7§0§4e§x§E§2§A§9§0§5n§x§E§6§9§C§0§6d§x§E§A§8§E§0§8ä§x§E§E§8§1§0§9r §6§kaa", "§7Nachschub", 3, 35, 3));
 
                     for (int i = (int) (Math.random() * 2); i < 3; i++) {
-                        e.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), Loot.LegendaryDrop());
+                        e.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), Loot.legendaryDrop());
                     }
-                    stats.setRare_crates(stats.getRare_crates() + 1);
+                    Objects.requireNonNull(stats).setRare_crates(stats.getRare_crates() + 1);
                         }
                 if (rarity <= 100 && rarity > 98) {
                     p.sendActionBar("§8<§cTot§8> §x§F§F§E§2§5§9N§x§F§F§D§E§5§8a§x§F§F§D§A§5§8c§x§F§F§D§5§5§7h§x§F§F§D§1§5§7s§x§F§F§C§D§5§6c§x§F§F§C§9§5§6h§x§F§F§C§5§5§5u§x§F§F§C§0§5§4b§x§F§F§B§C§5§4s§x§F§F§B§8§5§3k§x§F§F§B§4§5§3i§x§F§F§A§F§5§2s§x§F§F§A§B§5§2t§x§F§F§A§7§5§1e §8» §x§0§0§D§F§C§DM§x§0§1§D§1§B§By§x§0§3§C§4§A§9t§x§0§4§B§6§9§7h§x§0§6§A§9§8§6i§x§0§7§9§B§7§4s§x§0§9§8§E§6§2c§x§0§A§8§0§5§0h");
                     p.sendTitle(new Title("§b§kaa §x§0§0§D§F§C§DM§x§0§1§D§1§B§By§x§0§3§C§4§A§9t§x§0§4§B§6§9§7h§x§0§6§A§9§8§6i§x§0§7§9§B§7§4s§x§0§9§8§E§6§2c§x§0§A§8§0§5§0h §b§kaa", "§7Nachschub", 3, 35, 3));
 
                     for (int i = (int) (Math.random() * 3); i < 5; i++) {
-                        e.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), Loot.MythicDrop());
+                        e.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), Loot.mythicDrop());
                     }
-                    stats.setMythic_crates(stats.getMythic_crates() + 1);
+                    Objects.requireNonNull(stats).setMythic_crates(stats.getMythic_crates() + 1);
                 }
 
                 try {
-                    this.plugin.getDatabase().updatePlayerStats(stats);
+                    this.plugin.getDatabase().updatePlayerStats(Objects.requireNonNull(stats));
                 } catch (SQLException ex) {
                    ex.printStackTrace();
                 }

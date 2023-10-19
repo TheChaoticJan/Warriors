@@ -67,7 +67,7 @@ public class SpecialItemInventory {
         rezepte.setItem(30, SpecialResources.ExplosivBarren());
         rezepte.setItem(31, ExplosivItems.Spitzhacke());
         rezepte.setItem(32, ExplosivItems.Angel());
-        rezepte.setItem(34, ExplosivItems.Zündkerze());
+        rezepte.setItem(34, ExplosivItems.Zuendkerze());
 
         //Klebrig
         ItemStack KGlass = new ItemStack(Material.LIME_STAINED_GLASS_PANE);

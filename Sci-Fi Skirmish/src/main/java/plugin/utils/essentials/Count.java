@@ -2,9 +2,9 @@ package plugin.utils.essentials;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Count {
 
@@ -17,17 +17,17 @@ public class Count {
         int tnt = 0;
         for(int m = 0; m <= 35; m++){
             if(p.getInventory().getItem(m) != null){
-                if(p.getInventory().getItem(m).getType().equals(Material.EXPERIENCE_BOTTLE)){
-                    xp = xp + p.getInventory().getItem(m).getAmount();
+                if(Objects.requireNonNull(p.getInventory().getItem(m)).getType().equals(Material.EXPERIENCE_BOTTLE)){
+                    xp = xp + Objects.requireNonNull(p.getInventory().getItem(m)).getAmount();
                 }
-                if(p.getInventory().getItem(m).getType().equals(Material.ENDER_PEARL)){
-                    pearls = pearls + p.getInventory().getItem(m).getAmount();
+                if(Objects.requireNonNull(p.getInventory().getItem(m)).getType().equals(Material.ENDER_PEARL)){
+                    pearls = pearls + Objects.requireNonNull(p.getInventory().getItem(m)).getAmount();
                 }
-                if(p.getInventory().getItem(m).getType().equals(Material.TNT)){
-                    tnt = tnt + p.getInventory().getItem(m).getAmount();
+                if(Objects.requireNonNull(p.getInventory().getItem(m)).getType().equals(Material.TNT)){
+                    tnt = tnt + Objects.requireNonNull(p.getInventory().getItem(m)).getAmount();
                 }
-                if(p.getInventory().getItem(m).getType().equals(Material.COBWEB)){
-                    webs = webs + p.getInventory().getItem(m).getAmount();
+                if(Objects.requireNonNull(p.getInventory().getItem(m)).getType().equals(Material.COBWEB)){
+                    webs = webs + Objects.requireNonNull(p.getInventory().getItem(m)).getAmount();
                 }
             }
         }
@@ -64,7 +64,7 @@ public class Count {
             }
         }
 
-        @Nullable int mainHandDura;
+        int mainHandDura;
         if(p.getItemInHand().getType().equals(Material.AIR)){
             mainHandDura = 0;
         }else{
@@ -81,17 +81,5 @@ public class Count {
         count.add(BootsDura);
         count.add(mainHandDura);
         return count;
-    }
-
-    public static Integer getLowestPiece(int HDura, int CDura, int LDura, int SDura){
-
-        int lowest = 0;
-
-        if(HDura <= CDura && HDura <= LDura && HDura <= SDura){lowest = HDura;}
-        else if(CDura <= LDura && CDura <= SDura){lowest = CDura;}
-        else if(LDura <= SDura){lowest = LDura;}
-        else{lowest = SDura;}
-
-        return lowest;
     }
 }

@@ -2,8 +2,6 @@ package plugin;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Player;
-import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
 import plugin.LootSystem.CrateEntities.CrateDeathEvent;
 import plugin.LootSystem.CrateEntities.CrateHitEvent;
@@ -48,14 +46,14 @@ import plugin.utils.Scores.TablistManager;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.UUID;
 
 public final class Main extends JavaPlugin{
 
     private TablistManager tablistManager;
     public static Main instance;
-
-    public static MetadataValue metadataValue;
-    public ArrayList<Player> VanishList = new ArrayList<>();
+    public ArrayList<UUID> VanishList = new ArrayList<>();
     public TablistManager getTablistManager() {
         return tablistManager;
     }
@@ -81,7 +79,7 @@ public final class Main extends JavaPlugin{
         
                 getServer().getWorlds()
                         .forEach(world -> world.getEntitiesByClass(ArmorStand.class).stream()
-                                .filter(entity -> (entity.getCustomName().equals("§x§F§F§E§2§5§9N§x§F§F§D§E§5§8a§x§F§F§D§A§5§8c§x§F§F§D§5§5§7h§x§F§F§D§1§5§7s§x§F§F§C§D§5§6c§x§F§F§C§9§5§6h§x§F§F§C§5§5§5u§x§F§F§C§0§5§4b§x§F§F§B§C§5§4s§x§F§F§B§8§5§3k§x§F§F§B§4§5§3i§x§F§F§A§F§5§2s§x§F§F§A§B§5§2t§x§F§F§A§7§5§1e §8» §7???")))
+                                .filter(entity -> (Objects.equals(entity.getCustomName(), "§x§F§F§E§2§5§9N§x§F§F§D§E§5§8a§x§F§F§D§A§5§8c§x§F§F§D§5§5§7h§x§F§F§D§1§5§7s§x§F§F§C§D§5§6c§x§F§F§C§9§5§6h§x§F§F§C§5§5§5u§x§F§F§C§0§5§4b§x§F§F§B§C§5§4s§x§F§F§B§8§5§3k§x§F§F§B§4§5§3i§x§F§F§A§F§5§2s§x§F§F§A§B§5§2t§x§F§F§A§7§5§1e §8» §7???")))
                                 .forEach(Crates::startRotation)
                         );
 
@@ -128,30 +126,30 @@ public final class Main extends JavaPlugin{
 
 
         //commands
-        getCommand("heal").setExecutor(new HealCommand());
-        getCommand("feed").setExecutor(new FeedCommand());
-        getCommand("kit").setExecutor(new KitCommand());
-        getCommand("sign").setExecutor(new SignCommand());
-        getCommand("fix").setExecutor(new FixCommand());
-        getCommand("uwu").setExecutor(new UwUCommand(this));
-        getCommand("invsee").setExecutor(new InvseeCommand(this));
-        getCommand("spawn").setExecutor(new SpawnCommand());
-        getCommand("ec").setExecutor(new EnderchestCommand());
-        getCommand("workbench").setExecutor(new WorkbenchCommand());
-        getCommand("anvil").setExecutor(new AnvilCommand());
-        getCommand("specialitems").setExecutor(new SpecialitemCommand());
-        getCommand("vanish").setExecutor(new VanishCommand(this));
-        getCommand("rezepte").setExecutor(new RezepteCommand());
-        getCommand("playerinfo").setExecutor(new InfoCommand());
-        getCommand("xp").setExecutor(new XPCommand(this));
-        getCommand("rezept").setExecutor(new RezeptCommand());
-        getCommand("trash").setExecutor(new TrashCommand());
-        getCommand("modify").setExecutor(new ModifyCommand());
-        getCommand("cratestats").setExecutor(new CrateStatsCommand(this));
-        getCommand("top").setExecutor(new TopCommand(this));
-        getCommand("perks").setExecutor(new PerkCommand(this));
-        getCommand("infobar").setExecutor(new InfobarCommand(this));
-        getCommand("crate").setExecutor(new SpawnArmorstandCommand());
+        Objects.requireNonNull(getCommand("heal")).setExecutor(new HealCommand());
+        Objects.requireNonNull(getCommand("feed")).setExecutor(new FeedCommand());
+        Objects.requireNonNull(getCommand("kit")).setExecutor(new KitCommand());
+        Objects.requireNonNull(getCommand("sign")).setExecutor(new SignCommand());
+        Objects.requireNonNull(getCommand("fix")).setExecutor(new FixCommand());
+        Objects.requireNonNull(getCommand("uwu")).setExecutor(new UwUCommand(this));
+        Objects.requireNonNull(getCommand("invsee")).setExecutor(new InvseeCommand(this));
+        Objects.requireNonNull(getCommand("spawn")).setExecutor(new SpawnCommand());
+        Objects.requireNonNull(getCommand("ec")).setExecutor(new EnderchestCommand());
+        Objects.requireNonNull(getCommand("workbench")).setExecutor(new WorkbenchCommand());
+        Objects.requireNonNull(getCommand("anvil")).setExecutor(new AnvilCommand());
+        Objects.requireNonNull(getCommand("specialitems")).setExecutor(new SpecialitemCommand());
+        Objects.requireNonNull(getCommand("vanish")).setExecutor(new VanishCommand(this));
+        Objects.requireNonNull(getCommand("rezepte")).setExecutor(new RezepteCommand());
+        Objects.requireNonNull(getCommand("playerinfo")).setExecutor(new InfoCommand());
+        Objects.requireNonNull(getCommand("xp")).setExecutor(new XPCommand(this));
+        Objects.requireNonNull(getCommand("rezept")).setExecutor(new RezeptCommand());
+        Objects.requireNonNull(getCommand("trash")).setExecutor(new TrashCommand());
+        Objects.requireNonNull(getCommand("modify")).setExecutor(new ModifyCommand());
+        Objects.requireNonNull(getCommand("cratestats")).setExecutor(new CrateStatsCommand(this));
+        Objects.requireNonNull(getCommand("top")).setExecutor(new TopCommand(this));
+        Objects.requireNonNull(getCommand("perks")).setExecutor(new PerkCommand(this));
+        Objects.requireNonNull(getCommand("infobar")).setExecutor(new InfobarCommand(this));
+        Objects.requireNonNull(getCommand("crate")).setExecutor(new SpawnArmorstandCommand());
 
     }
     public static Main getInstance(){

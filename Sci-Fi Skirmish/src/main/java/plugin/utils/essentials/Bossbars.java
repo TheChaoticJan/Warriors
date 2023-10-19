@@ -7,11 +7,13 @@ import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 
+import java.util.Objects;
+
 public class Bossbars {
 
     private BossBar bossBar;
 
-    public BossBar sciFiBar(Player player) {
+    public void sciFiBar(Player player) {
         if (bossBar != null) {
             bossBar.removeAll();
         }
@@ -23,10 +25,9 @@ public class Bossbars {
             bossBar.removeAll();
             bossBar = null;
         }, 60); // 40 ticks = 2 seconds
-        return bossBar;
     }
 
-    public BossBar erfahrenBar(Player player) {
+    public void erfahrenBar(Player player) {
         if (bossBar != null) {
             bossBar.removeAll();
         }
@@ -38,10 +39,9 @@ public class Bossbars {
             bossBar.removeAll();
             bossBar = null;
         }, 60); // 40 ticks = 2 seconds
-        return bossBar;
     }
 
-    public BossBar klebrigBar(Player player) {
+    public void klebrigBar(Player player) {
         if (bossBar != null) {
             bossBar.removeAll();
         }
@@ -53,10 +53,9 @@ public class Bossbars {
             bossBar.removeAll();
             bossBar = null;
         }, 60); // 40 ticks = 2 seconds
-        return bossBar;
     }
 
-    public BossBar explosivBar(Player player) {
+    public void explosivBar(Player player) {
         if (bossBar != null) {
             bossBar.removeAll();
         }
@@ -68,16 +67,15 @@ public class Bossbars {
             bossBar.removeAll();
             bossBar = null;
         }, 60); // 40 ticks = 2 seconds
-        return bossBar;
     }
 
-    public BossBar healBar(Player player, String value, int amount) {
+    public void healBar(Player player, String value, int amount) {
         if (bossBar != null) {
             bossBar.removeAll();
         }
 
         bossBar = Bukkit.createBossBar("§7" + value + " geheilt §8» §a+" + amount, BarColor.GREEN, BarStyle.SEGMENTED_6);
-        if(value == "§cNichts"){
+        if(Objects.equals(value, "§cNichts")){
             bossBar = Bukkit.createBossBar(value + " geheilt, deine Rüstung ist kaputt oder voll!", BarColor.RED, BarStyle.SOLID);
         }
         bossBar.addPlayer(player);
@@ -86,7 +84,6 @@ public class Bossbars {
             bossBar.removeAll();
             bossBar = null;
         }, 60); // 40 ticks = 2 seconds
-        return bossBar;
     }
 
 }

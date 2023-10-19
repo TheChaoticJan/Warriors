@@ -11,6 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class FixCommand implements CommandExecutor, TabCompleter {
 
@@ -21,10 +22,10 @@ public class FixCommand implements CommandExecutor, TabCompleter {
             commandSender.sendMessage("§cDu musst ein Spieler sein um §7´/fix´ §cauführen zu können!");
         }else if(strings.length == 1){
             if(strings[0].equals("armor")){
-                p.getInventory().getHelmet().setDurability((short) p.getInventory().getHelmet().getMaxItemUseDuration());
-                p.getInventory().getChestplate().setDurability((short) p.getInventory().getChestplate().getMaxItemUseDuration());
-                p.getInventory().getLeggings().setDurability((short) p.getInventory().getLeggings().getMaxItemUseDuration());
-                p.getInventory().getBoots().setDurability((short) p.getInventory().getBoots().getMaxItemUseDuration());
+                Objects.requireNonNull(p.getInventory().getHelmet()).setDurability((short) p.getInventory().getHelmet().getMaxItemUseDuration());
+                Objects.requireNonNull(p.getInventory().getChestplate()).setDurability((short) p.getInventory().getChestplate().getMaxItemUseDuration());
+                Objects.requireNonNull(p.getInventory().getLeggings()).setDurability((short) p.getInventory().getLeggings().getMaxItemUseDuration());
+                Objects.requireNonNull(p.getInventory().getBoots()).setDurability((short) p.getInventory().getBoots().getMaxItemUseDuration());
                 p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_USE, 5, 1);
                 p.sendActionBar("§aErfolgreich deine Rüstung repariert");
             }

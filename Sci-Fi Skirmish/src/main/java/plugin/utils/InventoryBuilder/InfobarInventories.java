@@ -31,7 +31,7 @@ public class InfobarInventories {
         if(name.endsWith("3")){
             current = list.get(2);
         }
-        i.setItem(0, Inventarteile.Zurück());
+        i.setItem(0, Inventarteile.Zurueck());
 
         for(int i1 = 1; i1<= 12; i1++){
             i.setItem(i1, Inventarteile.Glass());

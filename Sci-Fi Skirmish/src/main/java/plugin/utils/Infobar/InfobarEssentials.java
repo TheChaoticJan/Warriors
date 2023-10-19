@@ -13,13 +13,13 @@ public class InfobarEssentials {
         ItemStack pearl = new ItemStack(Material.ENDER_PEARL);
         ItemMeta pearlMeta = pearl.getItemMeta();
         pearlMeta.setDisplayName("§5Enderperlen");
-        ArrayList<String> pearllore = new ArrayList<>();
-        pearllore.add("");
-        pearllore.add("§7Dieses Modul zeigt an");
-        pearllore.add("§7wieviele §5Enderperlen §7dein");
-        pearllore.add("§7Gegner im Inventar hat.");
-        pearllore.add("");
-        pearlMeta.setLore(pearllore);
+        ArrayList<String> pearlLore = new ArrayList<>();
+        pearlLore.add("");
+        pearlLore.add("§7Dieses Modul zeigt an");
+        pearlLore.add("§7wieviele §5Enderperlen §7dein");
+        pearlLore.add("§7Gegner im Inventar hat.");
+        pearlLore.add("");
+        pearlMeta.setLore(pearlLore);
         pearl.setItemMeta(pearlMeta);
         return pearl;
     }

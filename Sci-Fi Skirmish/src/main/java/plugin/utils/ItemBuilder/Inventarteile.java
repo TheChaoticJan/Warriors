@@ -16,7 +16,7 @@ public class Inventarteile {
         return Glas;
     }
 
-    public static ItemStack Baublöcke() {
+    public static ItemStack Baubloecke() {
         ItemStack BBlock = new ItemStack(Material.SANDSTONE);
 
         ItemMeta BlockMeta = BBlock.getItemMeta();
@@ -27,7 +27,7 @@ public class Inventarteile {
 
     }
 
-    public static ItemStack Zurück() {
+    public static ItemStack Zurueck() {
         ItemStack i = new ItemStack(Material.RED_DYE);
         ItemMeta d = i.getItemMeta();
         d.setDisplayName("§cZurück");

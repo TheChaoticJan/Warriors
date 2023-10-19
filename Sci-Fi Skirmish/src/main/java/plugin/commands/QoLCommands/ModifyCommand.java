@@ -1,5 +1,6 @@
 package plugin.commands.QoLCommands;
 
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -21,32 +22,32 @@ public class ModifyCommand implements CommandExecutor, TabCompleter {
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if (commandSender instanceof Player p) {
             switch (args[0].toLowerCase()) {
-                case "name":
-                    if(p.getItemInHand() != null){
+                case "name" -> {
+                    if (p.getItemInHand().getType().equals(Material.AIR)) {
                         ItemMeta RenameMeta = p.getItemInHand().getItemMeta();
-                        for(int i = 1; i <= args.length; i++){
-                            if(i == 2){
+                        for (int i = 1; i <= args.length; i++) {
+                            if (i == 2) {
                                 RenameMeta.setDisplayName(args[i - 1].replace("&", "§"));
-                            }else{
+                            } else {
                                 RenameMeta.setDisplayName(RenameMeta.getDisplayName() + " " + args[i - 1].replace("&", "§"));
                             }
 
                         }
                         p.getItemInHand().setItemMeta(RenameMeta);
                         p.sendActionBar("§aErfolgreich dein Item umbenannt!");
-                    }else{
+                    } else {
                         p.sendMessage("§cDu musst ein Item in der halten, welches du umbenennen möchtest!");
                     }
-                    break;
-                case "lore":
-                    if(p.getItemInHand().equals(null)){
+                }
+                case "lore" -> {
+                    if (p.getItemInHand().getType().equals(Material.AIR)) {
                         p.sendMessage("§cDu musst ein Item in der Hand halten");
                         return true;
-                    }else{
+                    } else {
                         int length = args.length;
-                        ArrayList lore = new ArrayList();
-                        for(int i = 1; i < length; i++) {
-                            lore.add(args[i].replace("&", "§").replace("_" , " "));
+                        ArrayList<String> lore = new ArrayList<>();
+                        for (int i = 1; i < length; i++) {
+                            lore.add(args[i].replace("&", "§").replace("_", " "));
                         }
                         ItemMeta LoreMeta = p.getItemInHand().getItemMeta();
                         LoreMeta.setLore(lore);
@@ -54,22 +55,20 @@ public class ModifyCommand implements CommandExecutor, TabCompleter {
                         p.sendActionBar("§aErfolgreich die Lore hinzugefügt!");
 
                     }
-                    break;
-
-                case "glow":
-
-                    if(p.getItemInHand() == null){
+                }
+                case "glow" -> {
+                    if (p.getItemInHand().getType().equals(Material.AIR)) {
                         p.sendMessage("§cDu musst ein Item in der Hand halten");
                         return true;
                     }
-                        ItemStack item = p.getItemInHand();
-                        ItemMeta itemMeta = item.getItemMeta();
-                        itemMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-                        itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                        item.setItemMeta(itemMeta);
-
-                    break;
-                default: p.sendMessage("§cBitte benutze: \n§e/modify name <name> \n§e/modify lore <lore> \n§e/modify type <type>");
+                    ItemStack item = p.getItemInHand();
+                    ItemMeta itemMeta = item.getItemMeta();
+                    itemMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
+                    itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+                    item.setItemMeta(itemMeta);
+                }
+                default ->
+                        p.sendMessage("§cBitte benutze: \n§e/modify name <name> \n§e/modify lore <lore> \n§e/modify type <type>");
             }
 
         }

@@ -11,13 +11,16 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 public class KlebrigRezeptInventare {
 
     public static Inventory Fragment(Player p, @Nullable InventoryClickEvent e, @Nullable ItemStack a){
-        Inventory i = null;
+        Inventory i;
         if(e != null) {
-            i = Bukkit.createInventory(p, 45, e.getCurrentItem().getItemMeta().getDisplayName() + "§f");
+            i = Bukkit.createInventory(p, 45, Objects.requireNonNull(e.getCurrentItem()).getItemMeta().getDisplayName() + "§f");
         }else{
+            assert a != null;
             i = Bukkit.createInventory(p,45, a.getItemMeta().getDisplayName() + "§f");
         }
         for(int i1 = 0; i1 <= 10; i1++){
@@ -46,15 +49,16 @@ public class KlebrigRezeptInventare {
         for(int i4 = 32; i4 <= 43; i4++){
             i.setItem(i4, Inventarteile.Glass());
         }
-        i.setItem(44, Inventarteile.Zurück());
+        i.setItem(44, Inventarteile.Zurueck());
         return i;
     }
 
     public static Inventory Barren(Player p, @Nullable InventoryClickEvent e, @Nullable ItemStack a){
-        Inventory i = null;
+        Inventory i;
         if(e != null) {
-            i = Bukkit.createInventory(p, 45, e.getCurrentItem().getItemMeta().getDisplayName() + "§f");
+            i = Bukkit.createInventory(p, 45, Objects.requireNonNull(e.getCurrentItem()).getItemMeta().getDisplayName() + "§f");
         }else{
+            assert a != null;
             i = Bukkit.createInventory(p,45, a.getItemMeta().getDisplayName() + "§f");
         }
         for(int i1 = 0; i1 <= 10; i1++){
@@ -83,15 +87,16 @@ public class KlebrigRezeptInventare {
         for(int i4 = 32; i4 <= 43; i4++){
             i.setItem(i4, Inventarteile.Glass());
         }
-        i.setItem(44, Inventarteile.Zurück());
+        i.setItem(44, Inventarteile.Zurueck());
         return i;
     }
 
     public static Inventory Angel(Player p, @Nullable InventoryClickEvent e, @Nullable ItemStack a){
-        Inventory i = null;
+        Inventory i;
         if(e != null) {
-            i = Bukkit.createInventory(p, 45, e.getCurrentItem().getItemMeta().getDisplayName() + "§f");
+            i = Bukkit.createInventory(p, 45, Objects.requireNonNull(e.getCurrentItem()).getItemMeta().getDisplayName() + "§f");
         }else{
+            assert a != null;
             i = Bukkit.createInventory(p,45, a.getItemMeta().getDisplayName() + "§f");
         }
         for(int i1 = 0; i1 <= 10; i1++){
@@ -120,16 +125,16 @@ public class KlebrigRezeptInventare {
         for(int i4 = 32; i4 <= 43; i4++){
             i.setItem(i4, Inventarteile.Glass());
         }
-        i.setItem(44, Inventarteile.Zurück());
+        i.setItem(44, Inventarteile.Zurueck());
         return i;
     }
 
     public static Inventory Schwert(Player p, @Nullable InventoryClickEvent e, @Nullable ItemStack a){
-        Inventory i = null;
+        Inventory i;
         if(e != null) {
-            i = Bukkit.createInventory(p, 45, e.getCurrentItem().getItemMeta().getDisplayName() + "§f");
+            i = Bukkit.createInventory(p, 45, Objects.requireNonNull(e.getCurrentItem()).getItemMeta().getDisplayName() + "§f");
         }else{
-            i = Bukkit.createInventory(p,45, a.getItemMeta().getDisplayName() + "§f");
+            i = Bukkit.createInventory(p,45, Objects.requireNonNull(a).getItemMeta().getDisplayName() + "§f");
         }
         for(int i1 = 0; i1 <= 10; i1++){
             i.setItem(i1 , Inventarteile.Glass());
@@ -156,16 +161,16 @@ public class KlebrigRezeptInventare {
         for(int i4 = 32; i4 <= 43; i4++){
             i.setItem(i4, Inventarteile.Glass());
         }
-        i.setItem(44, Inventarteile.Zurück());
+        i.setItem(44, Inventarteile.Zurueck());
         return i;
     }
 
     public static Inventory Bogen(Player p, @Nullable InventoryClickEvent e, @Nullable ItemStack a){
-        Inventory i = null;
+        Inventory i;
         if(e != null) {
-            i = Bukkit.createInventory(p, 45, e.getCurrentItem().getItemMeta().getDisplayName() + "§f");
+            i = Bukkit.createInventory(p, 45, Objects.requireNonNull(e.getCurrentItem()).getItemMeta().getDisplayName() + "§f");
         }else{
-            i = Bukkit.createInventory(p,45, a.getItemMeta().getDisplayName() + "§f");
+            i = Bukkit.createInventory(p,45, Objects.requireNonNull(a).getItemMeta().getDisplayName() + "§f");
         }
         for(int i1 = 0; i1 <= 10; i1++){
             i.setItem(i1 , Inventarteile.Glass());
@@ -193,7 +198,7 @@ public class KlebrigRezeptInventare {
         for(int i4 = 32; i4 <= 43; i4++){
             i.setItem(i4, Inventarteile.Glass());
         }
-        i.setItem(44, Inventarteile.Zurück());
+        i.setItem(44, Inventarteile.Zurueck());
         return i;
     }
 }

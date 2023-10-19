@@ -2,7 +2,6 @@ package plugin.events.PlayerOrEntityEvents.PvP;
 
 import org.bukkit.*;
 import org.bukkit.block.Block;
-import org.bukkit.boss.BossBar;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -22,6 +21,7 @@ import plugin.utils.essentials.Count;
 import plugin.utils.essentials.InventoryInteracts;
 
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class PlayerGetHitEvent implements Listener{
 
@@ -30,8 +30,6 @@ public class PlayerGetHitEvent implements Listener{
     public PlayerGetHitEvent(Main plugin) {
         this.plugin = plugin;
     }
-
-    private BossBar bossBar;
 
     @EventHandler
     public void hungerEvent(FoodLevelChangeEvent e){
@@ -108,7 +106,7 @@ public class PlayerGetHitEvent implements Listener{
 
                 CombatLogger.setInCombat(p, d);
 
-                if(stats.getClan() != "" | stats1.getClan() != "" ){
+                if(!Objects.equals(stats.getClan(), "") | !Objects.equals(stats1.getClan(), "")){
                     if(stats.getClan().equals(stats1.getClan())){
                         event.setCancelled(true);
                         return;
@@ -145,24 +143,22 @@ public class PlayerGetHitEvent implements Listener{
 
                         d.playSound(d.getLocation(), Sound.ENTITY_FROG_LONG_JUMP, 20, 1);
 
-                        Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-                            @Override
-                            public void run() {
-                                int i = 5;
-                                while (i > 0) {
-                                    i--;
-                                }
-                                if(block1.getType() != Material.AIR) {
-                                    block1.setType(Material.AIR);
-                                    block1.getWorld().spawnParticle(Particle.CRIT, new Location(Bukkit.getWorld("world"), p.getLocation().getBlockX(), p.getLocation().getBlockY(), p.getLocation().getBlockZ()), 15);
-                                    BlockEvents.removeBlockFromList(block1);
-                                }
+                        Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> {
+                            int i = 5;
+                            while (i > 0) {
+                                i--;
+                            }
+                            if(block1.getType() != Material.AIR) {
+                                block1.setType(Material.AIR);
+                                block1.getWorld().spawnParticle(Particle.CRIT, new Location(Bukkit.getWorld("world"), p.getLocation().getBlockX(), p.getLocation().getBlockY(), p.getLocation().getBlockZ()), 15);
+                                BlockEvents.removeBlockFromList(block1);
+                            }
 
-                            }}, 20 * 11);
+                        }, 20 * 11);
                     }
                 }
 
-                d.sendActionBar(Actionbar.buildActionbar(p,stats, d,stats1.getInfobar1() , stats1.getInfobar2(), stats1.getInfobar3()));
+                d.sendActionBar(Actionbar.buildActionbar(p,stats, stats1.getInfobar1() , stats1.getInfobar2(), stats1.getInfobar3()));
 
             }catch (SQLException e){
                 e.printStackTrace();

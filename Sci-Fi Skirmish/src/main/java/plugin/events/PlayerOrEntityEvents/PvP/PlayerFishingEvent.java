@@ -1,6 +1,5 @@
 package plugin.events.PlayerOrEntityEvents.PvP;
 
-import plugin.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -13,6 +12,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.inventory.ItemStack;
+import plugin.Main;
+
+import java.util.Objects;
 
 public class PlayerFishingEvent implements Listener{
 
@@ -26,11 +28,12 @@ public class PlayerFishingEvent implements Listener{
            return;
        }
 
+
         if(e.getCaught().getType() == EntityType.PLAYER){
-           e.getHook().removePassenger(e.getHook().getHookedEntity());
+           e.getHook().removePassenger(Objects.requireNonNull(e.getHook().getHookedEntity()));
         }
 
-        if(d.getItemInHand() != null){
+        if(!d.getItemInHand().getType().equals(Material.AIR)){
             if(d.getItemInHand().getItemMeta().getLore() != null) {
                 if (d.getItemInHand().getItemMeta().getLore().contains("§eKlebrig")) {
 

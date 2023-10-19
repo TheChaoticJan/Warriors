@@ -6,7 +6,7 @@
 
     <groupId>jansparadise</groupId>
     <artifactId>JansParadise</artifactId>
-    <version>1.0</version>
+    <version>0.2.7</version>
     <packaging>jar</packaging>
 
     <name>Sci-Fi_Skirmish</name>

@@ -14,12 +14,12 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ErfahrenItems{
-    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-    private static String date = "§8• §7§oGecraftet: §e§o" + simpleDateFormat.format(new Date());
+    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+    private static final String date = "§8• §7§oGecraftet: §e§o" + simpleDateFormat.format(new Date());
 
     private static final NamespacedKey key = new NamespacedKey(Main.getInstance(), "Erfahren");
     private static ArrayList<String> lore(){
-        ArrayList<String> lore = new ArrayList<String>();
+        ArrayList<String> lore = new ArrayList<>();
         lore.add("§eErfahren");
         lore.add("");
         lore.add("§8• §7Hatte langes §x§E§B§D§7§7§BT§x§E§5§D§7§7§6r§x§D§E§D§6§7§0a§x§D§8§D§6§6§Bi§x§D§1§D§6§6§6n§x§C§B§D§6§6§1i§x§C§4§D§5§5§Bn§x§B§E§D§5§5§6g§7...");

@@ -205,10 +205,4 @@ public class PerkInventories {
         return Perks;
     }
 
-    public static Inventory ConfirmBuy(Player p){
-
-        Inventory i = Bukkit.createInventory(p, 9, "");
-        return i;
-
-    }
 }

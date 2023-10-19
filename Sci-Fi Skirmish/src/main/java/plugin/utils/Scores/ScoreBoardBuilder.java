@@ -14,7 +14,7 @@ public class ScoreBoardBuilder {
         if(stats.getDeaths() == 0){
             stats.setDeaths(1);
         }
-        double kd = stats.getKills()/stats.getDeaths();
+        double kd = (double) stats.getKills() /stats.getDeaths();
 
 
         ScoreboardManager manager = Bukkit.getScoreboardManager();
@@ -25,7 +25,7 @@ public class ScoreBoardBuilder {
 
         Score score1 = objective.getScore("§a ");
         Score score2 = objective.getScore("§b §8· §7Dein Rang:");
-        Score score3 = objective.getScore("§c");
+        Score score3;
         if(p.isOp()){
             score3 = objective.getScore("§c   §5Moderator");
         }else{

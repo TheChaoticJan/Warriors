@@ -12,11 +12,11 @@ import java.util.Date;
 
 public class ExplosivItems {
 
-    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-    private static String date = "§8• §7§oGecraftet: §c§o" + simpleDateFormat.format(new Date());
+    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+    private static final String date = "§8• §7§oGecraftet: §c§o" + simpleDateFormat.format(new Date());
 
     private static ArrayList<String> lore(){
-        ArrayList<String> lore = new ArrayList<String>();
+        ArrayList<String> lore = new ArrayList<>();
         lore.add("§eExplosiv");
         lore.add("");
         lore.add("§8• §x§D§D§2§D§2§DE§x§C§D§3§A§2§8x§x§B§D§4§7§2§3p§x§A§C§5§4§1§El§x§9§C§6§1§1§9o§x§9§6§6§A§1§7d§x§9§B§6§D§1§8i§x§A§0§7§1§1§9e§x§A§5§7§4§1§Br§x§A§A§7§8§1§Ct §7gelegentlich...");
@@ -55,7 +55,7 @@ public class ExplosivItems {
         return Drop4;
     }
 
-    public static ItemStack Zündkerze(){
+    public static ItemStack Zuendkerze(){
         ItemStack Kerze = new ItemStack(Material.ORANGE_CANDLE);
         ItemMeta kerzenMeta = Kerze.getItemMeta();
         kerzenMeta.addEnchant(Enchantment.DURABILITY, 1, true);

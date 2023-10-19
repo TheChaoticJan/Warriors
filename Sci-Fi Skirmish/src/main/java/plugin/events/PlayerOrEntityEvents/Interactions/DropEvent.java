@@ -8,7 +8,7 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 public class DropEvent implements Listener{
 
     @EventHandler
-    public void DropEvent(PlayerDropItemEvent e){
+    public void onDropEvent(PlayerDropItemEvent e){
        if(e.getItemDrop().getItemStack().getType().equals(Material.SANDSTONE)){
            e.setCancelled(true);
        }

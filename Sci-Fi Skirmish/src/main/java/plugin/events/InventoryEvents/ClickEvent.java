@@ -15,6 +15,8 @@ import plugin.utils.InventoryBuilder.SpecialItemInventory;
 import plugin.utils.ItemBuilder.Inventarteile;
 import plugin.utils.ItemBuilder.WesternItems;
 
+import java.util.Objects;
+
 public class ClickEvent implements Listener {
 
     @EventHandler
@@ -36,7 +38,7 @@ public class ClickEvent implements Listener {
             if(e.getCurrentItem() == null){
                 return;
             }
-            if(e.getCurrentItem().getType().isTransparent() | e.getClickedInventory().equals(p.getInventory())){
+            if(e.getCurrentItem().getType().isTransparent() | Objects.equals(e.getClickedInventory(), p.getInventory())){
                 e.setCancelled(true);
             }else{
                 ItemStack i = new ItemStack(e.getCurrentItem());
@@ -98,8 +100,8 @@ public class ClickEvent implements Listener {
                      i.setItem(34, Arrows);
                      i.setItem(35, Arrows);
 
-                     i.setItem(8, Inventarteile.Baublöcke());
-                     i.getItem(8).setAmount(32);
+                     i.setItem(8, Inventarteile.Baubloecke());
+                     Objects.requireNonNull(i.getItem(8)).setAmount(32);
 
                      i.setItem(0, WesternItems.Schwert(p));
                      i.setItem(1, WesternItems.Rod(p));
@@ -110,7 +112,7 @@ public class ClickEvent implements Listener {
                      i.setItem(37, WesternItems.Leggings(p));
                      i.setItem(36, WesternItems.Boots(p));
 
-                     p.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(24);
+                     Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_ATTACK_SPEED)).setBaseValue(24);
                      p.closeInventory();
                      p.sendActionBar("§7Du bist nun ein §6Westernwars§7-Kämpfer!");
 

@@ -13,8 +13,8 @@ import java.util.Date;
 
 public class WesternItems {
 
-    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-    private static String date = "§8• §7§oGefunden: §4§o" + simpleDateFormat.format(new Date());
+    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+    private static final String date = "§8• §7§oGefunden: §4§o" + simpleDateFormat.format(new Date());
 
     public static ItemStack Schwert(Player p){
         ItemStack Sword = new ItemStack(Material.DIAMOND_SWORD);
