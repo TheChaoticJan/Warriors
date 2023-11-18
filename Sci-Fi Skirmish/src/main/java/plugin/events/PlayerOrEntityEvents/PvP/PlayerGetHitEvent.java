@@ -73,7 +73,7 @@ public class PlayerGetHitEvent implements Listener{
         }
 
         Player d = (Player) event.getDamager();
-        InventoryInteracts.checkSpeicalitemDrops(d);
+        InventoryInteracts.checkSpecialitemDrops(d);
 
         if(event.getEntity().getType() == EntityType.PLAYER){
             Player p = (Player) event.getEntity();

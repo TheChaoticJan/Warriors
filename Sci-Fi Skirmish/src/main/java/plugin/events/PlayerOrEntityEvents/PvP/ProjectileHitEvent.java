@@ -36,7 +36,7 @@ public class ProjectileHitEvent implements Listener{
             if (!d.getItemInHand().getType().equals(Material.AIR)) {
                 if (d.getItemInHand().getItemMeta() != null) {
                     if (d.getItemInHand().getItemMeta() != null) {
-                        InventoryInteracts.checkSpeicalitemDrops(d);
+                        InventoryInteracts.checkSpecialitemDrops(d);
                     }
                 }
             }

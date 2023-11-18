@@ -36,6 +36,7 @@ public class Count {
         int BootsDura = 0;
         int ChestDura = 0;
         int LeggingsDura = 0;
+
         if(!(p.getInventory().getHelmet() == null)){
             HelmetDura = p.getInventory().getHelmet().getType().getMaxDurability() - p.getInventory().getHelmet().getDurability();
             if(HelmetDura == p.getInventory().getHelmet().getType().getMaxDurability()){

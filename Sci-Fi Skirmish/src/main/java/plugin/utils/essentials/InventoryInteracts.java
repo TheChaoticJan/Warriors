@@ -9,10 +9,8 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Objects;
-
 public class InventoryInteracts {
-
-    public static void checkSpeicalitemDrops(Player d) {
+    public static void checkSpecialitemDrops(Player player) {
 
         ArrayList<String> types = new ArrayList<>();
         types.add("§eSci-Fi");
@@ -33,36 +31,36 @@ public class InventoryInteracts {
         amounts.add(2);
 
         for(int f = 0; f <= types.size() - 1; f++) {
-            if (d.getItemInHand().getItemMeta() != null) {
-                if (d.getItemInHand().getItemMeta().getLore() != null) {
-                    if (d.getItemInHand().getItemMeta().getLore().contains(types.get(f))) {
+            if (player.getItemInHand().getItemMeta() != null) {
+                if (player.getItemInHand().getItemMeta().getLore() != null) {
+                    if (player.getItemInHand().getItemMeta().getLore().contains(types.get(f))) {
                         String s = "false";
                         int i = (int) (Math.random() * 300) + 1;
                         if (i == 1) {
                             for(int k = 0; k <= amounts.get(f); k++) {
                                 for (int l = 0; l <= 35; l++) {
-                                    if (d.getInventory().getItem(l) == null || Objects.requireNonNull(d.getInventory().getItem(l)).getType() == materials.get(f) && Objects.requireNonNull(d.getInventory().getItem(l)).getAmount() <= 15) {
+                                    if (player.getInventory().getItem(l) == null || Objects.requireNonNull(player.getInventory().getItem(l)).getType() == materials.get(f) && Objects.requireNonNull(player.getInventory().getItem(l)).getAmount() <= 15) {
                                         s = "true";
                                     }
                                 }
                                 if (s.equals("true")) {
-                                    d.getInventory().addItem(new ItemStack(materials.get(f)));
+                                    player.getInventory().addItem(new ItemStack(materials.get(f)));
                                 } else {
-                                    int x = d.getLocation().getBlockX();
-                                    int y = d.getLocation().getBlockY();
-                                    int z = d.getLocation().getBlockZ();
+                                    int x = player.getLocation().getBlockX();
+                                    int y = player.getLocation().getBlockY();
+                                    int z = player.getLocation().getBlockZ();
 
-                                    d.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), new ItemStack(materials.get(f)));
+                                    player.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), new ItemStack(materials.get(f)));
                                 }
                             }
                             if(f == 0) {
-                                new Bossbars().sciFiBar(d);
+                                new Bossbars().sciFiBar(player);
                             }else if(f == 1){
-                                new Bossbars().erfahrenBar(d);
+                                new Bossbars().erfahrenBar(player);
                             }else if(f == 2){
-                                new Bossbars().klebrigBar(d);
+                                new Bossbars().klebrigBar(player);
                             }else if(f == 3){
-                                new Bossbars().explosivBar(d);
+                                new Bossbars().explosivBar(player);
                             }
                         }
                     }
