@@ -23,7 +23,7 @@ public class Database {
 
         public void initiliazeDatabase() throws SQLException{
                 Statement statement = getConnection().createStatement();
-                String sql = "CREATE TABLE IF NOT EXISTS player_stats(uuid varchar(36) primary key, name varchar(16), rank varchar(16), xp int, uwu long, deaths int, kills int, blocks_placed int, common_crates int, uncommon_crates int, epic_crates int, rare_crates int, mythic_crates int, clan varchar(16), perk1 boolean, perk2 boolean, perk3 boolean, perk4 boolean, perk5 boolean, perk6 boolean, infobar1 tinyint(6), infobar2 tinyint(6), infobar3 tinyint(6))";
+                String sql = "CREATE TABLE IF NOT EXISTS player_stats(uuid varchar(36) primary key, name varchar(16), rank varchar(16), xp int, deaths int, kills int, common_crates int, uncommon_crates int, epic_crates int, rare_crates int, mythic_crates int, clan varchar(16), perk1 boolean, perk2 boolean, perk3 boolean, perk4 boolean, perk5 boolean, perk6 boolean, infobar1 tinyint(6), infobar2 tinyint(6), infobar3 tinyint(6))";
                 statement.execute(sql);
                 statement.close();
         }
@@ -38,11 +38,9 @@ public class Database {
 
             int deaths = results.getInt("deaths");
             int xp = results.getInt("xp");
-            long uwu = results.getLong("uwu");
             String name = results.getString("name");
             String rank = results.getString("rank");
             int kills = results.getInt("kills");
-            int blocks_placed = results.getInt("blocks_placed");
             int common_crates = results.getInt("common_crates");
             int uncommon_crates = results.getInt("uncommon_crates");
             int epic_crates = results.getInt("epic_crates");
@@ -59,7 +57,7 @@ public class Database {
             int infobar2 = results.getInt("infobar2");
             int infobar3 = results.getInt("infobar3");
 
-            PlayerStats playerStats = new PlayerStats(uuid, name, rank,  xp, uwu, deaths, kills, blocks_placed, common_crates, uncommon_crates, epic_crates, rare_crates, mythic_crates, clan, perk1, perk2, perk3, perk4, perk5, perk6, infobar1, infobar2, infobar3);
+            PlayerStats playerStats = new PlayerStats(uuid, name, rank,  xp, deaths, kills, common_crates, uncommon_crates, epic_crates, rare_crates, mythic_crates, clan, perk1, perk2, perk3, perk4, perk5, perk6, infobar1, infobar2, infobar3);
 
             statement.close();
 
@@ -73,30 +71,28 @@ public class Database {
 
         public void createPlayerStats(PlayerStats stats) throws SQLException{
 
-            PreparedStatement statement = getConnection().prepareStatement("INSERT INTO player_stats(uuid, name, rank,  xp, uwu, deaths, kills, blocks_placed, common_crates, uncommon_crates, epic_crates, rare_crates, mythic_crates, clan, perk1, perk2, perk3, perk4, perk5, perk6, infobar1, infobar2, infobar3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement statement = getConnection().prepareStatement("INSERT INTO player_stats(uuid, name, rank,  xp, deaths, kills, common_crates, uncommon_crates, epic_crates, rare_crates, mythic_crates, clan, perk1, perk2, perk3, perk4, perk5, perk6, infobar1, infobar2, infobar3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             statement.setString(1, stats.getUuid());
             statement.setString(2, stats.getName());
             statement.setString(3, stats.getRank());
             statement.setInt(4, stats.getXp());
-            statement.setLong(5, stats.getUwu());
-            statement.setInt(6, stats.getDeaths());
-            statement.setInt(7, stats.getKills());
-            statement.setInt(8, stats.getBlocks_placed());
-            statement.setInt(9, stats.getCommon_crates());
-            statement.setInt(10, stats.getUncommon_crates());
-            statement.setInt(11, stats.getEpic_crates());
-            statement.setInt(12, stats.getRare_crates());
-            statement.setInt(13, stats.getMythic_crates());
-            statement.setString(14, stats.getClan());
-            statement.setBoolean(15, stats.getPerk1());
-            statement.setBoolean(16, stats.getPerk2());
-            statement.setBoolean(17, stats.getPerk3());
-            statement.setBoolean(18, stats.getPerk4());
-            statement.setBoolean(19, stats.getPerk5());
-            statement.setBoolean(20, stats.getPerk6());
-            statement.setInt(21, stats.getInfobar1());
-            statement.setInt(22, stats.getInfobar2());
-            statement.setInt(23, stats.getInfobar3());
+            statement.setInt(5, stats.getDeaths());
+            statement.setInt(6, stats.getKills());
+            statement.setInt(7, stats.getCommon_crates());
+            statement.setInt(8, stats.getUncommon_crates());
+            statement.setInt(9, stats.getEpic_crates());
+            statement.setInt(10, stats.getRare_crates());
+            statement.setInt(11, stats.getMythic_crates());
+            statement.setString(12, stats.getClan());
+            statement.setBoolean(13, stats.getPerk1());
+            statement.setBoolean(14, stats.getPerk2());
+            statement.setBoolean(15, stats.getPerk3());
+            statement.setBoolean(16, stats.getPerk4());
+            statement.setBoolean(17, stats.getPerk5());
+            statement.setBoolean(18, stats.getPerk6());
+            statement.setInt(19, stats.getInfobar1());
+            statement.setInt(20, stats.getInfobar2());
+            statement.setInt(21, stats.getInfobar3());
 
             statement.executeUpdate();
 
@@ -105,30 +101,28 @@ public class Database {
 
     public void updatePlayerStats(PlayerStats stats) throws SQLException{
 
-        PreparedStatement statement = getConnection().prepareStatement("UPDATE `player_stats` SET `name`=?,`rank`=?,`xp`=?,`uwu`=?,`deaths`=?,`kills`=?,`blocks_placed`=?,`common_crates`=?,`uncommon_crates`=?,`epic_crates`=?,`rare_crates`=? ,`mythic_crates`=?, `clan`=?, `perk1`=?,`perk2`=?,`perk3`=?,`perk4`=?,`perk5`=?,`perk6`=?, `infobar1`=?, `infobar2`=?, `infobar3`=? WHERE `uuid`= '" + stats.getUuid() + "';");
+        PreparedStatement statement = getConnection().prepareStatement("UPDATE `player_stats` SET `name`=?,`rank`=?,`xp`=?,`deaths`=?,`kills`=?,`common_crates`=?,`uncommon_crates`=?,`epic_crates`=?,`rare_crates`=? ,`mythic_crates`=?, `clan`=?, `perk1`=?,`perk2`=?,`perk3`=?,`perk4`=?,`perk5`=?,`perk6`=?, `infobar1`=?, `infobar2`=?, `infobar3`=? WHERE `uuid`= '" + stats.getUuid() + "';");
 
         statement.setString(1, stats.getName());
         statement.setString(2, stats.getRank());
         statement.setInt(3, stats.getXp());
-        statement.setLong(4, stats.getUwu());
-        statement.setInt(5, stats.getDeaths());
-        statement.setInt(6, stats.getKills());
-        statement.setInt(7, stats.getBlocks_placed());
-        statement.setInt(8, stats.getCommon_crates());
-        statement.setInt(9, stats.getUncommon_crates());
-        statement.setInt(10, stats.getEpic_crates());
-        statement.setInt(11, stats.getRare_crates());
-        statement.setInt(12, stats.getMythic_crates());
-        statement.setString(13, stats.getClan());
-        statement.setBoolean(14, stats.getPerk1());
-        statement.setBoolean(15, stats.getPerk2());
-        statement.setBoolean(16, stats.getPerk3());
-        statement.setBoolean(17, stats.getPerk4());
-        statement.setBoolean(18, stats.getPerk5());
-        statement.setBoolean(19, stats.getPerk6());
-        statement.setInt(20, stats.getInfobar1());
-        statement.setInt(21, stats.getInfobar2());
-        statement.setInt(22, stats.getInfobar3());
+        statement.setInt(4, stats.getDeaths());
+        statement.setInt(5, stats.getKills());
+        statement.setInt(6, stats.getCommon_crates());
+        statement.setInt(7, stats.getUncommon_crates());
+        statement.setInt(8, stats.getEpic_crates());
+        statement.setInt(9, stats.getRare_crates());
+        statement.setInt(10, stats.getMythic_crates());
+        statement.setString(11, stats.getClan());
+        statement.setBoolean(12, stats.getPerk1());
+        statement.setBoolean(13, stats.getPerk2());
+        statement.setBoolean(14, stats.getPerk3());
+        statement.setBoolean(15, stats.getPerk4());
+        statement.setBoolean(16, stats.getPerk5());
+        statement.setBoolean(17, stats.getPerk6());
+        statement.setInt(18, stats.getInfobar1());
+        statement.setInt(19, stats.getInfobar2());
+        statement.setInt(20, stats.getInfobar3());
 
         statement.executeUpdate();
 

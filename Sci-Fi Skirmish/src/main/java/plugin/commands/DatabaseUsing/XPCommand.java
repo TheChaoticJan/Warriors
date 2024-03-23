@@ -32,197 +32,144 @@ public class XPCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
 
-        if(sender instanceof Player p){
+        if (sender instanceof Player p) {
 
-            if(args.length == 0){
+            if (args.length == 0) {
                 p.sendMessage("""
                         §cBitte verwende:\s
                         §f
                         §7Auszahlung: §e/xp auszahlen <Zahl>\s
                         §7Kontostand: §e/xp balance
                         §7Einzahlung: §e/xp einzahlen <Zahl>\s""");
-            }else {
+            } else {
 
-                switch (args[0].toLowerCase()) {
-                    case "auszahlen" -> {
-                        try {
-                            PlayerStats stats = this.plugin.getDatabase().findPlayerStatsByUUID(p.getUniqueId().toString());
+                try {
+                    PlayerStats stats = this.plugin.getDatabase().findPlayerStatsByUUID(p.getUniqueId().toString());
 
-                            if (stats == null) {
+                    if (stats == null) {
 
-                                stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false, 1, 2, 3);
+                        stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "", 0,   0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false, false, 1, 2, 3);
 
-                                this.plugin.getDatabase().createPlayerStats(stats);
+                        this.plugin.getDatabase().createPlayerStats(stats);
+                    }
 
-                            } else {
+                    switch (args[0].toLowerCase()) {
+                        case "auszahlen" -> {
 
-                                if (args.length != 2) {
-                                    p.sendMessage("§cBitte benutze: §e/xp auszahlen <Zahl>");
-                                    return true;
-                                }
-
-                                try {
-
-                                    int space = 0;
-
-                                    for (int i = 0; i <= 35; i++) {
-                                        if (p.getInventory().getItem(i) == null) {
-                                            space = space + 64;
-                                        } else {
-                                            if (Objects.requireNonNull(p.getInventory().getItem(i)).getType() == Material.EXPERIENCE_BOTTLE) {
-                                                space = space + (64 - Objects.requireNonNull(p.getInventory().getItem(i)).getAmount());
-                                            }
-                                        }
-                                    }
-
-                                    if (args[1].equals("max")) {
-                                        args[1] = String.valueOf(space);
-                                    }
-                                    int amount = Integer.parseInt(args[1]);
-
-                                    if (amount > stats.getXp()) {
-                                        p.sendMessage("§cTransaktion fehlgeschlagen §7<§c" + stats.getXp() + "§7/" + amount + ">");
-                                        p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 5, 1);
-                                    } else if (Integer.parseInt(args[1]) > space) {
-                                        p.sendMessage("§cDu hast nicht genug Platz im Inventar! §7(§c" + space + "§7/" + args[1] + ")");
-                                    } else {
-                                        int newxp = stats.getXp() - amount;
-                                        stats.setXp(newxp);
-                                        this.plugin.getDatabase().updatePlayerStats(stats);
-                                        p.getInventory().addItem(new ItemStack(Material.EXPERIENCE_BOTTLE, Integer.parseInt(args[1])));
-                                        p.sendMessage("§7Kontostand: §e" + stats.getXp() + "§6✧§7 <§c-" + amount + "§7>");
-                                        p.playSound(p.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_BREAK, 5, 1);
-                                    }
-
-
-                                } catch (NumberFormatException e) {
-                                    p.sendMessage("§cDein 2. Argument muss eine §eZahl §csein!");
-                                }
-
+                            if (args.length != 2) {
+                                p.sendMessage("§cBitte benutze: §e/xp auszahlen <Zahl>");
+                                return true;
                             }
 
+                            int space = 0;
+
+                            for (int i = 0; i <= 35; i++) {
+                                if (p.getInventory().getItem(i) == null) {
+                                    space = space + 64;
+                                } else {
+                                    if (Objects.requireNonNull(p.getInventory().getItem(i)).getType() == Material.EXPERIENCE_BOTTLE) {
+                                        space = space + (64 - Objects.requireNonNull(p.getInventory().getItem(i)).getAmount());
+                                    }
+                                }
+                            }
+
+                            if (args[1].equals("max")) {
+                                args[1] = String.valueOf(space);
+                            }
+                            int amount = Integer.parseInt(args[1]);
+
+                            if (amount > stats.getXp()) {
+                                p.sendMessage("§cTransaktion fehlgeschlagen §7<§c" + stats.getXp() + "§7/" + amount + ">");
+                                p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 5, 1);
+                            } else if (Integer.parseInt(args[1]) > space) {
+                                p.sendMessage("§cDu hast nicht genug Platz im Inventar! §7(§c" + space + "§7/" + args[1] + ")");
+                            } else {
+                                int newxp = stats.getXp() - amount;
+                                stats.setXp(newxp);
+                                this.plugin.getDatabase().updatePlayerStats(stats);
+                                p.getInventory().addItem(new ItemStack(Material.EXPERIENCE_BOTTLE, Integer.parseInt(args[1])));
+                                p.sendMessage("§7Kontostand: §e" + stats.getXp() + "§6✧§7 <§c-" + amount + "§7>");
+                                p.playSound(p.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_BREAK, 5, 1);
+                            }
 
                             p.setScoreboard(ScoreBoardBuilder.Scoreboard(stats, p));
-
-                        } catch (SQLException e) {
-                            e.printStackTrace();
                         }
-                    }
-                    case "balance" -> {
-                        try {
-                            PlayerStats stats = this.plugin.getDatabase().findPlayerStatsByUUID(p.getUniqueId().toString());
 
-                            if (stats == null) {
 
-                                stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false, 1, 2, 3);
-
-                                this.plugin.getDatabase().createPlayerStats(stats);
-
-                            }
-
+                        case "balance" -> {
                             p.sendMessage("§7Kontostand: §e" + stats.getXp() + "§6✧");
                             p.playSound(p.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_BREAK, 5, 1);
-
-
                             p.setScoreboard(ScoreBoardBuilder.Scoreboard(stats, p));
-
-
-                        } catch (SQLException e) {
-                            e.printStackTrace();
                         }
-                    }
-                    case "einzahlen" -> {
-                        try {
-                            PlayerStats stats = this.plugin.getDatabase().findPlayerStatsByUUID(p.getUniqueId().toString());
 
-                            if (stats == null) {
+                        case "einzahlen" -> {
+                            if (args.length != 2) {
+                                p.sendMessage("§cBitte benutze: §e/xp einzahlen <Zahl>");
+                                return true;
+                            }
 
-                                stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false, 1, 2, 3);
+                            try {
 
-                                this.plugin.getDatabase().createPlayerStats(stats);
-
-                            } else {
-
-                                if (args.length != 2) {
-                                    p.sendMessage("§cBitte benutze: §e/xp einzahlen <Zahl>");
-                                    return true;
+                                int xp = new Count(p).getXp();
+                                if (args[1].equals("max")) {
+                                    args[1] = String.valueOf(xp);
                                 }
 
-                                try {
 
-                                    int xp = Count.countValues(p).get(0);
-                                    if (args[1].equals("max")) {
-                                        args[1] = String.valueOf(xp);
-                                    }
+                                int amount = Integer.parseInt(args[1]);
 
-
-                                    int amount = Integer.parseInt(args[1]);
-
-                                    if (Integer.parseInt(args[1]) > xp) {
-                                        p.sendMessage("§cTransaktion fehlgeschlagen §7<§c" + xp + "§7/" + amount + ">");
-                                        p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 5, 1);
-                                    } else {
-                                        int writeamount = amount;
-                                        int newxp = stats.getXp() + amount;
-                                        stats.setXp(newxp);
-                                        this.plugin.getDatabase().updatePlayerStats(stats);
-                                        for (int i = 0; i <= 35; i++) {
-                                            if (p.getInventory().getItem(i) != null) {
-                                                if (Objects.requireNonNull(p.getInventory().getItem(i)).getType() == Material.EXPERIENCE_BOTTLE) {
-                                                    if (amount > Objects.requireNonNull(p.getInventory().getItem(i)).getAmount()) {
-                                                        amount = amount - Objects.requireNonNull(p.getInventory().getItem(i)).getAmount();
-                                                        Objects.requireNonNull(p.getInventory().getItem(i)).setAmount(0);
-                                                    } else if (amount <= Objects.requireNonNull(p.getInventory().getItem(i)).getAmount()) {
-                                                        Objects.requireNonNull(p.getInventory().getItem(i)).setAmount(Objects.requireNonNull(p.getInventory().getItem(i)).getAmount() - amount);
-                                                        amount = 0;
-                                                    }
+                                if (Integer.parseInt(args[1]) > xp) {
+                                    p.sendMessage("§cTransaktion fehlgeschlagen §7<§c" + xp + "§7/" + amount + ">");
+                                    p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 5, 1);
+                                } else {
+                                    int writeamount = amount;
+                                    int newxp = stats.getXp() + amount;
+                                    stats.setXp(newxp);
+                                    this.plugin.getDatabase().updatePlayerStats(stats);
+                                    for (int i = 0; i <= 35; i++) {
+                                        if (p.getInventory().getItem(i) != null) {
+                                            if (Objects.requireNonNull(p.getInventory().getItem(i)).getType() == Material.EXPERIENCE_BOTTLE) {
+                                                if (amount > Objects.requireNonNull(p.getInventory().getItem(i)).getAmount()) {
+                                                    amount = amount - Objects.requireNonNull(p.getInventory().getItem(i)).getAmount();
+                                                    Objects.requireNonNull(p.getInventory().getItem(i)).setAmount(0);
+                                                } else if (amount <= Objects.requireNonNull(p.getInventory().getItem(i)).getAmount()) {
+                                                    Objects.requireNonNull(p.getInventory().getItem(i)).setAmount(Objects.requireNonNull(p.getInventory().getItem(i)).getAmount() - amount);
+                                                    amount = 0;
                                                 }
                                             }
                                         }
-
-                                        p.sendMessage("§7Kontostand: §e" + stats.getXp() + "§6✧ §7<§a+" + writeamount + "§7>");
-                                        p.playSound(p.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_BREAK, 5, 1);
                                     }
 
-
-                                    p.setScoreboard(ScoreBoardBuilder.Scoreboard(stats, p));
-
-
-                                } catch (NumberFormatException e) {
-                                    p.sendMessage("§c Dein 2. Argument muss eine §eZahl §csein!");
+                                    p.sendMessage("§7Kontostand: §e" + stats.getXp() + "§6✧ §7<§a+" + writeamount + "§7>");
+                                    p.playSound(p.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_BREAK, 5, 1);
                                 }
 
+
+                                p.setScoreboard(ScoreBoardBuilder.Scoreboard(stats, p));
+
+
+                            } catch (NumberFormatException e) {
+                                p.sendMessage("§c Dein 2. Argument muss eine §eZahl §csein!");
                             }
-                        } catch (SQLException e) {
-                            e.printStackTrace();
+
                         }
-                    }
-                    case "überweisen" -> {
-                        String playername = args[1];
-                        Player r = Bukkit.getPlayerExact(playername);
-                        if (r == null) {
-                            p.sendMessage("§cDer Spieler §7" + playername + " §cist nicht online!");
-                            break;
-                        } else if (r == p) {
-                            p.sendMessage("§cDas ergibt keinen Sinn oder?");
-                            p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 5, 1);
-                            break;
-                        }
-                        try {
-                            PlayerStats stats = this.plugin.getDatabase().findPlayerStatsByUUID(p.getUniqueId().toString());
 
-                            if (stats == null) {
-
-                                stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false, 1, 2, 3);
-
-                                this.plugin.getDatabase().createPlayerStats(stats);
-
+                        case "überweisen" -> {
+                            String playername = args[1];
+                            Player r = Bukkit.getPlayerExact(playername);
+                            if (r == null) {
+                                p.sendMessage("§cDer Spieler §7" + playername + " §cist nicht online!");
+                                break;
+                            } else if (r == p) {
+                                p.sendMessage("§cDas ergibt keinen Sinn oder?");
+                                p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 5, 1);
+                                break;
                             }
                             PlayerStats stats1 = this.plugin.getDatabase().findPlayerStatsByUUID(r.getUniqueId().toString());
 
                             if (stats1 == null) {
 
-                                stats1 = new PlayerStats(p.getUniqueId().toString(), r.getName(), "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false, 1, 2, 3);
+                                stats1 = new PlayerStats(p.getUniqueId().toString(), r.getName(), "", 0,   0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false, false, 1, 2, 3);
 
                                 this.plugin.getDatabase().createPlayerStats(stats1);
 
@@ -259,22 +206,19 @@ public class XPCommand implements CommandExecutor, TabCompleter {
                             }
 
 
-                        } catch (SQLException e) {
-                            e.printStackTrace();
                         }
+                        default -> p.sendMessage("""
+                                §cBitte verwende:\s
+                                §f
+                                §7Auszahlung: §e/xp auszahlen <Zahl>\s
+                                §7Kontostand: §e/xp balance
+                                §7Einzahlung: §e/xp einzahlen <Zahl>\s""");
                     }
-                    default ->
-                            p.sendMessage("""
-                                    §cBitte verwende:\s
-                                    §f
-                                    §7Auszahlung: §e/xp auszahlen <Zahl>\s
-                                    §7Kontostand: §e/xp balance
-                                    §7Einzahlung: §e/xp einzahlen <Zahl>\s""");
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
                 }
-
             }
         }
-
         return true;
     }
 
@@ -297,3 +241,4 @@ public class XPCommand implements CommandExecutor, TabCompleter {
         return Collections.singletonList("");
     }
 }
+

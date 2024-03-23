@@ -1,4 +1,4 @@
-package plugin.LootSystem.CrateEntities;
+package plugin.cratesystem.CrateEntities;
 
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.destroystokyo.paper.profile.ProfileProperty;
@@ -15,15 +15,15 @@ import org.bukkit.inventory.meta.SkullMeta;
 import java.util.UUID;
 
 
-public class Crates {
+public class Crate {
 
     Main plugin;
 
-    public Crates(Main plugin) {
+    public Crate(Main plugin) {
         this.plugin = plugin;
     }
 
-    public static void spawnArmorstand(Entity p, int x, float y, int z){
+    public Crate(Entity p, int x, float y, int z){
 
             ArmorStand Crate = (ArmorStand) p.getLocation().getBlock().getWorld().spawnEntity(new Location(Bukkit.getWorld("world"), x, y, z), EntityType.ARMOR_STAND);
 

@@ -5,13 +5,13 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import plugin.cratesystem.CrateEntities.Crates;
+import plugin.cratesystem.CrateEntities.Crate;
 
 public class SpawnCrateCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if(commandSender instanceof Player p) {
-            Crates.spawnArmorstand(p, p.getLocation().getBlockX(), (float) (p.getLocation().getBlockY() - 0.7), p.getLocation().getBlockZ());
+            new Crate(p, p.getLocation().getBlockX(), (float) (p.getLocation().getBlockY() - 0.7), p.getLocation().getBlockZ());
             p.sendActionBar("§aErfolgreich eine Crate gespawned!");
         }
         return true;

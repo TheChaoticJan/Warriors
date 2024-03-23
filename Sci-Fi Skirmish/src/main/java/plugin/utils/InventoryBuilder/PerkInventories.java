@@ -1,30 +1,30 @@
 package plugin.utils.InventoryBuilder;
 
-import plugin.models.PlayerStats;
-import plugin.utils.ItemBuilder.Inventarteile;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
+import plugin.Main;
+import plugin.models.PlayerStats;
+import plugin.utils.ItemBuilder.InventoryEssentials;
 
 import java.util.ArrayList;
 
 public class PerkInventories {
 
-    public static Inventory Overview(Player p, PlayerStats stats){
-        Inventory Perks = Bukkit.createInventory(p, 36, "§c§lPerks");
-        for(int i = 0; i <= 9; i++) {
-            Perks.setItem(i, Inventarteile.Glass());
-        }
-
-        //Armorer-Perk
+    //Armorer-Perk
+    private static ItemStack armorerPerk(PlayerStats stats) {
         ItemStack ArmorerPerk = new ItemStack(Material.LODESTONE);
         ItemMeta ArmorerMeta = ArmorerPerk.getItemMeta();
-        ArmorerMeta.setDisplayName("§3§oRüstungsfanatiker");
+        ArmorerMeta.setDisplayName("§3Rüstungsfanatiker");
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
         lore.add("§7Mit dem §3Rüstungsfanatiker §7Perk");
@@ -32,23 +32,60 @@ public class PerkInventories {
         lore.add("§7dein §ckaputtestes Rüstungsteil");
         lore.add("§7um 10 Haltbarkeit §arepariert wird§7!");
         ArmorerMeta.setLore(lore);
+        if (stats.getPerk1()) {
+            ArmorerMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+            ArmorerMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
+        ArmorerPerk.setItemMeta(ArmorerMeta);
+        return ArmorerPerk;
+    }
 
-        //Cobweb-Perk
+    private static ItemStack thievePerk(PlayerStats stats){
+
+        ItemStack ArmorerPerk = new ItemStack(Material.LEAD);
+        ItemMeta ArmorerMeta = ArmorerPerk.getItemMeta();
+        ArmorerMeta.setDisplayName("§6Taschendieb");
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add("§7Als §aTaschendieb §7kannst du");
+        lore.add("§7alle §660 Sekunden §7mit Rechtsklick");
+        lore.add("§7 & einem §bDiamantschwert §7in der Hand");
+        lore.add("§7das Inventar deines §cGegners §7auf Cooldown setzen!");
+        ArmorerMeta.setLore(lore);
+        if (stats.getPerk6()) {
+            ArmorerMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+            ArmorerMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
+        ArmorerPerk.setItemMeta(ArmorerMeta);
+        return ArmorerPerk;
+    }
+
+
+    //Cobweb-Perk
+    private static ItemStack cobwebPerk(PlayerStats stats) {
         ItemStack CobwebPerk = new ItemStack(Material.SLIME_BALL);
         ItemMeta CobwebMeta = CobwebPerk.getItemMeta();
-        CobwebMeta.setDisplayName("§a§oKlebrige Angelegenheit");
-        ArrayList <String> lore1 = new ArrayList<>();
+        CobwebMeta.setDisplayName("§aKlebrige Angelegenheit");
+        ArrayList<String> lore1 = new ArrayList<>();
         lore1.add("");
         lore1.add("§7Mit der §aklebrigen Angelegenheit");
         lore1.add("§7Hast du eine kleine Chance, §fSpinnenweben");
         lore1.add("§7in deinem §cGegner §7zu spawnen, wenn du");
         lore1.add("§7Diesen schlägst!");
         CobwebMeta.setLore(lore1);
+        if (stats.getPerk4()) {
+            CobwebMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+            CobwebMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
+        CobwebPerk.setItemMeta(CobwebMeta);
+        return CobwebPerk;
+    }
 
-        //Bow - Perk
+    //Bow - Perk
+    private static ItemStack bowPerk(PlayerStats stats) {
         ItemStack BowPerk = new ItemStack(Material.CROSSBOW);
         ItemMeta BowMeta = BowPerk.getItemMeta();
-        BowMeta.setDisplayName("§2§oGeübter Schütze");
+        BowMeta.setDisplayName("§2Geübter Schütze");
         ArrayList<String> lore2 = new ArrayList<>();
         lore2.add("");
         lore2.add("§7Als §2geübter Schütze §7verursacht");
@@ -56,12 +93,21 @@ public class PerkInventories {
         lore2.add("§7trifft, für §910 Sekunden §7den Effekt");
         lore2.add("§5Slowness I§7.");
         BowMeta.setLore(lore2);
+        if (stats.getPerk2()) {
+            BowMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+            BowMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
+        BowPerk.setItemMeta(BowMeta);
+        return BowPerk;
+    }
 
-        //Risk-Perk
-        ItemStack RiskPerk = new ItemStack(Material.GOLD_NUGGET);
-        ItemMeta RiskMeta = RiskPerk.getItemMeta();
-        RiskMeta.setDisplayName("§4§oRisikobehaftet");
-        ArrayList<String> lore3 = new ArrayList<>();
+    //Risk-Perk
+    private static ItemStack riskPerk(PlayerStats stats) {
+
+    ItemStack RiskPerk = new ItemStack(Material.GOLD_NUGGET);
+    ItemMeta RiskMeta = RiskPerk.getItemMeta();
+        RiskMeta.setDisplayName("§4Risikobehaftet");
+    ArrayList<String> lore3 = new ArrayList<>();
         lore3.add("");
         lore3.add("§7Bist du §4risikobehaftet§7, so");
         lore3.add("§7erhältst du §ajedesmal §7wenn dein");
@@ -69,11 +115,19 @@ public class PerkInventories {
         lore3.add("§7während du geschlagen wirst, für");
         lore3.add("§910 Sekunden §bSpeed I §7und §cStärke I§7.");
         RiskMeta.setLore(lore3);
+        if(stats.getPerk3()){
+            RiskMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+            RiskMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
+        RiskPerk.setItemMeta(RiskMeta);
+        return RiskPerk;
+}
 
-        //Spionagemeister
+    //Spionagemeister
+    private static ItemStack spyPerk(PlayerStats stats) {
         ItemStack InfoPerk = new ItemStack(Material.SPYGLASS);
         ItemMeta InfoMeta = InfoPerk.getItemMeta();
-        InfoMeta.setDisplayName("§5§oSpionagemeister");
+        InfoMeta.setDisplayName("§5Spionagemeister");
         ArrayList<String> lore6 = new ArrayList<>();
         lore6.add("");
         lore6.add("§7Mit dem §5Spionagemeister §7Perk");
@@ -81,18 +135,29 @@ public class PerkInventories {
         lore6.add("§7nutzen, und somit deine §6Infobar");
         lore6.add("§7modular §aanpassen §7und nutzen.");
         InfoMeta.setLore(lore6);
+        if(stats.getPerk5()){
+            InfoMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+            InfoMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
+        InfoPerk.setItemMeta(InfoMeta);
+        return InfoPerk;
+    }
 
+
+    public static Inventory overview(Player p, PlayerStats stats){
+        Inventory Perks = Bukkit.createInventory(p, 36, "§c§lPerks");
+        for(int i = 0; i <= 9; i++) {
+            Perks.setItem(i, InventoryEssentials.glass());
+        }
 
         //Cooming Soon
         ItemStack CS = new ItemStack(Material.BARRIER);
         ItemMeta meta = CS.getItemMeta();
         meta.setDisplayName("§c§l§oCooming Soon...");
         CS.setItemMeta(meta);
-        for(int i1 = 15; i1 <= 16; i1++){
-            Perks.setItem(i1, CS);
-        }
-        Perks.setItem(17, Inventarteile.Glass());
-        Perks.setItem(18, Inventarteile.Glass());
+        Perks.setItem(16, CS);
+        Perks.setItem(17, InventoryEssentials.glass());
+        Perks.setItem(18, InventoryEssentials.glass());
 
         //Buyed
         ItemStack buyed = new ItemStack(Material.EMERALD);
@@ -110,99 +175,110 @@ public class PerkInventories {
         ItemStack toBuy = new ItemStack(Material.GOLD_INGOT);
         ItemMeta toBuyMeta = toBuy.getItemMeta();
         toBuyMeta.setDisplayName("§6§lKaufen?");
-        ArrayList<String> lore5 = new ArrayList<>();
-        lore5.add("");
-        lore5.add("§7Du besitzt dieses Perk noch §cnicht§7!");
-        lore5.add("§7Willst du es jetzt §6kaufen§7?");
-        lore5.add("");
+        ArrayList<String> toBuyLore = new ArrayList<>();
+        toBuyLore.add("");
+        toBuyLore.add("§7Du besitzt dieses Perk noch §cnicht§7!");
+        toBuyLore.add("§7Willst du es jetzt §6kaufen§7?");
+        toBuyLore.add("");
+        toBuyLore.add("");
+        toBuyLore.add("");
 
-        Boolean b1 = stats.getPerk1();
-        if(b1){
-            ArmorerMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-            ArmorerMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-            ArmorerPerk.setItemMeta(ArmorerMeta);
+        Perks.setItem(10, armorerPerk(stats));
+        if(stats.getPerk1()){
             Perks.setItem(19, buyed);
         }else{
-            ArmorerPerk.setItemMeta(ArmorerMeta);
-            lore5.add(3, "§7Kosten: §e1000 §6✧");
-            toBuyMeta.setLore(lore5);
+            toBuyLore.set(4, "§7Perk: §3Rüstungsfanatiker");
+            toBuyLore.set(5, "§7Kosten: §e1000 §6✧");
+            toBuyMeta.setLore(toBuyLore);
+            toBuyMeta.getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "price"), PersistentDataType.INTEGER, 1000);
             toBuy.setItemMeta(toBuyMeta);
             Perks.setItem(19, toBuy);
-            lore5.remove(3);
         }
-        Perks.setItem(10, ArmorerPerk);
 
-        Boolean b2 = stats.getPerk2();
-        if(b2){
-            BowMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-            BowMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-            BowPerk.setItemMeta(BowMeta);
+        if(stats.getPerk2()){
             Perks.setItem(20, buyed);
         }else{
-            BowPerk.setItemMeta(BowMeta);
-            lore5.add(3, "§7Kosten: §e1000 §6✧");
-            toBuyMeta.setLore(lore5);
+            toBuyLore.set(4, "§7Perk: §2Geübter Schütze");
+            toBuyLore.set(5, "§7Kosten: §e1300 §6✧");
+            toBuyMeta.setLore(toBuyLore);
+            toBuyMeta.getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "price"), PersistentDataType.INTEGER, 1300);
             toBuy.setItemMeta(toBuyMeta);
             Perks.setItem(20, toBuy);
-            lore5.remove(3);
         }
-        Perks.setItem(11, BowPerk);
+        Perks.setItem(11, bowPerk(stats));
 
-
-        Boolean b3 = stats.getPerk3();
-        if(b3){
-            RiskMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-            RiskMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-            RiskPerk.setItemMeta(RiskMeta);
+        if(stats.getPerk3()){
             Perks.setItem(21, buyed);
         }else{
-            RiskPerk.setItemMeta(RiskMeta);
-            lore5.add(3, "§7Kosten: §e1000 §6✧");
-            toBuyMeta.setLore(lore5);
+            toBuyLore.set(4, "§7Perk: §4Risikobehaftet");
+            toBuyLore.set(5, "§7Kosten: §e1800 §6✧");
+            toBuyMeta.setLore(toBuyLore);
+            toBuyMeta.getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "price"), PersistentDataType.INTEGER, 1800);
             toBuy.setItemMeta(toBuyMeta);
             Perks.setItem(21, toBuy);
-            lore5.remove(3);
         }
-        Perks.setItem(12, RiskPerk);
+        Perks.setItem(12, riskPerk(stats));
 
-
-        Boolean b4 = stats.getPerk4();
-        if(b4){
-            CobwebMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-            CobwebMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-            CobwebPerk.setItemMeta(CobwebMeta);
+        if(stats.getPerk4()){
             Perks.setItem(22, buyed);
         }else{
-            CobwebPerk.setItemMeta(CobwebMeta);
-            lore5.add(3, "§7Kosten: §e1000 §6✧");
-            toBuyMeta.setLore(lore5);
+            toBuyLore.set(4, "§7Perk: §aKlebrige Angelegenheit");
+            toBuyLore.set(5, "§7Kosten: §e750 §6✧");
+            toBuyMeta.getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "price"), PersistentDataType.INTEGER, 750);
+            toBuyMeta.setLore(toBuyLore);
             toBuy.setItemMeta(toBuyMeta);
             Perks.setItem(22, toBuy);
-            lore5.remove(3);
         }
-        Perks.setItem(13, CobwebPerk);
+        Perks.setItem(13, cobwebPerk(stats));
 
-        Boolean b5 = stats.getPerk5();
-        if(b5){
-            InfoMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-            InfoMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-            InfoPerk.setItemMeta(InfoMeta);
+        if(stats.getPerk5()){
             Perks.setItem(23, buyed);
         }else{
-            InfoPerk.setItemMeta(InfoMeta);
-            lore5.add(3, "§7Kosten: §e1000 §6✧");
-            toBuyMeta.setLore(lore5);
+            toBuyLore.set(4, "§7Perk: §5Spionagemeister");
+            toBuyLore.set(5, "§7Kosten: §e500 §6✧");
+            toBuyMeta.setLore(toBuyLore);
+            toBuyMeta.getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "price"), PersistentDataType.INTEGER, 500);
             toBuy.setItemMeta(toBuyMeta);
             Perks.setItem(23, toBuy);
-            lore5.remove(3);
         }
-        Perks.setItem(14, InfoPerk);
+        Perks.setItem(14, spyPerk(stats));
+
+        if(stats.getPerk6()){
+            Perks.setItem(24, buyed);
+        }else{
+            toBuyLore.set(4, "§7Perk: §6Taschendieb");
+            toBuyLore.set(5, "§7Kosten: §e2100 §6✧");
+            toBuyMeta.setLore(toBuyLore);
+            toBuyMeta.getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "price"), PersistentDataType.INTEGER, 2100);
+            toBuy.setItemMeta(toBuyMeta);
+            Perks.setItem(24, toBuy);
+        }
+        Perks.setItem(15, thievePerk(stats));
 
         for(int i2 = 26; i2 <= 35; i2++){
-            Perks.setItem(i2, Inventarteile.Glass());
+            Perks.setItem(i2, InventoryEssentials.glass());
         }
 
+
         return Perks;
+    }
+
+
+
+    public static Inventory confirmBuy(Player p, ItemStack price){
+
+        Component name = MiniMessage.miniMessage().deserialize("<rainbow>Kaufen?sfsdfsdfsfsdf</rainbow>");
+        Inventory inventory = Bukkit.createInventory(p, 9, "§c§lPerk kaufen?");
+        inventory.setItem(0, InventoryEssentials.glass());
+        inventory.setItem(1, InventoryEssentials.glass());
+        inventory.setItem(2, InventoryEssentials.back());
+        inventory.setItem(3, InventoryEssentials.glass());
+        inventory.setItem(4, price);
+        inventory.setItem(5, InventoryEssentials.glass());
+        inventory.setItem(6, InventoryEssentials.confirm());
+        inventory.setItem(7, InventoryEssentials.glass());
+        inventory.setItem(8, InventoryEssentials.glass());
+        return inventory;
     }
 
 }

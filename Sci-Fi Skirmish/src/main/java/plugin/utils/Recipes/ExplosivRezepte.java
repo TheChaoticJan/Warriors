@@ -1,7 +1,7 @@
 package plugin.utils.Recipes;
 
 import plugin.Main;
-import plugin.utils.ItemBuilder.ExplosivItems;
+import plugin.utils.ItemBuilder.Explosiv;
 import plugin.utils.ItemBuilder.SpecialResources;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -17,7 +17,7 @@ public class ExplosivRezepte {
     }
 
     public static ShapedRecipe Recipe1(){
-        ShapedRecipe recipe = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "superpowder"), SpecialResources.ExplosivPuder());
+        ShapedRecipe recipe = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "superpowder"), SpecialResources.ExplosivPuder(1));
         recipe.shape("XXX","XFX","XXX");
         recipe.setIngredient('X', Material.GUNPOWDER);
         recipe.setIngredient('F',Material.TNT);
@@ -25,26 +25,26 @@ public class ExplosivRezepte {
     }
 
     public static ShapedRecipe Recipe2(){
-        ShapedRecipe recipe2 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "superkelp"), SpecialResources.ExplosivBarren());
+        ShapedRecipe recipe2 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "superkelp"), SpecialResources.ExplosivBarren(1));
         recipe2.shape("xxx", "xFx", "xxx");
-        recipe2.setIngredient('x', SpecialResources.ExplosivBarren());
+        recipe2.setIngredient('x', SpecialResources.ExplosivBarren(1));
         recipe2.setIngredient('F', Material.TNT);
         return recipe2;
     }
 
     public static ShapedRecipe Recipe3(){
-        ShapedRecipe recipe3 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "ExplosivAngel"), ExplosivItems.Angel());
+        ShapedRecipe recipe3 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "ExplosivAngel"), Explosiv.Angel());
         recipe3.shape("xxS", "xSF", "SxF");
         recipe3.setIngredient('x', Material.AIR);
-        recipe3.setIngredient('F', SpecialResources.ExplosivBarren());
+        recipe3.setIngredient('F', SpecialResources.ExplosivBarren(1));
         recipe3.setIngredient('S', Material.STICK);
         return recipe3;
     }
     public static ShapedRecipe Recipe4(){
-        ShapedRecipe recipe4 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "ExplivPicke"), ExplosivItems.Spitzhacke());
+        ShapedRecipe recipe4 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "ExplivPicke"), Explosiv.Spitzhacke());
         recipe4.shape("FFF", "xSx", "xSx");
         recipe4.setIngredient('x', Material.AIR);
-        recipe4.setIngredient('F', SpecialResources.ExplosivBarren());
+        recipe4.setIngredient('F', SpecialResources.ExplosivBarren(1));
         recipe4.setIngredient('S', Material.STICK);
         return recipe4;
     }

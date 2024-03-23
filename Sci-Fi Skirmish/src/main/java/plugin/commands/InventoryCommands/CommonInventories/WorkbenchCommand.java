@@ -1,4 +1,4 @@
-package plugin.commands.QoLCommands;
+package plugin.commands.InventoryCommands.CommonInventories;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

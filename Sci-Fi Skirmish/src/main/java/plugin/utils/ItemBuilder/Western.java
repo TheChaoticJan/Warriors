@@ -32,10 +32,10 @@ public class Western {
         SwordLore.add(date);
         SwordMeta.setLore(SwordLore);
         if(!(p.getDisplayName().endsWith("s"))) {
-            SwordMeta.setDisplayName("§c§k§oaa §4§l" + p.getDisplayName() + "`s §7§lheiliges §6§lSäbel §c§k§oaa");
+            SwordMeta.setDisplayName("§c§kaa §4§l" + p.getDisplayName() + "`s §6§lSäbel §c§kaa");
         }
         else{
-            SwordMeta.setDisplayName("§c§k§oaa §4§l" + p.getDisplayName() + "` §7§lheiliges §6§lSäbel §c§k§oaa");
+            SwordMeta.setDisplayName("§c§kaa §4§l" + p.getDisplayName() + "` §6§lSäbel §c§kaa");
         }
         Sword.setItemMeta(SwordMeta);
         return Sword;
@@ -58,10 +58,10 @@ public class Western {
         RodLore.add("");
         RodMeta.setLore(RodLore);
         if(!(p.getDisplayName().endsWith("s"))) {
-            RodMeta.setDisplayName("§c§k§oaa §4§l" + p.getDisplayName() + "`s §7§lheilige §6§lRod §c§k§oaa");
+            RodMeta.setDisplayName("§c§kaa §4§l" + p.getDisplayName() + "`s §6§lRod §c§kaa");
         }
         else{
-            RodMeta.setDisplayName("§c§k§oaa §4§l" + p.getDisplayName() + "` §7§lheilige §6§lRod §c§k§oaa");
+            RodMeta.setDisplayName("§c§kaa §4§l" + p.getDisplayName() + "` §6§lRod §c§kaa");
         }
         Rod.setItemMeta(RodMeta);
         return Rod;
@@ -83,10 +83,10 @@ public class Western {
         PickLore.add(date);
         PickMeta.setLore(PickLore);
         if(!(p.getDisplayName().endsWith("s"))) {
-            PickMeta.setDisplayName("§c§k§oaa §4§l" + p.getDisplayName() + "`s §7§lheilige §6§lSandsteinpicke §c§k§oaa");
+            PickMeta.setDisplayName("§c§kaa §4§l" + p.getDisplayName() + "`s §6§lSandsteinpicke §c§kaa");
         }
         else{
-            PickMeta.setDisplayName("§c§k§oaa §4§l" + p.getDisplayName() + "` §7§lheilige §6§lSandsteinpicke §c§k§oaa");
+            PickMeta.setDisplayName("§c§kaa §4§l" + p.getDisplayName() + "` §6§lSandsteinpicke §c§kaa");
         }
         Pick.setItemMeta(PickMeta);
         return Pick;
@@ -110,10 +110,10 @@ public class Western {
         BowLore.add("");
         bowmeta.setLore(BowLore);
         if(!(p.getDisplayName().endsWith("s"))) {
-            bowmeta.setDisplayName("§c§k§oaa §4§l" + p.getDisplayName() + "`s §7§lheiliger §6§lBospammer §c§k§oaa");
+            bowmeta.setDisplayName("§c§kaa §4§l" + p.getDisplayName() + "`s §6§lBospammer §c§kaa");
         }
         else{
-            bowmeta.setDisplayName("§c§k§oaa §4§l" + p.getDisplayName() + "` §7§lheiliger §6§lBospammer §c§k§oaa");
+            bowmeta.setDisplayName("§c§kaa §4§l" + p.getDisplayName() + "` §6§lBospammer §c§kaa");
         }
         Bow.setItemMeta(bowmeta);
         return Bow;
@@ -126,10 +126,10 @@ public class Western {
         meta1.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
         meta1.addEnchant(Enchantment.DURABILITY, 3, true);
         if(!(p.getDisplayName().endsWith("s"))) {
-            meta1.setDisplayName("§c§k§oaa §4§l" + p.getDisplayName() + "`s §7§lheiliger §6§lHelm §c§k§oaa");
+            meta1.setDisplayName("§c§kaa §4§l" + p.getDisplayName() + "`s §6§lHelm §c§k§oaa");
         }
         else{
-            meta1.setDisplayName("§c§k§oaa §4§l" + p.getDisplayName() + "` §7§lheiliger §6§lHelm §c§k§oaa");
+            meta1.setDisplayName("§c§kaa §4§l" + p.getDisplayName() + "` §6§lHelm §c§kaa");
         }
         Helmet.setItemMeta(meta1);
         return Helmet;
@@ -142,10 +142,10 @@ public class Western {
         meta2.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
         meta2.addEnchant(Enchantment.DURABILITY, 3, true);
         if(!(p.getDisplayName().endsWith("s"))) {
-            meta2.setDisplayName("§c§k§oaa §4§l" + p.getDisplayName() + "`s §7§lheilige §6§lBrustplatte §c§k§oaa");
+            meta2.setDisplayName("§c§kaa §4§l" + p.getDisplayName() + "`s §6§lBrustplatte §c§kaa");
         }
         else{
-            meta2.setDisplayName("§c§k§oaa §4§l" + p.getDisplayName() + "` §7§lheilige §6§lBrustplatte §c§k§oaa");
+            meta2.setDisplayName("§c§kaa §4§l" + p.getDisplayName() + "` §6§lBrustplatte §c§kaa");
         }
         Armor.setItemMeta(meta2);
         return Armor;
@@ -158,10 +158,10 @@ public class Western {
         meta3.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
         meta3.addEnchant(Enchantment.DURABILITY, 3, true);
         if(!(p.getDisplayName().endsWith("s"))) {
-            meta3.setDisplayName("§c§k§oaa §4§l" + p.getDisplayName() + "`s §7§lheiliger §6§lBeinschutz §c§k§oaa");
+            meta3.setDisplayName("§c§kaa §4§l" + p.getDisplayName() + "`s §6§lBeinschutz §c§kaa");
         }
         else{
-            meta3.setDisplayName("§c§k§oaa §4§l" + p.getDisplayName() + "` §7§lheiliger §6§lBeinschutz §c§k§oaa");
+            meta3.setDisplayName("§c§kaa §4§l" + p.getDisplayName() + "` §6§lBeinschutz §c§kaa");
         }
         Leggins.setItemMeta(meta3);
         return Leggins;
@@ -175,10 +175,10 @@ public class Western {
         meta4.addEnchant(Enchantment.DURABILITY, 3, true);
         meta4.addEnchant(Enchantment.DEPTH_STRIDER, 3, false);
         if(!(p.getDisplayName().endsWith("s"))) {
-            meta4.setDisplayName("§c§k§oaa §4§l" + p.getDisplayName() + "`s §7§lheilige §6§lSchuhe §c§k§oaa");
+            meta4.setDisplayName("§c§kaa §4§l" + p.getDisplayName() + "`s §6§lSchuhe §c§kaa");
         }
         else{
-            meta4.setDisplayName("§c§k§oaa §4§l" + p.getDisplayName() + "` §7§lheilige §6§lSchuhe §c§k§oaa");
+            meta4.setDisplayName("§c§kaa §4§l" + p.getDisplayName() + "` §6§lSchuhe §c§kaa");
         }
         Boots.setItemMeta(meta4);
         return Boots;

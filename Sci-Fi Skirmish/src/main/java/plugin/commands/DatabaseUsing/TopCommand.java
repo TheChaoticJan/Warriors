@@ -101,30 +101,6 @@ public class TopCommand implements CommandExecutor, TabCompleter {
                         //sending Text Message
                         p.sendMessage(line02 + line12 + line22 + line32 + line42 + line52 + line62 + line72 + line82 + line92 + line102);
                     }
-                    case "uwu" -> {
-
-                        //getting Data
-                        ArrayList<String> topUwU = this.plugin.getDatabase().getTopTenStats("uwu");
-                        for (int i = 14 - topUwU.size(); i <= 14; i++) {
-                            topUwU.add("§c---");
-                        }
-
-                        //formatting Text Message
-                        String line03 = "\n§f";
-                        String line13 = "§8§m    §8[§5§kaa §d§lDie Top 7 UwU-Bienchen §5§kaa§8]§8§m    ";
-                        String line23 = "\n§f";
-                        String line33 = "\n§e  1.  §d" + topUwU.get(0) + "  §8§8»  §d" + topUwU.get(1) + " ♛";
-                        String line43 = "\n§6  2.  §d" + topUwU.get(2) + "  §8§8»  §d" + topUwU.get(3) + " ♛";
-                        String line53 = "\n§c  3.  §d" + topUwU.get(4) + "  §8§8»  §d" + topUwU.get(5) + " ♛";
-                        String line63 = "\n§7  4.  §d" + topUwU.get(6) + "  §8§8»  §d" + topUwU.get(7) + " ♛";
-                        String line73 = "\n§7  5.  §d" + topUwU.get(8) + "  §8§8»  §d" + topUwU.get(9) + " ♛";
-                        String line83 = "\n§7  6.  §d" + topUwU.get(10) + "  §8§8»  §d" + topUwU.get(11) + " ♛";
-                        String line93 = "\n§7  7.  §d" + topUwU.get(12) + "  §8§8»  §d" + topUwU.get(13) + " ♛";
-                        String line103 = "\n§f";
-
-                        //sending Text Message
-                        p.sendMessage(line03 + line13 + line23 + line33 + line43 + line53 + line63 + line73 + line83 + line93 + line103);
-                    }
                 }
 
 
@@ -143,7 +119,6 @@ public class TopCommand implements CommandExecutor, TabCompleter {
         if(strings.length == 1){
             ArrayList<String> sc = new ArrayList<>();
             sc.add("xp");
-            sc.add("uwu");
             sc.add("mythische");
             sc.add("kills");
 

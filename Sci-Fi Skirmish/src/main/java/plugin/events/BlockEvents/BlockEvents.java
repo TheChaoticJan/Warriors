@@ -54,26 +54,6 @@ public class BlockEvents implements Listener {
 
         Player p = b.getPlayer();
 
-       try{
-           PlayerStats stats = this.plugin.getDatabase().findPlayerStatsByUUID(p.getUniqueId().toString());
-
-           if(stats == null){
-
-               stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "", 0, 0,0, 0, 1, 0, 0, 0, 0, 0, "", false, false, false, false, false, 1, 2, 3);
-
-               this.plugin.getDatabase().createPlayerStats(stats);
-
-           }else{
-
-               stats.setBlocks_placed(stats.getBlocks_placed() + 1);
-               this.plugin.getDatabase().updatePlayerStats(stats);
-           }
-
-
-       }catch (SQLException e){
-           e.printStackTrace();
-       }
-
         int x = b.getBlockPlaced().getX();
         int y = b.getBlockPlaced().getY() - 1;
         int z = b.getBlockPlaced().getZ();
@@ -81,9 +61,6 @@ public class BlockEvents implements Listener {
             b.setCancelled(true);
             return;
         }
-
-
-
 
         if(b.getBlockPlaced().getType() == Material.TNT){
             Block block = b.getBlockPlaced();

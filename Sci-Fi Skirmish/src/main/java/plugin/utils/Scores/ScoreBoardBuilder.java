@@ -1,10 +1,12 @@
 package plugin.utils.Scores;
 
-import plugin.models.PlayerStats;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.*;
+import plugin.models.PlayerStats;
 import plugin.utils.CombatLogger;
+
+import java.util.Objects;
 
 public class ScoreBoardBuilder {
 
@@ -14,37 +16,35 @@ public class ScoreBoardBuilder {
         if(stats.getDeaths() == 0){
             stats.setDeaths(1);
         }
-        double kd = (double) stats.getKills() /stats.getDeaths();
-
+        double kd = (double) stats.getKills() / stats.getDeaths();
+        kd = Math.round(kd * 100)/100.00;
 
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         Scoreboard scoreboard = manager.getNewScoreboard();
 
-        Objective objective = scoreboard.registerNewObjective("test", "dummy", "  §x§F§F§E§2§5§9W§x§F§F§D§C§5§8W§x§F§F§D§6§5§7-§x§F§F§D§0§5§7R§x§F§F§C§A§5§6e§x§F§F§C§5§5§5l§x§F§F§B§F§5§4o§x§F§F§B§9§5§3a§x§F§F§B§3§5§3d§x§F§F§A§D§5§2e§x§F§F§A§7§5§1t  ");
+        Objective objective = scoreboard.registerNewObjective("test", "dummy", "  §x§0§0§8§D§F§F§lS§x§1§E§5§5§F§F§lc§x§3§D§1§C§F§F§li§x§6§4§0§2§F§E§l-§x§9§5§0§7§F§B§lF§x§C§6§0§B§F§9§li §x§0§0§8§D§F§F§lS§x§1§6§6§5§F§F§lk§x§2§B§3§C§F§F§li§x§4§1§1§4§F§F§lr§x§5§D§0§2§F§E§lm§x§8§0§0§5§F§C§li§x§A§3§0§8§F§B§ls§x§C§6§0§B§F§9§lh  ");
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 
         Score score1 = objective.getScore("§a ");
-        Score score2 = objective.getScore("§b §8· §7Dein Rang:");
+        Score score2 = objective.getScore("§b §8· §fDein Rang:");
         Score score3;
-        if(p.isOp()){
-            score3 = objective.getScore("§c   §5Moderator");
+        if(Objects.equals(stats.getRank(), "Admin")){
+            score3 = objective.getScore(("§c   §8▸ §c" + stats.getRank()));
+        }else if (Objects.equals(stats.getRank(), "Moderator")){
+            score3 = objective.getScore("§c   §8▸ §5Moderator");
         }else{
-            score3 = objective.getScore("§c   §6Spieler");
+            score3 = objective.getScore("§c   §8▸ §6Spieler");
         }
-
         Score score4 = objective.getScore("§d ");
-        Score score5 = objective.getScore("§e §8· §7Deine XP:");
-        Score score6 = objective.getScore("§f   §8ᐅ§e " + stats.getXp() + " §6✧");
-        Score score7 = objective.getScore("§g ");
-        Score score8 = objective.getScore("§h §8· §7Deine §dUwU§7-Punkte:");
-        Score score9 = objective.getScore("§i   §8ᐅ§d " + stats.getUwu() + " ♛");
-        Score score10 = objective.getScore("§j  ");
-        Score score13 = objective.getScore("§k §8· §7K/D:");
-        Score score14 = objective.getScore("§l   §8ᐅ§c " + Math.round(kd) + " ⚔");
-        Score score15 = objective.getScore("§p");
-        Score score11 = objective.getScore("§q    §8[§aNicht in Combat§8]");
+        Score score5 = objective.getScore("§e §8· §fDeine XP:");
+        Score score6 = objective.getScore("§f   §8▸§e " + stats.getXp() + " §6✧");
+        Score score7 = objective.getScore("§j  ");
+        Score score9 = objective.getScore("§k §8· §fK/D:");
+        Score score10 = objective.getScore("§p   §8▸§c " + kd + " ⚔");
+        Score score11 = objective.getScore("§q");
+        Score score8 = objective.getScore("§r    §8[§aNicht in Combat§8]");
         if(CombatLogger.isInCombat(p)){
-            score11 = objective.getScore("§q       §8[§cIn Combat§8]");
+            score8 = objective.getScore("§r       §8[§cIn Combat§8]");
         }
 
         score1.setScore(0);
@@ -58,10 +58,7 @@ public class ScoreBoardBuilder {
         score9.setScore(0);
         score10.setScore(0);
         score11.setScore(0);
-        score13.setScore(0);
-        score14.setScore(0);
-        score15.setScore(0);
 
-        return scoreboard;
+        return scoreboard;      //returning the scoreboard with the new, set, values
     }
 }

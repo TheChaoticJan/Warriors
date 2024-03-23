@@ -1,15 +1,14 @@
 package plugin.events.InventoryEvents;
 
-import plugin.Main;
-import plugin.models.PlayerStats;
-import plugin.utils.Infobar.InfobarEssentials;
-import plugin.utils.InventoryBuilder.InfobarInventories;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemFlag;
+import plugin.Main;
+import plugin.infobar.InfobarEssentials;
+import plugin.models.PlayerStats;
+import plugin.utils.InventoryBuilder.InfobarInventories;
 
 import java.sql.SQLException;
 import java.util.Objects;
@@ -24,19 +23,24 @@ public class InfobarClick implements Listener{
 
     @EventHandler
     public void clickEvent(InventoryClickEvent event) {
+
+        if(event.getCurrentItem() == null){
+            return;
+        }
+
         Player p = (Player) event.getWhoClicked();
         try {
             PlayerStats stats = this.plugin.getDatabase().findPlayerStatsByUUID(p.getUniqueId().toString());
 
             if (stats == null) {
 
-                stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false, 1, 2, 3);
+                stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "", 0, 0, 0,   0, 0, 0, 0, 0, "", false, false, false, false, false, false, 1, 2, 3);
 
                 this.plugin.getDatabase().createPlayerStats(stats);
             }
 
 
-            if (event.getView().getTitle().equals("§6§lConfiguriere deine InfobarEssentials!")) {
+            if (event.getView().getTitle().equals("§6§lConfiguriere deine Infobar!")) {
                 if (event.getClick().isRightClick() && Objects.requireNonNull(event.getCurrentItem()).hasItemFlag(ItemFlag.HIDE_ENCHANTS)) {
                     p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier " + event.getCurrentItem().getItemMeta().getDisplayName()));
                     event.setCancelled(true);
@@ -45,16 +49,11 @@ public class InfobarClick implements Listener{
                 }
             }
 
-            if(event.getView().getTitle().equals("§c§lPerks")){
-                if(Objects.requireNonNull(event.getCurrentItem()).getItemMeta().getDisplayName().equals("§6§lKaufen?")){
-                    p.sendMessage("UwU");
-                }
-                event.setCancelled(true);
-            }
+
 
             if (event.getView().getTitle().startsWith("§7Bearbeite hier")) {
 
-                if(Objects.requireNonNull(event.getCurrentItem()).getType().equals(Material.RED_DYE)){
+                if(Objects.requireNonNull(event.getCurrentItem()).getItemMeta().getDisplayName().equalsIgnoreCase("§cZurück")){
                     p.openInventory(InfobarInventories.introduction(p, stats));
                     event.setCancelled(true);
                     return;
@@ -81,7 +80,7 @@ public class InfobarClick implements Listener{
                         this.plugin.getDatabase().updatePlayerStats(stats);
                         p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 1"));
                     }
-                    if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith("§c")){
+                    if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cTNT")){
                         stats.setInfobar1(5);
                         this.plugin.getDatabase().updatePlayerStats(stats);
                         p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 1"));
@@ -119,7 +118,7 @@ public class InfobarClick implements Listener{
                         this.plugin.getDatabase().updatePlayerStats(stats);
                         p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 2"));
                     }
-                    if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith("§c")){
+                    if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cTNT")){
                         stats.setInfobar2(5);
                         this.plugin.getDatabase().updatePlayerStats(stats);
                         p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 2"));
@@ -157,7 +156,7 @@ public class InfobarClick implements Listener{
                         this.plugin.getDatabase().updatePlayerStats(stats);
                         p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 3"));
                     }
-                    if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith("§c")){
+                    if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cTNT")){
                         stats.setInfobar3(5);
                         this.plugin.getDatabase().updatePlayerStats(stats);
                         p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 3"));

@@ -1,14 +1,14 @@
 package plugin.events.InventoryEvents.Rezepte;
 
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import plugin.utils.InventoryBuilder.Rezepte.ErfahrenRezeptInventare;
-import plugin.utils.InventoryBuilder.Rezepte.ExplosivRezeptInventare;
-import plugin.utils.InventoryBuilder.Rezepte.KlebrigRezeptInventare;
-import plugin.utils.InventoryBuilder.Rezepte.SciFiRezeptInventare;
+import plugin.Main;
+import plugin.utils.InventoryBuilder.Rezepte.*;
 
 import java.util.Objects;
 
@@ -17,20 +17,16 @@ public class RezeptClickEvent implements Listener{
     @EventHandler
     public void ClickEvent(InventoryClickEvent e){
 
-        if(e.getCurrentItem() == null){
+        if(e.getCurrentItem() == null || e.getCurrentItem().getItemMeta() == null){
             return;
-        }
-
-        if(e.getCurrentItem().getItemMeta() == null){
-            return;
-        }
-
-
-        if(e.getCurrentItem().getType().equals(Material.WHITE_STAINED_GLASS_PANE) || e.getCurrentItem().getItemMeta().getDisplayName().startsWith("§e")){
-            e.setCancelled(true);
         }
         Player p = (Player) e.getWhoClicked();
-        if(e.getView().getTitle().equals("§x§F§F§5§9§F§4R§x§F§4§5§8§F§6e§x§E§9§5§6§F§8z§x§D§E§5§5§F§Ae§x§D§3§5§4§F§Bp§x§C§8§5§2§F§Dt§x§B§D§5§1§F§Fe")){
+        if(e.getView().title().equals(MiniMessage.miniMessage().deserialize("<gradient:#FF59F4:#BD51FF><b>Rezepte"))){
+
+            if(e.getCurrentItem().getType().equals(Material.WHITE_STAINED_GLASS_PANE) || e.getCurrentItem().getItemMeta().getDisplayName().startsWith("§e")){
+                e.setCancelled(true);
+            }
+
             if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§x§C§6§0§B§F§9§ka§x§0§0§8§D§F§F§ka §8§l[§x§0§0§8§D§F§F§lS§x§1§E§5§5§F§F§lc§x§3§D§1§C§F§F§li§x§6§4§0§2§F§E§l-§x§9§5§0§7§F§B§lF§x§C§6§0§B§F§9§li§8§l] §x§0§0§8§D§F§F§lZ§x§2§6§6§E§F§F§la§x§4§B§4§E§F§F§lu§x§7§1§2§F§F§F§lb§x§9§6§1§0§F§F§le§x§A§C§0§1§F§E§lr§x§B§3§0§4§F§D§ls§x§B§9§0§6§F§C§lt§x§C§0§0§9§F§A§la§x§C§6§0§B§F§9§lb §x§0§0§8§D§F§F§ka§x§C§6§0§B§F§9§ka")){
                 p.openInventory(SciFiRezeptInventare.Zauberstab(p, e, null));
             }
@@ -101,10 +97,9 @@ public class RezeptClickEvent implements Listener{
                 p.openInventory(KlebrigRezeptInventare.Bogen(p, e, null));
             }
 
-            if(e.getCurrentItem().getType().equals(Material.BLAZE_ROD)){
-                p.openInventory(ErfahrenRezeptInventare.Zauberstab(p, e, null));
+            if(e.getCurrentItem().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "special"))){
+                p.openInventory(CandleRecipeInventories.specialCandleRecipe(p, e, null));
             }
-
             e.setCancelled(true);
         }
     }

@@ -21,7 +21,7 @@ public class PlayerRepairEvent implements Listener {
 
         Player player = event.getPlayer();
 
-        if (event.hasItem() && player.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "amount")) && Objects.requireNonNull(event.getItem()).getType().equals(Material.EXPERIENCE_BOTTLE) && event.getAction().isRightClick()) {
+        if (event.hasItem() && player.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "amount")) && Objects.requireNonNull(event.getItem()).getType().equals(Material.EXPERIENCE_BOTTLE) && event.getAction().isRightClick() && !player.isSneaking()) {
 
             event.setCancelled(true);
 

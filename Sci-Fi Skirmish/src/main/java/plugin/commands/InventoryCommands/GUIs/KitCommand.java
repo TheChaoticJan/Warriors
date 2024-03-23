@@ -8,12 +8,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -26,38 +28,31 @@ public class KitCommand implements CommandExecutor, TabCompleter {
             return true;
         }
         else {
-            //Player to command
-
-            //Inventory creation
-            Inventory i = Bukkit.createInventory(p, 9, "§6WW§7-§eReloaded §7Kit");
-
-            //WW-Kit
+            //WW-Kit Description
             ItemStack WW = new ItemStack(Material.EXPERIENCE_BOTTLE);
             ItemMeta WWMeta = WW.getItemMeta();
             WWMeta.setDisplayName("§6Westernwars §8- §7Kit");
             ArrayList<String> WWLore = new ArrayList<>();
-            WWLore.add("");
-            WWLore.add("§7  » Du erhältst:");
-            WWLore.add("");
+            WWLore.add("§8» §f§nDu erhältst:");
             WWLore.add("§8• §7834x §aErfahrungsfläschchen");
             WWLore.add("§8• §764x §5Enderperlen");
             WWLore.add("§8• §7256x §cTNT");
             WWLore.add("§8• §7256x §fSpinnenweben");
             WWLore.add("§8• §7384x §9Pfeile");
-            WWLore.add("§8• §7ein besonderes §bSchwert§7, eine besondere §bAngel§7,");
-            WWLore.add("§8  §7einen besonderen §bBogen §7& eine besondere §bSpitzhacke");
-            WWLore.add("");
+            WWLore.add("§8• §bSchwert§f, §bAngel§f, §bBogen §f& §bSpitzhacke");
+            WWLore.add("§8• §bFull Prot IV Diarep");
             WWMeta.setLore(WWLore);
 
             WWMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
             WWMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
             WW.setItemMeta(WWMeta);
-            i.setItem(4, WW);
 
-            p.openInventory(i);
+            Inventory inventory = Bukkit.createInventory(p, InventoryType.HOPPER, "          §6Westernwars §0Kit");
+            inventory.setItem(2, WW);
+
+            p.openInventory(inventory);
         }
-
 
         return false;
     }

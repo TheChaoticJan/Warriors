@@ -3,20 +3,24 @@ package plugin.events.PlayerOrEntityEvents.PvP;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.Vector;
 import plugin.Main;
 import plugin.events.BlockEvents.BlockEvents;
+import plugin.infobar.Actionbar;
 import plugin.models.PlayerStats;
 import plugin.utils.CombatLogger;
-import plugin.utils.Infobar.Actionbar;
 import plugin.utils.essentials.Count;
 import plugin.utils.essentials.InventoryInteracts;
 
@@ -37,23 +41,42 @@ public class PlayerGetHitEvent implements Listener{
     }
 
     @EventHandler
-    public void noDamageEvent(EntityDamageEvent event){
-        if(event.getEntity().getType() != EntityType.PLAYER){
-            return;
-        }
-        Player p = (Player) event.getEntity();
+    public void noDamageEvent(EntityDamageEvent event) {
 
-        if(p.getInventory().getBoots() != null && p.getInventory().getBoots().getItemMeta().hasEnchant(Enchantment.PROTECTION_ENVIRONMENTAL) && p.getInventory().getBoots().getEnchantmentLevel(Enchantment.PROTECTION_ENVIRONMENTAL) == 4) {
-            if (p.getInventory().getChestplate() != null && p.getInventory().getChestplate().getItemMeta().hasEnchant(Enchantment.PROTECTION_ENVIRONMENTAL) && p.getInventory().getChestplate().getEnchantmentLevel(Enchantment.PROTECTION_ENVIRONMENTAL) == 4) {
-                if (p.getInventory().getLeggings() != null && p.getInventory().getLeggings().getItemMeta().hasEnchant(Enchantment.PROTECTION_ENVIRONMENTAL) && p.getInventory().getLeggings().getEnchantmentLevel(Enchantment.PROTECTION_ENVIRONMENTAL) == 4) {
-                    if (p.getInventory().getHelmet() != null && p.getInventory().getHelmet().getItemMeta().hasEnchant(Enchantment.PROTECTION_ENVIRONMENTAL) && p.getInventory().getHelmet().getEnchantmentLevel(Enchantment.PROTECTION_ENVIRONMENTAL) == 4) {
-                        event.setDamage(EntityDamageEvent.DamageModifier.ARMOR, -1000);
-                        event.setDamage(EntityDamageEvent.DamageModifier.MAGIC, -1000);
-                    }
+        if(event.getEntity() instanceof Player p) {
+
+            boolean fullarmor = true;
+
+            for (ItemStack stack : p.getInventory().getArmorContents()) {
+                if (stack != null && stack.getItemMeta().hasEnchant(Enchantment.PROTECTION_ENVIRONMENTAL)) {
+                    event.setDamage(EntityDamageEvent.DamageModifier.MAGIC, event.getDamage(EntityDamageEvent.DamageModifier.MAGIC) - stack.getEnchantmentLevel(Enchantment.PROTECTION_ENVIRONMENTAL));
+                    event.setDamage(EntityDamageEvent.DamageModifier.ARMOR, event.getDamage(EntityDamageEvent.DamageModifier.ARMOR) - stack.getEnchantmentLevel(Enchantment.PROTECTION_ENVIRONMENTAL));
+                }else{
+                    fullarmor = false;
+                }
+            }
+
+            if(!fullarmor){
+                event.setDamage(EntityDamageEvent.DamageModifier.ARMOR, event.getOriginalDamage(EntityDamageEvent.DamageModifier.ARMOR));
+                event.setDamage(EntityDamageEvent.DamageModifier.MAGIC, event.getOriginalDamage(EntityDamageEvent.DamageModifier.MAGIC));
+            }
+
+
+            if(p.getItemInHand().getType() != Material.AIR) {
+                if (p.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "berserker_axe"))) {
+                    Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
+                        @Override
+                        public void run() {
+                            p.setVelocity(new Vector(0, 0, 0));
+                        }
+                    }, 1);
                 }
             }
         }
+
     }
+
+
 
     @EventHandler
     public void damageEvent(EntityDamageByEntityEvent event){
@@ -62,10 +85,18 @@ public class PlayerGetHitEvent implements Listener{
             event.setCancelled(true);
         }
 
-        if(event.getDamager().getType().equals(EntityType.PRIMED_TNT)){
-            Player e = (Player) event.getEntity();
-            e.setVelocity(e.getLocation().getDirection().multiply(3).setY(0.05));
+        if (event.getDamager() instanceof TNTPrimed && event.getEntity() instanceof Player) {
+            Entity entity = event.getEntity();
+            double x = entity.getLocation().getX() - event.getDamager().getLocation().getX();
+            double z = entity.getLocation().getZ() - event.getDamager().getLocation().getZ();
+            double distance = Math.sqrt(x * x + z * z);
+            double knockbackMultiplier = 4; // Adjust this value as needed
 
+            // Create a normalized vector in the direction of knockback (horizontal only)
+            Vector knockbackDirection = new Vector(x, 0, z).normalize();
+
+            // Apply knockback without changing the player's height
+            entity.setVelocity(knockbackDirection.multiply(knockbackMultiplier / distance).setY(entity.getVelocity().getY()));
         }
 
         if(event.getDamager().getType() != EntityType.PLAYER | event.getEntity().getType() != EntityType.PLAYER){
@@ -73,23 +104,24 @@ public class PlayerGetHitEvent implements Listener{
         }
 
         Player d = (Player) event.getDamager();
-        InventoryInteracts.checkSpecialitemDrops(d);
+        InventoryInteracts.checkSpeicalitemDrops(d);
 
         if(event.getEntity().getType() == EntityType.PLAYER){
             Player p = (Player) event.getEntity();
 
 
-                int HDura = Count.countValues(p).get(4);
-                int CDura = Count.countValues(p).get(5);
-                int LDura = Count.countValues(p).get(6);
-                int BDura = Count.countValues(p).get(7);
+                int HDura = new Count(p).getHelmetDura();
+                int CDura = new Count(p).getChestDura();
+                int LDura = new Count(p).getLeggingsDura();
+                int BDura = new Count(p).getBootsDura();
+
 
             try {
                 PlayerStats stats = this.plugin.getDatabase().findPlayerStatsByUUID(p.getUniqueId().toString());
 
                 if (stats == null) {
 
-                    stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false, 1, 2, 3);
+                    stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "Spieler", 0, 0,  0, 0, 0, 0, 0, 0,  "", false, false, false, false, false, false, 1, 2, 3);
 
                     this.plugin.getDatabase().createPlayerStats(stats);
 
@@ -98,7 +130,7 @@ public class PlayerGetHitEvent implements Listener{
 
                 if (stats1 == null) {
 
-                    stats1 = new PlayerStats(d.getUniqueId().toString(), d.getName(), "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false, 1, 2, 3);
+                    stats1 = new PlayerStats(d.getUniqueId().toString(), d.getName(), "Spieler", 0, 0, 0,  0, 0, 0, 0, 0,  "", false, false, false, false, false, false, 1, 2, 3);
 
                     this.plugin.getDatabase().createPlayerStats(stats1);
 
@@ -164,12 +196,9 @@ public class PlayerGetHitEvent implements Listener{
                 e.printStackTrace();
             }
 
-
-
                 if (event.getEntity().getType() == EntityType.ENDER_CRYSTAL) {
                     event.setCancelled(true);
                 }
-
 
             }
 

@@ -1,33 +1,21 @@
 package plugin.commands.FunCommands;
 
 
-import plugin.Main;
-import plugin.models.PlayerStats;
-import plugin.utils.Scores.ScoreBoardBuilder;
 import org.bukkit.Bukkit;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import java.sql.*;
+
 import java.util.Collections;
 import java.util.List;
 
 
 
 public class UwUCommand implements CommandExecutor, TabCompleter {
-
-    private final Main plugin;
-
-    public UwUCommand(Main plugin) {
-        this.plugin = plugin;
-    }
-
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
 
@@ -57,39 +45,17 @@ public class UwUCommand implements CommandExecutor, TabCompleter {
                                 "      §d" + p.getDisplayName() + " §fwünscht dir jetzt ein herzliches:\n" +
                                 " \n" +
                                 "                         §b§k§lsd §d§lUwU §b§k§lsd\n" +
-                                "                  §7(§f+1 §dUwU§f-Punkt§7)\n" +
                                 " \n" +
                                 "§7=============================================\n" +
                                 " \n" +
                                 " \n"
 
-
-
                      );
-                p.sendMessage("§7Du hast " + r.getName() + " §7erfolgreich ein §b§kaa §d§lUwU §b§kaa §7gewünscht");
-
-
+                p.sendActionBar("§fDu hast " + r.getName() + " §ferfolgreich ein §b§kaa §d§lUwU §b§kaa §fgewünscht");
 
             }else {
                 p.sendMessage("§cDer Spieler §7`" + playername + "` §cist nicht online!");
                 return true;
-            }
-
-            try{
-                PlayerStats stats = this.plugin.getDatabase().findPlayerStatsByUUID(r.getUniqueId().toString());
-
-                if(stats == null){
-                    stats = new PlayerStats(r.getUniqueId().toString(), r.getName(), "", 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false, 1, 2, 3);
-                    this.plugin.getDatabase().createPlayerStats(stats);
-                }else {
-                    stats.setUwu(stats.getUwu() + 1);
-                    this.plugin.getDatabase().updatePlayerStats(stats);
-                }
-
-                r.setScoreboard(ScoreBoardBuilder.Scoreboard(stats, r));
-
-            }catch (SQLException e){
-                e.printStackTrace();
             }
         }
 

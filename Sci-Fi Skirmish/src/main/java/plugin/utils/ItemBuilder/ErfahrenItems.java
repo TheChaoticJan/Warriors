@@ -1,10 +1,8 @@
 package plugin.utils.ItemBuilder;
 
-import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
@@ -47,7 +45,7 @@ public class ErfahrenItems{
         return Drop4;
     }
 
-    public static ItemStack Bogen(){
+    public static ItemStack bow(){
 
         ItemStack Drop4 = new ItemStack(Material.BOW);
         ItemMeta SwordMeta = Drop4.getItemMeta();
@@ -60,7 +58,7 @@ public class ErfahrenItems{
         return Drop4;
     }
 
-    public static ItemStack Schwert(){
+    public static ItemStack sword(){
 
         ItemStack Drop4 = new ItemStack(Material.DIAMOND_SWORD);
         ItemMeta SwordMeta = Drop4.getItemMeta();
@@ -71,27 +69,5 @@ public class ErfahrenItems{
         Drop4.setItemMeta(SwordMeta);
 
         return Drop4;
-    }
-
-    public static ItemStack Zauberstab(){
-
-        ItemStack Zauberstab = new ItemStack(Material.YELLOW_CANDLE);
-        ItemMeta ZauberMeta = Zauberstab.getItemMeta();
-        ZauberMeta.setDisplayName("§x§E§B§D§7§7§B§ka§x§B§E§D§5§5§6§ka §8§l[§x§E§B§D§7§7§B§lE§x§E§5§D§7§7§6§lr§x§D§E§D§6§7§0§lf§x§D§8§D§6§6§B§la§x§D§1§D§6§6§6§lh§x§C§B§D§6§6§1§lr§x§C§4§D§5§5§B§le§x§B§E§D§5§5§6§ln§8§l] §x§E§4§E§1§7§0§lW§x§D§D§D§F§6§D§lu§x§D§6§D§D§6§9§ln§x§C§F§D§B§6§6§ld§x§C§8§D§9§6§2§le§x§C§1§D§8§5§F§lr§x§B§9§D§6§5§C§lk§x§B§2§D§4§5§8§le§x§A§B§D§2§5§5§lr§x§A§4§D§0§5§1§lz§x§9§D§C§E§4§E§le §x§B§E§D§5§5§6§ka§x§E§B§D§7§7§B§ka");
-        ZauberMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-        ZauberMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        ArrayList<String> lore = new ArrayList<>();
-        lore.add("");
-        lore.add("§8• §7Hatte langes §x§E§B§D§7§7§BT§x§E§5§D§7§7§6r§x§D§E§D§6§7§0a§x§D§8§D§6§6§Bi§x§D§1§D§6§6§6n§x§C§B§D§6§6§1i§x§C§4§D§5§5§Bn§x§B§E§D§5§5§6g§7...");
-        lore.add("  §8▸ §7Diese §x§E§4§E§1§7§0W§x§D§D§D§F§6§Du§x§D§6§D§D§6§9n§x§C§F§D§B§6§6d§x§C§8§D§9§6§2e§x§C§1§D§8§5§Fr§x§B§9§D§6§5§Ck§x§B§2§D§4§5§8e§x§A§B§D§2§5§5r§x§A§4§D§0§5§1z§x§9§D§C§E§4§Ee §7kann");
-        lore.add("    §7alle §e60 Sekunden§7, dein");
-        lore.add("    §7lowstes Piece um §b15 Dura");
-        lore.add("    §7heilen");
-        lore.add("");
-        lore.add(date);
-        ZauberMeta.setLore(lore);
-        Zauberstab.setItemMeta(ZauberMeta);
-
-        return Zauberstab;
     }
 }

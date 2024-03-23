@@ -1,6 +1,8 @@
 package plugin.events.InventoryEvents;
 
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -10,10 +12,12 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
-import plugin.utils.InventoryBuilder.SpecialItemInventory;
-import plugin.utils.ItemBuilder.Inventarteile;
-import plugin.utils.ItemBuilder.WesternItems;
+import plugin.Main;
+import plugin.utils.InventoryBuilder.SpecialItemInventories;
+import plugin.utils.ItemBuilder.InventoryEssentials;
+import plugin.utils.ItemBuilder.Western;
 
 import java.util.Objects;
 
@@ -29,33 +33,45 @@ public class ClickEvent implements Listener {
 
         if(e.getView().getTitle().endsWith("§f")){
             if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cZurück")){
-                p.openInventory(SpecialItemInventory.inventory(p, "§x§F§F§5§9§F§4R§x§F§4§5§8§F§6e§x§E§9§5§6§F§8z§x§D§E§5§5§F§Ae§x§D§3§5§4§F§Bp§x§C§8§5§2§F§Dt§x§B§D§5§1§F§Fe"));
+                p.openInventory(SpecialItemInventories.selection(p, "<gradient:#FF59F4:#BD51FF><b>Rezepte"));
             }
             e.setCancelled(true);
         }
 
-        if(e.getView().getTitle().contains("§x§0§0§F§F§E§0§l§nS§x§0§8§7§4§F§1§l§np§x§1§6§0§1§F§2§l§ne§x§4§9§0§6§A§1§l§nc§x§7§9§0§C§7§7§l§ni§x§A§7§1§5§9§B§l§na§x§B§E§1§6§8§1§l§nl§x§B§E§0§F§2§A§l§ni§x§D§6§5§4§0§8§l§nt§x§F§9§B§D§0§1§l§ne§x§9§4§B§D§0§B§l§nm§x§1§4§A§8§1§8§l§ns")){
-            if(e.getCurrentItem() == null){
+        if(e.getView().title().equals(MiniMessage.miniMessage().deserialize("<rainbow><b>Specialitems"))){
+            if(e.getCurrentItem() == null || e.getCurrentItem().getType().equals(Material.WHITE_STAINED_GLASS_PANE)){
+                e.setCancelled(true);
                 return;
             }
-            if(e.getCurrentItem().getType().isTransparent() | Objects.equals(e.getClickedInventory(), p.getInventory())){
+            if(Objects.equals(e.getClickedInventory(), p.getInventory())){
                 e.setCancelled(true);
-            }else{
-                ItemStack i = new ItemStack(e.getCurrentItem());
-               p.getInventory().addItem(i);
-               e.setCancelled(true);
+            }else if(e.getCurrentItem().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "special"))){
+                p.openInventory(SpecialItemInventories.showOff(p, e.getCurrentItem().getItemMeta().getPersistentDataContainer().get(new NamespacedKey(Main.getInstance(), "special"), PersistentDataType.STRING), "<black><b>Wähle dein Item:"));
             }
         }
-        if(e.getView().getTitle().contains("§8Inventar von ")){
+        if(e.getView().getTitle().equalsIgnoreCase("§0§lWähle dein Item:")){
+            if(e.getCurrentItem() == null || e.getCurrentItem().getType().equals(Material.WHITE_STAINED_GLASS_PANE)){
+                e.setCancelled(true);
+                return;
+            }else if(e.getCurrentItem().equals(InventoryEssentials.back())){
+                p.openInventory(SpecialItemInventories.selection(p, "<rainbow><b>Specialitems"));
+                e.setCancelled(true);
+            }else{
+                p.getInventory().addItem(e.getCurrentItem());
+                e.setCancelled(true);
+            }
+        }
+
+        if(e.getView().getTitle().contains("§8Inventar von ") || e.getView().getTitle().contains("§0Stats von")){
                 e.setCancelled(true);
         }
-        if(e.getView().getTitle().equalsIgnoreCase("§6WW§7-§eReloaded §7Kit")) {
+        if(e.getView().getTitle().equalsIgnoreCase("          §6Westernwars §0Kit")) {
             if(e.getCurrentItem() == null){
                 return;
             }
                if(e.getCurrentItem().getItemMeta().hasItemFlag(ItemFlag.HIDE_ENCHANTS)){
 
-                 //WW-Kit
+                 //WW-Kit1
                  if(e.getCurrentItem().getItemMeta().hasEnchant(Enchantment.ARROW_INFINITE)) {
                      Inventory i = p.getInventory();
 
@@ -100,17 +116,17 @@ public class ClickEvent implements Listener {
                      i.setItem(34, Arrows);
                      i.setItem(35, Arrows);
 
-                     i.setItem(8, Inventarteile.Baubloecke());
+                     i.setItem(8, InventoryEssentials.buildingBlocks());
                      Objects.requireNonNull(i.getItem(8)).setAmount(32);
 
-                     i.setItem(0, WesternItems.Schwert(p));
-                     i.setItem(1, WesternItems.Rod(p));
-                     i.setItem(2, WesternItems.Bogen(p));
-                     i.setItem(7, WesternItems.Picke(p));
-                     i.setItem(39, WesternItems.Helmet(p));
-                     i.setItem(38, WesternItems.Chestplate(p));
-                     i.setItem(37, WesternItems.Leggings(p));
-                     i.setItem(36, WesternItems.Boots(p));
+                     i.setItem(0, Western.Schwert(p));
+                     i.setItem(1, Western.Rod(p));
+                     i.setItem(2, Western.Bogen(p));
+                     i.setItem(7, Western.Picke(p));
+                     i.setItem(39, Western.Helmet(p));
+                     i.setItem(38, Western.Chestplate(p));
+                     i.setItem(37, Western.Leggings(p));
+                     i.setItem(36, Western.Boots(p));
 
                      Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_ATTACK_SPEED)).setBaseValue(24);
                      p.closeInventory();
@@ -119,12 +135,11 @@ public class ClickEvent implements Listener {
                  }
 
             }
-
             e.setCancelled(true);
         }
 
-        }
-
     }
+
+}
 
 

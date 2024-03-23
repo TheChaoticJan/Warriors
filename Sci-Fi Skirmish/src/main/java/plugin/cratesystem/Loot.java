@@ -1,8 +1,10 @@
 package plugin.cratesystem;
 
+import lombok.Getter;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -11,45 +13,47 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import plugin.utils.ItemBuilder.SpecialResources;
 
+import java.awt.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
-
 public class Loot {
 
+    private final @Getter ArrayList<ItemStack> list = new ArrayList<>();
+
+    Loot(ArrayList<ItemStack> list, int mindropamount){
+
+        int amount = new Random().nextInt(mindropamount + 2) + mindropamount;
+
+        for(int i = 0; i < amount; i++) {
+            this.list.add(list.get(new Random().nextInt(list.size())));
+        }
+
+    }
+    
     public static ItemStack commonDrop(){
 
         ArrayList<ItemStack> commonDrops = new ArrayList<>();
-        ItemStack Drop1 = new ItemStack(Material.EXPERIENCE_BOTTLE, 3);
-        commonDrops.add(Drop1);
-        ItemStack Drop2 = new ItemStack(Material.TNT, 1);
-        commonDrops.add(Drop2);
-        ItemStack Drop3 = new ItemStack(Material.STICK, 2);
-        commonDrops.add(Drop3);
-        ItemStack Drop5 = new ItemStack(Material.STRING, 2);
-        commonDrops.add(Drop5);
-        ItemStack Drop6 = new ItemStack(Material.ARROW, 4);
-        commonDrops.add(Drop6);
-        ItemStack Drop7 = new ItemStack(Material.ENCHANTED_BOOK);
-        EnchantmentStorageMeta BookMeta = (EnchantmentStorageMeta) Drop7.getItemMeta();
-        BookMeta.addStoredEnchant(EnchantmentBuilder.RandomEnchant(), 1, false);
-        Drop7.setItemMeta(BookMeta);
-        commonDrops.add(Drop7);
-        ItemStack Drop8 = new ItemStack(Material.BOOK,1);
-        commonDrops.add(Drop8);
-        ItemStack Drop9 = new ItemStack(Material.IRON_INGOT, 1);
-        commonDrops.add(Drop9);
-        ItemStack Drop10 = new ItemStack(Material.GOLD_NUGGET, 2);
-        commonDrops.add(Drop10);
-        ItemStack Drop11 = new ItemStack(Material.AMETHYST_SHARD, 2);
-        commonDrops.add(Drop11);
-        ItemStack Drop12 = new ItemStack(Material.GUNPOWDER, 2);
-        commonDrops.add(Drop12);
-        ItemStack Drop13 = new ItemStack(Material.SCUTE);
-        commonDrops.add(Drop13);
-        ItemStack Drop14 = new ItemStack(Material.COBWEB, 1);
-        commonDrops.add(Drop14);
-        ItemStack Drop15 = new ItemStack(Material.APPLE);
-        commonDrops.add(Drop15);
+        commonDrops.add(new ItemStack(Material.EXPERIENCE_BOTTLE, 3));
+
+        commonDrops.add(new ItemStack(Material.TNT, 1));
+        commonDrops.add(new ItemStack(Material.STICK, 2));
+        commonDrops.add(new ItemStack(Material.STRING, 2));
+        commonDrops.add(new ItemStack(Material.ARROW, 4));
+        commonDrops.add(new ItemStack(Material.BOOK , 2));
+        commonDrops.add(new ItemStack(Material.IRON_INGOT, 1));
+        commonDrops.add(new ItemStack(Material.GOLD_NUGGET, 2));
+        commonDrops.add(new ItemStack(Material.AMETHYST_SHARD, 2));
+        commonDrops.add(new ItemStack(Material.GUNPOWDER, 2));
+        commonDrops.add(new ItemStack(Material.SCUTE));
+        commonDrops.add(new ItemStack(Material.COBWEB, 1));
+        commonDrops.add(new ItemStack(Material.APPLE));
+
+	    ItemStack book = new ItemStack(Material.ENCHANTED_BOOK);
+        EnchantmentStorageMeta BookMeta = (EnchantmentStorageMeta) book.getItemMeta();
+        BookMeta.addStoredEnchant(EnchantmentBuilder.RandomEnchant(1), 1, false);
+        book.setItemMeta(BookMeta);
+        commonDrops.add(book);
 
         return new ItemStack(commonDrops.get(new Random().nextInt(commonDrops.size())));
     }
@@ -57,44 +61,33 @@ public class Loot {
     public static ItemStack uncommonDrop(){
 
         ArrayList<ItemStack> uncommonDrops = new ArrayList<>();
-        ItemStack Drop1 = new ItemStack(Material.EXPERIENCE_BOTTLE, 6);
-        uncommonDrops.add(Drop1);
-        ItemStack Drop2 = new ItemStack(Material.TNT, 2);
-        uncommonDrops.add(Drop2);
-        ItemStack Drop3 = new ItemStack(Material.GOLD_NUGGET, 4);
-        uncommonDrops.add(Drop3);
-        ItemStack Drop4 = new ItemStack(Material.ENDER_PEARL, 1);
-        uncommonDrops.add(Drop4);
-        ItemStack Drop5 = new ItemStack(Material.STRING, 4);
-        uncommonDrops.add(Drop5);
-        ItemStack Drop6 = new ItemStack(Material.ARROW, 6);
-        uncommonDrops.add(Drop6);
-        ItemStack Drop7 = new ItemStack(Material.ENCHANTED_BOOK);
+        
+        uncommonDrops.add(new ItemStack(Material.EXPERIENCE_BOTTLE, 6));
+        uncommonDrops.add(new ItemStack(Material.TNT, 2));
+        uncommonDrops.add(new ItemStack(Material.GOLD_NUGGET, 4));
+        uncommonDrops.add(new ItemStack(Material.ENDER_PEARL, 1));
+        uncommonDrops.add(new ItemStack(Material.STRING, 4));
+        uncommonDrops.add(new ItemStack(Material.ARROW, 6));
+	    uncommonDrops.add(new ItemStack(Material.BOOK,2));
+        uncommonDrops.add(new ItemStack(Material.IRON_INGOT, 3));
+        uncommonDrops.add(new ItemStack(Material.AMETHYST_SHARD, 4));
+        uncommonDrops.add(new ItemStack(Material.SCUTE, 4));
+        uncommonDrops.add(new ItemStack(Material.GUNPOWDER, 4));
+        uncommonDrops.add(new ItemStack(Material.COBWEB, 2));
+        uncommonDrops.add(new ItemStack(Material.STONE_SWORD));
+	    uncommonDrops.add(new ItemStack(Material.APPLE, 2));
+
+	    ItemStack Drop7 = new ItemStack(Material.ENCHANTED_BOOK);
         EnchantmentStorageMeta BookMeta = (EnchantmentStorageMeta) Drop7.getItemMeta();
-        BookMeta.addStoredEnchant(EnchantmentBuilder.RandomEnchant(), 2, false);
+        BookMeta.addStoredEnchant(EnchantmentBuilder.RandomEnchant(1), 2, false);
         Drop7.setItemMeta(BookMeta);
         uncommonDrops.add(Drop7);
-        ItemStack Drop8 = new ItemStack(Material.BOOK,2);
-        uncommonDrops.add(Drop8);
-        ItemStack Drop9 = new ItemStack(Material.IRON_INGOT, 3);
-        uncommonDrops.add(Drop9);
-        ItemStack Drop10 = new ItemStack(Material.AMETHYST_SHARD, 4);
-        uncommonDrops.add(Drop10);
-        ItemStack Drop11 = new ItemStack(Material.SCUTE, 4);
-        uncommonDrops.add(Drop11);
-        ItemStack Drop12 = new ItemStack(Material.GUNPOWDER, 4);
-        uncommonDrops.add(Drop12);
-        ItemStack Drop13 = new ItemStack(Material.COBWEB, 2);
-        uncommonDrops.add(Drop13);
-        ItemStack Drop14 = new ItemStack(Material.STONE_SWORD);
-        uncommonDrops.add(Drop14);
+
         ItemStack rod = new ItemStack(Material.FISHING_ROD);
         ItemMeta rodMeta = rod.getItemMeta();
         rodMeta.addEnchant(Enchantment.DURABILITY, 1, false);
         rod.setItemMeta(rodMeta);
         uncommonDrops.add(rod);
-        ItemStack Drop15 = new ItemStack(Material.APPLE, 2);
-        uncommonDrops.add(Drop15);
 
         return new ItemStack(uncommonDrops.get(new Random().nextInt(uncommonDrops.size())));
     }
@@ -118,7 +111,7 @@ public class Loot {
         epicDrops.add(Drop5);
         ItemStack Drop6 = new ItemStack(Material.ENCHANTED_BOOK);
         EnchantmentStorageMeta EnchantMeta = (EnchantmentStorageMeta) Drop6.getItemMeta();
-        EnchantMeta.addStoredEnchant(EnchantmentBuilder.RandomEnchant(), 3, false);
+        EnchantMeta.addStoredEnchant(EnchantmentBuilder.RandomEnchant(1), 3, false);
         Drop6.setItemMeta(EnchantMeta);
         epicDrops.add(Drop6);
         ItemStack Drop7 = new ItemStack(Material.IRON_SWORD);
@@ -165,21 +158,17 @@ public class Loot {
         legendaryDrops.add(Drop3);
         ItemStack Drop4 = new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 1);
         legendaryDrops.add(Drop4);
-        ItemStack Drop5 = new ItemStack(SpecialResources.ErfahrenFragment());
-        ItemStack Drop6 = new ItemStack(SpecialResources.SciFiFragment());
-        ItemStack Drop7 = new ItemStack(SpecialResources.KlebrigFragment());
-        ItemStack Drop8 = new ItemStack(SpecialResources.ExplosivPuder());
-        legendaryDrops.add(Drop5);
-        legendaryDrops.add(Drop6);
-        legendaryDrops.add(Drop7);
-        legendaryDrops.add(Drop8);
+        legendaryDrops.add(SpecialResources.SciFiFragment(1));
+        legendaryDrops.add(SpecialResources.KlebrigFragment(1));
+        legendaryDrops.add(SpecialResources.ExplosivPuder(1));
+        legendaryDrops.add(SpecialResources.ErfahrenFragment(1));
         legendaryDrops.add(new ItemStack(Material.APPLE, 3));
         legendaryDrops.add(new ItemStack(Material.COBWEB, 6));
         legendaryDrops.add(new ItemStack(Material.BOOK, 5));
 
         ItemStack Drop9 = new ItemStack(Material.ENCHANTED_BOOK);
         EnchantmentStorageMeta EnchantMeta = (EnchantmentStorageMeta) Drop9.getItemMeta();
-        EnchantMeta.addStoredEnchant(EnchantmentBuilder.RandomEnchant(), 3, false);
+        EnchantMeta.addStoredEnchant(EnchantmentBuilder.RandomEnchant(1), 3, false);
         Drop9.setItemMeta(EnchantMeta);
         legendaryDrops.add(Drop9);
 
@@ -208,17 +197,13 @@ public class Loot {
         mythicDrops.add(Drop3);
         ItemStack Drop4 = new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 3);
         mythicDrops.add(Drop4);
-        ItemStack Drop5 = new ItemStack(SpecialResources.ErfahrenFragment().getType(), 3);
-        ItemStack Drop6 = new ItemStack(SpecialResources.SciFiFragment().getType(), 3);
-        ItemStack Drop7 = new ItemStack(SpecialResources.KlebrigFragment().getType(), 3);
-        ItemStack Drop8 = new ItemStack(SpecialResources.ExplosivPuder().getType(), 3);
-        mythicDrops.add(Drop5);
-        mythicDrops.add(Drop6);
-        mythicDrops.add(Drop7);
-        mythicDrops.add(Drop8);
+        mythicDrops.add(SpecialResources.ErfahrenFragment(3));
+        mythicDrops.add(SpecialResources.ExplosivPuder(3));
+        mythicDrops.add(SpecialResources.KlebrigFragment(3));
+        mythicDrops.add(SpecialResources.SciFiFragment(3));
         ItemStack Drop9 = new ItemStack(Material.ENCHANTED_BOOK);
         EnchantmentStorageMeta EnchantMeta = (EnchantmentStorageMeta) Drop9.getItemMeta();
-        EnchantMeta.addStoredEnchant(EnchantmentBuilder.RandomMythicEnchant(), 5, false);
+        EnchantMeta.addStoredEnchant(EnchantmentBuilder.RandomEnchant(5), 5, false);
         Drop9.setItemMeta(EnchantMeta);
         mythicDrops.add(Drop9);
         ItemStack Drop10 = new ItemStack(Material.POTION);

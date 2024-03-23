@@ -1,48 +1,47 @@
 package plugin;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.plugin.java.JavaPlugin;
-import plugin.LootSystem.CrateEntities.CrateDeathEvent;
-import plugin.LootSystem.CrateEntities.CrateHitEvent;
-import plugin.LootSystem.CrateEntities.Crates;
-import plugin.commands.DatabaseUsing.CrateStatsCommand;
 import plugin.commands.DatabaseUsing.PerkCommand;
+import plugin.commands.DatabaseUsing.StatsCommand;
 import plugin.commands.DatabaseUsing.TopCommand;
 import plugin.commands.DatabaseUsing.XPCommand;
 import plugin.commands.FunCommands.SignCommand;
 import plugin.commands.FunCommands.UwUCommand;
 import plugin.commands.InventoryCommands.CommonInventories.AnvilCommand;
 import plugin.commands.InventoryCommands.CommonInventories.EnderchestCommand;
+import plugin.commands.InventoryCommands.CommonInventories.SmithingTableCommand;
 import plugin.commands.InventoryCommands.CommonInventories.TrashCommand;
 import plugin.commands.InventoryCommands.GUIs.KitCommand;
 import plugin.commands.InventoryCommands.GUIs.RezeptCommand;
 import plugin.commands.InventoryCommands.GUIs.RezepteCommand;
 import plugin.commands.InventoryCommands.GUIs.SpecialitemCommand;
-import plugin.commands.ModerationsCommands.InfoCommand;
+import plugin.commands.InventoryCommands.CommonInventories.WorkbenchCommand;
 import plugin.commands.ModerationsCommands.InvseeCommand;
 import plugin.commands.ModerationsCommands.VanishCommand;
 import plugin.commands.QoLCommands.*;
-import plugin.db.Database;
+import plugin.cratesystem.CrateEntities.CrateDeathEvent;
+import plugin.cratesystem.CrateEntities.CrateHitEvent;
+import plugin.cratesystem.CrateEntities.Crate;
+import plugin.cratesystem.SpawnCrateCommand;
+import plugin.database.Database;
 import plugin.events.BlockEvents.BlockEvents;
 import plugin.events.ExplosionEvents.ExplodeEvent;
+import plugin.events.InventoryEvents.CandleClickEvent;
 import plugin.events.InventoryEvents.ClickEvent;
 import plugin.events.InventoryEvents.InfobarClick;
+import plugin.events.InventoryEvents.PerkClickEvent;
 import plugin.events.InventoryEvents.Rezepte.RezeptClickEvent;
-import plugin.events.PlayerOrEntityEvents.Interactions.ChatEvent;
-import plugin.events.PlayerOrEntityEvents.Interactions.DropEvent;
-import plugin.events.PlayerOrEntityEvents.Interactions.JoinEvent;
-import plugin.events.PlayerOrEntityEvents.Interactions.RightClickEvent;
-import plugin.events.PlayerOrEntityEvents.PvP.PlayerDeathEvent;
-import plugin.events.PlayerOrEntityEvents.PvP.PlayerFishingEvent;
-import plugin.events.PlayerOrEntityEvents.PvP.PlayerGetHitEvent;
-import plugin.events.PlayerOrEntityEvents.PvP.ProjectileHitEvent;
-import plugin.utils.Infobar.InfobarCommand;
-import plugin.utils.Recipes.Erfahrenrezepte;
-import plugin.utils.Recipes.ExplosivRezepte;
-import plugin.utils.Recipes.KlebrigRezepte;
-import plugin.utils.Recipes.SciFiRezepte;
+import plugin.events.PlayerOrEntityEvents.Interactions.*;
+import plugin.events.PlayerOrEntityEvents.PvP.*;
+import plugin.infobar.InfobarCommand;
+import plugin.utils.Recipes.*;
+import plugin.utils.Scores.ScoreBoardBuilder;
 import plugin.utils.Scores.TablistManager;
+import plugin.utils.essentials.PassiveHealing;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -76,13 +75,26 @@ public final class Main extends JavaPlugin{
             System.out.println("\u001B[31m Mögliche Quellen: Falsche Tabellen, Datenbank abgeschalten");
             e.printStackTrace();
         }
-        
-                getServer().getWorlds()
-                        .forEach(world -> world.getEntitiesByClass(ArmorStand.class).stream()
-                                .filter(entity -> (Objects.equals(entity.getCustomName(), "§x§F§F§E§2§5§9N§x§F§F§D§E§5§8a§x§F§F§D§A§5§8c§x§F§F§D§5§5§7h§x§F§F§D§1§5§7s§x§F§F§C§D§5§6c§x§F§F§C§9§5§6h§x§F§F§C§5§5§5u§x§F§F§C§0§5§4b§x§F§F§B§C§5§4s§x§F§F§B§8§5§3k§x§F§F§B§4§5§3i§x§F§F§A§F§5§2s§x§F§F§A§B§5§2t§x§F§F§A§7§5§1e §8» §7???")))
-                                .forEach(Crates::startRotation)
+        getServer().getWorlds()
+                .forEach(world -> world.getEntitiesByClass(ArmorStand.class).stream().
+                                filter(entity -> (Objects.equals(entity.getCustomName(), "§x§F§F§E§2§5§9N§x§F§F§D§E§5§8a§x§F§F§D§A§5§8c§x§F§F§D§5§5§7h§x§F§F§D§1§5§7s§x§F§F§C§D§5§6c§x§F§F§C§9§5§6h§x§F§F§C§5§5§5u§x§F§F§C§0§5§4b§x§F§F§B§C§5§4s§x§F§F§B§8§5§3k§x§F§F§B§4§5§3i§x§F§F§A§F§5§2s§x§F§F§A§B§5§2t§x§F§F§A§7§5§1e §8» §7???")))
+                                .forEach(Crate::startRotation)
                         );
 
+        getServer().getOnlinePlayers().forEach(player -> Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+            @Override
+            public void run() {
+                PassiveHealing.start(player);
+            }
+        }, 0, 3 * 20));
+
+        getServer().getOnlinePlayers().forEach(player -> {
+            try {
+                player.setScoreboard(ScoreBoardBuilder.Scoreboard(getDatabase().findPlayerStatsByUUID(String.valueOf(player.getUniqueId())), player));
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         //Adding all Special Recipes (Sci-Fi, Erfahren, Klebrig & Explosiv)
         Bukkit.addRecipe(Erfahrenrezepte.Recipe1());
@@ -90,12 +102,10 @@ public final class Main extends JavaPlugin{
         Bukkit.addRecipe(Erfahrenrezepte.Recipe3());
         Bukkit.addRecipe(Erfahrenrezepte.Recipe4());
         Bukkit.addRecipe(Erfahrenrezepte.Recipe5());
-        Bukkit.addRecipe(Erfahrenrezepte.Recipe6());
         Bukkit.addRecipe(SciFiRezepte.Recipe1());
         Bukkit.addRecipe(SciFiRezepte.Recipe2());
         Bukkit.addRecipe(SciFiRezepte.Recipe3());
         Bukkit.addRecipe(SciFiRezepte.Recipe4());
-        Bukkit.addRecipe(SciFiRezepte.Recipe5());
         Bukkit.addRecipe(SciFiRezepte.Recipe6());
         Bukkit.addRecipe(KlebrigRezepte.Recipe1());
         Bukkit.addRecipe(KlebrigRezepte.Recipe2());
@@ -106,6 +116,11 @@ public final class Main extends JavaPlugin{
         Bukkit.addRecipe(ExplosivRezepte.Recipe2());
         Bukkit.addRecipe(ExplosivRezepte.Recipe3());
         Bukkit.addRecipe(ExplosivRezepte.Recipe4());
+        Bukkit.addRecipe(CandleRecipes.healCandle());
+        Bukkit.addRecipe(CandleRecipes.boostCandle());
+        Bukkit.addRecipe(CandleRecipes.crateCandle());
+        Bukkit.addRecipe(CandleRecipes.teleportCandle());
+        Bukkit.addRecipe(CandleRecipes.superRecipe());
 
         //events
         getServer().getPluginManager().registerEvents(new ClickEvent(), this);
@@ -123,15 +138,20 @@ public final class Main extends JavaPlugin{
         getServer().getPluginManager().registerEvents(new PlayerFishingEvent(), this);
         getServer().getPluginManager().registerEvents(new CrateHitEvent(), this);
         getServer().getPluginManager().registerEvents(new InfobarClick(this), this);
-
+        getServer().getPluginManager().registerEvents(new PerkClickEvent(this), this);
+        getServer().getPluginManager().registerEvents(new MoveEvent(), this);
+        getServer().getPluginManager().registerEvents(new AnvilEvent(), this);
+        getServer().getPluginManager().registerEvents(new CandleClickEvent(), this);
+        getServer().getPluginManager().registerEvents(new PlayerRepairEvent(), this);
+        getServer().getPluginManager().registerEvents(new PlayerDamageEvent(), this);
+        getServer().getPluginManager().registerEvents(new LeaveEvent(), this);
 
         //commands
         Objects.requireNonNull(getCommand("heal")).setExecutor(new HealCommand());
-        Objects.requireNonNull(getCommand("feed")).setExecutor(new FeedCommand());
         Objects.requireNonNull(getCommand("kit")).setExecutor(new KitCommand());
         Objects.requireNonNull(getCommand("sign")).setExecutor(new SignCommand());
         Objects.requireNonNull(getCommand("fix")).setExecutor(new FixCommand());
-        Objects.requireNonNull(getCommand("uwu")).setExecutor(new UwUCommand(this));
+        Objects.requireNonNull(getCommand("uwu")).setExecutor(new UwUCommand());
         Objects.requireNonNull(getCommand("invsee")).setExecutor(new InvseeCommand(this));
         Objects.requireNonNull(getCommand("spawn")).setExecutor(new SpawnCommand());
         Objects.requireNonNull(getCommand("ec")).setExecutor(new EnderchestCommand());
@@ -140,16 +160,17 @@ public final class Main extends JavaPlugin{
         Objects.requireNonNull(getCommand("specialitems")).setExecutor(new SpecialitemCommand());
         Objects.requireNonNull(getCommand("vanish")).setExecutor(new VanishCommand(this));
         Objects.requireNonNull(getCommand("rezepte")).setExecutor(new RezepteCommand());
-        Objects.requireNonNull(getCommand("playerinfo")).setExecutor(new InfoCommand());
+        Objects.requireNonNull(getCommand("stats")).setExecutor(new StatsCommand(this));
         Objects.requireNonNull(getCommand("xp")).setExecutor(new XPCommand(this));
         Objects.requireNonNull(getCommand("rezept")).setExecutor(new RezeptCommand());
         Objects.requireNonNull(getCommand("trash")).setExecutor(new TrashCommand());
         Objects.requireNonNull(getCommand("modify")).setExecutor(new ModifyCommand());
-        Objects.requireNonNull(getCommand("cratestats")).setExecutor(new CrateStatsCommand(this));
         Objects.requireNonNull(getCommand("top")).setExecutor(new TopCommand(this));
         Objects.requireNonNull(getCommand("perks")).setExecutor(new PerkCommand(this));
         Objects.requireNonNull(getCommand("infobar")).setExecutor(new InfobarCommand(this));
-        Objects.requireNonNull(getCommand("crate")).setExecutor(new SpawnArmorstandCommand());
+        Objects.requireNonNull(getCommand("crate")).setExecutor(new SpawnCrateCommand());
+        Objects.requireNonNull(getCommand("smithingtable")).setExecutor(new SmithingTableCommand());
+
 
     }
     public static Main getInstance(){
@@ -161,6 +182,10 @@ public final class Main extends JavaPlugin{
 
     @Override
     public void onDisable() {
+
+        for(Block block : BlockEvents.blocks){
+            block.setType(Material.AIR);
+        }
 
     }
 }

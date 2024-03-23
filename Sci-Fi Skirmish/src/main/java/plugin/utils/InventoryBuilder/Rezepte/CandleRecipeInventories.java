@@ -15,13 +15,13 @@ public class CandleRecipeInventories {
 
         Inventory inventory = RecipeInventory.emptyInventory(p, e, a);
         inventory.setItem(11, Candles.boostCandle());
-        inventory.setItem(12, SpecialResources.ErfahrenBarren());
+        inventory.setItem(12, SpecialResources.ErfahrenBarren(1));
         inventory.setItem(13, Candles.crateCandle());
-        inventory.setItem(20, SpecialResources.KlebrigBarren());
+        inventory.setItem(20, SpecialResources.KlebrigBarren(1));
         inventory.setItem(21, Candles.emptyCandle());
-        inventory.setItem(22, SpecialResources.SciFiBarren());
+        inventory.setItem(22, SpecialResources.SciFiBarren(1));
         inventory.setItem(29, Candles.teleportCandle());
-        inventory.setItem(30, SpecialResources.ExplosivBarren());
+        inventory.setItem(30, SpecialResources.ExplosivBarren(1));
         inventory.setItem(31, Candles.boostCandle());
 
         return inventory;

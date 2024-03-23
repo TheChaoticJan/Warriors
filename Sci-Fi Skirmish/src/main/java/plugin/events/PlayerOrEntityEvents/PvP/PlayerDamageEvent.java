@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import plugin.Main;
@@ -34,6 +35,7 @@ public class PlayerDamageEvent implements Listener{
             if (player.getItemInHand().getType() != Material.AIR) {
                 if (player.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "Combohoe")) && cooldownMap.get(player).equals(false)) {
                     cooldownMap.put(player, true);
+                    ItemStack stack = player.getInventory().getItemInMainHand();
                     Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> cooldownMap.put(player, false), 5);
                     if (countMap.get(player) < 7) {
                         countMap.put(player, 1 + countMap.get(player));

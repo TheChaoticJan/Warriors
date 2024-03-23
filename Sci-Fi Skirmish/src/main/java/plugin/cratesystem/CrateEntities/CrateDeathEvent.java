@@ -44,7 +44,7 @@ public class CrateDeathEvent implements Listener {
                     i--;
                 }
 
-                Crates.spawnArmorstand(event.getEntity(), event.getEntity().getLocation().getBlockX(), event.getEntity().getLocation().getBlockY(), event.getEntity().getLocation().getBlockZ());
+                new Crate(event.getEntity(), event.getEntity().getLocation().getBlockX(), event.getEntity().getLocation().getBlockY(), event.getEntity().getLocation().getBlockZ());
 
             }, 20 * 30);
 
@@ -58,7 +58,7 @@ public class CrateDeathEvent implements Listener {
 
                     if (stats == null) {
 
-                        stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "", 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, "", false, false, false,false, false, false, 1,2, 3);
+                        stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "", 0, 0,   0, 0, 0, 0, 0, 0, "", false, false, false,false, false, false, 1,2, 3);
 
                         this.plugin.getDatabase().createPlayerStats(stats);
 
