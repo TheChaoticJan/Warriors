@@ -4,17 +4,15 @@ import lombok.Getter;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import plugin.cratesystem.CrateEntities.Crate;
 import plugin.utils.ItemBuilder.SpecialResources;
 
-import java.awt.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 public class Loot {
@@ -48,12 +46,8 @@ public class Loot {
         commonDrops.add(new ItemStack(Material.SCUTE));
         commonDrops.add(new ItemStack(Material.COBWEB, 1));
         commonDrops.add(new ItemStack(Material.APPLE));
-
-	    ItemStack book = new ItemStack(Material.ENCHANTED_BOOK);
-        EnchantmentStorageMeta BookMeta = (EnchantmentStorageMeta) book.getItemMeta();
-        BookMeta.addStoredEnchant(EnchantmentBuilder.RandomEnchant(1), 1, false);
-        book.setItemMeta(BookMeta);
-        commonDrops.add(book);
+        CrateBook book = new CrateBook(false, 1);
+        commonDrops.add(book.getBook());
 
         return new ItemStack(commonDrops.get(new Random().nextInt(commonDrops.size())));
     }
@@ -77,11 +71,8 @@ public class Loot {
         uncommonDrops.add(new ItemStack(Material.STONE_SWORD));
 	    uncommonDrops.add(new ItemStack(Material.APPLE, 2));
 
-	    ItemStack Drop7 = new ItemStack(Material.ENCHANTED_BOOK);
-        EnchantmentStorageMeta BookMeta = (EnchantmentStorageMeta) Drop7.getItemMeta();
-        BookMeta.addStoredEnchant(EnchantmentBuilder.RandomEnchant(1), 2, false);
-        Drop7.setItemMeta(BookMeta);
-        uncommonDrops.add(Drop7);
+	    CrateBook book = new CrateBook(false, 2);
+        uncommonDrops.add(book.getBook());
 
         ItemStack rod = new ItemStack(Material.FISHING_ROD);
         ItemMeta rodMeta = rod.getItemMeta();
@@ -109,12 +100,10 @@ public class Loot {
         BowMeta.addEnchant(Enchantment.DURABILITY, 2, true);
         Drop5.setItemMeta(BowMeta);
         epicDrops.add(Drop5);
-        ItemStack Drop6 = new ItemStack(Material.ENCHANTED_BOOK);
-        EnchantmentStorageMeta EnchantMeta = (EnchantmentStorageMeta) Drop6.getItemMeta();
-        EnchantMeta.addStoredEnchant(EnchantmentBuilder.RandomEnchant(1), 3, false);
-        Drop6.setItemMeta(EnchantMeta);
-        epicDrops.add(Drop6);
+        CrateBook book = new CrateBook(false, 3);
+        epicDrops.add(book.getBook());
         ItemStack Drop7 = new ItemStack(Material.IRON_SWORD);
+
         ItemMeta SwordMeta = Drop7.getItemMeta();
         SwordMeta.addEnchant(Enchantment.DURABILITY, 3, true);
         SwordMeta.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
@@ -166,11 +155,8 @@ public class Loot {
         legendaryDrops.add(new ItemStack(Material.COBWEB, 6));
         legendaryDrops.add(new ItemStack(Material.BOOK, 5));
 
-        ItemStack Drop9 = new ItemStack(Material.ENCHANTED_BOOK);
-        EnchantmentStorageMeta EnchantMeta = (EnchantmentStorageMeta) Drop9.getItemMeta();
-        EnchantMeta.addStoredEnchant(EnchantmentBuilder.RandomEnchant(1), 3, false);
-        Drop9.setItemMeta(EnchantMeta);
-        legendaryDrops.add(Drop9);
+        CrateBook book = new CrateBook(false, 3);
+        legendaryDrops.add(book.getBook());
 
         ItemStack Drop10 = new ItemStack(Material.POTION);
         PotionMeta potionMeta = (PotionMeta) Drop10.getItemMeta();
@@ -201,11 +187,10 @@ public class Loot {
         mythicDrops.add(SpecialResources.ExplosivPuder(3));
         mythicDrops.add(SpecialResources.KlebrigFragment(3));
         mythicDrops.add(SpecialResources.SciFiFragment(3));
-        ItemStack Drop9 = new ItemStack(Material.ENCHANTED_BOOK);
-        EnchantmentStorageMeta EnchantMeta = (EnchantmentStorageMeta) Drop9.getItemMeta();
-        EnchantMeta.addStoredEnchant(EnchantmentBuilder.RandomEnchant(5), 5, false);
-        Drop9.setItemMeta(EnchantMeta);
-        mythicDrops.add(Drop9);
+
+        CrateBook book = new CrateBook(true, 4);
+        mythicDrops.add(book.getBook());
+
         ItemStack Drop10 = new ItemStack(Material.POTION);
         PotionMeta potionMeta = (PotionMeta) Drop10.getItemMeta();
         potionMeta.setDisplayName("§5Stärke");

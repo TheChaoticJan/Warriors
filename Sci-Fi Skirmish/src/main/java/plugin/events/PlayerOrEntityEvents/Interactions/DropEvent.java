@@ -12,5 +12,9 @@ public class DropEvent implements Listener{
        if(e.getItemDrop().getItemStack().getType().equals(Material.SANDSTONE)){
            e.setCancelled(true);
        }
+       if(e.getItemDrop().getItemStack().getType().equals(Material.ENCHANTED_BOOK)){
+           e.getItemDrop().setCustomName(e.getItemDrop().getItemStack().getItemMeta().getDisplayName());
+           e.getItemDrop().setCustomNameVisible(true);
+       }
     }
 }

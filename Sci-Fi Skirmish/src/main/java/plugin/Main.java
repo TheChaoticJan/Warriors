@@ -1,5 +1,6 @@
 package plugin;
 
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -51,12 +52,12 @@ import java.util.UUID;
 public final class Main extends JavaPlugin{
 
     private TablistManager tablistManager;
-    public static Main instance;
+    private static @Getter Main instance;
     public ArrayList<UUID> VanishList = new ArrayList<>();
     public TablistManager getTablistManager() {
         return tablistManager;
     }
-    private Database database;
+    private static @Getter Database database;
 
 
     @Override
@@ -67,7 +68,7 @@ public final class Main extends JavaPlugin{
         instance = this;
 
         try{
-            this.database = new Database();
+            database = new Database();
             database.initiliazeDatabase();
 
         }catch (SQLException e){
@@ -131,7 +132,7 @@ public final class Main extends JavaPlugin{
         getServer().getPluginManager().registerEvents(new ChatEvent(), this );
         getServer().getPluginManager().registerEvents(new ProjectileHitEvent(this), this );
         getServer().getPluginManager().registerEvents(new PlayerDeathEvent(this), this);
-        getServer().getPluginManager().registerEvents(new CrateDeathEvent(this), this);
+        getServer().getPluginManager().registerEvents(new CrateDeathEvent(), this);
         getServer().getPluginManager().registerEvents(new RightClickEvent(this), this);
         getServer().getPluginManager().registerEvents(new RezeptClickEvent(), this);
         getServer().getPluginManager().registerEvents(new DropEvent(), this);
@@ -166,18 +167,12 @@ public final class Main extends JavaPlugin{
         Objects.requireNonNull(getCommand("trash")).setExecutor(new TrashCommand());
         Objects.requireNonNull(getCommand("modify")).setExecutor(new ModifyCommand());
         Objects.requireNonNull(getCommand("top")).setExecutor(new TopCommand(this));
-        Objects.requireNonNull(getCommand("perks")).setExecutor(new PerkCommand(this));
+        Objects.requireNonNull(getCommand("perks")).setExecutor(new PerkCommand());
         Objects.requireNonNull(getCommand("infobar")).setExecutor(new InfobarCommand(this));
         Objects.requireNonNull(getCommand("crate")).setExecutor(new SpawnCrateCommand());
         Objects.requireNonNull(getCommand("smithingtable")).setExecutor(new SmithingTableCommand());
 
 
-    }
-    public static Main getInstance(){
-        return instance;
-    }
-    public Database getDatabase() {
-        return database;
     }
 
     @Override

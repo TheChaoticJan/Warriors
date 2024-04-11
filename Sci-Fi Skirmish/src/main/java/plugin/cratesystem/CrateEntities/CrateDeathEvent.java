@@ -5,8 +5,11 @@ import com.destroystokyo.paper.event.entity.EntityRemoveFromWorldEvent;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Structure;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,11 +23,6 @@ import java.sql.SQLException;
 import java.util.Objects;
 
 public class CrateDeathEvent implements Listener {
-    public CrateDeathEvent(Main plugin) {
-        this.plugin = plugin;
-    }
-
-    Main plugin;
 
     @EventHandler
     public void DeathEvent(EntityRemoveFromWorldEvent event){
@@ -54,19 +52,17 @@ public class CrateDeathEvent implements Listener {
 
                 PlayerStats stats = null;
                 try {
-                     stats = this.plugin.getDatabase().findPlayerStatsByUUID(p.getUniqueId().toString());
+                     stats = Main.getInstance().getDatabase().findPlayerStatsByUUID(p.getUniqueId().toString());
 
                     if (stats == null) {
 
                         stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "", 0, 0,   0, 0, 0, 0, 0, 0, "", false, false, false,false, false, false, 1,2, 3);
-
-                        this.plugin.getDatabase().createPlayerStats(stats);
+                        Main.getInstance().getDatabase().createPlayerStats(stats);
 
                     }
-                }catch (SQLException e1){
+                }catch (SQLException e1) {
                     e1.printStackTrace();
                 }
-
 
                 int x = e.getLocation().getBlockX();
                 double y = e.getLocation().getBlockY() + 1.7;
@@ -76,8 +72,11 @@ public class CrateDeathEvent implements Listener {
                 if(rarity <= 42){
                     p.sendActionBar(MiniMessage.miniMessage().deserialize("<dark_gray><<red>Tot<dark_gray>> " + Texts.get("crate") + " <dark_gray>▸ " + Texts.get("common")));
                     for(int i = (int) (Math.random() * 2) ; i < 2; i++) {
-                        e.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), Loot.commonDrop());
-
+                        Item item = e.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), Loot.commonDrop());
+                        if(item.getItemStack().getType().equals(Material.ENCHANTED_BOOK)) {
+                            item.setCustomName(item.getItemStack().getItemMeta().getDisplayName());
+                            item.setCustomNameVisible(true);
+                        }
                 }
                     Objects.requireNonNull(stats).setCommon_crates(stats.getCommon_crates() + 1);
                     }
@@ -85,7 +84,11 @@ public class CrateDeathEvent implements Listener {
                     p.sendActionBar(MiniMessage.miniMessage().deserialize("<dark_gray><<red>Tot<dark_gray>> " + Texts.get("crate") + " <dark_gray>▸ " + Texts.get("uncommon")));
 
                     for (int i = (int) (Math.random() * 2); i < 2; i++) {
-                        e.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), Loot.uncommonDrop());
+                        Item item = e.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), Loot.uncommonDrop());
+                        if(item.getItemStack().getType().equals(Material.ENCHANTED_BOOK)) {
+                            item.setCustomName(item.getItemStack().getItemMeta().getDisplayName());
+                            item.setCustomNameVisible(true);
+                        }
                     }
                     Objects.requireNonNull(stats).setUncommon_crates(stats.getUncommon_crates() + 1);
                 }
@@ -93,7 +96,11 @@ public class CrateDeathEvent implements Listener {
                     p.sendActionBar(MiniMessage.miniMessage().deserialize("<dark_gray><<red>Tot<dark_gray>> " + Texts.get("crate") + " <dark_gray>▸ " + Texts.get("epic")));
 
                     for (int i = (int) (Math.random() * 3); i < 3; i++) {
-                        e.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), Loot.epicDrop());
+                        Item item =e.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), Loot.epicDrop());
+                        if(item.getItemStack().getType().equals(Material.ENCHANTED_BOOK)) {
+                            item.setCustomName(item.getItemStack().getItemMeta().getDisplayName());
+                            item.setCustomNameVisible(true);
+                        }
                     }
                     Objects.requireNonNull(stats).setEpic_crates(stats.getEpic_crates() + 1);
                 }
@@ -102,7 +109,11 @@ public class CrateDeathEvent implements Listener {
                     p.sendTitle(new Title("§6§kaa §x§D§3§D§F§0§0L§x§D§7§D§2§0§1e§x§D§B§C§4§0§3g§x§D§F§B§7§0§4e§x§E§2§A§9§0§5n§x§E§6§9§C§0§6d§x§E§A§8§E§0§8ä§x§E§E§8§1§0§9r §6§kaa", "§7Nachschub", 3, 35, 3));
 
                     for (int i = (int) (Math.random() * 2); i < 3; i++) {
-                        e.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), Loot.legendaryDrop());
+                        Item item = e.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), Loot.legendaryDrop());
+                        if(item.getItemStack().getType().equals(Material.ENCHANTED_BOOK)) {
+                            item.setCustomName(item.getItemStack().getItemMeta().getDisplayName());
+                            item.setCustomNameVisible(true);
+                        }
                     }
                     Objects.requireNonNull(stats).setRare_crates(stats.getRare_crates() + 1);
                         }
@@ -111,13 +122,17 @@ public class CrateDeathEvent implements Listener {
                     p.sendTitle(new Title("§b§kaa §x§0§0§D§F§C§DM§x§0§1§D§1§B§By§x§0§3§C§4§A§9t§x§0§4§B§6§9§7h§x§0§6§A§9§8§6i§x§0§7§9§B§7§4s§x§0§9§8§E§6§2c§x§0§A§8§0§5§0h §b§kaa", "§7Nachschub", 3, 35, 3));
 
                     for (int i = (int) (Math.random() * 3); i < 5; i++) {
-                        e.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), Loot.mythicDrop());
+                        Item item = e.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), Loot.mythicDrop());
+                        if(item.getItemStack().getType().equals(Material.ENCHANTED_BOOK)) {
+                            item.setCustomName(item.getItemStack().getItemMeta().getDisplayName());
+                            item.setCustomNameVisible(true);
+                        }
                     }
                     Objects.requireNonNull(stats).setMythic_crates(stats.getMythic_crates() + 1);
                 }
 
                 try {
-                    this.plugin.getDatabase().updatePlayerStats(Objects.requireNonNull(stats));
+                    Main.getInstance().getDatabase().updatePlayerStats(Objects.requireNonNull(stats));
                 } catch (SQLException ex) {
                    ex.printStackTrace();
                 }
