@@ -13,14 +13,14 @@ ___
 #### Introductory Part <br>
 [0. Plugin Inspiration](#the-inspiration-and-what-the-plugin-is-for-overall) - Short overview over my Inspiration and Ideas for this plugin <br>
 #### Main Part Contents <br>
-[1. The PvP-System](#u1-the-pvp-systemu) - Short explanation of the PvP-System  and why it is interesting <br> 
-[2. The Ecosystem](#u2-the-ecosystemu) - The Eco- and Cratesystem with short examples <br>
-[3. The Commands](#u3-the-commandsu) - The command names and their usages <br>
-[4. The Specialitems](#u4-the-specialitemsu) - Short explanation for the plugins specialitems <br>
-[5. The Moderation System](#u5-the-moderation-systemu-br) - All about the moderation side of things.
+[1. The PvP-System](#1-the-pvp-system) - Short explanation of the PvP-System  and why it is interesting <br> 
+[2. The Ecosystem](#2-the-ecosystem) - The Eco- and Cratesystem with short examples <br>
+[3. The Commands](#3-the-commands) - The command names and their usages <br>
+[4. The Specialitems](#4-the-specialitems) - Short explanation for the plugins specialitems <br>
+[5. The Moderation System](#5-the-moderation-system) - All about the moderation side of things.
 #### Summary & note of thanks <br>
-[So all in all...](#uso-all-in-allu) - a short summary of everything <br>
-[Note of thanks](#summary--note-of-thanks-br-1) - <3 <br>
+[So all in all...](#so-all-in-all) - a short summary of everything <br>
+[Note of thanks](#note-of-thanks) - <3 
 ---
 ## The inspiration and what the plugin is for overall...
 
@@ -46,7 +46,7 @@ I thought that it was a good and simple mode and way to train coding and learn a
 
 ---
 ## So what does this plugin do then (Overview)?
-### <u>1. The PvP-System</u>
+### <ins>1. The PvP-System</ins>
 As already mentioned earlier in this post, the PvP-System heavily relies on the bug, that made WesternWars so interesting for its
 players.
 So the clue of this system is, that you have to have a full Protection 4 Armor in order to recieve no-Damage. In that way longer fights can develop
@@ -73,7 +73,7 @@ So the PvP System relies on this core mechanic, and then on Bonuses like Potion 
 > 
 > >To get to know more about perks read more about them below, there you can find a detailed explanation to them.
 
-### <u>2. The Ecosystem</u>
+### <ins> 2. The Ecosystem </ins>
 The Ecosystems basic ideas also heavily relies on the idea that 'WesternWars' had in mind, so it  is providet through crates.
 These Crates are spawned at fixed Locations on the Map and contain of different rarities and contents based on those rarities.
 
@@ -122,10 +122,10 @@ server.
 > - enchanted golden apples, making it really easy to fight without for example your helmet
 > - some special Items specific to the player who opened them
 
-### <u>3. The Commands</u> 
+### <ins>3. The Commands</ins> 
 Here is a short list of all commands and what they are doing: <br>
 *Note, that commands, that are for the moderation system are not includet in this part of the Readme, but 
-in the Part that's about the [moderation system](#u5-the-moderation-systemu-br).*
+in the Part that's about the [moderation system](#5-the-moderation-system).*
     
     /specialitems - Provides you with an inventory Gui, that contains of all specialitems
     /stats <Playername> - provides you with the stats of the providet player
@@ -138,18 +138,18 @@ in the Part that's about the [moderation system](#u5-the-moderation-systemu-br).
     /xp einzahlen <amount> - lets you deposit the given amount of experience to you account
     
 
-### <u>4. The Specialitems</u>
-First of all, you can look up every single Special Item using the ``/specialitems``-command [(commands)](#u3-the-commandsu-) .
+### <ins>4. The Specialitems</ins>
+First of all, you can look up every single Special Item using the ``/specialitems``-command [(commands)](#3-the-commands-) .
 
-### <u>5. The moderation system</u> <br>
+### <ins>5. The moderation system</ins>
 This part is all about the part of the plugin, that goes on behind the scenes, the moderating side of things, so that team members
 are able, to help people and also keep a nice and good feeling around their server.
 
 --- 
 ## Summary & Note of thanks <br>
-### <u>So all in all...</u>
+### <ins>So all in all...</ins>
 To be written soon...
-### <u>Note of thanks </u>
+### <ins>Note of thanks </ins>
 A Big thanks goes to a lot of people, who helped me in the process, finding ideas, keeping me motivated, 
 helping me making my code better and so much more...
 So with that said a <b>huge</b> thanks goes to... <br>
