@@ -9,6 +9,17 @@ ___
 	since I am currently still learning, also learning java
 ---
 
+## Table of Contents:
+#### Introductory Part <br>
+[0. Plugin Inspiration](#the-inspiration-and-what-the-plugin-is-for-overall) - Short overview over my Inspiration and Ideas for this plugin <br>
+#### Main Part Contents <br>
+[1. The PvP-System](#u1-the-pvp-systemu) - Short explanation of the PvP-System  and why it is interesting <br> 
+[2. The Ecosystem](#u2-the-ecosystemu) - The Eco- and Cratesystem with short examples <br>
+[3. The Commands](#u3-the-commandsu) - The command names and their usages <br>
+[4. The Specialitems](#u4-the-specialitemsu) - Short explanation for the plugins specialitems <br>
+#### Summary & note of thanks <br>
+[So all in all...](#uso-all-in-allu) - a short summary of everything <br>
+[Note of thanks](#summary--note-of-thanks-br) - <3 <br>
 ## The inspiration and what the plugin is for overall...
 
 This plugins Idea is heavily inspired by an former gamemode on the German ``Mixelpixel.net`` network, called *"WesternWars"*
@@ -33,7 +44,7 @@ I thought that it was a good and simple mode and way to train coding and learn a
 
 ---
 ## So what does this plugin do then (Overview)?
-### 1. The PvP-System
+### <u>1. The PvP-System</u>
 As already mentioned earlier in this post, the PvP-System heavily relies on the bug, that made WesternWars so interesting for its
 players.
 So the clue of this system is, that you have to have a full Protection 4 Armor in order to recieve no-Damage. In that way longer fights can develop
@@ -60,7 +71,7 @@ So the PvP System relies on this core mechanic, and then on Bonuses like Potion 
 > 
 > >To get to know more about perks read more about them below, there you can find a detailed explanation to them.
 
-### 2. The Ecosystem
+### <u>2. The Ecosystem</u>
 The Ecosystems basic ideas also heavily relies on the idea that 'WesternWars' had in mind, so it  is providet through crates.
 These Crates are spawned at fixed Locations on the Map and contain of different rarities and contents based on those rarities.
 
@@ -94,5 +105,42 @@ server.
 >
 > So epic crates are the perfect balance of "interesting loot" and "amount of spawning"
 > ### Legendary Crates (9% of Crates)
+> Legendary crates are designed to be a pretty rare but powerful change in the common behaviour of
+> farming crates.
+> They contain of all of the above and also...
+> - ...The first maxed out enchanted Books
+> - ...The first Potions (Potion of Speed II)
+> - ...Golden Apples, to make fighting without  a full armor equipped possible
+>    / easier
 > ### Mythic Crates (2% of Crates)
-> 
+> Mythic crates are the rarest of all crates. Therefore they consist of the
+> best possible Loot, that could be there
+> For example they contain of...
+> - only maxed out enchanted Books, also they are the only Crates to contain Mending Books
+> - enchanted golden apples, making it really easy to fight without for example your helmet
+> - some special Items specific to the player who opened them
+
+### <u>3. The Commands</u>
+
+### <u>4. The Specialitems</u>
+First of all, you can look up every single Special Item using the ``/specialitems``-command.
+
+## Summary & Note of thanks <br>
+### <u>So all in all...</u>
+### <u>Note of thanks </u>
+A Big thanks goes to a lot of people, who helped me in the process, finding ideas, keeping me motivated, 
+helping me making my code better and so much more...
+So with that said a <b>huge</b> thanks goes to... <br>
+``Affen_Herzog`` <br>
+``Thunderdeus_XD``<br>
+``_LMEmi``<br>
+``DieSeelenlose``<br>
+``Klysma``<br>
+``TheReidenS``<br>
+``MarciWay``<br>
+``nichtkinq``<br>
+``Hansi159``<br>
+``jookobo``<br>
+``Shildii``<br>
+<br>
+You all are just really really nice guys, thanks for all you did and especially for your help in this plugin of course! <3 
