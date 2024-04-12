@@ -1,4 +1,4 @@
-package plugin.events.PlayerOrEntityEvents.Interactions;
+package plugin.events.PlayerOrEntityEvents.interactions;
 
 import com.destroystokyo.paper.Title;
 import net.kyori.adventure.text.minimessage.MiniMessage;

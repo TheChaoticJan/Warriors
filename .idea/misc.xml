@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="EntryPointsManager">
-    <list size="1">
+    <list size="2">
       <item index="0" class="java.lang.String" itemvalue="org.bukkit.event.EventHandler" />
+      <item index="1" class="java.lang.String" itemvalue="net.md_5.bungee.event.EventHandler" />
     </list>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
@@ -14,11 +15,15 @@
         <option value="$PROJECT_DIR$/Sci-Fi-Skirmish-main/Sci-Fi Skirmish/1/JansParadise/pom.xml" />
         <option value="$PROJECT_DIR$/Sci-Fi Skirmish/pom.xml" />
         <option value="$PROJECT_DIR$/Sci-Fi Skirmish/Specialtitems/pom.xml" />
+        <option value="$PROJECT_DIR$/Sci-Fi Skirmish/test/pom.xml" />
+        <option value="$PROJECT_DIR$/Sci-Fi Skirmish/untitled/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/Sci-Fi Skirmish/Specialtitems/pom.xml" />
+        <option value="$PROJECT_DIR$/Sci-Fi Skirmish/test/pom.xml" />
+        <option value="$PROJECT_DIR$/Sci-Fi Skirmish/untitled/pom.xml" />
       </set>
     </option>
   </component>

@@ -1,4 +1,4 @@
-package plugin.events.PlayerOrEntityEvents.Interactions;
+package plugin.events.PlayerOrEntityEvents.interactions;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

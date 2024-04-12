@@ -1,5 +1,6 @@
-package plugin.events.PlayerOrEntityEvents.Interactions;
+package plugin.events.PlayerOrEntityEvents.interactions;
 
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,7 +12,7 @@ public class LeaveEvent implements Listener{
 
     @EventHandler
     public static void quitEvent(PlayerQuitEvent event){
-        event.setQuitMessage("§8[§c-§8] §f" + event.getPlayer().getName());
+        event.quitMessage(MiniMessage.miniMessage().deserialize("<hover:show_text:'<red>Serverleave :('><dark_gray><<red>-<dark_gray>><reset> " + event.getPlayer().getName()));
         if(Main.getInstance().VanishList.contains(event.getPlayer().getUniqueId())){
             Main.getInstance().VanishList.remove(event.getPlayer());
             for(Player people : Bukkit.getOnlinePlayers()){
