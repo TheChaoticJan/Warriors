@@ -15,6 +15,11 @@ public class CombatLogger {
     private static final HashMap<Player, Player> inCombatWithMap = new HashMap<>();
 
     public static void setInCombat(Player combat1, Player combat2){
+
+        if(combat1 == combat2){
+            return;
+        }
+
         try {
         inCombatMap.add(combat1);
         inCombatMap.add(combat2);

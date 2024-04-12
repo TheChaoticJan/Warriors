@@ -96,7 +96,10 @@ public class SpecialItemInventories {
                 inventory.setItem(11, Vampirisch.EssenceBow(player));
                 inventory.setItem(12, Vampirisch.VampireCrown(player));
             }
-            case "berserker" -> inventory.setItem(10, Berserker.Axe(player));
+            case "berserker" -> {
+                inventory.setItem(10, Berserker.Axe(player));
+                inventory.setItem(11, Berserker.Tracker());
+            }
             case "erfahren" -> {
                 inventory.setItem(10, SpecialResources.ErfahrenFragment(1));
                 inventory.setItem(11, SpecialResources.ErfahrenBarren(1));

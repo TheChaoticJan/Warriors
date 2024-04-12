@@ -161,6 +161,8 @@ public class ChatEvent implements Listener{
         return;
     }
 
+    
+
     private static String replaceChars(String string){
 
         return string

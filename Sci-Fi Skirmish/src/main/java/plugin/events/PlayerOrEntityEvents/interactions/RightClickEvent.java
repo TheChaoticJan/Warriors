@@ -7,6 +7,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.CompassMeta;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import plugin.Main;
 import plugin.cratesystem.Loot;
@@ -41,6 +44,17 @@ public class RightClickEvent implements Listener{
 
         if(p.getItemInHand().getType().equals(Material.AIR)){
             return;
+        }
+
+        if(p.getItemInHand().getType().equals(Material.COMPASS) && p.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "tracker"))){
+            Player nearest = getNearestPlayer(p);
+            p.setCompassTarget(nearest.getLocation());
+
+            ItemMeta meta = p.getItemInHand().getItemMeta();
+            meta.displayName(MiniMessage.miniMessage().deserialize("<i:false><b><gradient:#6a3e0a:#9d2323:#e5e814>Tracker <dark_gray><b>▸ <red>" + getNearestPlayer(p).getName()));
+            p.getItemInHand().setItemMeta(meta);
+
+            p.sendActionBar("§f" + nearest.getName() + " §7- §b" + Math.round(p.getLocation().distance(nearest.getLocation())) + " Blöcke");
         }
 
         if(p.isSneaking() && e.getAction().isRightClick() && p.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "loadable"))){
@@ -176,6 +190,25 @@ public class RightClickEvent implements Listener{
                 p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 20, 1);
             }
         }
+        }
+
+        private Player getNearestPlayer(Player player){
+            double distance = Double.POSITIVE_INFINITY;
+
+            Player target = null;
+
+            for(Player guy : Bukkit.getOnlinePlayers()) {
+                double dist = Double.POSITIVE_INFINITY;
+                if (guy != player && !(Main.getInstance().VanishList.contains(guy.getUniqueId()))){
+                    dist = player.getLocation().distance(guy.getLocation());
+                }
+                if(distance >= dist){
+                    distance = dist;
+                    target = guy;
+                }
+            }
+
+            return target;
         }
 
     }
