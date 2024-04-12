@@ -1,5 +1,5 @@
 # Sci-Fi Skirmish
-### A Minecraft plugin.
+**A Minecraft plugin.**
 
 This is a minecraft plugin, currently for the minecraft version 1.20.1
 ___
@@ -18,7 +18,7 @@ ___
 [3. The Commands](#ins3-the-commandsins-) - The command names and their usages <br>
 [4. The Specialitems](#ins4-the-specialitemsins) - Short explanation for the plugins specialitems <br>
 [5. The Moderation System](#ins5-the-moderation-systemins) - All about the moderation side of things. <br>
-#### Summary & note of thanks <br>
+#### Summary and note of thanks <br>
 [So all in all...](#insso-all-in-allins) - a short summary of everything <br>
 [Note of thanks](#insnote-of-thanks-ins) - <3 
 ---
