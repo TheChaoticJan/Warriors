@@ -13,14 +13,14 @@ ___
 #### Introductory Part <br>
 [0. Plugin Inspiration](#the-inspiration-and-what-the-plugin-is-for-overall) - Short overview over my Inspiration and Ideas for this plugin <br>
 #### Main Part Contents <br>
-[1. The PvP-System](#1-the-pvp-system) - Short explanation of the PvP-System  and why it is interesting <br> 
-[2. The Ecosystem](#2-the-ecosystem) - The Eco- and Cratesystem with short examples <br>
-[3. The Commands](#3-the-commands) - The command names and their usages <br>
-[4. The Specialitems](#4-the-specialitems) - Short explanation for the plugins specialitems <br>
-[5. The Moderation System](#5-the-moderation-system) - All about the moderation side of things.
+[1. The PvP-System](#ins1-the-pvp-systemins) - Short explanation of the PvP-System  and why it is interesting <br> 
+[2. The Ecosystem](#ins-2-the-ecosystem-ins) - The Eco- and Cratesystem with short examples <br>
+[3. The Commands](#ins3-the-commandsins-) - The command names and their usages <br>
+[4. The Specialitems](#ins4-the-specialitemsins) - Short explanation for the plugins specialitems <br>
+[5. The Moderation System](#ins5-the-moderation-systemins) - All about the moderation side of things.
 #### Summary & note of thanks <br>
-[So all in all...](#so-all-in-all) - a short summary of everything <br>
-[Note of thanks](#note-of-thanks) - <3 
+[So all in all...](#insso-all-in-allins) - a short summary of everything <br>
+[Note of thanks](#insnote-of-thanks-ins) - <3 
 ---
 ## The inspiration and what the plugin is for overall...
 
