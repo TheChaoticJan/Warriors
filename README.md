@@ -17,9 +17,10 @@ ___
 [2. The Ecosystem](#u2-the-ecosystemu) - The Eco- and Cratesystem with short examples <br>
 [3. The Commands](#u3-the-commandsu) - The command names and their usages <br>
 [4. The Specialitems](#u4-the-specialitemsu) - Short explanation for the plugins specialitems <br>
+[5. The Moderation System](#u5-the-moderation-systemu-br) - All about the moderation side of things.
 #### Summary & note of thanks <br>
 [So all in all...](#uso-all-in-allu) - a short summary of everything <br>
-[Note of thanks](#summary--note-of-thanks-br) - <3 <br>
+[Note of thanks](#summary--note-of-thanks-br-1) - <3 <br>
 ---
 ## The inspiration and what the plugin is for overall...
 
@@ -147,6 +148,7 @@ are able, to help people and also keep a nice and good feeling around their serv
 --- 
 ## Summary & Note of thanks <br>
 ### <u>So all in all...</u>
+To be written soon...
 ### <u>Note of thanks </u>
 A Big thanks goes to a lot of people, who helped me in the process, finding ideas, keeping me motivated, 
 helping me making my code better and so much more...
