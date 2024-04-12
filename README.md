@@ -20,6 +20,7 @@ ___
 #### Summary & note of thanks <br>
 [So all in all...](#uso-all-in-allu) - a short summary of everything <br>
 [Note of thanks](#summary--note-of-thanks-br) - <3 <br>
+---
 ## The inspiration and what the plugin is for overall...
 
 This plugins Idea is heavily inspired by an former gamemode on the German ``Mixelpixel.net`` network, called *"WesternWars"*
@@ -120,11 +121,30 @@ server.
 > - enchanted golden apples, making it really easy to fight without for example your helmet
 > - some special Items specific to the player who opened them
 
-### <u>3. The Commands</u>
+### <u>3. The Commands</u> 
+Here is a short list of all commands and what they are doing: <br>
+*Note, that commands, that are for the moderation system are not includet in this part of the Readme, but 
+in the Part that's about the [moderation system](#u5-the-moderation-systemu-br).*
+    
+    /specialitems - Provides you with an inventory Gui, that contains of all specialitems
+    /stats <Playername> - provides you with the stats of the providet player
+    /fix - fixes the item that your currently have in your hand
+    /fix armor - fixes you entire armor
+    /wb | /workbench - opens a workbench inventory
+    /st | /smithingtable - opens a smithingtable inventory
+    /xp balance - shows your current xp-balance in the chat
+    /xp auszahlen <amount> - lets you withdraw the given amount of experience from your account
+    /xp einzahlen <amount> - lets you deposit the given amount of experience to you account
+    
 
 ### <u>4. The Specialitems</u>
-First of all, you can look up every single Special Item using the ``/specialitems``-command.
+First of all, you can look up every single Special Item using the ``/specialitems``-command [(commands)](#u3-the-commandsu-) .
 
+### <u>5. The moderation system</u> <br>
+This part is all about the part of the plugin, that goes on behind the scenes, the moderating side of things, so that team members
+are able, to help people and also keep a nice and good feeling around their server.
+
+--- 
 ## Summary & Note of thanks <br>
 ### <u>So all in all...</u>
 ### <u>Note of thanks </u>
