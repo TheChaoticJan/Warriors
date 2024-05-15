@@ -13,6 +13,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.inventory.ItemStack;
 import plugin.Main;
+import plugin.utils.essentials.Bossbars;
 
 import java.util.Objects;
 

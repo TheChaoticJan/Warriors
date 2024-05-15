@@ -51,8 +51,6 @@ public class InfobarClick implements Listener{
                 }
             }
 
-
-
             if (event.getView().getTitle().startsWith("§7Bearbeite hier")) {
 
                 if(Objects.requireNonNull(event.getCurrentItem()).getItemMeta().getDisplayName().equalsIgnoreCase("§cZurück")){
@@ -78,7 +76,7 @@ public class InfobarClick implements Listener{
                     stats.setInfobar2(index);
                     this.plugin.getDatabase().updatePlayerStats(stats);
 
-                    p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 1"));
+                    p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 2"));
                     event.setCancelled(true);
 
                 }
@@ -86,7 +84,7 @@ public class InfobarClick implements Listener{
                     stats.setInfobar3(index);
                     this.plugin.getDatabase().updatePlayerStats(stats);
 
-                    p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 1"));
+                    p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 3"));
                     event.setCancelled(true);
                 }
             }

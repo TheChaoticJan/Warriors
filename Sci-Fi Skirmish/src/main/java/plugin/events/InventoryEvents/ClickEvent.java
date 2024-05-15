@@ -76,19 +76,10 @@ public class ClickEvent implements Listener {
                      Inventory i = p.getInventory();
 
                      ItemStack XP = new ItemStack(Material.EXPERIENCE_BOTTLE, 64);
-                     i.setItem(3, XP);
-                     i.setItem(9, XP);
-                     i.setItem(10, XP);
-                     i.setItem(11, XP);
-                     i.setItem(12, XP);
-                     i.setItem(18, XP);
-                     i.setItem(19, XP);
-                     i.setItem(20, XP);
-                     i.setItem(21, XP);
-                     i.setItem(27, XP);
-                     i.setItem(28, XP);
-                     i.setItem(29, XP);
-                     i.setItem(30, XP);
+                     int [] slots = new int[]{3, 9, 10, 11, 12, 18, 19, 20, 21,27, 28, 29, 30};
+                     for(int slot : slots){
+                         i.setItem(slot, XP);
+                     }
 
                      ItemStack Webs = new ItemStack(Material.COBWEB, 64);
                      i.setItem(6, Webs);

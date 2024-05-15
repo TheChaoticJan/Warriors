@@ -4,16 +4,8 @@ package plugin.models;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
-import org.bukkit.persistence.PersistentDataType;
-import plugin.Main;
-
-import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.BitSet;
-import java.util.Objects;
 
 public class PlayerStats {
 

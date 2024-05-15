@@ -90,7 +90,7 @@ public class PlayerGetHitEvent implements Listener{
             double x = entity.getLocation().getX() - event.getDamager().getLocation().getX();
             double z = entity.getLocation().getZ() - event.getDamager().getLocation().getZ();
             double distance = Math.sqrt(x * x + z * z);
-            double knockbackMultiplier = 4; // Adjust this value as needed
+            double knockbackMultiplier = 3.5; // Adjust this value as needed
 
             // Create a normalized vector in the direction of knockback (horizontal only)
             Vector knockbackDirection = new Vector(x, 0, z).normalize();
