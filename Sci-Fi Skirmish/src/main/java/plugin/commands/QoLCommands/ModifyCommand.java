@@ -23,7 +23,7 @@ public class ModifyCommand implements CommandExecutor, TabCompleter {
         if (commandSender instanceof Player p) {
             switch (args[0].toLowerCase()) {
                 case "name" -> {
-                    if (p.getItemInHand().getType().equals(Material.AIR)) {
+                    if (!p.getItemInHand().getType().equals(Material.AIR)) {
                         ItemMeta RenameMeta = p.getItemInHand().getItemMeta();
                         for (int i = 1; i <= args.length; i++) {
                             if (i == 2) {

@@ -1,12 +1,14 @@
-package plugin.events.PlayerOrEntityEvents.interactions;
+package plugin.events.PlayerOrEntityEvents.Interactions;
 
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.persistence.PersistentDataType;
 import plugin.Main;
 import plugin.cratesystem.CrateEntities.Crate;
 import plugin.models.PlayerStats;
@@ -60,15 +62,12 @@ public class JoinEvent implements Listener {
         }
 
             try{
-                PlayerStats stats = this.plugin.getDatabase().findPlayerStatsByUUID(player.getUniqueId().toString());
+                PlayerStats stats = this.plugin.getDatabase().findPlayerStats(player);
 
                 if(stats == null){
 
-                    stats = new PlayerStats(player.getUniqueId().toString(), player.getName(), "Spieler",   0,0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false, false, 1, 2, 3);
-
+                    stats = new PlayerStats(player);
                     this.plugin.getDatabase().createPlayerStats(stats);
-
-
 
                 }
 

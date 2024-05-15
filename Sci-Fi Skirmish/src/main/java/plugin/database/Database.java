@@ -1,5 +1,7 @@
 package plugin.database;
 
+import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 import plugin.models.PlayerStats;
 
 import java.sql.*;
@@ -28,36 +30,46 @@ public class Database {
                 statement.close();
         }
 
-    public PlayerStats findPlayerStatsByUUID(String uuid) throws SQLException{
+    public PlayerStats findPlayerStats(OfflinePlayer player) throws SQLException{
 
         PreparedStatement statement = getConnection().prepareStatement("SELECT * FROM player_stats WHERE uuid = ?");
-        statement.setString(1, uuid);
+        statement.setString(1, player.getUniqueId().toString());
         ResultSet results = statement.executeQuery();
 
         if(results.next()){
 
-            int deaths = results.getInt("deaths");
-            int xp = results.getInt("xp");
-            String name = results.getString("name");
             String rank = results.getString("rank");
-            int kills = results.getInt("kills");
-            int common_crates = results.getInt("common_crates");
-            int uncommon_crates = results.getInt("uncommon_crates");
-            int epic_crates = results.getInt("epic_crates");
-            int rare_crates = results.getInt("rare_crates");
-            int mythic_crates = results.getInt("mythic_crates");
             String clan = results.getString("clan");
-            Boolean perk1 = results.getBoolean("perk1");
-            Boolean perk2 = results.getBoolean("perk2");
-            Boolean perk3 = results.getBoolean("perk3");
-            Boolean perk4 = results.getBoolean("perk4");
-            Boolean perk5 = results.getBoolean("perk5");
-            Boolean perk6 = results.getBoolean("perk6");
-            int infobar1 = results.getInt("infobar1");
-            int infobar2 = results.getInt("infobar2");
-            int infobar3 = results.getInt("infobar3");
 
-            PlayerStats playerStats = new PlayerStats(uuid, name, rank,  xp, deaths, kills, common_crates, uncommon_crates, epic_crates, rare_crates, mythic_crates, clan, perk1, perk2, perk3, perk4, perk5, perk6, infobar1, infobar2, infobar3);
+            int xp = results.getInt("xp");
+            int deaths = results.getInt("deaths");
+            int kills = results.getInt("kills");
+
+            int [] crates = new int[]{
+                    results.getInt("common_crates"),
+                    results.getInt("uncommon_crates"),
+                    results.getInt("epic_crates"),
+                    results.getInt("rare_crates"),
+                    results.getInt("mythic_crates")
+            };
+
+            boolean [] perks = new boolean[]{
+                    results.getBoolean("perk1"),
+                    results.getBoolean("perk2"),
+                    results.getBoolean("perk3"),
+                    results.getBoolean("perk4"),
+                    results.getBoolean("perk5"),
+                    results.getBoolean("perk6")
+            };
+
+            int [] infobarValues = new int[]{
+                    results.getInt("infobar1"),
+                    results.getInt("infobar2"),
+                    results.getInt("infobar3")
+            };
+
+
+            PlayerStats playerStats = new PlayerStats(player,  rank,  clan, xp, deaths, kills, crates, perks, infobarValues);
 
             statement.close();
 
@@ -75,24 +87,28 @@ public class Database {
             statement.setString(1, stats.getUuid());
             statement.setString(2, stats.getName());
             statement.setString(3, stats.getRank());
+            statement.setString(12, stats.getClan());
+
             statement.setInt(4, stats.getXp());
             statement.setInt(5, stats.getDeaths());
             statement.setInt(6, stats.getKills());
-            statement.setInt(7, stats.getCommon_crates());
-            statement.setInt(8, stats.getUncommon_crates());
-            statement.setInt(9, stats.getEpic_crates());
-            statement.setInt(10, stats.getRare_crates());
-            statement.setInt(11, stats.getMythic_crates());
-            statement.setString(12, stats.getClan());
-            statement.setBoolean(13, stats.getPerk1());
-            statement.setBoolean(14, stats.getPerk2());
-            statement.setBoolean(15, stats.getPerk3());
-            statement.setBoolean(16, stats.getPerk4());
-            statement.setBoolean(17, stats.getPerk5());
-            statement.setBoolean(18, stats.getPerk6());
-            statement.setInt(19, stats.getInfobar1());
-            statement.setInt(20, stats.getInfobar2());
-            statement.setInt(21, stats.getInfobar3());
+
+            statement.setInt(7, stats.getCrates()[0]);
+            statement.setInt(8, stats.getCrates()[1]);
+            statement.setInt(9, stats.getCrates()[2]);
+            statement.setInt(10, stats.getCrates()[3]);
+            statement.setInt(11, stats.getCrates()[4]);
+
+            statement.setBoolean(13, stats.getPerks()[0]);
+            statement.setBoolean(14, stats.getPerks()[1]);
+            statement.setBoolean(15, stats.getPerks()[2]);
+            statement.setBoolean(16, stats.getPerks()[3]);
+            statement.setBoolean(17, stats.getPerks()[4]);
+            statement.setBoolean(18, stats.getPerks()[5]);
+
+            statement.setInt(19, stats.getInfobarValues()[0]);
+            statement.setInt(20, stats.getInfobarValues()[1]);
+            statement.setInt(21, stats.getInfobarValues()[2]);
 
             statement.executeUpdate();
 
@@ -108,21 +124,21 @@ public class Database {
         statement.setInt(3, stats.getXp());
         statement.setInt(4, stats.getDeaths());
         statement.setInt(5, stats.getKills());
-        statement.setInt(6, stats.getCommon_crates());
-        statement.setInt(7, stats.getUncommon_crates());
-        statement.setInt(8, stats.getEpic_crates());
-        statement.setInt(9, stats.getRare_crates());
-        statement.setInt(10, stats.getMythic_crates());
+        statement.setInt(6, stats.getCrates()[0]);
+        statement.setInt(7, stats.getCrates()[1]);
+        statement.setInt(8, stats.getCrates()[2]);
+        statement.setInt(9, stats.getCrates()[3]);
+        statement.setInt(10, stats.getCrates()[4]);
         statement.setString(11, stats.getClan());
-        statement.setBoolean(12, stats.getPerk1());
-        statement.setBoolean(13, stats.getPerk2());
-        statement.setBoolean(14, stats.getPerk3());
-        statement.setBoolean(15, stats.getPerk4());
-        statement.setBoolean(16, stats.getPerk5());
-        statement.setBoolean(17, stats.getPerk6());
-        statement.setInt(18, stats.getInfobar1());
-        statement.setInt(19, stats.getInfobar2());
-        statement.setInt(20, stats.getInfobar3());
+        statement.setBoolean(12, stats.getPerks()[0]);
+        statement.setBoolean(13, stats.getPerks()[1]);
+        statement.setBoolean(14, stats.getPerks()[2]);
+        statement.setBoolean(15, stats.getPerks()[3]);
+        statement.setBoolean(16, stats.getPerks()[4]);
+        statement.setBoolean(17, stats.getPerks()[5]);
+        statement.setInt(18, stats.getInfobarValues()[0]);
+        statement.setInt(19, stats.getInfobarValues()[1]);
+        statement.setInt(20, stats.getInfobarValues()[2]);
 
         statement.executeUpdate();
 

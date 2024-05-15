@@ -1,5 +1,5 @@
 # Sci-Fi Skirmish
-**A Minecraft plugin.**
+### A Minecraft plugin.
 
 This is a minecraft plugin, currently for the minecraft version 1.20.1
 ___
@@ -9,19 +9,6 @@ ___
 	since I am currently still learning, also learning java
 ---
 
-## Table of Contents:
-#### Introductory Part <br>
-[0. Plugin Inspiration](#the-inspiration-and-what-the-plugin-is-for-overall) - Short overview over my Inspiration and Ideas for this plugin <br>
-#### Main Part Contents <br>
-[1. The PvP-System](#ins1-the-pvp-systemins) - Short explanation of the PvP-System  and why it is interesting <br> 
-[2. The Ecosystem](#ins-2-the-ecosystem-ins) - The Eco- and Cratesystem with short examples <br>
-[3. The Commands](#ins3-the-commandsins-) - The command names and their usages <br>
-[4. The Specialitems](#ins4-the-specialitemsins) - Short explanation for the plugins specialitems <br>
-[5. The Moderation System](#ins5-the-moderation-systemins) - All about the moderation side of things. <br>
-#### Summary and note of thanks <br>
-[So all in all...](#insso-all-in-allins) - a short summary of everything <br>
-[Note of thanks](#insnote-of-thanks-ins) - <3 
----
 ## The inspiration and what the plugin is for overall...
 
 This plugins Idea is heavily inspired by an former gamemode on the German ``Mixelpixel.net`` network, called *"WesternWars"*
@@ -46,7 +33,7 @@ I thought that it was a good and simple mode and way to train coding and learn a
 
 ---
 ## So what does this plugin do then (Overview)?
-### <ins>1. The PvP-System</ins>
+### 1. The PvP-System
 As already mentioned earlier in this post, the PvP-System heavily relies on the bug, that made WesternWars so interesting for its
 players.
 So the clue of this system is, that you have to have a full Protection 4 Armor in order to recieve no-Damage. In that way longer fights can develop
@@ -73,7 +60,7 @@ So the PvP System relies on this core mechanic, and then on Bonuses like Potion 
 > 
 > >To get to know more about perks read more about them below, there you can find a detailed explanation to them.
 
-### <ins> 2. The Ecosystem </ins>
+### 2. The Ecosystem
 The Ecosystems basic ideas also heavily relies on the idea that 'WesternWars' had in mind, so it  is providet through crates.
 These Crates are spawned at fixed Locations on the Map and contain of different rarities and contents based on those rarities.
 
@@ -107,62 +94,5 @@ server.
 >
 > So epic crates are the perfect balance of "interesting loot" and "amount of spawning"
 > ### Legendary Crates (9% of Crates)
-> Legendary crates are designed to be a pretty rare but powerful change in the common behaviour of
-> farming crates.
-> They contain of all of the above and also...
-> - ...The first maxed out enchanted Books
-> - ...The first Potions (Potion of Speed II)
-> - ...Golden Apples, to make fighting without  a full armor equipped possible
->    / easier
 > ### Mythic Crates (2% of Crates)
-> Mythic crates are the rarest of all crates. Therefore they consist of the
-> best possible Loot, that could be there
-> For example they contain of...
-> - only maxed out enchanted Books, also they are the only Crates to contain Mending Books
-> - enchanted golden apples, making it really easy to fight without for example your helmet
-> - some special Items specific to the player who opened them
-
-### <ins>3. The Commands</ins> 
-Here is a short list of all commands and what they are doing: <br>
-*Note, that commands, that are for the moderation system are not includet in this part of the Readme, but 
-in the Part that's about the [moderation system](#5-the-moderation-system).*
-    
-    /specialitems - Provides you with an inventory Gui, that contains of all specialitems
-    /stats <Playername> - provides you with the stats of the providet player
-    /fix - fixes the item that your currently have in your hand
-    /fix armor - fixes you entire armor
-    /wb | /workbench - opens a workbench inventory
-    /st | /smithingtable - opens a smithingtable inventory
-    /xp balance - shows your current xp-balance in the chat
-    /xp auszahlen <amount> - lets you withdraw the given amount of experience from your account
-    /xp einzahlen <amount> - lets you deposit the given amount of experience to you account
-    
-
-### <ins>4. The Specialitems</ins>
-First of all, you can look up every single Special Item using the ``/specialitems``-command [(commands)](#3-the-commands-) .
-
-### <ins>5. The moderation system</ins>
-This part is all about the part of the plugin, that goes on behind the scenes, the moderating side of things, so that team members
-are able, to help people and also keep a nice and good feeling around their server.
-
---- 
-## Summary & Note of thanks <br>
-### <ins>So all in all...</ins>
-To be written soon...
-### <ins>Note of thanks </ins>
-A Big thanks goes to a lot of people, who helped me in the process, finding ideas, keeping me motivated, 
-helping me making my code better and so much more...
-So with that said a <b>huge</b> thanks goes to... <br>
-``Affen_Herzog`` <br>
-``Thunderdeus_XD``<br>
-``_LMEmi``<br>
-``DieSeelenlose``<br>
-``Klysma``<br>
-``TheReidenS``<br>
-``MarciWay``<br>
-``nichtkinq``<br>
-``Hansi159``<br>
-``jookobo``<br>
-``Shildii``<br>
-<br>
-You all are just really really nice guys, thanks for all you did and especially for your help in this plugin of course! <3 
+> 

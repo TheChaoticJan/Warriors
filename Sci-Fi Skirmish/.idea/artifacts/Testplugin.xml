@@ -1,9 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="Testplugin">
-    <output-path>$PROJECT_DIR$/../../1.20.1 Minecraft Server/plugins</output-path>
-    <root id="archive" name="Testplugin.jar">
-      <element id="module-output" name="JansParadise" />
-      <element id="module-output" name="Sci-Fi Skirmish" />
-    </root>
-  </artifact>
-</component>

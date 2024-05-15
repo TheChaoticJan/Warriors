@@ -32,7 +32,7 @@ public class PerkInventories {
         lore.add("§7dein §ckaputtestes Rüstungsteil");
         lore.add("§7um 10 Haltbarkeit §arepariert wird§7!");
         ArmorerMeta.setLore(lore);
-        if (stats.getPerk1()) {
+        if (stats.getPerks()[0]) {
             ArmorerMeta.addEnchant(Enchantment.DURABILITY, 1, true);
             ArmorerMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
@@ -52,7 +52,7 @@ public class PerkInventories {
         lore.add("§7 & einem §bDiamantschwert §7in der Hand");
         lore.add("§7das Inventar deines §cGegners §7auf Cooldown setzen!");
         ArmorerMeta.setLore(lore);
-        if (stats.getPerk6()) {
+        if (stats.getPerks()[5]) {
             ArmorerMeta.addEnchant(Enchantment.DURABILITY, 1, true);
             ArmorerMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
@@ -73,7 +73,7 @@ public class PerkInventories {
         lore1.add("§7in deinem §cGegner §7zu spawnen, wenn du");
         lore1.add("§7Diesen schlägst!");
         CobwebMeta.setLore(lore1);
-        if (stats.getPerk4()) {
+        if (stats.getPerks()[3]) {
             CobwebMeta.addEnchant(Enchantment.DURABILITY, 1, true);
             CobwebMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
@@ -93,7 +93,7 @@ public class PerkInventories {
         lore2.add("§7trifft, für §910 Sekunden §7den Effekt");
         lore2.add("§5Slowness I§7.");
         BowMeta.setLore(lore2);
-        if (stats.getPerk2()) {
+        if (stats.getPerks()[1]) {
             BowMeta.addEnchant(Enchantment.DURABILITY, 1, true);
             BowMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
@@ -115,7 +115,7 @@ public class PerkInventories {
         lore3.add("§7während du geschlagen wirst, für");
         lore3.add("§910 Sekunden §bSpeed I §7und §cStärke I§7.");
         RiskMeta.setLore(lore3);
-        if(stats.getPerk3()){
+        if(stats.getPerks()[2]){
             RiskMeta.addEnchant(Enchantment.DURABILITY, 1, true);
             RiskMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
@@ -135,7 +135,7 @@ public class PerkInventories {
         lore6.add("§7nutzen, und somit deine §6Infobar");
         lore6.add("§7modular §aanpassen §7und nutzen.");
         InfoMeta.setLore(lore6);
-        if(stats.getPerk5()){
+        if(stats.getPerks()[4]){
             InfoMeta.addEnchant(Enchantment.DURABILITY, 1, true);
             InfoMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
@@ -184,7 +184,8 @@ public class PerkInventories {
         toBuyLore.add("");
 
         Perks.setItem(10, armorerPerk(stats));
-        if(stats.getPerk1()){
+
+        if(stats.getPerks()[0]){
             Perks.setItem(19, buyed);
         }else{
             toBuyLore.set(4, "§7Perk: §3Rüstungsfanatiker");
@@ -195,7 +196,7 @@ public class PerkInventories {
             Perks.setItem(19, toBuy);
         }
 
-        if(stats.getPerk2()){
+        if(stats.getPerks()[1]){
             Perks.setItem(20, buyed);
         }else{
             toBuyLore.set(4, "§7Perk: §2Geübter Schütze");
@@ -207,7 +208,7 @@ public class PerkInventories {
         }
         Perks.setItem(11, bowPerk(stats));
 
-        if(stats.getPerk3()){
+        if(stats.getPerks()[2]){
             Perks.setItem(21, buyed);
         }else{
             toBuyLore.set(4, "§7Perk: §4Risikobehaftet");
@@ -219,7 +220,7 @@ public class PerkInventories {
         }
         Perks.setItem(12, riskPerk(stats));
 
-        if(stats.getPerk4()){
+        if(stats.getPerks()[3]){
             Perks.setItem(22, buyed);
         }else{
             toBuyLore.set(4, "§7Perk: §aKlebrige Angelegenheit");
@@ -231,7 +232,7 @@ public class PerkInventories {
         }
         Perks.setItem(13, cobwebPerk(stats));
 
-        if(stats.getPerk5()){
+        if(stats.getPerks()[4]){
             Perks.setItem(23, buyed);
         }else{
             toBuyLore.set(4, "§7Perk: §5Spionagemeister");
@@ -243,7 +244,7 @@ public class PerkInventories {
         }
         Perks.setItem(14, spyPerk(stats));
 
-        if(stats.getPerk6()){
+        if(stats.getPerks()[5]){
             Perks.setItem(24, buyed);
         }else{
             toBuyLore.set(4, "§7Perk: §6Taschendieb");

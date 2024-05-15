@@ -104,7 +104,7 @@ public class PlayerGetHitEvent implements Listener{
         }
 
         Player d = (Player) event.getDamager();
-        InventoryInteracts.checkSpeicalitemDrops(d);
+        InventoryInteracts.checkSpecialItemDrops(d);
 
         if(event.getEntity().getType() == EntityType.PLAYER){
             Player p = (Player) event.getEntity();
@@ -117,21 +117,19 @@ public class PlayerGetHitEvent implements Listener{
 
 
             try {
-                PlayerStats stats = this.plugin.getDatabase().findPlayerStatsByUUID(p.getUniqueId().toString());
 
+                PlayerStats stats = this.plugin.getDatabase().findPlayerStats(p);
                 if (stats == null) {
 
-                    stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "Spieler", 0, 0,  0, 0, 0, 0, 0, 0,  "", false, false, false, false, false, false, 1, 2, 3);
-
+                    stats = new PlayerStats(p);
                     this.plugin.getDatabase().createPlayerStats(stats);
 
                 }
-                PlayerStats stats1 = this.plugin.getDatabase().findPlayerStatsByUUID(d.getUniqueId().toString());
 
+                PlayerStats stats1 = this.plugin.getDatabase().findPlayerStats(d);
                 if (stats1 == null) {
 
-                    stats1 = new PlayerStats(d.getUniqueId().toString(), d.getName(), "Spieler", 0, 0, 0,  0, 0, 0, 0, 0,  "", false, false, false, false, false, false, 1, 2, 3);
-
+                    stats1 = new PlayerStats(d);
                     this.plugin.getDatabase().createPlayerStats(stats1);
 
                 }
@@ -145,7 +143,7 @@ public class PlayerGetHitEvent implements Listener{
                     }
                 }
 
-                if(stats.getPerk1()){
+                if(stats.getPerks()[0]){
                     int rndm = (int) (1 + Math.random() * 111);
 
                     if(rndm == 1) {
@@ -153,7 +151,7 @@ public class PlayerGetHitEvent implements Listener{
                     }
                 }
 
-                if(stats.getPerk3()){
+                if(stats.getPerks()[2]){
                     if(HDura < 30 | BDura < 30 | CDura < 30 | LDura < 30){
                         PotionEffect effect1 = new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 200, 0);
                         PotionEffect effect2 = new PotionEffect(PotionEffectType.SPEED, 200, 0);
@@ -164,7 +162,7 @@ public class PlayerGetHitEvent implements Listener{
                     }
                 }
 
-                if(stats1.getPerk4()){
+                if(stats1.getPerks()[3]){
                     int random = (int) (1 + Math.random() * 240);
                     if(random == 1){
 
@@ -190,7 +188,7 @@ public class PlayerGetHitEvent implements Listener{
                     }
                 }
 
-                d.sendActionBar(Actionbar.buildActionbar(p,stats, stats1.getInfobar1() , stats1.getInfobar2(), stats1.getInfobar3()));
+                d.sendActionBar(Actionbar.buildActionbar(p,stats, stats1.getInfobarValues()));
 
             }catch (SQLException e){
                 e.printStackTrace();

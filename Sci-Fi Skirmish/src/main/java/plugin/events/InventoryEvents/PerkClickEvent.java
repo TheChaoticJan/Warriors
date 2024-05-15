@@ -30,7 +30,7 @@ public class PerkClickEvent implements Listener{
         }
         try {
         Player player = (Player) event.getWhoClicked();
-           PlayerStats stats = this.plugin.getDatabase().findPlayerStatsByUUID(String.valueOf(player.getUniqueId()));
+           PlayerStats stats = this.plugin.getDatabase().findPlayerStats(player);
             if (event.getView().getTitle().equalsIgnoreCase("§c§lPerks")) {
                 if(Objects.requireNonNull(event.getCurrentItem()).getItemMeta().getDisplayName().equals("§6§lKaufen?")) {
                     player.openInventory(PerkInventories.confirmBuy(player, event.getCurrentItem()));
@@ -42,7 +42,7 @@ public class PerkClickEvent implements Listener{
                     player.openInventory(PerkInventories.overview(player, stats));
                 }
                 if(event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§aBestätigen")){
-                    int price = (int) Objects.requireNonNull(event.getInventory().getItem(4).getItemMeta().getPersistentDataContainer().get(new NamespacedKey(Main.getInstance(), "price"), PersistentDataType.INTEGER));
+                    int price = Objects.requireNonNull(event.getInventory().getItem(4).getItemMeta().getPersistentDataContainer().get(new NamespacedKey(Main.getInstance(), "price"), PersistentDataType.INTEGER));
                     if(stats.getXp() < price){
                         player.closeInventory();
                         player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 20, 1);

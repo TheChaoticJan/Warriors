@@ -1,4 +1,4 @@
-package plugin.events.PlayerOrEntityEvents.interactions;
+package plugin.events.PlayerOrEntityEvents.Interactions;
 
 import com.destroystokyo.paper.Title;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -7,8 +7,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.CompassMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import plugin.Main;
@@ -78,17 +76,17 @@ public class RightClickEvent implements Listener{
         }
 
         try {
-            PlayerStats stats = this.plugin.getDatabase().findPlayerStatsByUUID(p.getUniqueId().toString());
+            PlayerStats stats = this.plugin.getDatabase().findPlayerStats(p);
 
             if (stats == null) {
 
-                stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "", 0, 0,   0, 0, 0, 0, 0, 0, "", false, false, false, false, false, false, 1, 2, 3);
+                stats = new PlayerStats(p);
 
                 this.plugin.getDatabase().createPlayerStats(stats);
 
             }
 
-            if(p.getItemInHand().getType().equals(Material.DIAMOND_SWORD) && e.getAction().isRightClick() && CombatLogger.isInCombat(p) && stats.getPerk6() && !lockCooldown.containsKey(p.getUniqueId())){
+            if(p.getItemInHand().getType().equals(Material.DIAMOND_SWORD) && e.getAction().isRightClick() && CombatLogger.isInCombat(p) && stats.getPerks()[5] && !lockCooldown.containsKey(p.getUniqueId())){
                 Player victim = CombatLogger.isInCombatWith(p);
                 victim.setCooldown(Material.ENDER_PEARL, 200);
                 victim.setCooldown(Material.COBWEB, 200);
@@ -139,7 +137,7 @@ public class RightClickEvent implements Listener{
                     for (int i = (int) (Math.random() * 3); i < 3; i++) {
                         p.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), Loot.epicDrop());
                     }
-                    stats.setEpic_crates(stats.getEpic_crates() + 1);
+                    Objects.requireNonNull(stats).setCrates(new int[]{stats.getCrates()[0], stats.getCrates()[1], stats.getCrates()[2] + 1, stats.getCrates()[3], stats.getCrates()[4]});
                 }
                 if (rarity <= 93 && rarity > 60) {
                     p.sendActionBar(MiniMessage.miniMessage().deserialize(Texts.get("crate") + " <dark_gray>▸ " + Texts.get("rare")));
@@ -148,7 +146,7 @@ public class RightClickEvent implements Listener{
                     for (int i = (int) (Math.random() * 2); i < 3; i++) {
                         p.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), Loot.legendaryDrop());
                     }
-                    stats.setRare_crates(stats.getRare_crates() + 1);
+                    Objects.requireNonNull(stats).setCrates(new int[]{stats.getCrates()[0], stats.getCrates()[1], stats.getCrates()[2], stats.getCrates()[3] + 1, stats.getCrates()[4]});
                 }
                 if (rarity <= 100 && rarity > 93) {
                     p.sendActionBar(MiniMessage.miniMessage().deserialize(Texts.get("crate") + " <dark_gray>▸ " + Texts.get("mythic")));
@@ -157,7 +155,7 @@ public class RightClickEvent implements Listener{
                     for (int i = (int) (Math.random() * 3); i < 5; i++) {
                         p.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), Loot.mythicDrop());
                     }
-                    stats.setMythic_crates(stats.getMythic_crates() + 1);
+                    Objects.requireNonNull(stats).setCrates(new int[]{stats.getCrates()[0], stats.getCrates()[1], stats.getCrates()[2], stats.getCrates()[3], stats.getCrates()[4] + 1});
                 }
                 this.plugin.getDatabase().updatePlayerStats(stats);
 
@@ -192,23 +190,23 @@ public class RightClickEvent implements Listener{
         }
         }
 
-        private Player getNearestPlayer(Player player){
-            double distance = Double.POSITIVE_INFINITY;
+    private Player getNearestPlayer(Player player){
+        double distance = Double.POSITIVE_INFINITY;
 
-            Player target = null;
+        Player target = null;
 
-            for(Player guy : Bukkit.getOnlinePlayers()) {
-                double dist = Double.POSITIVE_INFINITY;
-                if (guy != player && !(Main.getInstance().VanishList.contains(guy.getUniqueId()))){
-                    dist = player.getLocation().distance(guy.getLocation());
-                }
-                if(distance >= dist){
-                    distance = dist;
-                    target = guy;
-                }
+        for(Player guy : Bukkit.getOnlinePlayers()) {
+            double dist = Double.POSITIVE_INFINITY;
+            if (guy != player && !(Main.getInstance().VanishList.contains(guy.getUniqueId()))){
+                dist = player.getLocation().distance(guy.getLocation());
             }
-
-            return target;
+            if(distance >= dist){
+                distance = dist;
+                target = guy;
+            }
         }
+
+        return target;
+    }
 
     }

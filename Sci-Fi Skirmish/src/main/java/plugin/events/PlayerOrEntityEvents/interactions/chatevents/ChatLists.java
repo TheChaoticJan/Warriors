@@ -1,4 +1,4 @@
-package plugin.events.PlayerOrEntityEvents.interactions.chatevents;
+package plugin.events.PlayerOrEntityEvents.Interactions.chatevents;
 
 import lombok.Getter;
 import org.checkerframework.checker.units.qual.A;

@@ -6,7 +6,6 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.block.Structure;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
@@ -23,6 +22,11 @@ import java.sql.SQLException;
 import java.util.Objects;
 
 public class CrateDeathEvent implements Listener {
+    public CrateDeathEvent(Main plugin) {
+        this.plugin = plugin;
+    }
+
+    Main plugin;
 
     @EventHandler
     public void DeathEvent(EntityRemoveFromWorldEvent event){
@@ -52,23 +56,26 @@ public class CrateDeathEvent implements Listener {
 
                 PlayerStats stats = null;
                 try {
-                     stats = Main.getInstance().getDatabase().findPlayerStatsByUUID(p.getUniqueId().toString());
+                     stats = this.plugin.getDatabase().findPlayerStats(p);
 
                     if (stats == null) {
 
-                        stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "", 0, 0,   0, 0, 0, 0, 0, 0, "", false, false, false,false, false, false, 1,2, 3);
-                        Main.getInstance().getDatabase().createPlayerStats(stats);
+                        stats = new PlayerStats(p);
+
+                        this.plugin.getDatabase().createPlayerStats(stats);
 
                     }
-                }catch (SQLException e1) {
+                }catch (SQLException e1){
                     e1.printStackTrace();
                 }
+
 
                 int x = e.getLocation().getBlockX();
                 double y = e.getLocation().getBlockY() + 1.7;
                 int z = e.getLocation().getBlockZ();
 
                 int rarity = (int) (Math.random() * 100);
+
                 if(rarity <= 42){
                     p.sendActionBar(MiniMessage.miniMessage().deserialize("<dark_gray><<red>Tot<dark_gray>> " + Texts.get("crate") + " <dark_gray>▸ " + Texts.get("common")));
                     for(int i = (int) (Math.random() * 2) ; i < 2; i++) {
@@ -77,8 +84,8 @@ public class CrateDeathEvent implements Listener {
                             item.setCustomName(item.getItemStack().getItemMeta().getDisplayName());
                             item.setCustomNameVisible(true);
                         }
-                }
-                    Objects.requireNonNull(stats).setCommon_crates(stats.getCommon_crates() + 1);
+                    }
+                    Objects.requireNonNull(stats).setCrates(new int[]{stats.getCrates()[0] + 1, stats.getCrates()[1], stats.getCrates()[2], stats.getCrates()[3], stats.getCrates()[4]});
                     }
                 if(rarity <= 70 && rarity > 42) {
                     p.sendActionBar(MiniMessage.miniMessage().deserialize("<dark_gray><<red>Tot<dark_gray>> " + Texts.get("crate") + " <dark_gray>▸ " + Texts.get("uncommon")));
@@ -90,19 +97,19 @@ public class CrateDeathEvent implements Listener {
                             item.setCustomNameVisible(true);
                         }
                     }
-                    Objects.requireNonNull(stats).setUncommon_crates(stats.getUncommon_crates() + 1);
+                    Objects.requireNonNull(stats).setCrates(new int[]{stats.getCrates()[0], stats.getCrates()[1] + 1, stats.getCrates()[2], stats.getCrates()[3], stats.getCrates()[4]});
                 }
                 if (rarity <= 89 && rarity > 70) {
                     p.sendActionBar(MiniMessage.miniMessage().deserialize("<dark_gray><<red>Tot<dark_gray>> " + Texts.get("crate") + " <dark_gray>▸ " + Texts.get("epic")));
 
                     for (int i = (int) (Math.random() * 3); i < 3; i++) {
-                        Item item =e.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), Loot.epicDrop());
+                        Item item = e.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), Loot.epicDrop());
                         if(item.getItemStack().getType().equals(Material.ENCHANTED_BOOK)) {
                             item.setCustomName(item.getItemStack().getItemMeta().getDisplayName());
                             item.setCustomNameVisible(true);
                         }
                     }
-                    Objects.requireNonNull(stats).setEpic_crates(stats.getEpic_crates() + 1);
+                    Objects.requireNonNull(stats).setCrates(new int[]{stats.getCrates()[0], stats.getCrates()[1], stats.getCrates()[2] + 1, stats.getCrates()[3], stats.getCrates()[4]});
                 }
                 if (rarity <= 98 && rarity > 89) {
                     p.sendActionBar(MiniMessage.miniMessage().deserialize("<dark_gray><<red>Tot<dark_gray>> " + Texts.get("crate") + " <dark_gray>▸ " + Texts.get("rare")));
@@ -115,7 +122,7 @@ public class CrateDeathEvent implements Listener {
                             item.setCustomNameVisible(true);
                         }
                     }
-                    Objects.requireNonNull(stats).setRare_crates(stats.getRare_crates() + 1);
+                    Objects.requireNonNull(stats).setCrates(new int[]{stats.getCrates()[0], stats.getCrates()[1], stats.getCrates()[2], stats.getCrates()[3] + 1, stats.getCrates()[4]});
                         }
                 if (rarity <= 100 && rarity > 98) {
                     p.sendActionBar(MiniMessage.miniMessage().deserialize("<dark_gray><<red>Tot<dark_gray>> " + Texts.get("crate") + " <dark_gray>▸ " + Texts.get("mythic")));
@@ -128,11 +135,11 @@ public class CrateDeathEvent implements Listener {
                             item.setCustomNameVisible(true);
                         }
                     }
-                    Objects.requireNonNull(stats).setMythic_crates(stats.getMythic_crates() + 1);
+                    Objects.requireNonNull(stats).setCrates(new int[]{stats.getCrates()[0], stats.getCrates()[1], stats.getCrates()[2], stats.getCrates()[3], stats.getCrates()[4] + 1});
                 }
 
                 try {
-                    Main.getInstance().getDatabase().updatePlayerStats(Objects.requireNonNull(stats));
+                    this.plugin.getDatabase().updatePlayerStats(Objects.requireNonNull(stats));
                 } catch (SQLException ex) {
                    ex.printStackTrace();
                 }

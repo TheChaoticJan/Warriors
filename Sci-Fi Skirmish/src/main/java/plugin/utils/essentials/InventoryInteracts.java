@@ -7,62 +7,45 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class InventoryInteracts {
 
-    public static void checkSpeicalitemDrops(Player d) {
+    public static void checkSpecialItemDrops(Player d) {
 
-        ArrayList<String> types = new ArrayList<>();
-        types.add("§eSci-Fi");
-        types.add("§eErfahren");
-        types.add("§eKlebrig");
-        types.add("§eExplosiv");
+        final String [] types = {"§eSci-Fi", "§eErfahren", "§eKlebrig", "§eExplosiv"};
+        final Material [] items = {Material.ENDER_PEARL, Material.EXPERIENCE_BOTTLE, Material.COBWEB, Material.TNT};
+        final int [] amounts = {0, 5, 3, 2};
 
-        ArrayList<Material> materials = new ArrayList<>();
-        materials.add(Material.ENDER_PEARL);
-        materials.add(Material.EXPERIENCE_BOTTLE);
-        materials.add(Material.COBWEB);
-        materials.add(Material.TNT);
-
-        ArrayList<Integer> amounts = new ArrayList<>();
-        amounts.add(0);
-        amounts.add(5);
-        amounts.add(3);
-        amounts.add(2);
-
-        for(int f = 0; f <= types.size() - 1; f++) {
+        for(int i = 0; i <= types.length - 1; i++) {
             if (d.getItemInHand().getItemMeta() != null) {
                 if (d.getItemInHand().getItemMeta().getLore() != null) {
-                    if (d.getItemInHand().getItemMeta().getLore().contains(types.get(f))) {
-                        String s = "false";
-                        int i = (int) (Math.random() * 300) + 1;
-                        if (i == 1) {
-                            for(int k = 0; k <= amounts.get(f); k++) {
+                    if (d.getItemInHand().getItemMeta().getLore().contains(types[i])){
+                        boolean bl = false;
+                        int random = (int) (Math.random() * 300) + 1;
+                        if (random == 1) {
+                            for(int k = 0; k <= amounts[i]; k++) {
                                 for (int l = 0; l <= 35; l++) {
-                                    if (d.getInventory().getItem(l) == null || Objects.requireNonNull(d.getInventory().getItem(l)).getType() == materials.get(f) && Objects.requireNonNull(d.getInventory().getItem(l)).getAmount() <= 15) {
-                                        s = "true";
+                                    if (d.getInventory().getItem(l) == null || Objects.requireNonNull(d.getInventory().getItem(l)).getType() == items[i] && Objects.requireNonNull(d.getInventory().getItem(l)).getAmount() <= 15) {
+                                        bl = true;
                                     }
                                 }
-                                if (s.equals("true")) {
-                                    d.getInventory().addItem(new ItemStack(materials.get(f)));
+                                if (bl) {
+                                    d.getInventory().addItem(new ItemStack(items[i]));
                                 } else {
                                     int x = d.getLocation().getBlockX();
                                     int y = d.getLocation().getBlockY();
                                     int z = d.getLocation().getBlockZ();
 
-                                    d.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), new ItemStack(materials.get(f)));
+                                    d.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), new ItemStack(items[i]));
                                 }
                             }
-                            if(f == 0) {
-                                new Bossbars().sciFiBar(d);
-                            }else if(f == 1){
-                                new Bossbars().erfahrenBar(d);
-                            }else if(f == 2){
-                                new Bossbars().klebrigBar(d);
-                            }else if(f == 3){
-                                new Bossbars().explosivBar(d);
+
+                            switch (i){
+                                case 0 -> new Bossbars().sciFiBar(d);
+                                case 1 -> new Bossbars().erfahrenBar(d);
+                                case 2 -> new Bossbars().klebrigBar(d);
+                                case 3 -> new Bossbars().explosivBar(d);
                             }
                         }
                     }
@@ -87,13 +70,13 @@ public class InventoryInteracts {
             return;
         }
 
-        if (HDura <= BDura && HDura <= CDura && HDura <= LDura) {
+        if (lessThanEach(HDura, new int[]{CDura, LDura, HDura})) {
             if (player.getInventory().getHelmet() != null) {
                 player.getInventory().getHelmet().setDurability((short) (player.getInventory().getHelmet().getDurability() - amount));
                 player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_USE, 20, 1);
                 value = "Helm";
             }
-        }else if (CDura <= LDura && CDura <= BDura) {
+        }else if (lessThanEach(CDura, new int[]{LDura, HDura})) {
             if (player.getInventory().getChestplate() != null) {
                 player.getInventory().getChestplate().setDurability((short) (player.getInventory().getChestplate().getDurability() - amount));
                 player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_USE, 20, 1);
@@ -113,5 +96,16 @@ public class InventoryInteracts {
             }
         }
         new Bossbars().healBar(player, value, amount);
+    }
+
+    private static boolean lessThanEach(int i, int [] others){
+        boolean bl = true;
+        for(int other : others){
+            if (other < i) {
+                bl = false;
+                break;
+            }
+        }
+        return bl;
     }
 }

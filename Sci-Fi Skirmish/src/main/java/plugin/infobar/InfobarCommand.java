@@ -2,7 +2,6 @@ package plugin.infobar;
 
 import plugin.Main;
 import plugin.models.PlayerStats;
-import plugin.utils.InventoryBuilder.InfobarInventories;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -25,25 +24,22 @@ public class InfobarCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
 
-        if(commandSender instanceof Player p){
+        if(commandSender instanceof Player player){
 
             try{
 
-                PlayerStats stats = this.plugin.getDatabase().findPlayerStatsByUUID(p.getUniqueId().toString());
+                PlayerStats stats = this.plugin.getDatabase().findPlayerStats(player);
 
                 if(stats == null){
-
-                    stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "", 0, 0,  0, 0, 0, 0, 0, 0, "", false, false, false, false, false, false, 1, 2, 3);
-
+                    stats = new PlayerStats(player);
                     this.plugin.getDatabase().createPlayerStats(stats);
-
                 }
 
-                if(!stats.getPerk5()){
-                    p.sendMessage("\n§cDu musst erst das Perk §7'§5Spionagemeister§7' §ckaufen, um die Infobar bearbeiten zu können!\n§f");
+                if(!stats.getPerks()[4]){
+                    player.sendMessage("\n§cDu musst erst das Perk §7'§5Spionagemeister§7' §ckaufen, um die Infobar bearbeiten zu können!\n§f");
                     return true;
                 }else{
-                   p.openInventory(InfobarInventories.introduction(p, stats));
+                   player.openInventory(InfobarInventories.introduction(player, stats));
                 }
             }catch (SQLException e){
                 e.printStackTrace();

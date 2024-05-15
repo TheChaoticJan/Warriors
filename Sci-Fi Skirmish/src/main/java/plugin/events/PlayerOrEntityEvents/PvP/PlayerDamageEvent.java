@@ -35,7 +35,6 @@ public class PlayerDamageEvent implements Listener{
             if (player.getItemInHand().getType() != Material.AIR) {
                 if (player.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "Combohoe")) && cooldownMap.get(player).equals(false)) {
                     cooldownMap.put(player, true);
-                    ItemStack stack = player.getInventory().getItemInMainHand();
                     Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> cooldownMap.put(player, false), 5);
                     if (countMap.get(player) < 7) {
                         countMap.put(player, 1 + countMap.get(player));

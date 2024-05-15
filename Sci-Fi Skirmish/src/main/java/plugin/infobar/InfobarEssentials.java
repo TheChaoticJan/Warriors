@@ -1,5 +1,8 @@
 package plugin.infobar;
 
+import org.bukkit.NamespacedKey;
+import org.bukkit.persistence.PersistentDataType;
+import plugin.Main;
 import plugin.models.PlayerStats;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -21,6 +24,7 @@ public class InfobarEssentials {
         pearlLore.add("");
         pearlMeta.setLore(pearlLore);
         pearl.setItemMeta(pearlMeta);
+        pearl.getItemMeta().getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "index"), PersistentDataType.INTEGER, 3);
         return pearl;
     }
 
@@ -36,6 +40,7 @@ public class InfobarEssentials {
         pearllore.add("");
         pearlMeta.setLore(pearllore);
         pearl.setItemMeta(pearlMeta);
+        pearl.getItemMeta().getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "index"), PersistentDataType.INTEGER, 2);
         return pearl;
     }
 
@@ -51,6 +56,7 @@ public class InfobarEssentials {
         pearllore.add("");
         pearlMeta.setLore(pearllore);
         pearl.setItemMeta(pearlMeta);
+        pearl.getItemMeta().getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "index"), PersistentDataType.INTEGER, 5);
         return pearl;
     }
 
@@ -66,6 +72,7 @@ public class InfobarEssentials {
         pearllore.add("");
         pearlMeta.setLore(pearllore);
         pearl.setItemMeta(pearlMeta);
+        pearl.getItemMeta().getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "index"), PersistentDataType.INTEGER, 6);
         return pearl;
     }
 
@@ -81,6 +88,7 @@ public class InfobarEssentials {
         pearllore.add("");
         pearlMeta.setLore(pearllore);
         pearl.setItemMeta(pearlMeta);
+        pearl.getItemMeta().getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "index"), PersistentDataType.INTEGER, 4);
         return pearl;
     }
 
@@ -95,6 +103,7 @@ public class InfobarEssentials {
         pearllore.add("§7lowste Piece deines Gegners hat.");
         pearlMeta.setLore(pearllore);
         pearl.setItemMeta(pearlMeta);
+        pearl.getItemMeta().getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "index"), PersistentDataType.INTEGER, 1);
         return pearl;
     }
 
@@ -109,36 +118,25 @@ public class InfobarEssentials {
         pearllore.add("§7in der Hand deines Gegners hat.");
         pearlMeta.setLore(pearllore);
         pearl.setItemMeta(pearlMeta);
+        pearl.getItemMeta().getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "index"), PersistentDataType.INTEGER, 7);
         return pearl;
     }
 
     public static ArrayList<ItemStack> neededItemstack(PlayerStats stats){
         ItemStack stack = null;
         ArrayList<ItemStack> stacks = new ArrayList<>();
-        for(int i = 1; i <= 3; i++) {
-            int infobar;
-            if(i == 1) {
-                infobar = stats.getInfobar1();
-            }else if(i == 2){
-                infobar = stats.getInfobar2();
-            }else{
-                infobar = stats.getInfobar3();
-            }
+        for(int i = 0; i < 3; i++) {
 
-            if (infobar == 1) {
-                stack = InfobarEssentials.Dura();
-            } else if (infobar == 2) {
-                stack = InfobarEssentials.XP();
-            } else if (infobar == 3) {
-                stack = InfobarEssentials.Enderpearl();
-            } else if (infobar == 4) {
-                stack = InfobarEssentials.Konto();
-            } else if (infobar == 5) {
-                stack = InfobarEssentials.tnt();
-            } else if (infobar == 6) {
-                stack = InfobarEssentials.Webs();
-            } else if (infobar == 7) {
-                stack = InfobarEssentials.MainHand();
+            int infobar = stats.getInfobarValues()[i];
+
+            switch (infobar){
+                case 1 -> stack = InfobarEssentials.Dura();
+                case 2 -> stack = InfobarEssentials.XP();
+                case 3 -> stack = InfobarEssentials.Enderpearl();
+                case 4 -> stack = InfobarEssentials.Konto();
+                case 5 -> stack = InfobarEssentials.tnt();
+                case 6 -> stack = InfobarEssentials.Webs();
+                case 7 -> stack = InfobarEssentials.MainHand();
             }
 
             stacks.add(stack);

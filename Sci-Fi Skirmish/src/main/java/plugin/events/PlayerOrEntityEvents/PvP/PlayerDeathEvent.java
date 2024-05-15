@@ -5,6 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemStack;
 import plugin.Main;
 import plugin.models.PlayerStats;
 import plugin.utils.CombatLogger;
@@ -26,6 +27,12 @@ public class PlayerDeathEvent implements Listener{
 
         //Casting player Into Event & Cancelling Death
         Player p = event.getPlayer();
+
+        if(p.getKiller() == null){
+            event.setCancelled(true);
+            return;
+        }
+
         p.setHealth(20);
         p.setFoodLevel(20);
 
@@ -45,22 +52,13 @@ public class PlayerDeathEvent implements Listener{
                 }
             }
 
-        if (p.getInventory().getBoots() != null) {
-            p.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), p.getInventory().getBoots());
-            p.getInventory().remove(p.getInventory().getBoots());
+        for(ItemStack stack : p.getInventory().getArmorContents()){
+            if (stack != null) {
+                p.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), stack);
+                p.getInventory().remove(stack);
+            }
         }
-        if (p.getInventory().getLeggings() != null) {
-            p.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), p.getInventory().getLeggings());
-            p.getInventory().remove(p.getInventory().getLeggings());
-        }
-        if (p.getInventory().getChestplate() != null) {
-            p.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), p.getInventory().getChestplate());
-            p.getInventory().remove(p.getInventory().getChestplate());
-        }
-        if (p.getInventory().getHelmet() != null) {
-            p.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), p.getInventory().getHelmet());
-            p.getInventory().remove(p.getInventory().getHelmet());
-        }
+
         p.getInventory().clear();
 
 
@@ -74,39 +72,34 @@ public class PlayerDeathEvent implements Listener{
                 }
 
                 try {
-                    PlayerStats stats = this.plugin.getDatabase().findPlayerStatsByUUID(p.getUniqueId().toString());
+                    PlayerStats stats = this.plugin.getDatabase().findPlayerStats(p);
 
                     if (stats == null) {
 
-                        stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "", 0, 1,  0, 0, 0, 0, 0, 0, "", false, false, false, false, false, false, 1, 2, 3);
-
+                        stats = new PlayerStats(p);
                         this.plugin.getDatabase().createPlayerStats(stats);
 
                     } else {
 
                         stats.setDeaths(stats.getDeaths() + 1);
-
                         this.plugin.getDatabase().updatePlayerStats(stats);
+
                     }
 
                     p.setScoreboard(ScoreBoardBuilder.Scoreboard(stats, p));
 
 
-                    PlayerStats stats1 = this.plugin.getDatabase().findPlayerStatsByUUID(p.getKiller().getUniqueId().toString());
+                    PlayerStats stats1 = this.plugin.getDatabase().findPlayerStats(p.getKiller());
 
                     if(stats1 == null){
 
-                        stats1 = new PlayerStats(p.getKiller().getUniqueId().toString(), p.getKiller().getName(), "", 5,  0, 1, 0, 0, 0, 0, 0, "", false, false, false, false, false, false, 1, 2, 3);
-
+                        stats1 = new PlayerStats(p.getKiller());
                         this.plugin.getDatabase().createPlayerStats(stats1);
 
-                    }else {
-
+                    }
                         stats1.setXp(stats1.getXp() + 5);
                         stats1.setKills(stats1.getKills() + 1);
-
                         this.plugin.getDatabase().updatePlayerStats(stats1);
-                    }
 
                         p.getKiller().setScoreboard(ScoreBoardBuilder.Scoreboard(stats1, p.getKiller()));
 

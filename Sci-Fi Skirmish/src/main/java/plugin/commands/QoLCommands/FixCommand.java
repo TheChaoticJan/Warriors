@@ -6,7 +6,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -23,9 +22,11 @@ public class FixCommand implements CommandExecutor, TabCompleter {
             commandSender.sendMessage("§cDu musst ein Spieler sein um §7´/fix´ §cauführen zu können!");
         }else if(strings.length == 1){
             if(strings[0].equals("armor")){
-                for(ItemStack stack : p.getInventory().getArmorContents()){
-                    stack.setDurability((short) stack.getMaxItemUseDuration());
-                }
+                Objects.requireNonNull(p.getInventory().getHelmet()).setDurability((short) p.getInventory().getHelmet().getMaxItemUseDuration());
+                Objects.requireNonNull(p.getInventory().getChestplate()).setDurability((short) p.getInventory().getChestplate().getMaxItemUseDuration());
+                Objects.requireNonNull(p.getInventory().getLeggings()).setDurability((short) p.getInventory().getLeggings().getMaxItemUseDuration());
+                Objects.requireNonNull(p.getInventory().getBoots()).setDurability((short) p.getInventory().getBoots().getMaxItemUseDuration());
+                p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_USE, 5, 1);
                 p.sendActionBar("§aErfolgreich deine Rüstung repariert");
             }
         }

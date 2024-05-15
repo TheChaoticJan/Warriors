@@ -28,97 +28,94 @@ public class ProjectileHitEvent implements Listener {
     }
 
     @EventHandler
-    public void BowEvent(org.bukkit.event.entity.ProjectileHitEvent e) {
+    public void BowEvent(org.bukkit.event.entity.ProjectileHitEvent event) {
 
-        if(e.getHitEntity() == null){
+        if(event.getHitEntity() == null){
             return;
         }
 
-        if (e.getEntity().getShooter() instanceof Player d) {
+        if (event.getEntity().getShooter() instanceof Player damager) {
 
-            if(d == e.getEntity()){
+            if(damager == event.getHitEntity()){
+                event.setCancelled(true);
                 return;
             }
 
-                if (!d.getItemInHand().getType().equals(Material.AIR)) {
-                    if (d.getItemInHand().getItemMeta() != null) {
-                        if (d.getItemInHand().getItemMeta() != null) {
-                            InventoryInteracts.checkSpeicalitemDrops(d);
+                if (!damager.getItemInHand().getType().equals(Material.AIR)) {
+                    if (damager.getItemInHand().getItemMeta() != null) {
+                        if (damager.getItemInHand().getItemMeta() != null) {
+                            InventoryInteracts.checkSpecialItemDrops(damager);
                         }
                     }
                 }
 
-                if (e.getHitEntity().getType().equals(EntityType.PLAYER)) {
 
-                    Player p = (Player) e.getHitEntity();
+                if  (event.getHitEntity() instanceof Player player){
+
 
                     try {
 
                         PlayerStats stats = null;
 
-                        if (p != null) {
-                            stats = this.plugin.getDatabase().findPlayerStatsByUUID(p.getUniqueId().toString());
+                            stats = this.plugin.getDatabase().findPlayerStats(player);
 
                             if (stats == null) {
 
-                                stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "", 0,   0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false, false, 1, 2, 3);
-
+                                stats = new PlayerStats(player);
                                 this.plugin.getDatabase().createPlayerStats(stats);
+
                             }
 
-
-                        }
-                        PlayerStats stats1 = this.plugin.getDatabase().findPlayerStatsByUUID(d.getUniqueId().toString());
+                        PlayerStats stats1 = this.plugin.getDatabase().findPlayerStats(damager);
 
                         if (stats1 == null) {
 
-                            stats1 = new PlayerStats(d.getUniqueId().toString(), d.getName(), "", 0,  0, 0, 0, 0, 0, 0, 0, "", false, false, false, false, false, false, 1, 2, 3);
+                            stats1 = new PlayerStats(damager);
 
                             this.plugin.getDatabase().createPlayerStats(stats1);
 
                         }
 
-                        CombatLogger.setInCombat(p, d);
+                        CombatLogger.setInCombat(player, damager);
 
-                        if (d.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "EssenceBow"))) {
+                        if (damager.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "EssenceBow"))) {
 
-                            if (new Count(p).getXp() >= 3) {
-                                p.getInventory().removeItem(new ItemStack(Material.EXPERIENCE_BOTTLE, 3));
+                            if (new Count(player).getXp() >= 3) {
+                                player.getInventory().removeItem(new ItemStack(Material.EXPERIENCE_BOTTLE, 3));
                                 stats1.setXp(stats1.getXp() + 3);
                             } else {
-                                p.getInventory().removeItem(new ItemStack(Material.EXPERIENCE_BOTTLE, new Count(p).getXp()));
-                                stats1.setXp(stats1.getXp() + new Count(p).getXp());
+                                player.getInventory().removeItem(new ItemStack(Material.EXPERIENCE_BOTTLE, new Count(player).getXp()));
+                                stats1.setXp(stats1.getXp() + new Count(player).getXp());
                             }
 
-                            d.playSound(d, Sound.ITEM_HONEY_BOTTLE_DRINK, 50, 1);
+                            damager.playSound(damager, Sound.ITEM_HONEY_BOTTLE_DRINK, 50, 1);
                             Main.getInstance().getDatabase().updatePlayerStats(stats1);
-                            d.setCooldown(Material.BOW, 5 * 20);
+                            damager.setCooldown(Material.BOW, 5 * 20);
                         }
 
-                        assert stats != null;
                         if (!Objects.equals(stats.getClan(), "") && !Objects.equals(stats1.getClan(), "")) {
                             if (stats.getClan().equals(stats1.getClan())) {
-                                e.setCancelled(true);
+                                event.setCancelled(true);
                                 return;
                             }
                         }
 
-                        if (e.getEntity().getType().equals(EntityType.FISHING_HOOK) || e.getEntity().getType().equals(EntityType.SNOWBALL)) {
-                            p.damage(0.1);
-                            p.setVelocity(d.getLocation().getDirection().setY(0.2).multiply(1));
-                            if (e.getEntity().getType().equals(EntityType.SNOWBALL)) {
-                                p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 60, 99));
+                        if (event.getEntity().getType().equals(EntityType.FISHING_HOOK) || event.getEntity().getType().equals(EntityType.SNOWBALL)) {
+                            player.damage(0.1);
+                            player.setVelocity(damager.getLocation().getDirection().setY(0.2).multiply(1));
+                            if (event.getEntity().getType().equals(EntityType.SNOWBALL)) {
+                                player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 60, 99));
                             }
                         }
 
-                        if (e.getEntity().getType().equals(EntityType.ARROW)) {
-                            if (stats1.getPerk2()) {
+                        if (event.getEntity().getType().equals(EntityType.ARROW)) {
+                            if (stats1.getPerks()[1]) {
                                 PotionEffect effect = new PotionEffect(PotionEffectType.SLOW, 200, 0);
-                                p.addPotionEffect(effect);
+                                player.addPotionEffect(effect);
                             }
                         }
 
-                        d.sendActionBar(Actionbar.buildActionbar(p, stats, stats1.getInfobar1(), stats1.getInfobar2(), stats1.getInfobar3()));
+                        damager.sendActionBar(Actionbar.buildActionbar(player, stats, stats1.getInfobarValues()));
 
                     } catch (SQLException s) {
                         s.printStackTrace();

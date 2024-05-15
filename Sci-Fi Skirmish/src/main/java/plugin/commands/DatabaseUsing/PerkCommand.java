@@ -16,16 +16,22 @@ import java.util.List;
 
 public class PerkCommand implements CommandExecutor, TabCompleter {
 
+    Main plugin;
+
+    public PerkCommand(Main plugin) {
+        this.plugin = plugin;
+    }
+
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
 
         if(commandSender instanceof Player p){
             try{
-                PlayerStats stats = Main.getInstance().getDatabase().findPlayerStatsByUUID(p.getUniqueId().toString());
+                PlayerStats stats = this.plugin.getDatabase().findPlayerStats(p);
 
                 if(stats == null){
-                    stats = new PlayerStats(p.getUniqueId().toString(), p.getName(), "", 0, 1,  0,  0, 0, 0, 0, 0, "", false, false, false, false, false,false, 1,2, 3);
-                    Main.getInstance().getDatabase().createPlayerStats(stats);
+                    stats = new PlayerStats(p);
+                    this.plugin.getDatabase().createPlayerStats(stats);
                 }
 
                 p.openInventory(PerkInventories.overview(p, stats));

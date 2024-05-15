@@ -13,23 +13,17 @@ public class CombatLogger {
 
     private static final ArrayList<Player> inCombatMap = new ArrayList<>();
     private static final HashMap<Player, Player> inCombatWithMap = new HashMap<>();
-
     public static void setInCombat(Player combat1, Player combat2){
-
-        if(combat1 == combat2){
-            return;
-        }
-
         try {
         inCombatMap.add(combat1);
         inCombatMap.add(combat2);
-        combat1.setScoreboard(ScoreBoardBuilder.Scoreboard(Main.getInstance().getDatabase().findPlayerStatsByUUID(String.valueOf(combat1.getUniqueId())), combat1));
-        combat2.setScoreboard(ScoreBoardBuilder.Scoreboard(Main.getInstance().getDatabase().findPlayerStatsByUUID(String.valueOf(combat2.getUniqueId())), combat2));
+        combat1.setScoreboard(ScoreBoardBuilder.Scoreboard(Main.getInstance().getDatabase().findPlayerStats(combat1), combat1));
+        combat2.setScoreboard(ScoreBoardBuilder.Scoreboard(Main.getInstance().getDatabase().findPlayerStats(combat2), combat2));
 
             Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> {
                 CombatLogger.removeFromCombat(combat1);
                 try {
-                    combat1.setScoreboard(ScoreBoardBuilder.Scoreboard(Main.getInstance().getDatabase().findPlayerStatsByUUID(String.valueOf(combat1.getUniqueId())), combat1));
+                    combat1.setScoreboard(ScoreBoardBuilder.Scoreboard(Main.getInstance().getDatabase().findPlayerStats(combat1), combat1));
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -37,7 +31,7 @@ public class CombatLogger {
                 Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> {
                     CombatLogger.removeFromCombat(combat2);
                     try {
-                        combat2.setScoreboard(ScoreBoardBuilder.Scoreboard(Main.getInstance().getDatabase().findPlayerStatsByUUID(String.valueOf(combat2.getUniqueId())), combat2));
+                        combat2.setScoreboard(ScoreBoardBuilder.Scoreboard(Main.getInstance().getDatabase().findPlayerStats(combat1), combat2));
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }

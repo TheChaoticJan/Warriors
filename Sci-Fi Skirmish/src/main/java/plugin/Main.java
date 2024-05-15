@@ -1,6 +1,5 @@
 package plugin;
 
-import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -12,20 +11,21 @@ import plugin.commands.DatabaseUsing.TopCommand;
 import plugin.commands.DatabaseUsing.XPCommand;
 import plugin.commands.FunCommands.SignCommand;
 import plugin.commands.FunCommands.UwUCommand;
-import plugin.commands.InventoryCommands.CommonInventories.*;
+import plugin.commands.InventoryCommands.CommonInventories.AnvilCommand;
+import plugin.commands.InventoryCommands.CommonInventories.EnderchestCommand;
+import plugin.commands.InventoryCommands.CommonInventories.SmithingTableCommand;
+import plugin.commands.InventoryCommands.CommonInventories.TrashCommand;
 import plugin.commands.InventoryCommands.GUIs.KitCommand;
 import plugin.commands.InventoryCommands.GUIs.RezeptCommand;
 import plugin.commands.InventoryCommands.GUIs.RezepteCommand;
 import plugin.commands.InventoryCommands.GUIs.SpecialitemCommand;
+import plugin.commands.InventoryCommands.CommonInventories.WorkbenchCommand;
 import plugin.commands.ModerationsCommands.InvseeCommand;
 import plugin.commands.ModerationsCommands.VanishCommand;
-import plugin.commands.QoLCommands.FixCommand;
-import plugin.commands.QoLCommands.HealCommand;
-import plugin.commands.QoLCommands.ModifyCommand;
-import plugin.commands.QoLCommands.SpawnCommand;
-import plugin.cratesystem.CrateEntities.Crate;
+import plugin.commands.QoLCommands.*;
 import plugin.cratesystem.CrateEntities.CrateDeathEvent;
 import plugin.cratesystem.CrateEntities.CrateHitEvent;
+import plugin.cratesystem.CrateEntities.Crate;
 import plugin.cratesystem.SpawnCrateCommand;
 import plugin.database.Database;
 import plugin.events.BlockEvents.BlockEvents;
@@ -35,9 +35,9 @@ import plugin.events.InventoryEvents.ClickEvent;
 import plugin.events.InventoryEvents.InfobarClick;
 import plugin.events.InventoryEvents.PerkClickEvent;
 import plugin.events.InventoryEvents.Rezepte.RezeptClickEvent;
-import plugin.events.PlayerOrEntityEvents.interactions.*;
+import plugin.events.PlayerOrEntityEvents.Interactions.*;
+import plugin.events.PlayerOrEntityEvents.Interactions.chatevents.ChatEvent;
 import plugin.events.PlayerOrEntityEvents.PvP.*;
-import plugin.events.PlayerOrEntityEvents.interactions.chatevents.ChatEvent;
 import plugin.infobar.InfobarCommand;
 import plugin.utils.Recipes.*;
 import plugin.utils.Scores.ScoreBoardBuilder;
@@ -48,15 +48,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.UUID;
+
 public final class Main extends JavaPlugin{
 
     private TablistManager tablistManager;
-    private static @Getter Main instance;
+    public static Main instance;
     public ArrayList<UUID> VanishList = new ArrayList<>();
     public TablistManager getTablistManager() {
         return tablistManager;
     }
-    private static @Getter Database database;
+    private Database database;
 
 
     @Override
@@ -67,7 +68,7 @@ public final class Main extends JavaPlugin{
         instance = this;
 
         try{
-            database = new Database();
+            this.database = new Database();
             database.initiliazeDatabase();
 
         }catch (SQLException e){
@@ -90,7 +91,7 @@ public final class Main extends JavaPlugin{
 
         getServer().getOnlinePlayers().forEach(player -> {
             try {
-                player.setScoreboard(ScoreBoardBuilder.Scoreboard(getDatabase().findPlayerStatsByUUID(String.valueOf(player.getUniqueId())), player));
+                player.setScoreboard(ScoreBoardBuilder.Scoreboard(getDatabase().findPlayerStats(player), player));
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -131,7 +132,7 @@ public final class Main extends JavaPlugin{
         getServer().getPluginManager().registerEvents(new ChatEvent(), this );
         getServer().getPluginManager().registerEvents(new ProjectileHitEvent(this), this );
         getServer().getPluginManager().registerEvents(new PlayerDeathEvent(this), this);
-        getServer().getPluginManager().registerEvents(new CrateDeathEvent(), this);
+        getServer().getPluginManager().registerEvents(new CrateDeathEvent(this), this);
         getServer().getPluginManager().registerEvents(new RightClickEvent(this), this);
         getServer().getPluginManager().registerEvents(new RezeptClickEvent(), this);
         getServer().getPluginManager().registerEvents(new DropEvent(), this);
@@ -166,12 +167,18 @@ public final class Main extends JavaPlugin{
         Objects.requireNonNull(getCommand("trash")).setExecutor(new TrashCommand());
         Objects.requireNonNull(getCommand("modify")).setExecutor(new ModifyCommand());
         Objects.requireNonNull(getCommand("top")).setExecutor(new TopCommand(this));
-        Objects.requireNonNull(getCommand("perks")).setExecutor(new PerkCommand());
+        Objects.requireNonNull(getCommand("perks")).setExecutor(new PerkCommand(this));
         Objects.requireNonNull(getCommand("infobar")).setExecutor(new InfobarCommand(this));
         Objects.requireNonNull(getCommand("crate")).setExecutor(new SpawnCrateCommand());
         Objects.requireNonNull(getCommand("smithingtable")).setExecutor(new SmithingTableCommand());
 
 
+    }
+    public static Main getInstance(){
+        return instance;
+    }
+    public Database getDatabase() {
+        return database;
     }
 
     @Override

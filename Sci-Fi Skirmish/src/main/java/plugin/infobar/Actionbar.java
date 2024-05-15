@@ -1,6 +1,5 @@
 package plugin.infobar;
 
-import org.checkerframework.checker.units.qual.C;
 import plugin.models.PlayerStats;
 import plugin.utils.essentials.Count;
 import org.bukkit.entity.Player;
@@ -9,8 +8,11 @@ import java.util.Objects;
 
 public class Actionbar {
 
+    public Actionbar(){
 
-    public static String buildActionbar(Player p, PlayerStats stats, int module1, int module2, int module3){
+    }
+
+    public static String buildActionbar(Player p, PlayerStats stats, int [] modules){
 
         Count counted = new Count(p);
 
@@ -47,7 +49,7 @@ public class Actionbar {
                 stats.setClan("§cClanlos");
             }
 
-        int mainHandDura = counted.getMainHandDura();
+        int mainHandDura = counted.getMainhanddura();
         String mainhand = "§8<§bMainhand§8> §9" + mainHandDura;
         
         String clan = "§8<§6Konto§8> §e" + stats.getXp() + " §6✧";
@@ -56,36 +58,15 @@ public class Actionbar {
         String tnt1 = "§8<§x§9§E§1§B§5§0T§x§C§F§0§E§5§2N§x§F§F§0§0§5§3T§8> §x§C§F§0§E§5§2" + counted.getTnt();
         String webs1 = "§8<§fWebs§8> §§x§C§2§F§A§E§F" + counted.getWebs();
 
+        String [] pieces = {"", "", ""};
+
         //Assigning Strings to Modules
+        for(int i = 0; i < 3; i++){
+            String [] cache = {Piece, xp1, pearls1, clan, tnt1, webs1, mainhand};
 
-        String piece1 = "";
-        String piece2 = "";
-        String piece3 = "";
-
-        for(int i = 1; i <= 3; i++){
-            String var = "";
-            int val = 0;
-            //Gathering moduleX
-            if(i == 1) { val = module1; }
-            if(i == 2) { val = module2; }
-            if(i == 3) { val = module3; }
-
-            if(val == 1){ var = Piece; }
-            else if(val == 2){ var = xp1; }
-            else if(val == 3){ var = pearls1; }
-            else if(val == 4){ var = clan; }
-            else if(val == 5){ var = tnt1; }
-            else if(val == 6){ var = webs1; }
-            else if(val == 7){ var = mainhand; }
-            //Assigning to pieceX
-            if(i == 1) { piece1 = var; }
-            if(i == 2) { piece2 = var; }
-            if(i == 3) { piece3 = var; }
+            pieces[i] = cache[modules[i] - 1];
         }
 
-        String Actionbar;
-        Actionbar = piece1 + " §7| " + piece2 + " §7| " + piece3;
-
-        return Actionbar;
+        return pieces[0] + " §7| " + pieces[1] + " §7| " + pieces[2];
     }
 }

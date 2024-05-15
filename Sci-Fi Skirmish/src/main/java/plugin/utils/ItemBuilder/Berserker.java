@@ -22,10 +22,14 @@ public class Berserker {
         ItemStack stack = new ItemStack(Material.GOLDEN_AXE);
         ItemMeta meta = stack.getItemMeta();
 
+        Player player1 = player;
+        player1.getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "humbug"), PersistentDataType.STRING, "");
+
+
         meta.getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "berserker_axe"), PersistentDataType.BYTE, (byte) 1);
 
         if(player.getName().endsWith("s")) {
-            meta.displayName(MiniMessage.miniMessage().deserialize("<i:false><b><#9d2323><obf>aa</obf><gradient:#6a3e0a:#9d2323:#e5e814> " + player.getName() +  "' Kampfaxt <#9d2323><obf>aa"));
+            meta.displayName(MiniMessage.miniMessage().deserialize("<i:false><b><#9d2323><obf>aa</obf><gradient:#824622:#b5185c> " + player.getName() +  "' Kampfaxt <#9d2323><obf>aa"));
         }else{
             meta.displayName(MiniMessage.miniMessage().deserialize("<i:false><b><#9d2323><obf>aa</obf><gradient:#6a3e0a:#9d2323:#e5e814> " + player.getName() +  "'s Kampfaxt <#9d2323><obf>aa"));
         }
@@ -47,7 +51,6 @@ public class Berserker {
         return stack;
 
     }
-
 
     public static ItemStack Tracker(){
         ItemStack stack = new ItemStack(Material.COMPASS);

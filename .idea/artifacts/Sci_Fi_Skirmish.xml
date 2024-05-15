@@ -3,6 +3,7 @@
     <output-path>$USER_HOME$/Desktop/1.20.1 Minecraft Server/plugins</output-path>
     <root id="archive" name="Sci-Fi Skirmish.jar">
       <element id="module-output" name="JansParadise" />
+      <element id="library" level="project" name="Maven: org.projectlombok:lombok:1.18.30" />
     </root>
   </artifact>
 </component>

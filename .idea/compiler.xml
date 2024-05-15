@@ -13,8 +13,6 @@
     <bytecodeTargetLevel>
       <module name="JansParadise (1)" target="17" />
       <module name="Specialtitems" target="1.8" />
-      <module name="test" target="1.8" />
-      <module name="untitled" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

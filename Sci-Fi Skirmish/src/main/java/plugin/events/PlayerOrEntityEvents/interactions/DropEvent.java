@@ -1,4 +1,4 @@
-package plugin.events.PlayerOrEntityEvents.interactions;
+package plugin.events.PlayerOrEntityEvents.Interactions;
 
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -12,9 +12,9 @@ public class DropEvent implements Listener{
        if(e.getItemDrop().getItemStack().getType().equals(Material.SANDSTONE)){
            e.setCancelled(true);
        }
-       if(e.getItemDrop().getItemStack().getType().equals(Material.ENCHANTED_BOOK)){
-           e.getItemDrop().setCustomName(e.getItemDrop().getItemStack().getItemMeta().getDisplayName());
-           e.getItemDrop().setCustomNameVisible(true);
-       }
+        if(e.getItemDrop().getItemStack().getType().equals(Material.ENCHANTED_BOOK)){
+            e.getItemDrop().setCustomName(e.getItemDrop().getItemStack().getItemMeta().getDisplayName());
+            e.getItemDrop().setCustomNameVisible(true);
+        }
     }
 }

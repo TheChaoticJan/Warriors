@@ -33,7 +33,7 @@ public class SelectCandleInventory {
             boostCandle.removeEnchantment(Enchantment.DURABILITY);
         }else{
            Objects.requireNonNull(boostCandle.getItemMeta().getLore()).add("");
-            Objects.requireNonNull(boostCandle.getItemMeta().getLore()).add("§aIm Moment ausgewählt!");
+           Objects.requireNonNull(boostCandle.getItemMeta().getLore()).add("§aIm Moment ausgewählt!");
         }
         inventory.setItem(10, boostCandle);
 

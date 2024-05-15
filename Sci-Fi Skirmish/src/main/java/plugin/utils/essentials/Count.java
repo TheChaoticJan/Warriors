@@ -13,7 +13,7 @@ public class Count {
     private @Getter int pearls = 0;
     private @Getter int webs = 0;
     private @Getter int tnt = 0;
-    private @Getter int mainHandDura = 0;
+    private @Getter int mainhanddura = 0;
     private @Getter int helmetDura = 0;
     private @Getter int bootsDura = 0;
     private @Getter int chestDura = 0;
@@ -26,13 +26,13 @@ public class Count {
                     this.xp = this.xp + Objects.requireNonNull(p.getInventory().getItem(m)).getAmount();
                 }
                 if (Objects.requireNonNull(p.getInventory().getItem(m)).getType().equals(Material.ENDER_PEARL)) {
-                    pearls = pearls + Objects.requireNonNull(p.getInventory().getItem(m)).getAmount();
+                    pearls += Objects.requireNonNull(p.getInventory().getItem(m)).getAmount();
                 }
                 if (Objects.requireNonNull(p.getInventory().getItem(m)).getType().equals(Material.TNT)) {
-                    tnt = tnt + Objects.requireNonNull(p.getInventory().getItem(m)).getAmount();
+                    tnt += Objects.requireNonNull(p.getInventory().getItem(m)).getAmount();
                 }
                 if (Objects.requireNonNull(p.getInventory().getItem(m)).getType().equals(Material.COBWEB)) {
-                    webs = webs + Objects.requireNonNull(p.getInventory().getItem(m)).getAmount();
+                    webs += Objects.requireNonNull(p.getInventory().getItem(m)).getAmount();
                 }
             }
         }
@@ -66,10 +66,8 @@ public class Count {
             }
         }
 
-        if (p.getItemInHand().getType().equals(Material.AIR)) {
-            mainHandDura = 0;
-        } else {
-            mainHandDura = p.getInventory().getItemInMainHand().getType().getMaxDurability() - p.getInventory().getItemInMainHand().getDurability();
+        if (!p.getItemInHand().getType().equals(Material.AIR)) {
+            mainhanddura = p.getInventory().getItemInMainHand().getType().getMaxDurability() - p.getInventory().getItemInMainHand().getDurability();
         }
     }
 

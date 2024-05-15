@@ -1,4 +1,4 @@
-package plugin.utils.InventoryBuilder;
+package plugin.infobar;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
