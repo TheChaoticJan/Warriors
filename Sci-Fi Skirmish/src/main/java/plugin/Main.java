@@ -2,9 +2,12 @@ package plugin;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 import plugin.commands.DatabaseUsing.PerkCommand;
 import plugin.commands.DatabaseUsing.StatsCommand;
 import plugin.commands.DatabaseUsing.TopCommand;
@@ -58,8 +61,6 @@ public final class Main extends JavaPlugin{
         return tablistManager;
     }
     private Database database;
-
-
     @Override
     public void onEnable() {
 
@@ -76,10 +77,11 @@ public final class Main extends JavaPlugin{
             System.out.println("\u001B[31m Mögliche Quellen: Falsche Tabellen, Datenbank abgeschalten");
             e.printStackTrace();
         }
+
         getServer().getWorlds()
                 .forEach(world -> world.getEntitiesByClass(ArmorStand.class).stream().
-                                filter(entity -> (Objects.equals(entity.getCustomName(), "§x§F§F§E§2§5§9N§x§F§F§D§E§5§8a§x§F§F§D§A§5§8c§x§F§F§D§5§5§7h§x§F§F§D§1§5§7s§x§F§F§C§D§5§6c§x§F§F§C§9§5§6h§x§F§F§C§5§5§5u§x§F§F§C§0§5§4b§x§F§F§B§C§5§4s§x§F§F§B§8§5§3k§x§F§F§B§4§5§3i§x§F§F§A§F§5§2s§x§F§F§A§B§5§2t§x§F§F§A§7§5§1e §8» §7???")))
-                                .forEach(Crate::startRotation)
+                                filter(entity -> (Objects.equals(entity.getPersistentDataContainer().has(new NamespacedKey(this, "key")), true)))
+                                .forEach(Crate::new)
                         );
 
         getServer().getOnlinePlayers().forEach(player -> Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
@@ -183,6 +185,12 @@ public final class Main extends JavaPlugin{
 
     @Override
     public void onDisable() {
+
+        for(BukkitTask task : Bukkit.getScheduler().getPendingTasks()){
+            Runnable runnable = (Runnable) task;
+            runnable.run();
+            task.cancel();
+        }
 
         for(Block block : BlockEvents.blocks){
             block.setType(Material.AIR);

@@ -5,26 +5,48 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import plugin.cratesystem.CrateEntities.Crate;
 import plugin.utils.ItemBuilder.SpecialResources;
 
 import java.util.ArrayList;
 import java.util.Random;
 public class Loot {
 
-    private final @Getter ArrayList<ItemStack> list = new ArrayList<>();
+    private final @Getter ArrayList<ItemStack> contents = new ArrayList<>();
 
-    Loot(ArrayList<ItemStack> list, int mindropamount){
+    public Loot(String rarity) {
 
-        int amount = new Random().nextInt(mindropamount + 2) + mindropamount;
+        int iterations = (int) (Math.random() * 2);
 
-        for(int i = 0; i < amount; i++) {
-            this.list.add(list.get(new Random().nextInt(list.size())));
+        switch (rarity){
+            case "common" -> {
+                for (int i = iterations; i < 3; i++) {
+                contents.add(commonDrop());
+                }
+            }
+            case "uncommon" -> {
+                for (int i = iterations; i < 3; i++) {
+                    contents.add(uncommonDrop());
+                }
+            }
+            case "epic" -> {
+                for (int i = iterations; i < 3; i++) {
+                    contents.add(epicDrop());
+                }
+            }
+            case "rare" -> {
+                for (int i = iterations; i < 3; i++) {
+                    contents.add(legendaryDrop());
+                }
+            }
+            case "mythic" -> {
+                for (int i = iterations; i < 3; i++) {
+                    contents.add(mythicDrop());
+                }
+            }
         }
 
     }
@@ -205,4 +227,6 @@ public class Loot {
 
         return new ItemStack(mythicDrops.get(new Random().nextInt(mythicDrops.size())));
     }
+
+
 }

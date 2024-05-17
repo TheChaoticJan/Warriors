@@ -20,7 +20,7 @@ import plugin.Main;
 import plugin.events.BlockEvents.BlockEvents;
 import plugin.infobar.Actionbar;
 import plugin.models.PlayerStats;
-import plugin.utils.CombatLogger;
+import plugin.utils.PlayerCombatHandler;
 import plugin.utils.essentials.Count;
 import plugin.utils.essentials.InventoryInteracts;
 
@@ -103,38 +103,36 @@ public class PlayerGetHitEvent implements Listener{
             return;
         }
 
-        Player d = (Player) event.getDamager();
-        InventoryInteracts.checkSpecialItemDrops(d);
+        Player damager = (Player) event.getDamager();
+        InventoryInteracts.checkSpecialItemDrops(damager);
 
-        if(event.getEntity().getType() == EntityType.PLAYER){
-            Player p = (Player) event.getEntity();
+        if(event.getEntity() instanceof  Player player){
 
-
-                int HDura = new Count(p).getHelmetDura();
-                int CDura = new Count(p).getChestDura();
-                int LDura = new Count(p).getLeggingsDura();
-                int BDura = new Count(p).getBootsDura();
+                int HDura = new Count(player).getHelmetDura();
+                int CDura = new Count(player).getChestDura();
+                int LDura = new Count(player).getLeggingsDura();
+                int BDura = new Count(player).getBootsDura();
 
 
             try {
 
-                PlayerStats stats = this.plugin.getDatabase().findPlayerStats(p);
+                PlayerStats stats = this.plugin.getDatabase().findPlayerStats(player);
                 if (stats == null) {
 
-                    stats = new PlayerStats(p);
+                    stats = new PlayerStats(player);
                     this.plugin.getDatabase().createPlayerStats(stats);
 
                 }
 
-                PlayerStats stats1 = this.plugin.getDatabase().findPlayerStats(d);
+                PlayerStats stats1 = this.plugin.getDatabase().findPlayerStats(damager);
                 if (stats1 == null) {
 
-                    stats1 = new PlayerStats(d);
+                    stats1 = new PlayerStats(damager);
                     this.plugin.getDatabase().createPlayerStats(stats1);
 
                 }
 
-                CombatLogger.setInCombat(p, d);
+                PlayerCombatHandler.setInCombat(player, damager);
 
                 if(!Objects.equals(stats.getClan(), "") | !Objects.equals(stats1.getClan(), "")){
                     if(stats.getClan().equals(stats1.getClan())){
@@ -147,7 +145,7 @@ public class PlayerGetHitEvent implements Listener{
                     int rndm = (int) (1 + Math.random() * 111);
 
                     if(rndm == 1) {
-                        InventoryInteracts.healArmorPieces(p, 10);
+                        InventoryInteracts.healArmorPieces(player, 10);
                     }
                 }
 
@@ -156,9 +154,9 @@ public class PlayerGetHitEvent implements Listener{
                         PotionEffect effect1 = new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 200, 0);
                         PotionEffect effect2 = new PotionEffect(PotionEffectType.SPEED, 200, 0);
 
-                        p.addPotionEffect(effect1);
-                        p.addPotionEffect(effect2);
-                        p.playSound(p.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_BREAK, 20, 1);
+                        player.addPotionEffect(effect1);
+                        player.addPotionEffect(effect2);
+                        player.playSound(player.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_BREAK, 20, 1);
                     }
                 }
 
@@ -166,12 +164,12 @@ public class PlayerGetHitEvent implements Listener{
                     int random = (int) (1 + Math.random() * 240);
                     if(random == 1){
 
-                        Block block1 = p.getWorld().getBlockAt(p.getLocation().getBlockX(), p.getLocation().getBlockY() + 1, p.getLocation().getBlockZ());
+                        Block block1 = player.getWorld().getBlockAt(player.getLocation().getBlockX(), player.getLocation().getBlockY() + 1, player.getLocation().getBlockZ());
 
                         block1.setType(Material.COBWEB);
                         BlockEvents.addBlockToList(block1);
 
-                        d.playSound(d.getLocation(), Sound.ENTITY_FROG_LONG_JUMP, 20, 1);
+                        damager.playSound(damager.getLocation(), Sound.ENTITY_FROG_LONG_JUMP, 20, 1);
 
                         Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> {
                             int i = 5;
@@ -180,7 +178,7 @@ public class PlayerGetHitEvent implements Listener{
                             }
                             if(block1.getType() != Material.AIR) {
                                 block1.setType(Material.AIR);
-                                block1.getWorld().spawnParticle(Particle.CRIT, new Location(Bukkit.getWorld("world"), p.getLocation().getBlockX(), p.getLocation().getBlockY(), p.getLocation().getBlockZ()), 15);
+                                block1.getWorld().spawnParticle(Particle.CRIT, new Location(Bukkit.getWorld("world"), player.getLocation().getBlockX(), player.getLocation().getBlockY(), player.getLocation().getBlockZ()), 15);
                                 BlockEvents.removeBlockFromList(block1);
                             }
 
@@ -188,7 +186,7 @@ public class PlayerGetHitEvent implements Listener{
                     }
                 }
 
-                d.sendActionBar(Actionbar.buildActionbar(p,stats, stats1.getInfobarValues()));
+                damager.sendActionBar(Actionbar.buildActionbar(player,stats, stats1.getInfobarValues()));
 
             }catch (SQLException e){
                 e.printStackTrace();

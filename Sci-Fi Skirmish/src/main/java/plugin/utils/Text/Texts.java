@@ -1,6 +1,20 @@
 package plugin.utils.Text;
 
+import java.util.Random;
+
 public class Texts {
+
+    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ÄÖÜäöü;,:._-";
+    private static final Random RANDOM = new Random();
+
+    public static String generateRandomString(int STRING_LENGTH) {
+        StringBuilder stringBuilder = new StringBuilder(STRING_LENGTH);
+        for (int i = 0; i < STRING_LENGTH; i++) {
+            int randomIndex = RANDOM.nextInt(CHARACTERS.length());
+            stringBuilder.append(CHARACTERS.charAt(randomIndex));
+        }
+        return stringBuilder.toString();
+    }
 
     public static String stringToMiniMessage(String s) {
         return s

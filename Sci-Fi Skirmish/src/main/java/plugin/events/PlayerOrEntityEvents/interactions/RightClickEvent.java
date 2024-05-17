@@ -12,7 +12,7 @@ import org.bukkit.persistence.PersistentDataType;
 import plugin.Main;
 import plugin.cratesystem.Loot;
 import plugin.models.PlayerStats;
-import plugin.utils.CombatLogger;
+import plugin.utils.PlayerCombatHandler;
 import plugin.utils.InventoryBuilder.SelectCandleInventory;
 import plugin.utils.Text.Texts;
 import plugin.utils.essentials.InventoryInteracts;
@@ -86,8 +86,8 @@ public class RightClickEvent implements Listener{
 
             }
 
-            if(p.getItemInHand().getType().equals(Material.DIAMOND_SWORD) && e.getAction().isRightClick() && CombatLogger.isInCombat(p) && stats.getPerks()[5] && !lockCooldown.containsKey(p.getUniqueId())){
-                Player victim = CombatLogger.isInCombatWith(p);
+            if(p.getItemInHand().getType().equals(Material.DIAMOND_SWORD) && e.getAction().isRightClick() && PlayerCombatHandler.isInCombat(p) && stats.getPerks()[5] && !lockCooldown.containsKey(p.getUniqueId())){
+                Player victim = PlayerCombatHandler.isInCombatWith(p);
                 victim.setCooldown(Material.ENDER_PEARL, 200);
                 victim.setCooldown(Material.COBWEB, 200);
                 victim.setCooldown(Material.BOW, 200);
@@ -177,8 +177,8 @@ public class RightClickEvent implements Listener{
             }
 
         if(p.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "candle")) && p.getItemInHand().getType().equals(Material.GREEN_CANDLE) && e.getAction().isRightClick() && !Objects.equals(teleportCooldown.get(p.getUniqueId()), "teleport") && !p.isSneaking()){
-            if(CombatLogger.isInCombat(p)){
-                p.teleport(Objects.requireNonNull(CombatLogger.isInCombatWith(p)));
+            if(PlayerCombatHandler.isInCombat(p)){
+                p.teleport(Objects.requireNonNull(PlayerCombatHandler.isInCombatWith(p)));
                 p.setCooldown(Material.GREEN_CANDLE, 1800);
                 p.playSound(p.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 20, 1);
                 teleportCooldown.put(p.getUniqueId(), "teleport");

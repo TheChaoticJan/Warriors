@@ -4,7 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.*;
 import plugin.models.PlayerStats;
-import plugin.utils.CombatLogger;
+import plugin.utils.PlayerCombatHandler;
 
 import java.util.Objects;
 
@@ -43,7 +43,7 @@ public class ScoreBoardBuilder {
         Score score10 = objective.getScore("§p   §8▸§c " + kd + " ⚔");
         Score score11 = objective.getScore("§q");
         Score score8 = objective.getScore("§r    §8[§aNicht in Combat§8]");
-        if(CombatLogger.isInCombat(p)){
+        if(PlayerCombatHandler.isInCombat(p)){
             score8 = objective.getScore("§r       §8[§cIn Combat§8]");
         }
 

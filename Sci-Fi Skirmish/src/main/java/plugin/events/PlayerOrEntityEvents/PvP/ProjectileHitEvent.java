@@ -13,7 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 import plugin.Main;
 import plugin.infobar.Actionbar;
 import plugin.models.PlayerStats;
-import plugin.utils.CombatLogger;
+import plugin.utils.PlayerCombatHandler;
 import plugin.utils.essentials.Count;
 import plugin.utils.essentials.InventoryInteracts;
 
@@ -76,7 +76,7 @@ public class ProjectileHitEvent implements Listener {
 
                         }
 
-                        CombatLogger.setInCombat(player, damager);
+                        PlayerCombatHandler.setInCombat(player, damager);
 
                         if (damager.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "EssenceBow"))) {
 

@@ -9,7 +9,24 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CombatLogger {
+public class PlayerCombatHandler{
+
+    //TODO: Refactor this to be Object-oriented. One Global CombatHandlerObject handling all of the combat, other than it is right now
+
+    private final Player player;
+    private static Player lastAttacked;
+    Boolean combatStatus;
+    public PlayerCombatHandler(Player player){
+        this.player = player;
+    }
+    public Player getLastAttacked(){
+        return lastAttacked;
+    }
+
+    public void startCombat(Player victim){
+        this.combatStatus = true;
+
+    }
 
     private static final ArrayList<Player> inCombatMap = new ArrayList<>();
     private static final HashMap<Player, Player> inCombatWithMap = new HashMap<>();
@@ -21,7 +38,7 @@ public class CombatLogger {
         combat2.setScoreboard(ScoreBoardBuilder.Scoreboard(Main.getInstance().getDatabase().findPlayerStats(combat2), combat2));
 
             Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> {
-                CombatLogger.removeFromCombat(combat1);
+                PlayerCombatHandler.removeFromCombat(combat1);
                 try {
                     combat1.setScoreboard(ScoreBoardBuilder.Scoreboard(Main.getInstance().getDatabase().findPlayerStats(combat1), combat1));
                 } catch (SQLException e) {
@@ -29,7 +46,7 @@ public class CombatLogger {
                 }
             }, 20 * 10);
                 Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> {
-                    CombatLogger.removeFromCombat(combat2);
+                    PlayerCombatHandler.removeFromCombat(combat2);
                     try {
                         combat2.setScoreboard(ScoreBoardBuilder.Scoreboard(Main.getInstance().getDatabase().findPlayerStats(combat1), combat2));
                     } catch (SQLException e) {
@@ -41,7 +58,6 @@ public class CombatLogger {
     } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
     public static Boolean isInCombat(Player p){
         return inCombatMap.contains(p);
