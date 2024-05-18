@@ -11,7 +11,7 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import plugin.Main;
 import plugin.events.PlayerOrEntityEvents.Interactions.RightClickEvent;
 import plugin.models.PlayerStats;
-import plugin.utils.PlayerCombatHandler;
+import plugin.models.PlayerCombatHandler;
 import plugin.utils.Text.Texts;
 
 import java.sql.SQLException;
@@ -23,7 +23,7 @@ public class ChatEvent implements Listener{
     public void onCommandEvent(PlayerCommandPreprocessEvent event){
         Player player = event.getPlayer();
 
-        if(PlayerCombatHandler.isInCombat(player) && !player.isOp()){
+        if(PlayerCombatHandler.getCombatStatusByPlayer(player).getCombatStatus() && !player.isOp()){
             event.setCancelled(true);
             player.sendActionBar("§c§lDu kannst keine Befehle ausführen, während du im Kampf bist!");
             player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 20 ,1);

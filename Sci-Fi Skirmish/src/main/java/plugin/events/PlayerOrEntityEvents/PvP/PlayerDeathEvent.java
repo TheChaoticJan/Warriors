@@ -8,7 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import plugin.Main;
 import plugin.models.PlayerStats;
-import plugin.utils.PlayerCombatHandler;
+import plugin.models.PlayerCombatHandler;
 import plugin.utils.Scores.ScoreBoardBuilder;
 
 import java.sql.SQLException;
@@ -37,8 +37,10 @@ public class PlayerDeathEvent implements Listener{
         p.setFoodLevel(20);
 
         //removing both players from combat
-        PlayerCombatHandler.removeFromCombat(p);
-        PlayerCombatHandler.removeFromCombat(p.getKiller());
+        PlayerCombatHandler.getCombatStatusByPlayer(p).setCombatStatus(false);
+        PlayerCombatHandler.getCombatStatusByPlayer(p.getKiller()).setCombatStatus(false);
+        PlayerCombatHandler.getCombatStatusByPlayer(p).setLastAttacked(null);
+        PlayerCombatHandler.getCombatStatusByPlayer(p.getKiller()).setLastAttacked(null);
 
         //Creating Playerlocation
         int x = p.getLocation().getBlockX();

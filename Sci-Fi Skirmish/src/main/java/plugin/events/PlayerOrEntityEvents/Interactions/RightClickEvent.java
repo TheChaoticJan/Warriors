@@ -12,7 +12,7 @@ import org.bukkit.persistence.PersistentDataType;
 import plugin.Main;
 import plugin.cratesystem.Loot;
 import plugin.models.PlayerStats;
-import plugin.utils.PlayerCombatHandler;
+import plugin.models.PlayerCombatHandler;
 import plugin.utils.InventoryBuilder.SelectCandleInventory;
 import plugin.utils.Text.Texts;
 import plugin.utils.essentials.InventoryInteracts;
@@ -86,8 +86,11 @@ public class RightClickEvent implements Listener{
 
             }
 
-            if(p.getItemInHand().getType().equals(Material.DIAMOND_SWORD) && e.getAction().isRightClick() && PlayerCombatHandler.isInCombat(p) && stats.getPerks()[5] && !lockCooldown.containsKey(p.getUniqueId())){
-                Player victim = PlayerCombatHandler.isInCombatWith(p);
+            if(p.getItemInHand().getType().equals(Material.DIAMOND_SWORD) && e.getAction().isRightClick() && PlayerCombatHandler.getCombatStatusByPlayer(p).getCombatStatus() && stats.getPerks()[5] && !lockCooldown.containsKey(p.getUniqueId())){
+                Player victim = PlayerCombatHandler.getCombatStatusByPlayer(p).getLastAttacked();
+                if(victim == null){
+                    return;
+                }
                 victim.setCooldown(Material.ENDER_PEARL, 200);
                 victim.setCooldown(Material.COBWEB, 200);
                 victim.setCooldown(Material.BOW, 200);
@@ -177,12 +180,14 @@ public class RightClickEvent implements Listener{
             }
 
         if(p.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "candle")) && p.getItemInHand().getType().equals(Material.GREEN_CANDLE) && e.getAction().isRightClick() && !Objects.equals(teleportCooldown.get(p.getUniqueId()), "teleport") && !p.isSneaking()){
-            if(PlayerCombatHandler.isInCombat(p)){
-                p.teleport(Objects.requireNonNull(PlayerCombatHandler.isInCombatWith(p)));
-                p.setCooldown(Material.GREEN_CANDLE, 1800);
-                p.playSound(p.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 20, 1);
-                teleportCooldown.put(p.getUniqueId(), "teleport");
-                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> teleportCooldown.remove(p.getUniqueId(), "teleport"), 20 * 90);
+            if(PlayerCombatHandler.getCombatStatusByPlayer(p).getCombatStatus()){
+                if(PlayerCombatHandler.getCombatStatusByPlayer(p).getLastAttacked() != null) {
+                    p.teleport(Objects.requireNonNull(PlayerCombatHandler.getCombatStatusByPlayer(p).getLastAttacked()));
+                    p.setCooldown(Material.GREEN_CANDLE, 1800);
+                    p.playSound(p.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 20, 1);
+                    teleportCooldown.put(p.getUniqueId(), "teleport");
+                    Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> teleportCooldown.remove(p.getUniqueId(), "teleport"), 20 * 90);
+                }
             }else{
                 p.sendActionBar("§cDu befindest dich nicht im Kampf!");
                 p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 20, 1);

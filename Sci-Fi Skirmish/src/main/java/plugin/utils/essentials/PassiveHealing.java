@@ -3,7 +3,7 @@ package plugin.utils.essentials;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import plugin.Main;
-import plugin.utils.PlayerCombatHandler;
+import plugin.models.PlayerCombatHandler;
 
 import java.util.Objects;
 
@@ -11,7 +11,7 @@ public class PassiveHealing {
 
     public static void start(Player player) {
 
-            if(!PlayerCombatHandler.isInCombat(player) && player.getInventory().getHelmet() != null) {
+            if(!PlayerCombatHandler.getCombatStatusByPlayer(player).getCombatStatus() && player.getInventory().getHelmet() != null) {
                     if(Objects.requireNonNull(player.getInventory().getHelmet()).getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "crown"))) {
 
                             if (new Count(player).getHelmetDura() < Objects.requireNonNull(player.getInventory().getHelmet()).getType().getMaxDurability()) {

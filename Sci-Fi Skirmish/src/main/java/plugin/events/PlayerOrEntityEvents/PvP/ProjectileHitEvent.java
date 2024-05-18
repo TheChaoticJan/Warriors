@@ -12,8 +12,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import plugin.Main;
 import plugin.infobar.Actionbar;
+import plugin.models.PlayerCombatHandler;
 import plugin.models.PlayerStats;
-import plugin.utils.PlayerCombatHandler;
 import plugin.utils.essentials.Count;
 import plugin.utils.essentials.InventoryInteracts;
 
@@ -52,12 +52,13 @@ public class ProjectileHitEvent implements Listener {
 
                 if  (event.getHitEntity() instanceof Player player){
 
+                    PlayerCombatHandler handler = PlayerCombatHandler.getCombatStatusByPlayer(damager);
+                    handler.startCombat(player, false);
+
 
                     try {
 
-                        PlayerStats stats = null;
-
-                            stats = this.plugin.getDatabase().findPlayerStats(player);
+                         PlayerStats stats = this.plugin.getDatabase().findPlayerStats(player);
 
                             if (stats == null) {
 
@@ -75,8 +76,6 @@ public class ProjectileHitEvent implements Listener {
                             this.plugin.getDatabase().createPlayerStats(stats1);
 
                         }
-
-                        PlayerCombatHandler.setInCombat(player, damager);
 
                         if (damager.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "EssenceBow"))) {
 

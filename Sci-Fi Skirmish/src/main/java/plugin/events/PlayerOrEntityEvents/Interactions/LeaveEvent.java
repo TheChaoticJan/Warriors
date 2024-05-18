@@ -24,4 +24,6 @@ public class LeaveEvent implements Listener{
             event.getPlayer().setCustomNameVisible(true);
         }
     }
+
+
 }

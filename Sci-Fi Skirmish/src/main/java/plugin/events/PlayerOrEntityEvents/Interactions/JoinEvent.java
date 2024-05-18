@@ -2,16 +2,15 @@ package plugin.events.PlayerOrEntityEvents.Interactions;
 
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
-import org.bukkit.NamespacedKey;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.persistence.PersistentDataType;
 import plugin.Main;
 import plugin.cratesystem.CrateEntities.Crate;
 import plugin.models.PlayerStats;
+import plugin.models.PlayerCombatHandler;
 import plugin.utils.Scores.ScoreBoardBuilder;
 import plugin.utils.essentials.PassiveHealing;
 
@@ -36,6 +35,8 @@ public class JoinEvent implements Listener {
 
         Player player = event.getPlayer();
 
+        new PlayerCombatHandler(player);
+        PlayerCombatHandler.getCombatStatusByPlayer(player).startUnCombatCheck();
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), () -> {
                 PassiveHealing.start(player);
         }, 0,3 * 20);

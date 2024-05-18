@@ -4,6 +4,7 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import plugin.utils.ItemBuilder.Candles;
@@ -15,17 +16,7 @@ public class SelectCandleInventory {
 
     public static Inventory selectCandle(Player player, String currenttype){
 
-        Inventory inventory = Bukkit.createInventory(player, 27, MiniMessage.miniMessage().deserialize("<rainbow>Wähle den Kerzentyp aus!"));
-
-        for(int i = 0; i <=9; i++){
-            inventory.setItem(i, InventoryEssentials.glass());
-        }
-        for(int i = 11; i <= 17; i = i + 2){
-            inventory.setItem(i, InventoryEssentials.glass());
-        }
-        for(int i = 18; i <=26; i++){
-            inventory.setItem(i, InventoryEssentials.glass());
-        }
+        Inventory inventory = Bukkit.createInventory(player, InventoryType.HOPPER, MiniMessage.miniMessage().deserialize("<rainbow>Wähle den Kerzentyp aus!"));
 
         //Adding Candles to the Inventory
         ItemStack boostCandle = Candles.boostCandle();
@@ -35,7 +26,7 @@ public class SelectCandleInventory {
            Objects.requireNonNull(boostCandle.getItemMeta().getLore()).add("");
            Objects.requireNonNull(boostCandle.getItemMeta().getLore()).add("§aIm Moment ausgewählt!");
         }
-        inventory.setItem(10, boostCandle);
+        inventory.setItem(0, boostCandle);
 
         ItemStack healCandle = Candles.healCandle();
         if(!currenttype.equals("heal")){
@@ -44,7 +35,7 @@ public class SelectCandleInventory {
             Objects.requireNonNull(healCandle.getItemMeta().getLore()).add("");
             Objects.requireNonNull(healCandle.getItemMeta().getLore()).add("§aIm Moment ausgewählt!");
         }
-        inventory.setItem(12, healCandle);
+        inventory.setItem(1, healCandle);
 
         ItemStack crateCandle = Candles.crateCandle();
         if(!currenttype.equals("crate")){
@@ -53,7 +44,7 @@ public class SelectCandleInventory {
             Objects.requireNonNull(crateCandle.getItemMeta().getLore()).add("");
             Objects.requireNonNull(crateCandle.getItemMeta().getLore()).add("§aIm Moment ausgewählt!");
         }
-        inventory.setItem(14, crateCandle);
+        inventory.setItem(3, crateCandle);
 
         ItemStack teleportCandle = Candles.teleportCandle();
         if(!currenttype.equals("teleport")){
@@ -62,7 +53,7 @@ public class SelectCandleInventory {
             Objects.requireNonNull(teleportCandle.getItemMeta().getLore()).add("");
             Objects.requireNonNull(teleportCandle.getItemMeta().getLore()).add("§aIm Moment ausgewählt!");
         }
-        inventory.setItem(16, teleportCandle);
+        inventory.setItem(4, teleportCandle);
 
 
         return inventory;

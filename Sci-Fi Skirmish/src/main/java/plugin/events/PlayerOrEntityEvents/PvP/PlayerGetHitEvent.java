@@ -20,7 +20,7 @@ import plugin.Main;
 import plugin.events.BlockEvents.BlockEvents;
 import plugin.infobar.Actionbar;
 import plugin.models.PlayerStats;
-import plugin.utils.PlayerCombatHandler;
+import plugin.models.PlayerCombatHandler;
 import plugin.utils.essentials.Count;
 import plugin.utils.essentials.InventoryInteracts;
 
@@ -132,7 +132,8 @@ public class PlayerGetHitEvent implements Listener{
 
                 }
 
-                PlayerCombatHandler.setInCombat(player, damager);
+                PlayerCombatHandler handler = PlayerCombatHandler.getCombatStatusByPlayer(damager);
+                handler.startCombat(player, false);
 
                 if(!Objects.equals(stats.getClan(), "") | !Objects.equals(stats1.getClan(), "")){
                     if(stats.getClan().equals(stats1.getClan())){

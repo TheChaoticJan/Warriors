@@ -5,7 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
 import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 import plugin.commands.DatabaseUsing.PerkCommand;
@@ -38,10 +38,10 @@ import plugin.events.InventoryEvents.ClickEvent;
 import plugin.events.InventoryEvents.InfobarClick;
 import plugin.events.InventoryEvents.PerkClickEvent;
 import plugin.events.InventoryEvents.Rezepte.RezeptClickEvent;
-import plugin.events.PlayerOrEntityEvents.Interactions.*;
 import plugin.events.PlayerOrEntityEvents.Interactions.chatevents.ChatEvent;
 import plugin.events.PlayerOrEntityEvents.PvP.*;
 import plugin.infobar.InfobarCommand;
+import plugin.models.PlayerCombatHandler;
 import plugin.utils.Recipes.*;
 import plugin.utils.Scores.ScoreBoardBuilder;
 import plugin.utils.Scores.TablistManager;
@@ -83,6 +83,11 @@ public final class Main extends JavaPlugin{
                                 filter(entity -> (Objects.equals(entity.getPersistentDataContainer().has(new NamespacedKey(this, "key")), true)))
                                 .forEach(Crate::new)
                         );
+
+        for(Player player : getServer().getOnlinePlayers()){
+            new PlayerCombatHandler(player);
+            PlayerCombatHandler.getCombatStatusByPlayer(player).startUnCombatCheck();
+        }
 
         getServer().getOnlinePlayers().forEach(player -> Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
             @Override
@@ -130,24 +135,24 @@ public final class Main extends JavaPlugin{
         getServer().getPluginManager().registerEvents(new BlockEvents(this), this );
         getServer().getPluginManager().registerEvents(new ExplodeEvent(), this );
         getServer().getPluginManager().registerEvents(new PlayerGetHitEvent(this), this );
-        getServer().getPluginManager().registerEvents(new JoinEvent(this), this );
+        getServer().getPluginManager().registerEvents(new plugin.events.PlayerOrEntityEvents.Interactions.JoinEvent(this), this );
         getServer().getPluginManager().registerEvents(new ChatEvent(), this );
         getServer().getPluginManager().registerEvents(new ProjectileHitEvent(this), this );
         getServer().getPluginManager().registerEvents(new PlayerDeathEvent(this), this);
         getServer().getPluginManager().registerEvents(new CrateDeathEvent(this), this);
-        getServer().getPluginManager().registerEvents(new RightClickEvent(this), this);
+        getServer().getPluginManager().registerEvents(new plugin.events.PlayerOrEntityEvents.Interactions.RightClickEvent(this), this);
         getServer().getPluginManager().registerEvents(new RezeptClickEvent(), this);
-        getServer().getPluginManager().registerEvents(new DropEvent(), this);
+        getServer().getPluginManager().registerEvents(new plugin.events.PlayerOrEntityEvents.Interactions.DropEvent(), this);
         getServer().getPluginManager().registerEvents(new PlayerFishingEvent(), this);
         getServer().getPluginManager().registerEvents(new CrateHitEvent(), this);
         getServer().getPluginManager().registerEvents(new InfobarClick(this), this);
         getServer().getPluginManager().registerEvents(new PerkClickEvent(this), this);
-        getServer().getPluginManager().registerEvents(new MoveEvent(), this);
-        getServer().getPluginManager().registerEvents(new AnvilEvent(), this);
+        getServer().getPluginManager().registerEvents(new plugin.events.PlayerOrEntityEvents.Interactions.MoveEvent(), this);
+        getServer().getPluginManager().registerEvents(new plugin.events.PlayerOrEntityEvents.Interactions.AnvilEvent(), this);
         getServer().getPluginManager().registerEvents(new CandleClickEvent(), this);
         getServer().getPluginManager().registerEvents(new PlayerRepairEvent(), this);
         getServer().getPluginManager().registerEvents(new PlayerDamageEvent(), this);
-        getServer().getPluginManager().registerEvents(new LeaveEvent(), this);
+        getServer().getPluginManager().registerEvents(new plugin.events.PlayerOrEntityEvents.Interactions.LeaveEvent(), this);
 
         //commands
         Objects.requireNonNull(getCommand("heal")).setExecutor(new HealCommand());
