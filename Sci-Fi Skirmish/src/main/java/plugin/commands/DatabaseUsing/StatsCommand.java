@@ -40,7 +40,6 @@ public class StatsCommand implements CommandExecutor, TabCompleter{
 
         if(commandSender instanceof Player p) {
             try {
-            Player player = null;
 
             if(strings.length == 0){
                strings = new String[]{p.getName()};

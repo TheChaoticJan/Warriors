@@ -110,10 +110,10 @@ public class Western {
         BowLore.add("");
         bowmeta.setLore(BowLore);
         if(!(p.getDisplayName().endsWith("s"))) {
-            bowmeta.setDisplayName("§c§kaa §4§l" + p.getDisplayName() + "`s §6§lBospammer §c§kaa");
+            bowmeta.setDisplayName("§c§kaa §4§l" + p.getDisplayName() + "`s §6§lBowspammer §c§kaa");
         }
         else{
-            bowmeta.setDisplayName("§c§kaa §4§l" + p.getDisplayName() + "` §6§lBospammer §c§kaa");
+            bowmeta.setDisplayName("§c§kaa §4§l" + p.getDisplayName() + "` §6§lBowspammer §c§kaa");
         }
         Bow.setItemMeta(bowmeta);
         return Bow;

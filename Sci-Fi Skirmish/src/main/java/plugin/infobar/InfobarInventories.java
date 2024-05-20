@@ -77,8 +77,6 @@ public class InfobarInventories {
         ModuleItem.setItemMeta(ModuleMeta);
         Configuration.setItem(11, ModuleItem);
 
-
-
         ModuleMeta.setDisplayName("§3Modul 2");
         ModuleItem.setItemMeta(ModuleMeta);
         Configuration.setItem(13, ModuleItem);

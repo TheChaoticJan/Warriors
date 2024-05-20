@@ -38,7 +38,8 @@ public class Texts {
                 .replace("&n", "<u>")
                 .replace("&l", "<b>")
                 .replace("&r", "<reset>")
-                .replace("&o", "<i>");
+                .replace("&o", "<i>")
+                .replace("&k", "<obf>");
     }
 
     public static String get(String s){

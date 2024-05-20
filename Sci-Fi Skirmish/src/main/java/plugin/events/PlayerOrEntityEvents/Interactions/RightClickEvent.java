@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import plugin.Main;
@@ -52,7 +53,7 @@ public class RightClickEvent implements Listener{
             meta.displayName(MiniMessage.miniMessage().deserialize("<i:false><b><gradient:#6a3e0a:#9d2323:#e5e814>Tracker <dark_gray><b>▸ <red>" + getNearestPlayer(p).getName()));
             p.getItemInHand().setItemMeta(meta);
 
-            p.sendActionBar("§f" + nearest.getName() + " §7- §b" + Math.round(p.getLocation().distance(nearest.getLocation())) + " Blöcke");
+            p.sendActionBar("§f" + nearest.getName() + " §7| §b" + Math.round(p.getLocation().distance(nearest.getLocation())) + " Blöcke");
         }
 
         if(p.isSneaking() && e.getAction().isRightClick() && p.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "loadable"))){
@@ -130,36 +131,33 @@ public class RightClickEvent implements Listener{
             float z = p.getLocation().getBlockZ();
 
             if (p.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "candle")) && p.getItemInHand().getType().equals(Material.BLUE_CANDLE) && e.getAction().isRightClick() && !Objects.equals(crateCooldown.get(p.getUniqueId()), "crate") && !p.isSneaking()) {
-                int rarity = (int) (Math.random() * 100 + 1);
+                int rarity = (int) (Math.random() * 100 + 30);
                 crateCooldown.put(p.getUniqueId(), "crate");
-                p.setCooldown(Material.BLUE_CANDLE, 6000);
-                p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 20, 1);
-                if (rarity <= 60) {
-                    p.sendActionBar(MiniMessage.miniMessage().deserialize(Texts.get("crate") + " <dark_gray>▸ " + Texts.get("epic")));
-
-                    for (int i = (int) (Math.random() * 3); i < 3; i++) {
-                        p.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), Loot.epicDrop());
-                    }
+                String rare;
+                if(rarity <= 60){
+                    rare = "epic";
                     Objects.requireNonNull(stats).setCrates(new int[]{stats.getCrates()[0], stats.getCrates()[1], stats.getCrates()[2] + 1, stats.getCrates()[3], stats.getCrates()[4]});
-                }
-                if (rarity <= 93 && rarity > 60) {
-                    p.sendActionBar(MiniMessage.miniMessage().deserialize(Texts.get("crate") + " <dark_gray>▸ " + Texts.get("rare")));
+
+                }else if(rarity <= 93){
+                    rare = "rare";
+                    Objects.requireNonNull(stats).setCrates(new int[]{stats.getCrates()[0], stats.getCrates()[1], stats.getCrates()[2], stats.getCrates()[3] + 1, stats.getCrates()[4]});
                     p.sendTitle(new Title("§6§kaa §x§D§3§D§F§0§0L§x§D§7§D§2§0§1e§x§D§B§C§4§0§3g§x§D§F§B§7§0§4e§x§E§2§A§9§0§5n§x§E§6§9§C§0§6d§x§E§A§8§E§0§8ä§x§E§E§8§1§0§9r §6§kaa", "§7Nachschub", 3, 35, 3));
 
-                    for (int i = (int) (Math.random() * 2); i < 3; i++) {
-                        p.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), Loot.legendaryDrop());
-                    }
-                    Objects.requireNonNull(stats).setCrates(new int[]{stats.getCrates()[0], stats.getCrates()[1], stats.getCrates()[2], stats.getCrates()[3] + 1, stats.getCrates()[4]});
-                }
-                if (rarity <= 100 && rarity > 93) {
-                    p.sendActionBar(MiniMessage.miniMessage().deserialize(Texts.get("crate") + " <dark_gray>▸ " + Texts.get("mythic")));
+                }else{
+                    rare = "mythic";
+                    Objects.requireNonNull(stats).setCrates(new int[]{stats.getCrates()[0], stats.getCrates()[1], stats.getCrates()[2], stats.getCrates()[3], stats.getCrates()[4] + 1});
                     p.sendTitle(new Title("§b§kaa §x§0§0§D§F§C§DM§x§0§1§D§1§B§By§x§0§3§C§4§A§9t§x§0§4§B§6§9§7h§x§0§6§A§9§8§6i§x§0§7§9§B§7§4s§x§0§9§8§E§6§2c§x§0§A§8§0§5§0h §b§kaa", "§7Nachschub", 3, 35, 3));
 
-                    for (int i = (int) (Math.random() * 3); i < 5; i++) {
-                        p.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), Loot.mythicDrop());
-                    }
-                    Objects.requireNonNull(stats).setCrates(new int[]{stats.getCrates()[0], stats.getCrates()[1], stats.getCrates()[2], stats.getCrates()[3], stats.getCrates()[4] + 1});
                 }
+                Loot loot = new Loot(rare);
+                p.sendActionBar(MiniMessage.miniMessage().deserialize(Texts.get("crate") + " <dark_gray>▸ " + Texts.get(rare)));
+                p.setCooldown(Material.BLUE_CANDLE, 6000);
+                p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 20, 1);
+
+                for (ItemStack stack : loot.getContents()) {
+                    p.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), stack);
+                }
+
                 this.plugin.getDatabase().updatePlayerStats(stats);
 
                 Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> crateCooldown.remove(p.getUniqueId(), "crate"), 20 * 300 );

@@ -81,12 +81,10 @@ public class PlayerDeathEvent implements Listener{
                         stats = new PlayerStats(p);
                         this.plugin.getDatabase().createPlayerStats(stats);
 
-                    } else {
-
-                        stats.setDeaths(stats.getDeaths() + 1);
-                        this.plugin.getDatabase().updatePlayerStats(stats);
-
                     }
+
+                    stats.setDeaths(stats.getDeaths() + 1);
+                    this.plugin.getDatabase().updatePlayerStats(stats);
 
                     p.setScoreboard(ScoreBoardBuilder.Scoreboard(stats, p));
 
@@ -99,11 +97,12 @@ public class PlayerDeathEvent implements Listener{
                         this.plugin.getDatabase().createPlayerStats(stats1);
 
                     }
-                        stats1.setXp(stats1.getXp() + 5);
-                        stats1.setKills(stats1.getKills() + 1);
-                        this.plugin.getDatabase().updatePlayerStats(stats1);
 
-                        p.getKiller().setScoreboard(ScoreBoardBuilder.Scoreboard(stats1, p.getKiller()));
+                    stats1.setXp(stats1.getXp() + 5);
+                    stats1.setKills(stats1.getKills() + 1);
+                    this.plugin.getDatabase().updatePlayerStats(stats1);
+
+                    p.getKiller().setScoreboard(ScoreBoardBuilder.Scoreboard(stats1, p.getKiller()));
 
 
                 }catch (SQLException e){

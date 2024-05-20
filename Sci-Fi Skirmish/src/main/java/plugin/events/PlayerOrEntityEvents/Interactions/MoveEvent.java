@@ -1,8 +1,11 @@
 package plugin.events.PlayerOrEntityEvents.Interactions;
 
+import io.papermc.paper.event.entity.EntityMoveEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
