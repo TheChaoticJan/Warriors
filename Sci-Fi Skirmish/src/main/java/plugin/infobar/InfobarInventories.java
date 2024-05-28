@@ -65,7 +65,7 @@ public class InfobarInventories {
         }
 
         ItemStack ModuleItem = new ItemStack(Material.LEGACY_EMPTY_MAP);
-        ItemMeta ModuleMeta =ModuleItem.getItemMeta();
+        ItemMeta ModuleMeta = ModuleItem.getItemMeta();
         ModuleMeta.addEnchant(Enchantment.DURABILITY, 1, true);
         ModuleMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         ModuleMeta.setDisplayName("§3Modul 1");

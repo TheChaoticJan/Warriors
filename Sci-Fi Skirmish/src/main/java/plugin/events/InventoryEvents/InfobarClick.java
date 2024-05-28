@@ -59,33 +59,20 @@ public class InfobarClick implements Listener{
                     return;
                 }
 
+                if(event.getCurrentItem().getItemMeta().getPersistentDataContainer().get(new NamespacedKey(Main.getInstance(), "index"), PersistentDataType.INTEGER) == null){
+                    event.setCancelled(true);
+                    return;
+                }
+
                 int index = event.getCurrentItem().getItemMeta().getPersistentDataContainer().get(new NamespacedKey(Main.getInstance(), "index"), PersistentDataType.INTEGER);
 
-                if (event.getView().getTitle().endsWith("1")) {
 
-                        stats.setInfobar1(index);
+                for(int i = 1; i <= 3; i++){
+                    if(event.getView().getTitle().substring(event.getView().getTitle().length() - 1).equals(String.valueOf(i))){
+                        stats.setInfobar(i - 1, index);
                         this.plugin.getDatabase().updatePlayerStats(stats);
-
-                        p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 1"));
-                        event.setCancelled(true);
-
-                }
-
-                if (event.getView().getTitle().endsWith("2")) {
-
-                    stats.setInfobar2(index);
-                    this.plugin.getDatabase().updatePlayerStats(stats);
-
-                    p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 2"));
-                    event.setCancelled(true);
-
-                }
-                if (event.getView().getTitle().endsWith("3")) {
-                    stats.setInfobar3(index);
-                    this.plugin.getDatabase().updatePlayerStats(stats);
-
-                    p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul 3"));
-                    event.setCancelled(true);
+                        p.openInventory(InfobarInventories.edit(p, InfobarEssentials.neededItemstack(stats), "§7Bearbeite hier §3Modul " + i));
+                    }
                 }
             }
 

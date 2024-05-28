@@ -5,7 +5,6 @@ import com.destroystokyo.paper.profile.ProfileProperty;
 import lombok.Getter;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.NamespacedKey;
-import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataType;
 import plugin.Main;
 import org.bukkit.Bukkit;
@@ -17,7 +16,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import plugin.cratesystem.Loot;
-import plugin.utils.Text.Texts;
+import plugin.models.TextHandler;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,7 +55,7 @@ public class Crate{
 
         maxHealth = new Random().nextInt((120 - 80) + 1) + 80;
 
-        String key = Texts.generateRandomString(8);
+        String key = TextHandler.generateRandomString(8);
 
         ArmorStand Crate = (ArmorStand) player.getLocation().getBlock().getWorld().spawnEntity(new Location(Bukkit.getWorld("world"), x, y, z), EntityType.ARMOR_STAND);
         Crate.setMaxHealth(this.maxHealth);

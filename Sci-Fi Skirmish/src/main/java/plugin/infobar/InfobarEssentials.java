@@ -23,8 +23,8 @@ public class InfobarEssentials {
         pearlLore.add("§7Gegner im Inventar hat.");
         pearlLore.add("");
         pearlMeta.setLore(pearlLore);
+        pearlMeta.getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "index"), PersistentDataType.INTEGER, 3);
         pearl.setItemMeta(pearlMeta);
-        pearl.getItemMeta().getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "index"), PersistentDataType.INTEGER, 3);
         return pearl;
     }
 
@@ -39,8 +39,8 @@ public class InfobarEssentials {
         pearllore.add("§7Gegner im Inventar hat.");
         pearllore.add("");
         pearlMeta.setLore(pearllore);
+        pearlMeta.getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "index"), PersistentDataType.INTEGER, 2);
         pearl.setItemMeta(pearlMeta);
-        pearl.getItemMeta().getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "index"), PersistentDataType.INTEGER, 2);
         return pearl;
     }
 
@@ -55,8 +55,8 @@ public class InfobarEssentials {
         pearllore.add("§7Gegner im Inventar hat.");
         pearllore.add("");
         pearlMeta.setLore(pearllore);
+        pearlMeta.getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "index"), PersistentDataType.INTEGER, 5);
         pearl.setItemMeta(pearlMeta);
-        pearl.getItemMeta().getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "index"), PersistentDataType.INTEGER, 5);
         return pearl;
     }
 
@@ -71,8 +71,8 @@ public class InfobarEssentials {
         pearllore.add("§7Gegner im Inventar hat.");
         pearllore.add("");
         pearlMeta.setLore(pearllore);
+        pearlMeta.getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "index"), PersistentDataType.INTEGER, 6);
         pearl.setItemMeta(pearlMeta);
-        pearl.getItemMeta().getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "index"), PersistentDataType.INTEGER, 6);
         return pearl;
     }
 
@@ -87,8 +87,8 @@ public class InfobarEssentials {
         pearllore.add("§7Gegner auf dem §6Konto §7hat.");
         pearllore.add("");
         pearlMeta.setLore(pearllore);
+        pearlMeta.getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "index"), PersistentDataType.INTEGER, 4);
         pearl.setItemMeta(pearlMeta);
-        pearl.getItemMeta().getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "index"), PersistentDataType.INTEGER, 4);
         return pearl;
     }
 
@@ -102,8 +102,8 @@ public class InfobarEssentials {
         pearllore.add("§7wieviel §4Haltbarkeit §7das");
         pearllore.add("§7lowste Piece deines Gegners hat.");
         pearlMeta.setLore(pearllore);
+        pearlMeta.getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "index"), PersistentDataType.INTEGER, 1);
         pearl.setItemMeta(pearlMeta);
-        pearl.getItemMeta().getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "index"), PersistentDataType.INTEGER, 1);
         return pearl;
     }
 
@@ -117,8 +117,8 @@ public class InfobarEssentials {
         pearllore.add("§7wieviel §bHaltbarkeit §7das Item");
         pearllore.add("§7in der Hand deines Gegners hat.");
         pearlMeta.setLore(pearllore);
+        pearlMeta.getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "index"), PersistentDataType.INTEGER, 7);
         pearl.setItemMeta(pearlMeta);
-        pearl.getItemMeta().getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "index"), PersistentDataType.INTEGER, 7);
         return pearl;
     }
 

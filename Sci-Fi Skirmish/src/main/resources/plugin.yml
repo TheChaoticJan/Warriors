@@ -27,7 +27,6 @@ commands:
   stats:
   trash:
     aliases: "müll"
-    permission: permission.mod
   xp:
     aliases: "handel"
   modify:
@@ -36,10 +35,14 @@ commands:
   perks:
   infobar:
   crate:
-    aliases: "spawnarmorstand"
     permission: permission.mod
   smithingtable:
     aliases: 'st'
+  cratestats:
+  nightvision:
+    aliases: ['nv', 'nachtsicht']
+  setrank:
+    permission: permission.mod
 permissions:
   permission.mod:
     default: op

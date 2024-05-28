@@ -60,14 +60,8 @@ public class PlayerStats {
         this.infobarValues = new int[]{1, 2, 3};
     }
 
-    public void setInfobar1(int i){
-        this.infobarValues[0] = i;
-    }
-    public void setInfobar2(int i){
-        this.infobarValues[1] = i;
-    }
-    public void setInfobar3(int i){
-        this.infobarValues[2] = i;
+    public void setInfobar(int index, int i){
+        this.infobarValues[index] = i;
     }
     public void setPerk1(boolean bl){
         this.perks[0] = bl;

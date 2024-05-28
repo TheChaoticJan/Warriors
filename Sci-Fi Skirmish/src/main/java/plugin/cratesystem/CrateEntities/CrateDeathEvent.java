@@ -12,12 +12,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
-import org.checkerframework.checker.units.qual.N;
 import org.jetbrains.annotations.NotNull;
 import plugin.Main;
-import plugin.cratesystem.Loot;
 import plugin.models.PlayerStats;
-import plugin.utils.Text.Texts;
+import plugin.models.TextHandler;
 
 import java.sql.SQLException;
 import java.util.Objects;
@@ -74,7 +72,7 @@ public class CrateDeathEvent implements Listener {
 
             Crate crate = Crate.getCrateByKey(event.getEntity().getPersistentDataContainer().get(new NamespacedKey(Main.getInstance(), "key"), PersistentDataType.STRING));
 
-            p.sendActionBar(MiniMessage.miniMessage().deserialize("<dark_gray><<red>Tot<dark_gray>> " + Texts.get("crate") + " <dark_gray>▸ " + Texts.get(crate.getRarity())));
+            p.sendActionBar(MiniMessage.miniMessage().deserialize("<dark_gray><<red>Tot<dark_gray>> " + TextHandler.get("crate") + " <dark_gray>▸ " + TextHandler.get(crate.getRarity())));
 
             for(ItemStack stack : crate.getLootTable()) {
                 Item item = e.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), stack);
@@ -88,8 +86,14 @@ public class CrateDeathEvent implements Listener {
                 case "common" -> Objects.requireNonNull(stats).setCrates(new int[]{stats.getCrates()[0] + 1, stats.getCrates()[1], stats.getCrates()[2], stats.getCrates()[3], stats.getCrates()[4]});
                 case "uncommon" -> Objects.requireNonNull(stats).setCrates(new int[]{stats.getCrates()[0], stats.getCrates()[1] + 1, stats.getCrates()[2], stats.getCrates()[3], stats.getCrates()[4]});
                 case "epic" -> Objects.requireNonNull(stats).setCrates(new int[]{stats.getCrates()[0], stats.getCrates()[1], stats.getCrates()[2] + 1, stats.getCrates()[3], stats.getCrates()[4]});
-                case "rare" -> Objects.requireNonNull(stats).setCrates(new int[]{stats.getCrates()[0], stats.getCrates()[1], stats.getCrates()[2], stats.getCrates()[3] + 1, stats.getCrates()[4]});
-                case "mythic" -> Objects.requireNonNull(stats).setCrates(new int[]{stats.getCrates()[0], stats.getCrates()[1], stats.getCrates()[2], stats.getCrates()[3], stats.getCrates()[4] + 1});
+                case "rare" -> {
+                    Objects.requireNonNull(stats).setCrates(new int[]{stats.getCrates()[0], stats.getCrates()[1], stats.getCrates()[2], stats.getCrates()[3] + 1, stats.getCrates()[4]});
+                    p.sendTitle(new Title("§6§kaa §x§D§3§D§F§0§0L§x§D§7§D§2§0§1e§x§D§B§C§4§0§3g§x§D§F§B§7§0§4e§x§E§2§A§9§0§5n§x§E§6§9§C§0§6d§x§E§A§8§E§0§8ä§x§E§E§8§1§0§9r §6§kaa", "§7Nachschub", 3, 35, 3));
+                }
+                case "mythic" -> {
+                    Objects.requireNonNull(stats).setCrates(new int[]{stats.getCrates()[0], stats.getCrates()[1], stats.getCrates()[2], stats.getCrates()[3], stats.getCrates()[4] + 1});
+                    p.sendTitle(new Title("§b§kaa §x§0§0§D§F§C§DM§x§0§1§D§1§B§By§x§0§3§C§4§A§9t§x§0§4§B§6§9§7h§x§0§6§A§9§8§6i§x§0§7§9§B§7§4s§x§0§9§8§E§6§2c§x§0§A§8§0§5§0h §b§kaa", "§7Nachschub", 3, 35, 3));
+                }
             }
 
             try {

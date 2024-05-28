@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerPortalEvent;
 import plugin.Main;
 
 import java.util.ArrayList;
@@ -50,6 +51,11 @@ public class MoveEvent implements Listener {
         materials.add(Material.WAXED_COPPER_BLOCK);
 
         return materials.get((int) (Math.random() * (materials.size())));
+    }
+
+    @EventHandler
+    public static void portalEvent(PlayerPortalEvent event){
+        event.setCancelled(true);
     }
 
     @EventHandler

@@ -1,8 +1,8 @@
-package plugin.utils.Text;
+package plugin.models;
 
 import java.util.Random;
 
-public class Texts {
+public class TextHandler {
 
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ÄÖÜäöü;,:._-";
     private static final Random RANDOM = new Random();
@@ -39,7 +39,9 @@ public class Texts {
                 .replace("&l", "<b>")
                 .replace("&r", "<reset>")
                 .replace("&o", "<i>")
-                .replace("&k", "<obf>");
+                .replace("&k", "<obf>")
+                .replace("<3", "❤");
+
     }
 
     public static String get(String s){
@@ -54,8 +56,8 @@ public class Texts {
         };
     }
 
-    public static String gradient(String gradientColor, String gradientText){
-        return switch (gradientColor){
+    public static String gradient(String type, String gradientText){
+        return switch (type){
             case "scifi" -> "<gradient:ffffff:000000>" + gradientText + "</gradient>";
             case "sticky" -> "sadasd";
             default -> "DA FEHLT WAS ODER IST FALSCH EINGEGEBEN JAN";
@@ -67,6 +69,9 @@ public class Texts {
             case "Spieler" -> "<gradient:#FFE259:#FFA751>";
             case "Moderator" -> "<gradient:#7034E6:#b76eec>";
             case "Admin" -> "<gradient:#FF0000:#ad0d34>";
+            case "Inhaber" -> "<gradient:#5DA6F5:#64F588>";
+            case "Goat" -> "<gradient:#F33949:#F5E964>";
+            case "Simp" -> "<gradient:#F238F2:#AD56C6>";
             default -> "Da ist was falsch Jan";
         };
     }

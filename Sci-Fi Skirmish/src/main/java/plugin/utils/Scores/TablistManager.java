@@ -1,11 +1,20 @@
 package plugin.utils.Scores;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.block.data.type.Switch;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 import plugin.Main;
+import plugin.models.PlayerStats;
+import plugin.models.TextHandler;
+
+import javax.imageio.stream.MemoryCacheImageOutputStream;
+import java.sql.SQLException;
+import java.util.Iterator;
 
 public class TablistManager{
 
@@ -25,41 +34,51 @@ public class TablistManager{
     }
 
     public void setAllPlayerTeams(){
-        Bukkit.getOnlinePlayers().forEach(this::setPlayerTeams);
+
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                setPlayerTeams(player);
+            }
 
     }
 
-    public void setPlayerTeams(Player player){
+    private void setPlayerTeams(Player player) {
 
-        Scoreboard scoreboard = player.getScoreboard();
+        try {
+            PlayerStats stats = Main.getInstance().getDatabase().findPlayerStats(player);
 
-        Team players = scoreboard.getTeam("bplayers");
+            String rank = stats.getRank();
+            String prefix = TextHandler.setRankGradient(rank) + "<b>" + rank + "<reset> ";
 
-        if(players == null){
-            players = scoreboard.registerNewTeam("bplayers");
-        }
-
-        Team ops = scoreboard.getTeam("aoperators");
-
-        if(ops == null){
-            ops = scoreboard.registerNewTeam("aoperators");
-        }
-
-        players.setPrefix(" §x§F§F§E§2§5§9§lS§x§F§F§D§8§5§8§lp§x§F§F§C§E§5§6§li§x§F§F§C§5§5§5§le§x§F§F§B§B§5§4§ll§x§F§F§B§1§5§2§le§x§F§F§A§7§5§1§lr §8| ");
-        players.setColor(ChatColor.GRAY);
-
-        ops.setPrefix(" §x§7§0§3§4§E§6§lM§x§7§9§3§B§E§7§lo§x§8§2§4§3§E§8§ld§x§8§B§4§A§E§8§le§x§9§4§5§1§E§9§lr§x§9§C§5§8§E§A§la§x§A§5§6§0§E§B§lt§x§A§E§6§7§E§B§lo§x§B§7§6§E§E§C§lr §8| ");
-        ops.setColor(ChatColor.GRAY);
-
-
-
-        for( Player target : Bukkit.getOnlinePlayers()){
-            if(target.isOp()){
-                ops.addEntry(target.getName());
-                continue;
-            }
-              players.addEntry(target.getName());
+            // Define the order for sorting prefixes
+            String teamName;
+            switch (rank) {
+                case "Inhaber" -> teamName = "aInhaber";
+                case "Admin" -> teamName = "bAdmin";
+                case "Moderator" -> teamName = "cModerator";
+                case "Goat" -> teamName = "dGoat";
+                case "Simp" -> teamName = "eSimp";
+                case "Spieler" -> teamName = "fSpieler";
+                default -> teamName = "zDefault";
             }
 
+            Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
+            Team team = scoreboard.getTeam(teamName);
+
+            if (team == null) {
+                team = scoreboard.registerNewTeam(teamName);
+            }
+
+            // Set the team prefix
+            team.prefix(MiniMessage.miniMessage().deserialize(prefix));
+            // Add player to the team
+            team.addEntry(player.getName());
+
+            // Update player's display name and tab list name
+            player.displayName(MiniMessage.miniMessage().deserialize(prefix + player.getName()));
+            player.playerListName(MiniMessage.miniMessage().deserialize(prefix + player.getName()));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
+}

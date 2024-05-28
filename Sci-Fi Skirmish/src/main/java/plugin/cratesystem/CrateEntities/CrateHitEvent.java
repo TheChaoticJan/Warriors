@@ -3,7 +3,6 @@ package plugin.cratesystem.CrateEntities;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.NamespacedKey;
 import org.bukkit.Particle;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -13,10 +12,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.persistence.PersistentDataType;
-import org.checkerframework.checker.units.qual.N;
-import plugin.Main;
-import plugin.utils.Text.Texts;
+import plugin.models.TextHandler;
 
 public class CrateHitEvent implements Listener {
 
@@ -38,7 +34,7 @@ public class CrateHitEvent implements Listener {
                     ((LivingEntity) e).setHealth(0);
                 } else {
                     ((LivingEntity) e).setHealth(((LivingEntity) e).getHealth() - Damage);
-                    d.sendActionBar(MiniMessage.miniMessage().deserialize("<dark_gray><<red>" + FinalScale + "%<dark_gray>> " + Texts.get("crate") + " <dark_gray>▸ <gray>???"));
+                    d.sendActionBar(MiniMessage.miniMessage().deserialize("<dark_gray><<red>" + FinalScale + "%<dark_gray>> " + TextHandler.get("crate") + " <dark_gray>▸ <gray>???"));
                 }
 
 

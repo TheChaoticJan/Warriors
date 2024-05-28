@@ -15,10 +15,10 @@ public class DropEvent implements Listener{
        if(e.getItemDrop().getItemStack().getType().equals(Material.SANDSTONE)){
            e.setCancelled(true);
        }
-        if(e.getItemDrop().getItemStack().getType().equals(Material.ENCHANTED_BOOK)){
-            e.getItemDrop().setCustomName(e.getItemDrop().getItemStack().getItemMeta().getDisplayName());
-            e.getItemDrop().setCustomNameVisible(true);
-        }
+       if(e.getItemDrop().getItemStack().getItemMeta().hasDisplayName()) {
+           e.getItemDrop().setCustomNameVisible(true);
+           e.getItemDrop().customName(e.getItemDrop().getItemStack().getItemMeta().displayName());
+       }
         BossBar bossBar = PlayerCombatHandler.playerBossBars.remove(e.getPlayer());
         if (bossBar != null) {
             bossBar.removeAll();

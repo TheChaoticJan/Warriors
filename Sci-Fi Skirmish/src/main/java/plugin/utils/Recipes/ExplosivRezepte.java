@@ -1,5 +1,6 @@
 package plugin.utils.Recipes;
 
+import org.bukkit.inventory.ItemStack;
 import plugin.Main;
 import plugin.utils.ItemBuilder.Explosiv;
 import plugin.utils.ItemBuilder.SpecialResources;
@@ -27,7 +28,7 @@ public class ExplosivRezepte {
     public static ShapedRecipe Recipe2(){
         ShapedRecipe recipe2 = new ShapedRecipe(new NamespacedKey(Main.getInstance(), "superkelp"), SpecialResources.ExplosivBarren(1));
         recipe2.shape("xxx", "xFx", "xxx");
-        recipe2.setIngredient('x', SpecialResources.ExplosivBarren(1));
+        recipe2.setIngredient('x', SpecialResources.ExplosivPuder(1));
         recipe2.setIngredient('F', Material.TNT);
         return recipe2;
     }

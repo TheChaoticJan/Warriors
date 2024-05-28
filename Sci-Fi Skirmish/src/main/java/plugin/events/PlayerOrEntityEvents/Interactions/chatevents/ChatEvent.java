@@ -9,48 +9,39 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import plugin.Main;
-import plugin.events.PlayerOrEntityEvents.Interactions.RightClickEvent;
 import plugin.models.PlayerStats;
 import plugin.models.PlayerCombatHandler;
-import plugin.utils.Text.Texts;
+import plugin.models.TextHandler;
 
 import java.sql.SQLException;
 import java.util.Objects;
 
-public class ChatEvent implements Listener{
+public class ChatEvent implements Listener {
 
     @EventHandler
-    public void onCommandEvent(PlayerCommandPreprocessEvent event){
+    public void onCommandEvent(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
 
-        if(PlayerCombatHandler.getCombatStatusByPlayer(player).getCombatStatus() && !player.isOp()){
+        if (PlayerCombatHandler.getCombatStatusByPlayer(player).getCombatStatus() && !player.isOp()) {
             event.setCancelled(true);
             player.sendActionBar("§c§lDu kannst keine Befehle ausführen, während du im Kampf bist!");
-            player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 20 ,1);
+            player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 20, 1);
         }
     }
 
     @EventHandler
-    public void onChatEvent (PlayerChatEvent event){
+    public void onChatEvent(PlayerChatEvent event) {
 
         Player player = event.getPlayer();
 
-        event.setMessage(Texts.stringToMiniMessage(event.getMessage()));
-
-        //TODO: Implement the funcitonality of the loadable XP bottles
-        if(RightClickEvent.checkChat.containsKey(event.getPlayer().getUniqueId())){
-            event.setCancelled(true);
-            try {
-                int i = Integer.parseInt(event.getMessage());
-
-            }catch (NumberFormatException e){
-                player.sendMessage("§cDu musst schon eine Zahl eingeben! §7(Prozess abgebrochen)");
-            }
-            return;
-        }
+        event.setMessage(TextHandler.stringToMiniMessage(event.getMessage()));
 
         try {
             PlayerStats stats = Main.getInstance().getDatabase().findPlayerStats(player);
+            if (stats == null) {
+                stats = new PlayerStats(player);
+                Main.getInstance().getDatabase().createPlayerStats(stats);
+            }
             if (!(stats.getRank().equals("Moderator") || stats.getRank().equals("Admin"))) {
 
                 StringBuilder toFullMessage = new StringBuilder();
@@ -108,81 +99,50 @@ public class ChatEvent implements Listener{
                     }
                 }
             }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
 
-        try {
-            PlayerStats stats = Main.getInstance().getDatabase().findPlayerStats(player);
+            String rank = TextHandler.setRankGradient(stats.getRank()) + event.getPlayer().getName() + " <gray>▸<white>";
 
             boolean isMod = stats.getRank().equals("Moderator") || stats.getRank().equals("Admin");
-            if(event.getMessage().startsWith("!tc") && isMod){
-            event.setCancelled(true);
+            if (event.getMessage().startsWith("!tc") && isMod) {
+                event.setCancelled(true);
 
-            String rank;
-
-            switch (stats.getRank()) {
-                default -> rank = ("<gradient:#FFE259:#FFA751>" + event.getPlayer().getName() + " <gray>▸<white>");
-                case "Moderator" ->
-                            rank =("<gradient:#7034E6:#b76eec>" + event.getPlayer().getName() + " <gray>▸<white>");
-                case "Admin" ->
-                           rank = ("<gradient:#FF0000:#ad0d34>" + event.getPlayer().getName() + " <gray>▸<white>");
-            }
-
-            for (Player people : Bukkit.getOnlinePlayers()) {
+                for (Player people : Bukkit.getOnlinePlayers()) {
                     stats = Main.getInstance().getDatabase().findPlayerStats(people);
-                    if(Objects.equals(stats.getRank(), "Moderator") || Objects.equals(stats.getRank(), "Admin")){
+                    if (Objects.equals(stats.getRank(), "Moderator") || Objects.equals(stats.getRank(), "Admin")) {
 
-                        people.sendMessage(MiniMessage.miniMessage().deserialize("<hover:show_text:'<red>Diese Nachricht wurde im Teamchat verschickt'><dark_gray><<red>❗<dark_gray>><reset> "  + rank + event.getMessage().replace("!tc", "")));
+                        people.sendMessage(MiniMessage.miniMessage().deserialize("<hover:show_text:'<red>Diese Nachricht wurde im Teamchat verschickt'><dark_gray><<red>❗<dark_gray>><reset> " + rank + event.getMessage().replace("!tc", "")));
                     }
                 }
                 return;
             }
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
 
-        if(event.getMessage().startsWith("7")){
-            event.setCancelled(true);
-            player.sendMessage("§cDeine Nachricht wurde nicht abgesendet! \n§7Wolltest du nicht: §e" + event.getMessage().replace("7", "/") + " §7schreiben?");
-            return;
-        }
-
-        try {
-            PlayerStats stats = Main.getInstance().getDatabase().findPlayerStats(player);
-
-            if(stats == null){
-                stats = new PlayerStats(player);
-                Main.getInstance().getDatabase().createPlayerStats(stats);
+            if (event.getMessage().startsWith("7")) {
+                event.setCancelled(true);
+                player.sendMessage("§cDeine Nachricht wurde nicht abgesendet! \n§7Wolltest du nicht: §e" + event.getMessage().replace("7", "/") + " §7schreiben?");
+                return;
             }
 
             event.setCancelled(true);
-            switch (stats.getRank()) {
-                default ->
-                        Bukkit.broadcast(MiniMessage.miniMessage().deserialize("<gradient:#FFE259:#FFA751>" + event.getPlayer().getName() + " <gray>▸ <white>" + Texts.stringToMiniMessage(event.getMessage())));
-                case "Moderator" ->
-                        Bukkit.broadcast(MiniMessage.miniMessage().deserialize("<gradient:#7034E6:#b76eec>" + event.getPlayer().getName() + " <gray>▸ <white>" + Texts.stringToMiniMessage(event.getMessage())));
-                case "Admin" ->
-                        Bukkit.broadcast(MiniMessage.miniMessage().deserialize("<gradient:#FF0000:#ad0d34>" + event.getPlayer().getName() + " <gray>▸ <white>" + Texts.stringToMiniMessage(event.getMessage())));
-            }
 
-        }catch (SQLException e) {
+            Bukkit.broadcast(MiniMessage.miniMessage().deserialize(rank + " " +  TextHandler.stringToMiniMessage(event.getMessage())));
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private static String replaceChars(String string){
+        private static String replaceChars (String string){
 
-        return string
-                .replace(",", "")
-                .replace(".", "")
-                .replace(" ", "")
-                .replace("_", "")
-                .replace("-", "")
-                .replace("°", "")
-                .replace("^", "")
-                .replace("0", "o")
-                .replace("1", "i");
+            return string
+                    .replace(",", "")
+                    .replace(".", "")
+                    .replace(" ", "")
+                    .replace("_", "")
+                    .replace("-", "")
+                    .replace("°", "")
+                    .replace("^", "")
+                    .replace("0", "o")
+                    .replace("1", "i");
 
+        }
     }
-}

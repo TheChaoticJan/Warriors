@@ -2,15 +2,20 @@ package plugin.events.PlayerOrEntityEvents.Interactions;
 
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.Team;
 import plugin.Main;
 import plugin.cratesystem.CrateEntities.Crate;
 import plugin.models.PlayerStats;
 import plugin.models.PlayerCombatHandler;
+import plugin.models.TextHandler;
 import plugin.utils.Scores.ScoreBoardBuilder;
 import plugin.utils.essentials.PassiveHealing;
 
@@ -29,30 +34,36 @@ public class JoinEvent implements Listener {
     }
 
     @EventHandler
-    public void joinEvent(PlayerJoinEvent event){
+    public void joinEvent(PlayerJoinEvent event) {
 
         this.plugin = Main.getInstance();
 
         Player player = event.getPlayer();
 
+        if (event.getPlayer().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "combatlog"))) {
+            if (Boolean.TRUE.equals(event.getPlayer().getPersistentDataContainer().get(new NamespacedKey(Main.getInstance(), "combatlog"), PersistentDataType.BOOLEAN))) {
+                event.getPlayer().sendMessage("\n§cDu warst bei deinem letzten Kampf Feige und hast dich ausgelogged! \nDu bist trotzdem gestorben und wurdest zum Spawn geschickt\n§f");
+            }
+            event.getPlayer().getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "combatlog"), PersistentDataType.BOOLEAN, false);
+        }
+
         new PlayerCombatHandler(player);
         PlayerCombatHandler.getCombatStatusByPlayer(player).startUnCombatCheck();
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), () -> {
-                PassiveHealing.start(player);
-        }, 0,3 * 20);
+            PassiveHealing.start(player);
+        }, 0, 3 * 20);
 
-        event.joinMessage(MiniMessage.miniMessage().deserialize("<hover:show_text:'<green>Serverjoin!'><dark_gray><<green>+<dark_gray>><reset> " + player.getName()));
+        try {
+            event.joinMessage(MiniMessage.miniMessage().deserialize("<hover:show_text:'<green>Serverjoin!'><dark_gray><<green>+<dark_gray>><reset> " + TextHandler.setRankGradient(Main.getInstance().getDatabase().findPlayerStats(player).getRank()) + player.getName()));
+        }catch (SQLException e){ e.printStackTrace(); }
 
         for (int i = 0; i < plugin.VanishList.size(); i++) {
             if (!player.isOp()) {
                 player.hidePlayer(plugin, Objects.requireNonNull(Bukkit.getPlayer(plugin.VanishList.get(i))));
             }
         }
-        if(plugin.VanishList.contains(player.getUniqueId())){
-            player.setDisplayName(player.getPlayerListName() + " §5§lV");
-        }
 
-        if(Bukkit.getOnlinePlayers().size() == 1){
+        if (Bukkit.getOnlinePlayers().size() == 1) {
 
             getServer().getWorlds()
                     .forEach(world -> world.getEntitiesByClass(ArmorStand.class).stream()
@@ -62,28 +73,32 @@ public class JoinEvent implements Listener {
 
         }
 
-            try{
-                PlayerStats stats = this.plugin.getDatabase().findPlayerStats(player);
+        try {
+            PlayerStats stats = this.plugin.getDatabase().findPlayerStats(player);
 
-                if(stats == null){
-
-                    stats = new PlayerStats(player);
-                    this.plugin.getDatabase().createPlayerStats(stats);
-
-                }
-
-                player.setScoreboard(ScoreBoardBuilder.Scoreboard(stats, player));
-                for(Player p : Bukkit.getOnlinePlayers()){
-                    Main.getInstance().getTablistManager().setTablist(p);
-                }
-                Main.getInstance().getTablistManager().setAllPlayerTeams();
-
-            }catch (SQLException e){
-                e.printStackTrace();
+            if (stats == null) {
+                stats = new PlayerStats(player);
+                this.plugin.getDatabase().createPlayerStats(stats);
             }
 
 
+
+            player.setScoreboard(ScoreBoardBuilder.Scoreboard(stats, player));
+            for (Player p : Bukkit.getOnlinePlayers()) {
+                Main.getInstance().getTablistManager().setTablist(p);
+            }
+            Main.getInstance().getTablistManager().setAllPlayerTeams();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+
+
+
+
+
     }
+
 
 

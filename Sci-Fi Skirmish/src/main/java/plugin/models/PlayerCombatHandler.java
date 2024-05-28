@@ -76,7 +76,7 @@ public class PlayerCombatHandler{
     }
 
     public static void createBossBarForPlayer(Player player) {
-        BossBar bossBar = Bukkit.createBossBar("§cDU BEFINDEST DICH IM KAMPF", BarColor.RED, BarStyle.SOLID);
+        BossBar bossBar = Bukkit.createBossBar("§cDU BEFINDEST DICH IM KAMPF", BarColor.RED, BarStyle.SEGMENTED_20);
         bossBar.addPlayer(player);
         bossBar.setVisible(true);
         playerBossBars.put(player, bossBar);
@@ -87,7 +87,7 @@ public class PlayerCombatHandler{
         if (bossBar == null) return;
         int taskID = new BukkitRunnable() {
             double progress = 1.0;
-            double step = 0.01;
+            double step = 0.05;
             @Override
             public void run() {
                 if (progress > 0 && progress > step) {
@@ -99,7 +99,7 @@ public class PlayerCombatHandler{
                     this.cancel();
                 }
             }
-        }.runTaskTimer(Main.getInstance(), 0L, 2L).getTaskId(); // runs every 2 ticks (0.1 second)
+        }.runTaskTimer(Main.getInstance(), 10L, 10L).getTaskId(); // runs every 2 ticks (0.1 second)
 
         playerTaskIDs.put(player, taskID);
     }

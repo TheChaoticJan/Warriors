@@ -15,13 +15,11 @@ import plugin.cratesystem.Loot;
 import plugin.models.PlayerStats;
 import plugin.models.PlayerCombatHandler;
 import plugin.utils.InventoryBuilder.SelectCandleInventory;
-import plugin.utils.Text.Texts;
+import plugin.models.TextHandler;
 import plugin.utils.essentials.InventoryInteracts;
 
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 public class RightClickEvent implements Listener{
 
@@ -35,7 +33,27 @@ public class RightClickEvent implements Listener{
     public HashMap<UUID, String> crateCooldown = new HashMap<>();
     public HashMap<UUID, String> teleportCooldown = new HashMap<>();
     public HashMap<UUID, String> lockCooldown = new HashMap<>();
+    public HashMap<UUID, Long> flowerCD = new HashMap<>();
     Main plugin;
+
+    private static Material randomFlower(Material material){
+        ArrayList<Material> list = new ArrayList<Material>();
+        list.add(Material.POPPY);
+        list.add(Material.BLUE_ORCHID);
+        list.add(Material.TORCHFLOWER);
+        list.add(Material.ROSE_BUSH);
+        list.add(Material.LILY_OF_THE_VALLEY);
+        list.add(Material.ALLIUM);
+        list.add(Material.ORANGE_TULIP);
+        list.add(Material.PINK_TULIP);
+        list.add(Material.WITHER_ROSE);
+
+        if(list.contains(material)){
+            list.remove(material);
+        }
+
+        return  list.get((int)(Math.random() * list.size() - 1));
+    }
 
     @EventHandler
     public void clickEvent(PlayerInteractEvent e){
@@ -43,6 +61,40 @@ public class RightClickEvent implements Listener{
 
         if(p.getItemInHand().getType().equals(Material.AIR)){
             return;
+        }
+
+        if(p.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "love"))){
+
+            if(!String.valueOf(p.getUniqueId()).equals("58c6e186-a994-45f1-b804-cae8ccdec55d") && !String.valueOf(p.getUniqueId()).equals("3686fc60-3ff8-459b-8da6-ce05e8910e3f")/*Isys UUID*/) {
+                if (!(flowerCD.get(p.getUniqueId()) == null)) {
+                    if (System.currentTimeMillis() - 2500 >= flowerCD.get(p.getUniqueId())) {
+                        flowerCD.remove(p.getUniqueId());
+                    } else {
+                        p.sendActionBar("§fDu musst noch kurz warten!");
+                        return;
+                    }
+                }
+            }
+
+            flowerCD.put(p.getUniqueId(), System.currentTimeMillis());
+
+            p.getItemInHand().setType(randomFlower(p.getItemInHand().getType()));
+
+            Random random = new Random();
+            double radius = 1.1;
+            int particleCount = 100;
+            double angleIncrement = (2 * Math.PI) / particleCount;
+
+            for(int i = 0; i < particleCount; i++){
+
+                double angle = i * angleIncrement;
+
+                double offsetX = Math.cos(angle) * radius;
+                double offsetZ = Math.sin(angle) * radius;
+
+                p.getWorld().spawnParticle(Particle.HEART, p.getLocation().add(offsetX, 2.4, offsetZ), 1, random.nextDouble(1), random.nextDouble(1), 0);
+
+            }
         }
 
         if(p.getItemInHand().getType().equals(Material.COMPASS) && p.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "tracker"))){
@@ -150,7 +202,7 @@ public class RightClickEvent implements Listener{
 
                 }
                 Loot loot = new Loot(rare);
-                p.sendActionBar(MiniMessage.miniMessage().deserialize(Texts.get("crate") + " <dark_gray>▸ " + Texts.get(rare)));
+                p.sendActionBar(MiniMessage.miniMessage().deserialize(TextHandler.get("crate") + " <dark_gray>▸ " + TextHandler.get(rare)));
                 p.setCooldown(Material.BLUE_CANDLE, 6000);
                 p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 20, 1);
 

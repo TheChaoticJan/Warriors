@@ -27,14 +27,17 @@ public class ScoreBoardBuilder {
 
         Score score1 = objective.getScore("§a ");
         Score score2 = objective.getScore("§b §8· §fDein Rang:");
-        Score score3;
-        if(Objects.equals(stats.getRank(), "Admin")){
-            score3 = objective.getScore(("§c   §8▸ §c" + stats.getRank()));
-        }else if (Objects.equals(stats.getRank(), "Moderator")){
-            score3 = objective.getScore("§c   §8▸ §5Moderator");
-        }else{
-            score3 = objective.getScore("§c   §8▸ §6Spieler");
+        Score score3 = null;
+
+        switch (stats.getRank()) {
+            case "Admin" -> score3 = objective.getScore(("§c   §8▸ §c" + stats.getRank()));
+            case "Moderator" -> score3 = objective.getScore("§c   §8▸ §5Moderator");
+            case "Spieler" -> score3 = objective.getScore("§c   §8▸ §6Spieler");
+            case "Inhaber" -> score3 = objective.getScore("§c   §8▸ §3Inhaber");
+            case "Goat" -> score3 = objective.getScore("§c   §8▸ §eGoat");
+            case "Simp" -> score3 = objective.getScore("§c   §8▸ §dSimp");
         }
+
         Score score4 = objective.getScore("§d ");
         Score score5 = objective.getScore("§e §8· §fDeine XP:");
         Score score6 = objective.getScore("§f   §8▸§e " + stats.getXp() + " §6✧");

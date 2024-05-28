@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import plugin.Main;
 import plugin.models.PlayerStats;
-import plugin.utils.Text.Texts;
+import plugin.models.TextHandler;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -72,6 +72,7 @@ public class StatsCommand implements CommandExecutor, TabCompleter{
                         int all = c + u + e + r + m;
 
 
+
                         Inventory inventory = Bukkit.createInventory(p, InventoryType.HOPPER, "§0Stats von " + strings[0]);
 
                         //cratestats
@@ -83,11 +84,11 @@ public class StatsCommand implements CommandExecutor, TabCompleter{
                         skullMeta.displayName(MiniMessage.miniMessage().deserialize("<i:false><u><b><gradient:#824622:#b4c468>Cratestats"));
                         ArrayList<Component> crateLore = new ArrayList<Component>();
                         crateLore.add(Component.text(""));
-                        crateLore.add(MiniMessage.miniMessage().deserialize("<i:false>" + Texts.get("common") + "<#ffffff>: " + c));
-                        crateLore.add(MiniMessage.miniMessage().deserialize("<i:false>" + Texts.get("uncommon") + "<#ffffff>: " + u));
-                        crateLore.add(MiniMessage.miniMessage().deserialize("<i:false>" + Texts.get("epic") + "<#ffffff>: " + e));
-                        crateLore.add(MiniMessage.miniMessage().deserialize("<i:false>" + Texts.get("rare") + "<#ffffff>: " + r));
-                        crateLore.add(MiniMessage.miniMessage().deserialize("<i:false>" + Texts.get("mythic") + "<#ffffff>: " + m));
+                        crateLore.add(MiniMessage.miniMessage().deserialize("<i:false>" + TextHandler.get("common") + "<#ffffff>: " + c + " <gray><i>(" + Math.round((float) c /all * 10000)/100.00 + "%)"));
+                        crateLore.add(MiniMessage.miniMessage().deserialize("<i:false>" + TextHandler.get("uncommon") + "<#ffffff>: " + u + " <gray><i>(" + Math.round((float) u /all * 10000)/100.00 + "%)"));
+                        crateLore.add(MiniMessage.miniMessage().deserialize("<i:false>" + TextHandler.get("epic") + "<#ffffff>: " + e + " <gray><i>(" + Math.round((float) e /all * 10000)/100.00 + "%)"));
+                        crateLore.add(MiniMessage.miniMessage().deserialize("<i:false>" + TextHandler.get("rare") + "<#ffffff>: " + r + " <gray><i>(" + Math.round((float) r /all * 10000)/100.00 + "%)"));
+                        crateLore.add(MiniMessage.miniMessage().deserialize("<i:false>" + TextHandler.get("mythic") + "<#ffffff>: " + m + " <gray><i>(" + Math.round((float) m /all * 10000)/100.00 + "%)"));
                         crateLore.add(Component.text(""));
                         crateLore.add(Component.text("§7Insgesamt geöffnet: " + all));
                         skullMeta.lore(crateLore);

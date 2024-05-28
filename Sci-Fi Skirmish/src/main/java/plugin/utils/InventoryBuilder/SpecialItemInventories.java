@@ -120,7 +120,8 @@ public class SpecialItemInventories {
                 inventory.setItem(14, Klebrig.Angel());
                 inventory.setItem(15, Klebrig.Bogen());
             }
-            case "else" -> inventory.setItem(10, LoadableItems.loadableXP());
+            case "else" -> inventory.setItem(10, UnsortableItems.loveStick());
+
             default -> player.sendMessage("DA IST WAS FALSCH");
         }
         return inventory;

@@ -42,6 +42,7 @@ import plugin.events.PlayerOrEntityEvents.Interactions.chatevents.ChatEvent;
 import plugin.events.PlayerOrEntityEvents.PvP.*;
 import plugin.infobar.InfobarCommand;
 import plugin.models.PlayerCombatHandler;
+import plugin.ranksystem.commands.SetRankCommand;
 import plugin.utils.Recipes.*;
 import plugin.utils.Scores.ScoreBoardBuilder;
 import plugin.utils.Scores.TablistManager;
@@ -63,9 +64,6 @@ public final class Main extends JavaPlugin{
     private Database database;
     @Override
     public void onEnable() {
-
-        tablistManager = new TablistManager(this);
-
         instance = this;
 
         try{
@@ -77,6 +75,9 @@ public final class Main extends JavaPlugin{
             System.out.println("\u001B[31m Mögliche Quellen: Falsche Tabellen, Datenbank abgeschalten");
             e.printStackTrace();
         }
+
+        tablistManager = new TablistManager(this);
+        tablistManager.setAllPlayerTeams();
 
         getServer().getWorlds()
                 .forEach(world -> world.getEntitiesByClass(ArmorStand.class).stream().
@@ -138,7 +139,7 @@ public final class Main extends JavaPlugin{
         getServer().getPluginManager().registerEvents(new plugin.events.PlayerOrEntityEvents.Interactions.JoinEvent(this), this );
         getServer().getPluginManager().registerEvents(new ChatEvent(), this );
         getServer().getPluginManager().registerEvents(new ProjectileHitEvent(this), this );
-        getServer().getPluginManager().registerEvents(new PlayerDeathEvent(this), this);
+        getServer().getPluginManager().registerEvents(new PlayerDeathEvent(), this);
         getServer().getPluginManager().registerEvents(new CrateDeathEvent(this), this);
         getServer().getPluginManager().registerEvents(new plugin.events.PlayerOrEntityEvents.Interactions.RightClickEvent(this), this);
         getServer().getPluginManager().registerEvents(new RezeptClickEvent(), this);
@@ -178,7 +179,8 @@ public final class Main extends JavaPlugin{
         Objects.requireNonNull(getCommand("infobar")).setExecutor(new InfobarCommand(this));
         Objects.requireNonNull(getCommand("crate")).setExecutor(new SpawnCrateCommand());
         Objects.requireNonNull(getCommand("smithingtable")).setExecutor(new SmithingTableCommand());
-
+        Objects.requireNonNull(getCommand("nightvision")).setExecutor(new NightVisionCommand());
+        Objects.requireNonNull(getCommand("setrank")).setExecutor(new SetRankCommand());
 
     }
     public static Main getInstance(){
