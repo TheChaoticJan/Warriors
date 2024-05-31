@@ -4,15 +4,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.ItemStack;
 import plugin.Main;
 import plugin.models.PlayerStats;
 import plugin.models.PlayerCombatHandler;
-import plugin.utils.Scores.ScoreBoardBuilder;
 
 import java.sql.SQLException;
 import java.util.Objects;
@@ -94,9 +91,6 @@ public class PlayerDeathEvent implements Listener{
                 stats.setDeaths(stats.getDeaths() + 1);
                 Main.getInstance().getDatabase().updatePlayerStats(stats);
 
-                player.setScoreboard(ScoreBoardBuilder.Scoreboard(stats, player));
-
-
                 PlayerStats stats1 = Main.getInstance().getDatabase().findPlayerStats(player.getKiller());
 
                 if(stats1 == null){
@@ -110,8 +104,8 @@ public class PlayerDeathEvent implements Listener{
                 stats1.setKills(stats1.getKills() + 1);
                 Main.getInstance().getDatabase().updatePlayerStats(stats1);
 
-                player.getKiller().setScoreboard(ScoreBoardBuilder.Scoreboard(stats1, player.getKiller()));
-
+                Main.getInstance().getTablistManager().setScoreboard(player);
+                Main.getInstance().getTablistManager().setScoreboard(player.getKiller());
 
             }catch (SQLException e){
                 e.printStackTrace();

@@ -9,14 +9,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.Team;
 import plugin.Main;
 import plugin.cratesystem.CrateEntities.Crate;
 import plugin.models.PlayerStats;
 import plugin.models.PlayerCombatHandler;
 import plugin.models.TextHandler;
-import plugin.utils.Scores.ScoreBoardBuilder;
 import plugin.utils.essentials.PassiveHealing;
 
 import java.sql.SQLException;
@@ -81,11 +78,9 @@ public class JoinEvent implements Listener {
                 this.plugin.getDatabase().createPlayerStats(stats);
             }
 
-
-
-            player.setScoreboard(ScoreBoardBuilder.Scoreboard(stats, player));
             for (Player p : Bukkit.getOnlinePlayers()) {
                 Main.getInstance().getTablistManager().setTablist(p);
+                Main.getInstance().getTablistManager().setScoreboard(p);
             }
             Main.getInstance().getTablistManager().setAllPlayerTeams();
 

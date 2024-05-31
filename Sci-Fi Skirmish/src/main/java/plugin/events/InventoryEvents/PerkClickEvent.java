@@ -11,7 +11,6 @@ import org.bukkit.persistence.PersistentDataType;
 import plugin.Main;
 import plugin.models.PlayerStats;
 import plugin.utils.InventoryBuilder.PerkInventories;
-import plugin.utils.Scores.ScoreBoardBuilder;
 
 import java.sql.SQLException;
 import java.util.Objects;
@@ -73,7 +72,7 @@ public class PerkClickEvent implements Listener{
                         player.closeInventory();
                         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 20, 1);
                         this.plugin.getDatabase().updatePlayerStats(stats);
-                        player.setScoreboard(ScoreBoardBuilder.Scoreboard(stats, player));
+                        Main.getInstance().getTablistManager().setScoreboard(player);
                     }
                 }
                 event.setCancelled(true);

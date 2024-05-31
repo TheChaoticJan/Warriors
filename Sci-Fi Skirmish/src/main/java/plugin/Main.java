@@ -44,8 +44,7 @@ import plugin.infobar.InfobarCommand;
 import plugin.models.PlayerCombatHandler;
 import plugin.ranksystem.commands.SetRankCommand;
 import plugin.utils.Recipes.*;
-import plugin.utils.Scores.ScoreBoardBuilder;
-import plugin.utils.Scores.TablistManager;
+import plugin.utils.Scores.ScoreboardManager;
 import plugin.utils.essentials.PassiveHealing;
 
 import java.sql.SQLException;
@@ -55,10 +54,10 @@ import java.util.UUID;
 
 public final class Main extends JavaPlugin{
 
-    private TablistManager tablistManager;
+    private ScoreboardManager tablistManager;
     public static Main instance;
     public ArrayList<UUID> VanishList = new ArrayList<>();
-    public TablistManager getTablistManager() {
+    public ScoreboardManager getTablistManager() {
         return tablistManager;
     }
     private Database database;
@@ -76,7 +75,9 @@ public final class Main extends JavaPlugin{
             e.printStackTrace();
         }
 
-        tablistManager = new TablistManager(this);
+        tablistManager = new ScoreboardManager(this);
+        tablistManager.registerAllTeams();
+        tablistManager.removeAllPlayerTeams();
         tablistManager.setAllPlayerTeams();
 
         getServer().getWorlds()
@@ -98,11 +99,8 @@ public final class Main extends JavaPlugin{
         }, 0, 3 * 20));
 
         getServer().getOnlinePlayers().forEach(player -> {
-            try {
-                player.setScoreboard(ScoreBoardBuilder.Scoreboard(getDatabase().findPlayerStats(player), player));
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+                tablistManager.setAllPlayerTeams();
+                tablistManager.setScoreboard(player);
         });
 
         //Adding all Special Recipes (Sci-Fi, Erfahren, Klebrig & Explosiv)

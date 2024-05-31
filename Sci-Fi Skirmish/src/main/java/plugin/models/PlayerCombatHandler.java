@@ -8,9 +8,7 @@ import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.jetbrains.annotations.Nullable;
 import plugin.Main;
-import plugin.utils.Scores.ScoreBoardBuilder;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -65,11 +63,7 @@ public class PlayerCombatHandler{
             public void run() {
                 if(canBeRemovedFromCombat(timeStamp)){
                     combatStatus = false;
-                    try {
-                        ScoreBoardBuilder.Scoreboard(Main.getInstance().getDatabase().findPlayerStats(player), player);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+                    Main.getInstance().getTablistManager().setScoreboard(player);;
                 }
             }
         }, 5, 5);

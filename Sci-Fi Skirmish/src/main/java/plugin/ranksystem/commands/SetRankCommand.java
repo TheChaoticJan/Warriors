@@ -12,9 +12,7 @@ import org.jetbrains.annotations.Nullable;
 import plugin.Main;
 import plugin.models.PlayerStats;
 import plugin.ranksystem.models.RankHandler;
-import plugin.utils.Scores.ScoreBoardBuilder;
 import plugin.models.TextHandler;
-import plugin.utils.Scores.TablistManager;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -47,14 +45,16 @@ public class SetRankCommand implements CommandExecutor, TabCompleter {
             player.sendMessage(MiniMessage.miniMessage().deserialize( "<white>Dein Rang wurde geupdated! Neuer Rang: " + TextHandler.setRankGradient(args[1]) + args[1]));
             commandSender.sendMessage(MiniMessage.miniMessage().deserialize("<white> Du hast erfolgreich den Rang von <aqua>" + player.getName() + "<white> geupdated! \n<white>Neuer Rang: " + TextHandler.setRankGradient(stats.getRank()) + stats.getRank()));
             Main.getInstance().getDatabase().updatePlayerStats(stats);
-            player.setScoreboard(ScoreBoardBuilder.Scoreboard(stats, player));
+            Main.getInstance().getTablistManager().setAllPlayerTeams();
+
+            Main.getInstance().getTablistManager().removeAllPlayerTeams();
+            Main.getInstance().getTablistManager().setScoreboard(player);
+            Main.getInstance().getTablistManager().setAllPlayerTeams();
+
 
         }catch (SQLException e){
             e.printStackTrace();
         }
-
-        Main.getInstance().getTablistManager().setAllPlayerTeams();
-
         return true;
     }
 

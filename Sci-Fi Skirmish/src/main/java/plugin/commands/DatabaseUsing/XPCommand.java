@@ -3,7 +3,6 @@ package plugin.commands.DatabaseUsing;
 import plugin.Main;
 import plugin.models.PlayerStats;
 import plugin.utils.essentials.Count;
-import plugin.utils.Scores.ScoreBoardBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -92,14 +91,14 @@ public class XPCommand implements CommandExecutor, TabCompleter {
                                 player.playSound(player.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_BREAK, 5, 1);
                             }
 
-                            player.setScoreboard(ScoreBoardBuilder.Scoreboard(stats, player));
+                            Main.getInstance().getTablistManager().setScoreboard(player);
                         }
 
 
                         case "balance" -> {
                             player.sendMessage("§7Kontostand: §e" + stats.getXp() + "§6✧");
                             player.playSound(player.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_BREAK, 5, 1);
-                            player.setScoreboard(ScoreBoardBuilder.Scoreboard(stats, player));
+                            Main.getInstance().getTablistManager().setScoreboard(player);
                         }
 
                         case "einzahlen" -> {
@@ -145,7 +144,7 @@ public class XPCommand implements CommandExecutor, TabCompleter {
                                 }
 
 
-                                player.setScoreboard(ScoreBoardBuilder.Scoreboard(stats, player));
+                                Main.getInstance().getTablistManager().setScoreboard(player);
 
 
                             } catch (NumberFormatException e) {
@@ -198,8 +197,7 @@ public class XPCommand implements CommandExecutor, TabCompleter {
                                 receiver.sendMessage("§7Kontostand: §e" + stats1.getXp() + "§6✧ §7<§a+" + betrag + "§7 » " + player.getName() + ">");
                                 receiver.playSound(player.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_BREAK, 5, 1);
 
-                                player.setScoreboard(ScoreBoardBuilder.Scoreboard(stats, player));
-                                receiver.setScoreboard(ScoreBoardBuilder.Scoreboard(stats1, receiver));
+                                Main.getInstance().getTablistManager().setScoreboard(player);
 
                             } catch (NumberFormatException e) {
                                 player.sendMessage("§cBitte benutze: §e/xp überweisen <Spieler> <Betrag>");
