@@ -99,6 +99,7 @@ public class ScoreboardManager {
         }catch (SQLException e){
             e.printStackTrace();
         }
+
         player.setScoreboard(scoreboard1);
     }
 
