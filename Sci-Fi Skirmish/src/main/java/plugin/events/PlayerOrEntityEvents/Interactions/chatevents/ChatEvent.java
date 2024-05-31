@@ -12,6 +12,7 @@ import plugin.Main;
 import plugin.models.PlayerStats;
 import plugin.models.PlayerCombatHandler;
 import plugin.models.TextHandler;
+import plugin.ranksystem.models.RankHandler;
 
 import java.sql.SQLException;
 import java.util.Objects;
@@ -42,7 +43,7 @@ public class ChatEvent implements Listener {
                 stats = new PlayerStats(player);
                 Main.getInstance().getDatabase().createPlayerStats(stats);
             }
-            if (!(stats.getRank().equals("Moderator") || stats.getRank().equals("Admin"))) {
+            if (!(RankHandler.isTeamler(stats.getRank()))) {
 
                 StringBuilder toFullMessage = new StringBuilder();
                 StringBuilder toFullWord = new StringBuilder();
@@ -82,10 +83,10 @@ public class ChatEvent implements Listener {
                                 // Send message to online moderators and admins
                                 for (Player people : Bukkit.getOnlinePlayers()) {
                                     stats = Main.getInstance().getDatabase().findPlayerStats(people);
-                                    if (Objects.equals(stats.getRank(), "Moderator") || Objects.equals(stats.getRank(), "Admin")) {
+                                    if (RankHandler.isTeamler(stats.getRank())) {
                                         people.sendMessage(MiniMessage.miniMessage().deserialize(
                                                 "\n<hover:show_text:'<gray>Nachricht aus dem <red>Chatfilter'><dark_gray><<red>\uD83D\uDCAC<dark_gray>><reset> <red>Chatfilter Nachricht!<reset>\n \n"
-                                                        + "<gray>Spieler: <gold>" + event.getPlayer().getName() + "\n"
+                                                        + "<gray>Spieler: " + TextHandler.setRankGradient(Main.getInstance().getDatabase().findPlayerStats(event.getPlayer()).getRank()) + event.getPlayer().getName() + "</gradient>\n"
                                                         + "<gray>Geflaggtes Wort: <red>" + replaceChars(toFullWord.toString()) + " <white>| <red>" + replaceChars(word) + "\n"
                                                         + "<gray>Nachricht: <gray>'<reset>"
                                                         + event.getMessage() + "<gray>'\n"
@@ -102,13 +103,12 @@ public class ChatEvent implements Listener {
 
             String rank = TextHandler.setRankGradient(stats.getRank()) + event.getPlayer().getName() + " <gray>▸<white>";
 
-            boolean isMod = stats.getRank().equals("Moderator") || stats.getRank().equals("Admin");
-            if (event.getMessage().startsWith("!tc") && isMod) {
+            if (event.getMessage().startsWith("!tc") && RankHandler.isTeamler(stats.getRank())) {
                 event.setCancelled(true);
 
                 for (Player people : Bukkit.getOnlinePlayers()) {
                     stats = Main.getInstance().getDatabase().findPlayerStats(people);
-                    if (Objects.equals(stats.getRank(), "Moderator") || Objects.equals(stats.getRank(), "Admin")) {
+                    if (RankHandler.isTeamler(stats.getRank())) {
 
                         people.sendMessage(MiniMessage.miniMessage().deserialize("<hover:show_text:'<red>Diese Nachricht wurde im Teamchat verschickt'><dark_gray><<red>❗<dark_gray>><reset> " + rank + event.getMessage().replace("!tc", "")));
                     }

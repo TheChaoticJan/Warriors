@@ -20,5 +20,16 @@ public class RankHandler {
         return list;
     }
 
+    public static boolean isTeamler(String rank){
+        switch (rank){
+            case "Inhaber", "Moderator", "Admin" -> {
+                return true;
+            }
+            default -> {
+                return false;
+            }
+        }
+    }
+
 
 }

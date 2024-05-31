@@ -2,6 +2,7 @@ package plugin.ranksystem.commands;
 
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -28,8 +29,8 @@ public class SetRankCommand implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        if(Bukkit.getPlayerExact(args[0]) == null){
-            commandSender.sendMessage("§cDer Spieler " + args[0] + " ist nicht Online!");
+        if(!Bukkit.getOfflinePlayer(args[0]).hasPlayedBefore()){
+            commandSender.sendMessage("§cDer Spieler " + args[0] + " existiert nicht auf diesem Netzwerk!");
             return true;
         }
 
@@ -39,18 +40,24 @@ public class SetRankCommand implements CommandExecutor, TabCompleter {
         }
 
         try {
-            Player player = Bukkit.getPlayerExact(args[0]);
+            OfflinePlayer player = Bukkit.getOfflinePlayer(args[0]);
             PlayerStats stats = Main.getInstance().getDatabase().findPlayerStats(player);
             stats.setRank(args[1]);
-            player.sendMessage(MiniMessage.miniMessage().deserialize( "<white>Dein Rang wurde geupdated! Neuer Rang: " + TextHandler.setRankGradient(args[1]) + args[1]));
-            commandSender.sendMessage(MiniMessage.miniMessage().deserialize("<white> Du hast erfolgreich den Rang von <aqua>" + player.getName() + "<white> geupdated! \n<white>Neuer Rang: " + TextHandler.setRankGradient(stats.getRank()) + stats.getRank()));
+            if(player.isOnline()) {
+                Player p = (Player) player;
+                p.sendMessage(MiniMessage.miniMessage().deserialize("<white>Dein Rang wurde geupdated! Neuer Rang: " + TextHandler.setRankGradient(args[1]) + args[1]));
+            }
+            if(!(player.equals(commandSender))) {
+                commandSender.sendMessage(MiniMessage.miniMessage().deserialize("<white> Du hast erfolgreich den Rang von <aqua>" + player.getName() + "<white> geupdated! \n<white>Neuer Rang: " + TextHandler.setRankGradient(stats.getRank()) + stats.getRank()));
+            }
             Main.getInstance().getDatabase().updatePlayerStats(stats);
-            Main.getInstance().getTablistManager().setAllPlayerTeams();
 
             Main.getInstance().getTablistManager().removeAllPlayerTeams();
-            Main.getInstance().getTablistManager().setScoreboard(player);
             Main.getInstance().getTablistManager().setAllPlayerTeams();
-
+            if(player.isOnline()){
+                Player p = (Player) player;
+                Main.getInstance().getTablistManager().setScoreboard(p);
+            }
 
         }catch (SQLException e){
             e.printStackTrace();

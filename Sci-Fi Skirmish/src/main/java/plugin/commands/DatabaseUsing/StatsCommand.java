@@ -102,14 +102,8 @@ public class StatsCommand implements CommandExecutor, TabCompleter{
                         playerSkullMeta.setOwningPlayer(offlinePlayer);
                         playerSkullMeta.displayName(MiniMessage.miniMessage().deserialize("<i:false><u><b><gradient:#21b161:#8ec468>Spielerstats"));
                         ArrayList<Component> playerLore = new ArrayList<>();
-                        switch (stats.getRank()) {
-                            default ->
-                                    playerLore.add(MiniMessage.miniMessage().deserialize("<i:false><white>Rang: <gradient:#FFE259:#FFA751>Spieler"));
-                            case "Moderator" ->
-                                    playerLore.add(MiniMessage.miniMessage().deserialize("<i:false><white>Rang: <gradient:#7034E6:#b76eec>Moderator"));
-                            case "Admin" ->
-                                    playerLore.add(MiniMessage.miniMessage().deserialize("<i:false><white>Rang: <gradient:#FF0000:#ad0d34>Admin"));
-                        }
+
+                        playerLore.add(MiniMessage.miniMessage().deserialize("<i:false><white>Rang: " + TextHandler.setRankGradient(stats.getRank()) + stats.getRank()));
                         playerLore.add(Component.text(""));
                         playerLore.add(MiniMessage.miniMessage().deserialize("<i:false><#ffffff>XP: <#21b161>" + stats.getXp() + "<#29ac64>✧"));
                         playerLore.add(Component.text(""));

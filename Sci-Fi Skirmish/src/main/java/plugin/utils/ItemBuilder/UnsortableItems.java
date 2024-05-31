@@ -42,7 +42,7 @@ public class UnsortableItems {
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         ArrayList<Component> lore = new ArrayList<>();
         lore.add(MiniMessage.miniMessage().deserialize("<i:false><white>Signiert von: "));
-        lore.add(MiniMessage.miniMessage().deserialize("<i:false><gradient:#EA21ED:#DA1B54>ItsNetflix_</gradient> <white>& <gradient:#EA21ED:#DA1B54>TheChaoticJan</gradient>"));
+        lore.add(MiniMessage.miniMessage().deserialize("<i:false><gradient:#EA21ED:#DA1B54>ItsNetflix_</gradient> <white>& <gradient:#EA21ED:#DA1B54>?</gradient>"));
         lore.add(Component.text(""));
         lore.add(Component.text("§r§fNachricht an euch: §o§b§kaa §o§c❤ §b§kaa"));
         lore.add(Component.text("§7§o(2.5 Sekunden Cooldown)"));
