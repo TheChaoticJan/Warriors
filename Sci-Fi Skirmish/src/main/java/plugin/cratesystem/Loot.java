@@ -9,7 +9,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import plugin.utils.ItemBuilder.SpecialResources;
+import plugin.utils.itembuilder.SpecialResources;
 
 import java.util.ArrayList;
 import java.util.Random;

@@ -9,8 +9,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import plugin.models.PlayerStats;
-import plugin.infobar.InfobarEssentials;
-import plugin.utils.ItemBuilder.InventoryEssentials;
+import plugin.utils.itembuilder.InventoryEssentials;
 
 import java.util.ArrayList;
 

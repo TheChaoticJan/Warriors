@@ -8,43 +8,43 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
-import plugin.commands.DatabaseUsing.PerkCommand;
-import plugin.commands.DatabaseUsing.StatsCommand;
-import plugin.commands.DatabaseUsing.TopCommand;
-import plugin.commands.DatabaseUsing.XPCommand;
-import plugin.commands.FunCommands.SignCommand;
-import plugin.commands.FunCommands.UwUCommand;
-import plugin.commands.InventoryCommands.CommonInventories.AnvilCommand;
-import plugin.commands.InventoryCommands.CommonInventories.EnderchestCommand;
-import plugin.commands.InventoryCommands.CommonInventories.SmithingTableCommand;
-import plugin.commands.InventoryCommands.CommonInventories.TrashCommand;
-import plugin.commands.InventoryCommands.GUIs.KitCommand;
-import plugin.commands.InventoryCommands.GUIs.RezeptCommand;
-import plugin.commands.InventoryCommands.GUIs.RezepteCommand;
-import plugin.commands.InventoryCommands.GUIs.SpecialitemCommand;
-import plugin.commands.InventoryCommands.CommonInventories.WorkbenchCommand;
-import plugin.commands.ModerationsCommands.InvseeCommand;
-import plugin.commands.ModerationsCommands.VanishCommand;
-import plugin.commands.QoLCommands.*;
-import plugin.cratesystem.CrateEntities.CrateDeathEvent;
-import plugin.cratesystem.CrateEntities.CrateHitEvent;
-import plugin.cratesystem.CrateEntities.Crate;
+import plugin.commands.databasedependant.PerkCommand;
+import plugin.commands.databasedependant.StatsCommand;
+import plugin.commands.databasedependant.TopCommand;
+import plugin.commands.databasedependant.XPCommand;
+import plugin.commands.funcommands.SignCommand;
+import plugin.commands.funcommands.UwUCommand;
+import plugin.commands.inventorycommands.commoninventories.AnvilCommand;
+import plugin.commands.inventorycommands.commoninventories.EnderchestCommand;
+import plugin.commands.inventorycommands.commoninventories.SmithingTableCommand;
+import plugin.commands.inventorycommands.commoninventories.TrashCommand;
+import plugin.commands.inventorycommands.gui.KitCommand;
+import plugin.commands.inventorycommands.gui.RezeptCommand;
+import plugin.commands.inventorycommands.gui.RezepteCommand;
+import plugin.commands.inventorycommands.gui.SpecialitemCommand;
+import plugin.commands.inventorycommands.commoninventories.WorkbenchCommand;
+import plugin.commands.moderationcommands.InvseeCommand;
+import plugin.commands.moderationcommands.VanishCommand;
+import plugin.commands.qolcommands.*;
+import plugin.cratesystem.entities.CrateDeathEvent;
+import plugin.cratesystem.entities.CrateHitEvent;
+import plugin.cratesystem.entities.Crate;
 import plugin.cratesystem.SpawnCrateCommand;
 import plugin.database.Database;
-import plugin.events.BlockEvents.BlockEvents;
-import plugin.events.ExplosionEvents.ExplodeEvent;
-import plugin.events.InventoryEvents.CandleClickEvent;
-import plugin.events.InventoryEvents.ClickEvent;
-import plugin.events.InventoryEvents.InfobarClick;
-import plugin.events.InventoryEvents.PerkClickEvent;
-import plugin.events.InventoryEvents.Rezepte.RezeptClickEvent;
-import plugin.events.PlayerOrEntityEvents.Interactions.chatevents.ChatEvent;
-import plugin.events.PlayerOrEntityEvents.PvP.*;
+import plugin.listeners.blocklisteners.BlockEvents;
+import plugin.listeners.explosionlisteners.ExplodeEvent;
+import plugin.listeners.inventorylisteners.CandleClickEvent;
+import plugin.listeners.inventorylisteners.ClickEvent;
+import plugin.listeners.inventorylisteners.InfobarClick;
+import plugin.listeners.inventorylisteners.PerkClickEvent;
+import plugin.listeners.inventorylisteners.Rezepte.RezeptClickEvent;
+import plugin.listeners.entitylisteners.interactions.chatevents.ChatEvent;
+import plugin.listeners.entitylisteners.pvp.*;
 import plugin.infobar.InfobarCommand;
 import plugin.models.PlayerCombatHandler;
 import plugin.ranksystem.commands.SetRankCommand;
-import plugin.utils.Recipes.*;
-import plugin.utils.Scores.ScoreboardManager;
+import plugin.utils.recipes.*;
+import plugin.utils.scores.ScoreboardManager;
 import plugin.utils.essentials.PassiveHealing;
 
 import java.sql.SQLException;
@@ -52,41 +52,40 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.UUID;
 
-public final class Main extends JavaPlugin{
+public final class Main extends JavaPlugin {
 
     private ScoreboardManager tablistManager;
     public static Main instance;
     public ArrayList<UUID> VanishList = new ArrayList<>();
+
     public ScoreboardManager getTablistManager() {
         return tablistManager;
     }
+
     private Database database;
+
     @Override
     public void onEnable() {
         instance = this;
 
-        try{
+        try {
             this.database = new Database();
             database.initiliazeDatabase();
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println("\u001B[31m Konnte sich nicht mit der Datenbank verbinden!");
             System.out.println("\u001B[31m Mögliche Quellen: Falsche Tabellen, Datenbank abgeschalten");
             e.printStackTrace();
         }
 
-        tablistManager = new ScoreboardManager(this);
-        tablistManager.registerAllTeams();
-        tablistManager.removeAllPlayerTeams();
-        tablistManager.setAllPlayerTeams();
 
         getServer().getWorlds()
                 .forEach(world -> world.getEntitiesByClass(ArmorStand.class).stream().
-                                filter(entity -> (Objects.equals(entity.getPersistentDataContainer().has(new NamespacedKey(this, "key")), true)))
-                                .forEach(Crate::new)
-                        );
+                        filter(entity -> (Objects.equals(entity.getPersistentDataContainer().has(new NamespacedKey(this, "key")), true)))
+                        .forEach(Crate::new)
+                );
 
-        for(Player player : getServer().getOnlinePlayers()){
+        for (Player player : getServer().getOnlinePlayers()) {
             new PlayerCombatHandler(player);
             PlayerCombatHandler.getCombatStatusByPlayer(player).startUnCombatCheck();
         }
@@ -98,12 +97,37 @@ public final class Main extends JavaPlugin{
             }
         }, 0, 3 * 20));
 
-        getServer().getOnlinePlayers().forEach(player -> {
-                tablistManager.setAllPlayerTeams();
-                tablistManager.setScoreboard(player);
-        });
+        setupTablist();
+        addRecipes();
+        registerCommands();
+        registerEvents();
 
-        //Adding all Special Recipes (Sci-Fi, Erfahren, Klebrig & Explosiv)
+    }
+
+    public static Main getInstance() {
+        return instance;
+    }
+
+    public Database getDatabase() {
+        return database;
+    }
+
+    @Override
+    public void onDisable() {
+
+        for (BukkitTask task : Bukkit.getScheduler().getPendingTasks()) {
+            Runnable runnable = (Runnable) task;
+            runnable.run();
+            task.cancel();
+        }
+
+        for (Block block : BlockEvents.blocks) {
+            block.setType(Material.AIR);
+        }
+
+    }
+
+    private void addRecipes(){
         Bukkit.addRecipe(Erfahrenrezepte.Recipe1());
         Bukkit.addRecipe(Erfahrenrezepte.Recipe2());
         Bukkit.addRecipe(Erfahrenrezepte.Recipe3());
@@ -128,32 +152,34 @@ public final class Main extends JavaPlugin{
         Bukkit.addRecipe(CandleRecipes.crateCandle());
         Bukkit.addRecipe(CandleRecipes.teleportCandle());
         Bukkit.addRecipe(CandleRecipes.superRecipe());
+    }
 
-        //events
+    private void registerEvents(){
         getServer().getPluginManager().registerEvents(new ClickEvent(), this);
-        getServer().getPluginManager().registerEvents(new BlockEvents(this), this );
-        getServer().getPluginManager().registerEvents(new ExplodeEvent(), this );
-        getServer().getPluginManager().registerEvents(new PlayerGetHitEvent(this), this );
-        getServer().getPluginManager().registerEvents(new plugin.events.PlayerOrEntityEvents.Interactions.JoinEvent(this), this );
-        getServer().getPluginManager().registerEvents(new ChatEvent(), this );
-        getServer().getPluginManager().registerEvents(new ProjectileHitEvent(this), this );
+        getServer().getPluginManager().registerEvents(new BlockEvents(this), this);
+        getServer().getPluginManager().registerEvents(new ExplodeEvent(), this);
+        getServer().getPluginManager().registerEvents(new PlayerGetHitEvent(this), this);
+        getServer().getPluginManager().registerEvents(new plugin.listeners.entitylisteners.interactions.JoinEvent(this), this);
+        getServer().getPluginManager().registerEvents(new ChatEvent(), this);
+        getServer().getPluginManager().registerEvents(new ProjectileHitEvent(this), this);
         getServer().getPluginManager().registerEvents(new PlayerDeathEvent(), this);
         getServer().getPluginManager().registerEvents(new CrateDeathEvent(this), this);
-        getServer().getPluginManager().registerEvents(new plugin.events.PlayerOrEntityEvents.Interactions.RightClickEvent(this), this);
+        getServer().getPluginManager().registerEvents(new plugin.listeners.entitylisteners.interactions.RightClickEvent(this), this);
         getServer().getPluginManager().registerEvents(new RezeptClickEvent(), this);
-        getServer().getPluginManager().registerEvents(new plugin.events.PlayerOrEntityEvents.Interactions.DropEvent(), this);
+        getServer().getPluginManager().registerEvents(new plugin.listeners.entitylisteners.interactions.DropEvent(), this);
         getServer().getPluginManager().registerEvents(new PlayerFishingEvent(), this);
         getServer().getPluginManager().registerEvents(new CrateHitEvent(), this);
         getServer().getPluginManager().registerEvents(new InfobarClick(this), this);
         getServer().getPluginManager().registerEvents(new PerkClickEvent(this), this);
-        getServer().getPluginManager().registerEvents(new plugin.events.PlayerOrEntityEvents.Interactions.MoveEvent(), this);
-        getServer().getPluginManager().registerEvents(new plugin.events.PlayerOrEntityEvents.Interactions.AnvilEvent(), this);
+        getServer().getPluginManager().registerEvents(new plugin.listeners.entitylisteners.interactions.MoveEvent(), this);
+        getServer().getPluginManager().registerEvents(new plugin.listeners.entitylisteners.interactions.AnvilEvent(), this);
         getServer().getPluginManager().registerEvents(new CandleClickEvent(), this);
         getServer().getPluginManager().registerEvents(new PlayerRepairEvent(), this);
         getServer().getPluginManager().registerEvents(new PlayerDamageEvent(), this);
-        getServer().getPluginManager().registerEvents(new plugin.events.PlayerOrEntityEvents.Interactions.LeaveEvent(), this);
+        getServer().getPluginManager().registerEvents(new plugin.listeners.entitylisteners.interactions.LeaveEvent(), this);
+    }
 
-        //commands
+    private void registerCommands(){
         Objects.requireNonNull(getCommand("heal")).setExecutor(new HealCommand());
         Objects.requireNonNull(getCommand("kit")).setExecutor(new KitCommand());
         Objects.requireNonNull(getCommand("sign")).setExecutor(new SignCommand());
@@ -179,28 +205,16 @@ public final class Main extends JavaPlugin{
         Objects.requireNonNull(getCommand("smithingtable")).setExecutor(new SmithingTableCommand());
         Objects.requireNonNull(getCommand("nightvision")).setExecutor(new NightVisionCommand());
         Objects.requireNonNull(getCommand("setrank")).setExecutor(new SetRankCommand());
-
-    }
-    public static Main getInstance(){
-        return instance;
-    }
-    public Database getDatabase() {
-        return database;
     }
 
-    @Override
-    public void onDisable() {
-
-        for(BukkitTask task : Bukkit.getScheduler().getPendingTasks()){
-            Runnable runnable = (Runnable) task;
-            runnable.run();
-            task.cancel();
-        }
-
-        for(Block block : BlockEvents.blocks){
-            block.setType(Material.AIR);
-        }
-
+    private void setupTablist(){
+        tablistManager = new ScoreboardManager(this);
+        tablistManager.registerAllTeams();
+        tablistManager.removeAllPlayerTeams();
+        tablistManager.setAllPlayerTeams();
+        getServer().getOnlinePlayers().forEach(player -> {
+            tablistManager.setAllPlayerTeams();
+            tablistManager.setScoreboard(player);
+        });
     }
 }
-
