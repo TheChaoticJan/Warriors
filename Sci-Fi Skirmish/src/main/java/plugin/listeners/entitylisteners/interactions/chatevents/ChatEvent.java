@@ -64,9 +64,11 @@ public class ChatEvent implements Listener {
                         String fullWordLower = toFullWord.toString().toLowerCase();
 
                         // Check if either the full message, word, or full word is in the filter list
-                        if (chatLists.getFilterList().contains(fullMessageLower) ||
+                        if (
+                                chatLists.getFilterList().contains(fullMessageLower) ||
                                 chatLists.getFilterList().contains(word.toLowerCase()) ||
-                                chatLists.getFilterList().contains(fullWordLower)) {
+                                chatLists.getFilterList().contains(fullWordLower)
+                        ) {
 
                             // Check if both the full message and word are not in the okay list
                             if (!(chatLists.getOkayList().contains(fullMessageLower) && chatLists.getOkayList().contains(word.toLowerCase()))) {
@@ -100,7 +102,7 @@ public class ChatEvent implements Listener {
                 }
             }
 
-            String rank = TextHandler.setRankGradient(stats.getRank()) + event.getPlayer().getName() + " <gray>▸<white>";
+            String rank = TextHandler.setRankGradient(stats.getRank()) + event.getPlayer().getName() + " </gradient><gray>▸<white>";
 
             if (event.getMessage().startsWith("!tc") && RankHandler.isTeamler(stats.getRank())) {
                 event.setCancelled(true);

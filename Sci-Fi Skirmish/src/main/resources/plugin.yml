@@ -38,7 +38,6 @@ commands:
     permission: permission.mod
   smithingtable:
     aliases: 'st'
-  cratestats:
   nightvision:
     aliases: ['nv', 'nachtsicht']
   setrank:

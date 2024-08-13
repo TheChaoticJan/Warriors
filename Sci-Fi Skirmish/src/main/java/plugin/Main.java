@@ -42,6 +42,7 @@ import plugin.listeners.entitylisteners.interactions.chatevents.ChatEvent;
 import plugin.listeners.entitylisteners.pvp.*;
 import plugin.infobar.InfobarCommand;
 import plugin.models.PlayerCombatHandler;
+import plugin.models.PlayerStats;
 import plugin.ranksystem.commands.SetRankCommand;
 import plugin.utils.recipes.*;
 import plugin.utils.scores.ScoreboardManager;
@@ -88,6 +89,13 @@ public final class Main extends JavaPlugin {
         for (Player player : getServer().getOnlinePlayers()) {
             new PlayerCombatHandler(player);
             PlayerCombatHandler.getCombatStatusByPlayer(player).startUnCombatCheck();
+            try {
+                if (getDatabase().findPlayerStats(player) == null) {
+                    getDatabase().createPlayerStats(new PlayerStats(player));
+                }
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
         }
 
         getServer().getOnlinePlayers().forEach(player -> Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {

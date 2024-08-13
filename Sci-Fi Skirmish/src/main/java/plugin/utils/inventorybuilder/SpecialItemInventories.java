@@ -13,6 +13,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import plugin.Main;
 import plugin.utils.itembuilder.*;
+import plugin.utils.itembuilder.Feather;
+import plugin.utils.itembuilder.holy.Util;
 
 import java.util.ArrayList;
 public class SpecialItemInventories {
@@ -48,6 +50,7 @@ public class SpecialItemInventories {
         inventory.setItem(16, createSelectionItem(Material.WHITE_DYE, "<gradient:#4cd98d:#77cd3b><b>Kerzen",("candles")));
 
         inventory.setItem(24, createSelectionItem(Material.GOLD_INGOT, "<gradient:gold:red><b>Western", ("western")));
+        inventory.setItem(25, createSelectionItem(Material.SUNFLOWER, Util.holyGradient + "<b>Heilig", ("holy")));
 
         return inventory;
 
@@ -120,6 +123,7 @@ public class SpecialItemInventories {
                 inventory.setItem(14, Klebrig.Angel());
                 inventory.setItem(15, Klebrig.Bogen());
             }
+            case "holy" -> inventory.setItem(10, Feather.holyFeather());
             case "else" -> inventory.setItem(10, UnsortableItems.loveStick());
 
             default -> player.sendMessage("DA IST WAS FALSCH");

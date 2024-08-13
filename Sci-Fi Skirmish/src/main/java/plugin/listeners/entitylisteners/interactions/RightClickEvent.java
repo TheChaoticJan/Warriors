@@ -17,6 +17,7 @@ import plugin.models.PlayerCombatHandler;
 import plugin.utils.inventorybuilder.SelectCandleInventory;
 import plugin.models.TextHandler;
 import plugin.utils.essentials.InventoryInteracts;
+import plugin.utils.itembuilder.Feather;
 
 import java.sql.SQLException;
 import java.util.*;
@@ -56,16 +57,20 @@ public class RightClickEvent implements Listener{
     }
 
     @EventHandler
-    public void clickEvent(PlayerInteractEvent e){
-        Player p = e.getPlayer();
+    public void clickEvent(PlayerInteractEvent event){
+        Player p = event.getPlayer();
 
         if(p.getItemInHand().getType().equals(Material.AIR)){
             return;
         }
 
+        if(event.getAction().isRightClick() && event.getPlayer().getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "holy_feather"))){
+            Feather.processEffect(event.getPlayer());
+        }
+
         if(p.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "love"))){
 
-            if(!String.valueOf(p.getUniqueId()).equals("58c6e186-a994-45f1-b804-cae8ccdec55d") && !String.valueOf(p.getUniqueId()).equals("3686fc60-3ff8-459b-8da6-ce05e8910e3f")/*Isys UUID*/) {
+            if(!String.valueOf(p.getUniqueId()).equals("58c6e186-a994-45f1-b804-cae8ccdec55d") && !String.valueOf(p.getUniqueId()).equals("3686fc60-3ff8-459b-8da6-ce05e8910e3f") && !String.valueOf(p.getUniqueId()).equals("1f965897-539a-4195-b886-8c82e732edad")/*Isys UUID*/) {
                 if (!(flowerCD.get(p.getUniqueId()) == null)) {
                     if (System.currentTimeMillis() - 2500 >= flowerCD.get(p.getUniqueId())) {
                         flowerCD.remove(p.getUniqueId());
@@ -108,14 +113,14 @@ public class RightClickEvent implements Listener{
             p.sendActionBar("§f" + nearest.getName() + " §7| §b" + Math.round(p.getLocation().distance(nearest.getLocation())) + " Blöcke");
         }
 
-        if(p.isSneaking() && e.getAction().isRightClick() && p.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "loadable"))){
-            e.setCancelled(true);
+        if(p.isSneaking() && event.getAction().isRightClick() && p.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "loadable"))){
+            event.setCancelled(true);
             p.sendMessage("§cBitte schreib in den Chat wie viele XP aufgeladen werden sollen!");
             checkChat.putIfAbsent(p.getUniqueId(), p.getItemInHand().getItemMeta().getPersistentDataContainer().get(new NamespacedKey(Main.getInstance(), "amount"), PersistentDataType.INTEGER));
 
         }
 
-        if(p.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "candle")) && p.getItemInHand().getType().equals(Material.ORANGE_CANDLE) && e.getAction().isRightClick() && !Objects.equals(jumpCooldown.get(p.getUniqueId()), "jump") && !p.isSneaking()){
+        if(p.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "candle")) && p.getItemInHand().getType().equals(Material.ORANGE_CANDLE) && event.getAction().isRightClick() && !Objects.equals(jumpCooldown.get(p.getUniqueId()), "jump") && !p.isSneaking()){
             p.setVelocity(p.getLocation().getDirection().add(p.getLocation().getDirection().multiply(0.7).setY(0.2)));
             jumpCooldown.put(p.getUniqueId(), "jump");
             p.setCooldown(Material.ORANGE_CANDLE, 100);
@@ -124,7 +129,7 @@ public class RightClickEvent implements Listener{
             Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> jumpCooldown.remove(p.getUniqueId(), "jump"), 20 * 5 );
         }
 
-        if(p.isSneaking() && p.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "special")) && e.getAction().isRightClick()){ //&& !teleportCooldown.containsKey(p.getUniqueId()) && !jumpCooldown.containsKey(p.getUniqueId()) && !healCooldown.containsKey(p.getUniqueId()) && !crateCooldown.containsKey(p.getUniqueId())
+        if(p.isSneaking() && p.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "special")) && event.getAction().isRightClick()){ //&& !teleportCooldown.containsKey(p.getUniqueId()) && !jumpCooldown.containsKey(p.getUniqueId()) && !healCooldown.containsKey(p.getUniqueId()) && !crateCooldown.containsKey(p.getUniqueId())
             p.openInventory(SelectCandleInventory.selectCandle(p, p.getItemInHand().getItemMeta().getPersistentDataContainer().get(new NamespacedKey(Main.getInstance(), "candle"), PersistentDataType.STRING)));
         }
 
@@ -139,7 +144,7 @@ public class RightClickEvent implements Listener{
 
             }
 
-            if(p.getItemInHand().getType().equals(Material.DIAMOND_SWORD) && e.getAction().isRightClick() && PlayerCombatHandler.getCombatStatusByPlayer(p).getCombatStatus() && stats.getPerks()[5] && !lockCooldown.containsKey(p.getUniqueId())){
+            if(p.getItemInHand().getType().equals(Material.DIAMOND_SWORD) && event.getAction().isRightClick() && PlayerCombatHandler.getCombatStatusByPlayer(p).getCombatStatus() && stats.getPerks()[5] && !lockCooldown.containsKey(p.getUniqueId())){
                 Player victim = PlayerCombatHandler.getCombatStatusByPlayer(p).getLastAttacked();
                 if(victim == null){
                     return;
@@ -182,7 +187,7 @@ public class RightClickEvent implements Listener{
             float y = p.getLocation().getBlockY();
             float z = p.getLocation().getBlockZ();
 
-            if (p.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "candle")) && p.getItemInHand().getType().equals(Material.BLUE_CANDLE) && e.getAction().isRightClick() && !Objects.equals(crateCooldown.get(p.getUniqueId()), "crate") && !p.isSneaking()) {
+            if (p.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "candle")) && p.getItemInHand().getType().equals(Material.BLUE_CANDLE) && event.getAction().isRightClick() && !Objects.equals(crateCooldown.get(p.getUniqueId()), "crate") && !p.isSneaking()) {
                 int rarity = (int) (Math.random() * 100 + 30);
                 crateCooldown.put(p.getUniqueId(), "crate");
                 String rare;
@@ -219,7 +224,7 @@ public class RightClickEvent implements Listener{
             exception.printStackTrace();
         }
 
-        if(p.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "candle")) && p.getItemInHand().getType().equals(Material.YELLOW_CANDLE) && e.getAction().isRightClick() && !Objects.equals(healCooldown.get(p.getUniqueId()), "heal") && !p.isSneaking()){
+        if(p.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "candle")) && p.getItemInHand().getType().equals(Material.YELLOW_CANDLE) && event.getAction().isRightClick() && !Objects.equals(healCooldown.get(p.getUniqueId()), "heal") && !p.isSneaking()){
             healCooldown.put(p.getUniqueId(), "heal");
             InventoryInteracts.healArmorPieces(p, 15);
             p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_USE, 20, 1);
@@ -229,7 +234,7 @@ public class RightClickEvent implements Listener{
 
             }
 
-        if(p.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "candle")) && p.getItemInHand().getType().equals(Material.GREEN_CANDLE) && e.getAction().isRightClick() && !Objects.equals(teleportCooldown.get(p.getUniqueId()), "teleport") && !p.isSneaking()){
+        if(p.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "candle")) && p.getItemInHand().getType().equals(Material.GREEN_CANDLE) && event.getAction().isRightClick() && !Objects.equals(teleportCooldown.get(p.getUniqueId()), "teleport") && !p.isSneaking()){
             if(PlayerCombatHandler.getCombatStatusByPlayer(p).getCombatStatus()){
                 if(PlayerCombatHandler.getCombatStatusByPlayer(p).getLastAttacked() != null) {
                     p.teleport(Objects.requireNonNull(PlayerCombatHandler.getCombatStatusByPlayer(p).getLastAttacked()));

@@ -37,6 +37,15 @@ public class JoinEvent implements Listener {
 
         Player player = event.getPlayer();
 
+        try{
+        if(Main.getInstance().getDatabase().findPlayerStats(player) == null){
+
+                Main.getInstance().getDatabase().createPlayerStats(new PlayerStats(player));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
         if (event.getPlayer().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "combatlog"))) {
             if (Boolean.TRUE.equals(event.getPlayer().getPersistentDataContainer().get(new NamespacedKey(Main.getInstance(), "combatlog"), PersistentDataType.BOOLEAN))) {
                 event.getPlayer().sendMessage("\n§cDu warst bei deinem letzten Kampf Feige und hast dich ausgelogged! \nDu bist trotzdem gestorben und wurdest zum Spawn geschickt\n§f");
