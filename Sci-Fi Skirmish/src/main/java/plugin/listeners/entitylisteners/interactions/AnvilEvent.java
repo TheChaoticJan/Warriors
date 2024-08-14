@@ -9,7 +9,10 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import plugin.Main;
-import plugin.utils.itembuilder.Candles;
+import plugin.cratesystem.entities.Crate;
+import plugin.utils.itembuilder.candles.JumpCandle;
+import plugin.utils.itembuilder.candles.RepairCandle;
+import plugin.utils.itembuilder.candles.TeleportCandle;
 
 import java.util.Objects;
 
@@ -27,10 +30,9 @@ public class AnvilEvent implements Listener{
             }
 
             switch (Objects.requireNonNull(anvil.getItem(1).getItemMeta().getPersistentDataContainer().get(new NamespacedKey(Main.getInstance(), "material"), PersistentDataType.STRING))) {
-                case "gold" -> event.setResult(Candles.healCandle());
-                case "diamond" -> event.setResult(Candles.crateCandle());
-                case "kelp" -> event.setResult(Candles.boostCandle());
-                case "emerald" -> event.setResult(Candles.teleportCandle());
+                case "gold" -> event.setResult(RepairCandle.create());
+                case "kelp" -> event.setResult(JumpCandle.create());
+                case "emerald" -> event.setResult(TeleportCandle.create());
                 default -> event.setResult(new ItemStack(Material.AIR));
             }
 

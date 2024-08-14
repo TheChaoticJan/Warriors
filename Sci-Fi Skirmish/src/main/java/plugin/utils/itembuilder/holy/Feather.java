@@ -4,25 +4,24 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.util.Vector;
 import plugin.Main;
 import plugin.utils.itembuilder.holy.Util;
+import org.bukkit.event.Listener;
 
 import java.util.ArrayList;
 
-public class Feather{
+public class Feather implements Listener{
 
-    public static ItemStack holyFeather(){
+    public static ItemStack create(){
         ItemStack stack = new ItemStack(Material.FEATHER);
         ItemMeta meta = stack.getItemMeta();
 
@@ -34,11 +33,11 @@ public class Feather{
         ArrayList<Component> lore = new ArrayList<>();
         lore.add(MiniMessage.miniMessage().deserialize(Util.holyGradient + "<i:false>Heilig"));
         lore.add(Component.text(""));
-        lore.add(MiniMessage.miniMessage().deserialize("  <dark_gray>▸ <yellow>Aus dem Himmel gefallen..."));
-        lore.add(MiniMessage.miniMessage().deserialize("<i:false><white>Diese Feder gibt dir die Mächte"));
-        lore.add(MiniMessage.miniMessage().deserialize("<i:false><white>der Götter für eine kurze Zeit"));
+        lore.add(MiniMessage.miniMessage().deserialize("<dark_gray>▸ <yellow>Aus dem Himmel gefallen..."));
+        lore.add(MiniMessage.miniMessage().deserialize(" <i:false><white>Diese Feder gibt dir die Mächte"));
+        lore.add(MiniMessage.miniMessage().deserialize(" <i:false><white>der Götter für eine kurze Zeit"));
         lore.add(Component.text(""));
-        lore.add(Component.text("§7'Meine Macht ist unergründlich'§r §f~§e_LMEmi"));
+        lore.add(Component.text("§7'Meine Macht ist unergründlich'"));
 
         meta.lore(lore);
 
@@ -46,7 +45,7 @@ public class Feather{
         return stack;
     }
 
-    public static void processEffect(Player player){
+    private static void processEffect(Player player){
 
         player.setItemInHand(player.getItemInHand().subtract(1));
         ItemStack [] inventory = player.getInventory().getContents();
@@ -85,6 +84,13 @@ public class Feather{
         }, time * 20);
 
     }
+    @EventHandler
+    private void rightClickEvent(PlayerInteractEvent event){
+        if(event.getAction().isRightClick() && event.getPlayer().getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "holy_feather"))){
+            Feather.processEffect(event.getPlayer());
+        }
+    }
+
     private static ItemStack godSword(){
         ItemStack stack = new ItemStack(Material.NETHERITE_SWORD);
         ItemMeta meta = stack.getItemMeta();

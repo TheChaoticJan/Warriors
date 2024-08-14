@@ -26,7 +26,7 @@ public class InventoryEssentials {
     }
 
     public static ItemStack back() {
-        ItemStack i = new ItemStack(Material.REDSTONE_BLOCK);
+        ItemStack i = new ItemStack(Material.REDSTONE);
         ItemMeta d = i.getItemMeta();
         d.setDisplayName("§cZurück");
         i.setItemMeta(d);

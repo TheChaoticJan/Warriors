@@ -44,6 +44,13 @@ import plugin.infobar.InfobarCommand;
 import plugin.models.PlayerCombatHandler;
 import plugin.models.PlayerStats;
 import plugin.ranksystem.commands.SetRankCommand;
+import plugin.utils.itembuilder.Feather;
+import plugin.utils.itembuilder.candles.JumpCandle;
+import plugin.utils.itembuilder.candles.RepairCandle;
+import plugin.utils.itembuilder.candles.TeleportCandle;
+import plugin.utils.itembuilder.candles.UltimateCandle;
+import plugin.utils.itembuilder.holy.Coin;
+import plugin.utils.itembuilder.holy.CookieBox;
 import plugin.utils.recipes.*;
 import plugin.utils.scores.ScoreboardManager;
 import plugin.utils.essentials.PassiveHealing;
@@ -157,7 +164,6 @@ public final class Main extends JavaPlugin {
         Bukkit.addRecipe(ExplosivRezepte.Recipe4());
         Bukkit.addRecipe(CandleRecipes.healCandle());
         Bukkit.addRecipe(CandleRecipes.boostCandle());
-        Bukkit.addRecipe(CandleRecipes.crateCandle());
         Bukkit.addRecipe(CandleRecipes.teleportCandle());
         Bukkit.addRecipe(CandleRecipes.superRecipe());
     }
@@ -185,6 +191,13 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerRepairEvent(), this);
         getServer().getPluginManager().registerEvents(new PlayerDamageEvent(), this);
         getServer().getPluginManager().registerEvents(new plugin.listeners.entitylisteners.interactions.LeaveEvent(), this);
+        getServer().getPluginManager().registerEvents(new Feather(), this);
+        getServer().getPluginManager().registerEvents(new Coin(), this);
+        getServer().getPluginManager().registerEvents(new JumpCandle(), this);
+        getServer().getPluginManager().registerEvents(new RepairCandle(), this);
+        getServer().getPluginManager().registerEvents(new TeleportCandle(), this);
+        getServer().getPluginManager().registerEvents(new UltimateCandle(), this);
+        getServer().getPluginManager().registerEvents(new CookieBox(), this);
     }
 
     private void registerCommands(){

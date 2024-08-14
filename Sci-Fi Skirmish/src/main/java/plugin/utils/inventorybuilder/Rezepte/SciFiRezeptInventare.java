@@ -7,20 +7,10 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import plugin.utils.inventorybuilder.RecipeInventory;
-import plugin.utils.itembuilder.Candles;
 import plugin.utils.itembuilder.SciFiItems;
 import plugin.utils.itembuilder.SpecialResources;
 
 public class SciFiRezeptInventare {
-
-    public static Inventory Zauberstab(Player p, @Nullable InventoryClickEvent e, @Nullable ItemStack a){
-        Inventory i = RecipeInventory.emptyInventory(p, e, a);
-        i.setItem(12, SpecialResources.SciFiBarren(1));
-        i.setItem(21, SpecialResources.SciFiBarren(1));
-        i.setItem(24, Candles.crateCandle());
-        i.setItem(30, SpecialResources.SciFiBarren(1));
-        return i;
-    }
 
     public static Inventory Schwert(Player p, @Nullable InventoryClickEvent e, @Nullable ItemStack a){
 

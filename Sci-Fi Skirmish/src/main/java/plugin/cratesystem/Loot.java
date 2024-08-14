@@ -9,6 +9,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import plugin.utils.itembuilder.Feather;
 import plugin.utils.itembuilder.SpecialResources;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class Loot {
 
     public Loot(String rarity) {
 
-        int iterations = (int) (Math.random() * 2);
+        int iterations = new Random().nextInt(2);
 
         switch (rarity){
             case "common" -> {
@@ -38,12 +39,12 @@ public class Loot {
                 }
             }
             case "rare" -> {
-                for (int i = iterations; i < 3; i++) {
+                for (int i = iterations; i < 4; i++) {
                     contents.add(legendaryDrop());
                 }
             }
             case "mythic" -> {
-                for (int i = iterations; i < 3; i++) {
+                for (int i = iterations; i < 4; i++) {
                     contents.add(mythicDrop());
                 }
             }
@@ -209,6 +210,7 @@ public class Loot {
         mythicDrops.add(SpecialResources.ExplosivPuder(3));
         mythicDrops.add(SpecialResources.KlebrigFragment(3));
         mythicDrops.add(SpecialResources.SciFiFragment(3));
+        mythicDrops.add(Feather.create());
 
         CrateBook book = new CrateBook(true, 4);
         mythicDrops.add(book.getBook());

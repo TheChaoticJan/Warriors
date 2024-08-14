@@ -14,6 +14,9 @@ import org.bukkit.persistence.PersistentDataType;
 import plugin.Main;
 import plugin.utils.itembuilder.*;
 import plugin.utils.itembuilder.Feather;
+import plugin.utils.itembuilder.candles.*;
+import plugin.utils.itembuilder.holy.Coin;
+import plugin.utils.itembuilder.holy.CookieBox;
 import plugin.utils.itembuilder.holy.Util;
 
 import java.util.ArrayList;
@@ -80,12 +83,11 @@ public class SpecialItemInventories {
                 inventory.setItem(22, Western.Boots(player));
             }
             case "candles" -> {
-                inventory.setItem(10, Candles.emptyCandle());
-                inventory.setItem(12, Candles.crateCandle());
-                inventory.setItem(13, Candles.healCandle());
-                inventory.setItem(14, Candles.boostCandle());
-                inventory.setItem(15, Candles.teleportCandle());
-                inventory.setItem(16, Candles.superCandle());
+                inventory.setItem(10, EmptyCandle.create());
+                inventory.setItem(12, JumpCandle.create());
+                inventory.setItem(13, RepairCandle.create());
+                inventory.setItem(14, TeleportCandle.create());
+                inventory.setItem(15, UltimateCandle.create());
             }
             case "scifi" -> {
                 inventory.setItem(10, SpecialResources.SciFiFragment(1));
@@ -123,7 +125,11 @@ public class SpecialItemInventories {
                 inventory.setItem(14, Klebrig.Angel());
                 inventory.setItem(15, Klebrig.Bogen());
             }
-            case "holy" -> inventory.setItem(10, Feather.holyFeather());
+            case "holy" -> {
+                inventory.setItem(10, Feather.create());
+                inventory.setItem(11, Coin.create());
+                inventory.setItem(12, CookieBox.create());
+            }
             case "else" -> inventory.setItem(10, UnsortableItems.loveStick());
 
             default -> player.sendMessage("DA IST WAS FALSCH");

@@ -7,7 +7,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import plugin.utils.itembuilder.Candles;
+import plugin.utils.itembuilder.candles.JumpCandle;
+import plugin.utils.itembuilder.candles.RepairCandle;
+import plugin.utils.itembuilder.candles.TeleportCandle;
 
 import java.util.Objects;
 
@@ -18,41 +20,32 @@ public class SelectCandleInventory {
         Inventory inventory = Bukkit.createInventory(player, InventoryType.HOPPER, MiniMessage.miniMessage().deserialize("<rainbow>Wähle den Kerzentyp aus!"));
 
         //Adding Candles to the Inventory
-        ItemStack boostCandle = Candles.boostCandle();
+        ItemStack boostCandle = JumpCandle.create();
         if(!currenttype.equals("boost")){
             boostCandle.removeEnchantment(Enchantment.DURABILITY);
         }else{
            Objects.requireNonNull(boostCandle.getItemMeta().getLore()).add("");
            Objects.requireNonNull(boostCandle.getItemMeta().getLore()).add("§aIm Moment ausgewählt!");
         }
-        inventory.setItem(0, boostCandle);
+        inventory.setItem(1, boostCandle);
 
-        ItemStack healCandle = Candles.healCandle();
+        ItemStack healCandle = RepairCandle.create();
         if(!currenttype.equals("heal")){
             healCandle.removeEnchantment(Enchantment.DURABILITY);
         }else{
             Objects.requireNonNull(healCandle.getItemMeta().getLore()).add("");
             Objects.requireNonNull(healCandle.getItemMeta().getLore()).add("§aIm Moment ausgewählt!");
         }
-        inventory.setItem(1, healCandle);
+        inventory.setItem(2, healCandle);
 
-        ItemStack crateCandle = Candles.crateCandle();
-        if(!currenttype.equals("crate")){
-            crateCandle.removeEnchantment(Enchantment.DIG_SPEED);
-        }else{
-            Objects.requireNonNull(crateCandle.getItemMeta().getLore()).add("");
-            Objects.requireNonNull(crateCandle.getItemMeta().getLore()).add("§aIm Moment ausgewählt!");
-        }
-        inventory.setItem(3, crateCandle);
-
-        ItemStack teleportCandle = Candles.teleportCandle();
+        ItemStack teleportCandle = TeleportCandle.create();
         if(!currenttype.equals("teleport")){
             teleportCandle.removeEnchantment(Enchantment.DIG_SPEED);
         }else{
             Objects.requireNonNull(teleportCandle.getItemMeta().getLore()).add("");
             Objects.requireNonNull(teleportCandle.getItemMeta().getLore()).add("§aIm Moment ausgewählt!");
         }
-        inventory.setItem(4, teleportCandle);
+        inventory.setItem(3, teleportCandle);
 
 
         return inventory;

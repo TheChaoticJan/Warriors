@@ -7,9 +7,9 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import plugin.utils.inventorybuilder.RecipeInventory;
-import plugin.utils.itembuilder.Candles;
 import plugin.utils.itembuilder.ErfahrenItems;
 import plugin.utils.itembuilder.SpecialResources;
+import plugin.utils.itembuilder.candles.RepairCandle;
 
 public class ErfahrenRezeptInventare {
 
@@ -54,7 +54,7 @@ public class ErfahrenRezeptInventare {
         i.setItem(12, SpecialResources.ErfahrenBarren(1));
         i.setItem(21, SpecialResources.ErfahrenBarren(1));
         i.setItem(30, SpecialResources.ErfahrenBarren(1));
-        i.setItem(24, Candles.healCandle());
+        i.setItem(24, RepairCandle.create());
         return i;
     }
 

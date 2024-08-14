@@ -13,6 +13,7 @@ import plugin.utils.inventorybuilder.Rezepte.ExplosivRezeptInventare;
 import plugin.utils.inventorybuilder.Rezepte.KlebrigRezeptInventare;
 import plugin.utils.inventorybuilder.Rezepte.SciFiRezeptInventare;
 import plugin.utils.itembuilder.*;
+import plugin.utils.itembuilder.candles.RepairCandle;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,8 +38,6 @@ public class RezeptCommand implements CommandExecutor, TabCompleter {
                         p.openInventory(SciFiRezeptInventare.Bogen(p, null, SciFiItems.Bogen()));
                 case "Sci-Fi_Axt" ->
                         p.openInventory(SciFiRezeptInventare.Axt(p, null, SciFiItems.Axt()));
-                case "Sci-Fi_Zauberstab" ->
-                        p.openInventory(SciFiRezeptInventare.Zauberstab(p, null, Candles.crateCandle()));
                 case "Erfahrenfragment" ->
                         p.openInventory(ErfahrenRezeptInventare.Fragment(p, null, SpecialResources.ErfahrenFragment(1)));
                 case "Erfahrenbarren" ->
@@ -68,7 +67,7 @@ public class RezeptCommand implements CommandExecutor, TabCompleter {
                 case "Klebrig_Bogen" ->
                         p.openInventory(KlebrigRezeptInventare.Bogen(p, null, Klebrig.Bogen()));
                 case "Erfahren_Zauberstab" ->
-                        p.openInventory(ErfahrenRezeptInventare.Zauberstab(p, null, Candles.healCandle()));
+                        p.openInventory(ErfahrenRezeptInventare.Zauberstab(p, null, RepairCandle.create()));
                 default -> {
                     p.sendMessage("§cDies ist kein Servereigenes Specialitem!");
                     p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 2, 1);
