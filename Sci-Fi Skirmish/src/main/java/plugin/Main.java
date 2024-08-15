@@ -15,12 +15,9 @@ import plugin.commands.databasedependant.XPCommand;
 import plugin.commands.funcommands.SignCommand;
 import plugin.commands.funcommands.UwUCommand;
 import plugin.commands.inventorycommands.commoninventories.AnvilCommand;
-import plugin.commands.inventorycommands.commoninventories.EnderchestCommand;
 import plugin.commands.inventorycommands.commoninventories.SmithingTableCommand;
 import plugin.commands.inventorycommands.commoninventories.TrashCommand;
 import plugin.commands.inventorycommands.gui.KitCommand;
-import plugin.commands.inventorycommands.gui.RezeptCommand;
-import plugin.commands.inventorycommands.gui.RezepteCommand;
 import plugin.commands.inventorycommands.gui.SpecialitemCommand;
 import plugin.commands.inventorycommands.commoninventories.WorkbenchCommand;
 import plugin.commands.moderationcommands.InvseeCommand;
@@ -37,23 +34,28 @@ import plugin.listeners.inventorylisteners.CandleClickEvent;
 import plugin.listeners.inventorylisteners.ClickEvent;
 import plugin.listeners.inventorylisteners.InfobarClick;
 import plugin.listeners.inventorylisteners.PerkClickEvent;
-import plugin.listeners.inventorylisteners.Rezepte.RezeptClickEvent;
 import plugin.listeners.entitylisteners.interactions.chatevents.ChatEvent;
 import plugin.listeners.entitylisteners.pvp.*;
 import plugin.infobar.InfobarCommand;
 import plugin.models.PlayerCombatHandler;
 import plugin.models.PlayerStats;
 import plugin.ranksystem.commands.SetRankCommand;
-import plugin.utils.itembuilder.Feather;
-import plugin.utils.itembuilder.candles.JumpCandle;
-import plugin.utils.itembuilder.candles.RepairCandle;
-import plugin.utils.itembuilder.candles.TeleportCandle;
-import plugin.utils.itembuilder.candles.UltimateCandle;
-import plugin.utils.itembuilder.holy.Coin;
-import plugin.utils.itembuilder.holy.CookieBox;
-import plugin.utils.recipes.*;
+import plugin.safe.SafeListener;
+import plugin.safe.SafeCommand;
+import plugin.specialitems.holy.HolyBackpack;
+import plugin.utils.itembuilder.HolyFeather;
+import plugin.specialitems.candles.JumpCandle;
+import plugin.specialitems.candles.RepairCandle;
+import plugin.specialitems.candles.TeleportCandle;
+import plugin.specialitems.candles.UltimateCandle;
+import plugin.specialitems.holy.HolyArmor;
+import plugin.specialitems.holy.HolyCoin;
+import plugin.specialitems.holy.HolyCookieBox;
+import plugin.specialitems.vampiric.VampiricBow;
+import plugin.specialitems.vampiric.VampiricHelmet;
+import plugin.specialitems.vampiric.VampiricHoe;
 import plugin.utils.scores.ScoreboardManager;
-import plugin.utils.essentials.PassiveHealing;
+import plugin.listeners.entitylisteners.interactions.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -65,11 +67,9 @@ public final class Main extends JavaPlugin {
     private ScoreboardManager tablistManager;
     public static Main instance;
     public ArrayList<UUID> VanishList = new ArrayList<>();
-
     public ScoreboardManager getTablistManager() {
         return tablistManager;
     }
-
     private Database database;
 
     @Override
@@ -95,6 +95,7 @@ public final class Main extends JavaPlugin {
 
         for (Player player : getServer().getOnlinePlayers()) {
             new PlayerCombatHandler(player);
+            HolyArmor.startArmorCheck(player);
             PlayerCombatHandler.getCombatStatusByPlayer(player).startUnCombatCheck();
             try {
                 if (getDatabase().findPlayerStats(player) == null) {
@@ -105,15 +106,24 @@ public final class Main extends JavaPlugin {
             }
         }
 
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+            @Override
+            public void run() {
+                for(Player player : Bukkit.getOnlinePlayers()) {
+                   Main.getInstance().getTablistManager().setAllPlayerTeams();
+                   Main.getInstance().getTablistManager().setScoreboard(player);
+                }
+            }
+        }, 9, 9);
+
         getServer().getOnlinePlayers().forEach(player -> Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
             @Override
             public void run() {
-                PassiveHealing.start(player);
+                VampiricHelmet.start(player);
             }
         }, 0, 3 * 20));
 
         setupTablist();
-        addRecipes();
         registerCommands();
         registerEvents();
 
@@ -142,62 +152,45 @@ public final class Main extends JavaPlugin {
 
     }
 
-    private void addRecipes(){
-        Bukkit.addRecipe(Erfahrenrezepte.Recipe1());
-        Bukkit.addRecipe(Erfahrenrezepte.Recipe2());
-        Bukkit.addRecipe(Erfahrenrezepte.Recipe3());
-        Bukkit.addRecipe(Erfahrenrezepte.Recipe4());
-        Bukkit.addRecipe(Erfahrenrezepte.Recipe5());
-        Bukkit.addRecipe(SciFiRezepte.Recipe1());
-        Bukkit.addRecipe(SciFiRezepte.Recipe2());
-        Bukkit.addRecipe(SciFiRezepte.Recipe3());
-        Bukkit.addRecipe(SciFiRezepte.Recipe4());
-        Bukkit.addRecipe(SciFiRezepte.Recipe6());
-        Bukkit.addRecipe(KlebrigRezepte.Recipe1());
-        Bukkit.addRecipe(KlebrigRezepte.Recipe2());
-        Bukkit.addRecipe(KlebrigRezepte.Recipe3());
-        Bukkit.addRecipe(KlebrigRezepte.Recipe4());
-        Bukkit.addRecipe(KlebrigRezepte.Recipe5());
-        Bukkit.addRecipe(ExplosivRezepte.Recipe1());
-        Bukkit.addRecipe(ExplosivRezepte.Recipe2());
-        Bukkit.addRecipe(ExplosivRezepte.Recipe3());
-        Bukkit.addRecipe(ExplosivRezepte.Recipe4());
-        Bukkit.addRecipe(CandleRecipes.healCandle());
-        Bukkit.addRecipe(CandleRecipes.boostCandle());
-        Bukkit.addRecipe(CandleRecipes.teleportCandle());
-        Bukkit.addRecipe(CandleRecipes.superRecipe());
-    }
-
     private void registerEvents(){
         getServer().getPluginManager().registerEvents(new ClickEvent(), this);
         getServer().getPluginManager().registerEvents(new BlockEvents(this), this);
         getServer().getPluginManager().registerEvents(new ExplodeEvent(), this);
         getServer().getPluginManager().registerEvents(new PlayerGetHitEvent(this), this);
-        getServer().getPluginManager().registerEvents(new plugin.listeners.entitylisteners.interactions.JoinEvent(this), this);
+        getServer().getPluginManager().registerEvents(new JoinEvent(this), this);
         getServer().getPluginManager().registerEvents(new ChatEvent(), this);
-        getServer().getPluginManager().registerEvents(new ProjectileHitEvent(this), this);
+        getServer().getPluginManager().registerEvents(new BowHitEvent(this), this);
         getServer().getPluginManager().registerEvents(new PlayerDeathEvent(), this);
         getServer().getPluginManager().registerEvents(new CrateDeathEvent(this), this);
-        getServer().getPluginManager().registerEvents(new plugin.listeners.entitylisteners.interactions.RightClickEvent(this), this);
-        getServer().getPluginManager().registerEvents(new RezeptClickEvent(), this);
-        getServer().getPluginManager().registerEvents(new plugin.listeners.entitylisteners.interactions.DropEvent(), this);
+        getServer().getPluginManager().registerEvents(new RightClickEvent(this), this);
+        getServer().getPluginManager().registerEvents(new DropEvent(), this);
         getServer().getPluginManager().registerEvents(new PlayerFishingEvent(), this);
         getServer().getPluginManager().registerEvents(new CrateHitEvent(), this);
         getServer().getPluginManager().registerEvents(new InfobarClick(this), this);
         getServer().getPluginManager().registerEvents(new PerkClickEvent(this), this);
-        getServer().getPluginManager().registerEvents(new plugin.listeners.entitylisteners.interactions.MoveEvent(), this);
-        getServer().getPluginManager().registerEvents(new plugin.listeners.entitylisteners.interactions.AnvilEvent(), this);
+        getServer().getPluginManager().registerEvents(new MoveEvent(), this);
+        getServer().getPluginManager().registerEvents(new AnvilEvent(), this);
         getServer().getPluginManager().registerEvents(new CandleClickEvent(), this);
         getServer().getPluginManager().registerEvents(new PlayerRepairEvent(), this);
-        getServer().getPluginManager().registerEvents(new PlayerDamageEvent(), this);
-        getServer().getPluginManager().registerEvents(new plugin.listeners.entitylisteners.interactions.LeaveEvent(), this);
-        getServer().getPluginManager().registerEvents(new Feather(), this);
-        getServer().getPluginManager().registerEvents(new Coin(), this);
+        getServer().getPluginManager().registerEvents(new LeaveEvent(), this);
+
+        //functionality for the Candles
         getServer().getPluginManager().registerEvents(new JumpCandle(), this);
         getServer().getPluginManager().registerEvents(new RepairCandle(), this);
         getServer().getPluginManager().registerEvents(new TeleportCandle(), this);
         getServer().getPluginManager().registerEvents(new UltimateCandle(), this);
-        getServer().getPluginManager().registerEvents(new CookieBox(), this);
+        //functionality for the holy Items
+        getServer().getPluginManager().registerEvents(new HolyFeather(), this);
+        getServer().getPluginManager().registerEvents(new HolyCoin(), this);
+        getServer().getPluginManager().registerEvents(new HolyCookieBox(), this);
+        getServer().getPluginManager().registerEvents(new HolyArmor(), this);
+        getServer().getPluginManager().registerEvents(new HolyBackpack(), this);
+        //functionality for the vampiric Items
+        getServer().getPluginManager().registerEvents(new VampiricHelmet(), this);
+        getServer().getPluginManager().registerEvents(new VampiricHoe(), this);
+        getServer().getPluginManager().registerEvents(new VampiricBow(), this);
+
+        getServer().getPluginManager().registerEvents(new SafeListener(), this);
     }
 
     private void registerCommands(){
@@ -208,15 +201,12 @@ public final class Main extends JavaPlugin {
         Objects.requireNonNull(getCommand("uwu")).setExecutor(new UwUCommand());
         Objects.requireNonNull(getCommand("invsee")).setExecutor(new InvseeCommand(this));
         Objects.requireNonNull(getCommand("spawn")).setExecutor(new SpawnCommand());
-        Objects.requireNonNull(getCommand("ec")).setExecutor(new EnderchestCommand());
         Objects.requireNonNull(getCommand("workbench")).setExecutor(new WorkbenchCommand());
         Objects.requireNonNull(getCommand("anvil")).setExecutor(new AnvilCommand());
         Objects.requireNonNull(getCommand("specialitems")).setExecutor(new SpecialitemCommand());
         Objects.requireNonNull(getCommand("vanish")).setExecutor(new VanishCommand(this));
-        Objects.requireNonNull(getCommand("rezepte")).setExecutor(new RezepteCommand());
         Objects.requireNonNull(getCommand("stats")).setExecutor(new StatsCommand(this));
         Objects.requireNonNull(getCommand("xp")).setExecutor(new XPCommand(this));
-        Objects.requireNonNull(getCommand("rezept")).setExecutor(new RezeptCommand());
         Objects.requireNonNull(getCommand("trash")).setExecutor(new TrashCommand());
         Objects.requireNonNull(getCommand("modify")).setExecutor(new ModifyCommand());
         Objects.requireNonNull(getCommand("top")).setExecutor(new TopCommand(this));
@@ -226,6 +216,7 @@ public final class Main extends JavaPlugin {
         Objects.requireNonNull(getCommand("smithingtable")).setExecutor(new SmithingTableCommand());
         Objects.requireNonNull(getCommand("nightvision")).setExecutor(new NightVisionCommand());
         Objects.requireNonNull(getCommand("setrank")).setExecutor(new SetRankCommand());
+        Objects.requireNonNull(getCommand("safe")).setExecutor(new SafeCommand());
     }
 
     private void setupTablist(){
@@ -233,9 +224,5 @@ public final class Main extends JavaPlugin {
         tablistManager.registerAllTeams();
         tablistManager.removeAllPlayerTeams();
         tablistManager.setAllPlayerTeams();
-        getServer().getOnlinePlayers().forEach(player -> {
-            tablistManager.setAllPlayerTeams();
-            tablistManager.setScoreboard(player);
-        });
     }
 }

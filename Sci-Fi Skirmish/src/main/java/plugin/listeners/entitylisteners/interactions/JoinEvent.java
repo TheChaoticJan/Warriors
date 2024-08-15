@@ -14,7 +14,7 @@ import plugin.cratesystem.entities.Crate;
 import plugin.models.PlayerStats;
 import plugin.models.PlayerCombatHandler;
 import plugin.models.TextHandler;
-import plugin.utils.essentials.PassiveHealing;
+import plugin.specialitems.vampiric.VampiricHelmet;
 
 import java.sql.SQLException;
 import java.util.Objects;
@@ -56,7 +56,7 @@ public class JoinEvent implements Listener {
         new PlayerCombatHandler(player);
         PlayerCombatHandler.getCombatStatusByPlayer(player).startUnCombatCheck();
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), () -> {
-            PassiveHealing.start(player);
+            VampiricHelmet.start(player);
         }, 0, 3 * 20);
 
         try {

@@ -1,26 +1,18 @@
 package plugin.listeners.entitylisteners.interactions;
 
-import com.destroystokyo.paper.Title;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataType;
 import plugin.Main;
-import plugin.cratesystem.Loot;
 import plugin.models.PlayerStats;
 import plugin.models.PlayerCombatHandler;
-import plugin.utils.inventorybuilder.SelectCandleInventory;
-import plugin.models.TextHandler;
-import plugin.utils.essentials.InventoryInteracts;
-import plugin.utils.itembuilder.Feather;
-import plugin.utils.itembuilder.candles.JumpCandle;
-import plugin.utils.itembuilder.candles.RepairCandle;
-import plugin.utils.itembuilder.candles.TeleportCandle;
+import plugin.specialitems.candles.JumpCandle;
+import plugin.specialitems.candles.RepairCandle;
+import plugin.specialitems.candles.TeleportCandle;
 
 import java.sql.SQLException;
 import java.util.*;

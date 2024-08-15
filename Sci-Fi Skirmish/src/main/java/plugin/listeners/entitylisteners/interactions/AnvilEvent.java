@@ -9,10 +9,9 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import plugin.Main;
-import plugin.cratesystem.entities.Crate;
-import plugin.utils.itembuilder.candles.JumpCandle;
-import plugin.utils.itembuilder.candles.RepairCandle;
-import plugin.utils.itembuilder.candles.TeleportCandle;
+import plugin.specialitems.candles.JumpCandle;
+import plugin.specialitems.candles.RepairCandle;
+import plugin.specialitems.candles.TeleportCandle;
 
 import java.util.Objects;
 

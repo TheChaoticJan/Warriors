@@ -7,9 +7,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import plugin.utils.itembuilder.candles.JumpCandle;
-import plugin.utils.itembuilder.candles.RepairCandle;
-import plugin.utils.itembuilder.candles.TeleportCandle;
+import plugin.specialitems.candles.JumpCandle;
+import plugin.specialitems.candles.RepairCandle;
+import plugin.specialitems.candles.TeleportCandle;
 
 import java.util.Objects;
 

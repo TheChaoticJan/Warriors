@@ -63,7 +63,6 @@ public class PlayerCombatHandler{
             public void run() {
                 if(canBeRemovedFromCombat(timeStamp)){
                     combatStatus = false;
-                    Main.getInstance().getTablistManager().setScoreboard(player);;
                 }
             }
         }, 5, 5);

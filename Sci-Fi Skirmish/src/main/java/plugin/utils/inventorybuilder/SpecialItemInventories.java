@@ -12,12 +12,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import plugin.Main;
+import plugin.specialitems.holy.*;
 import plugin.utils.itembuilder.*;
-import plugin.utils.itembuilder.Feather;
-import plugin.utils.itembuilder.candles.*;
-import plugin.utils.itembuilder.holy.Coin;
-import plugin.utils.itembuilder.holy.CookieBox;
-import plugin.utils.itembuilder.holy.Util;
+import plugin.utils.itembuilder.HolyFeather;
+import plugin.specialitems.candles.*;
+import plugin.specialitems.vampiric.VampiricBow;
+import plugin.specialitems.vampiric.VampiricHelmet;
+import plugin.specialitems.vampiric.VampiricHoe;
 
 import java.util.ArrayList;
 public class SpecialItemInventories {
@@ -43,20 +44,18 @@ public class SpecialItemInventories {
 
         inventory.setItem(10, createSelectionItem(Material.BLUE_DYE, "<gradient:#008DFF:#C60BF9><b>Sci-Fi",("scifi")));
         inventory.setItem(11, createSelectionItem(Material.YELLOW_DYE, "<gradient:#EBD77B:#BED556><b>Erfahren",("erfahren")));
-        inventory.setItem(19, createSelectionItem(Material.RED_DYE, "<gradient:#DD2D2D:#AA781C><b>Explosiv",("explosive")));
-        inventory.setItem(20, createSelectionItem(Material.LIME_DYE, "<gradient:#5ADD2D:#40AA1C><b>Klebrig",("sticky")));
+        inventory.setItem(12, createSelectionItem(Material.RED_DYE, "<gradient:#DD2D2D:#AA781C><b>Explosiv",("explosive")));
+        inventory.setItem(13, createSelectionItem(Material.LIME_DYE, "<gradient:#5ADD2D:#40AA1C><b>Klebrig",("sticky")));
 
-        inventory.setItem(13, createSelectionItem(Material.PURPLE_DYE, "<gradient:#824622:#b5185c><b>Vampirisch",("vampiric")));
-        inventory.setItem(22, createSelectionItem(Material.ORANGE_DYE, "<gradient:#6a3e0a:#9d2323:#e5e814><b>Berserker",("berserker")));
+        inventory.setItem(19, createSelectionItem(Material.PURPLE_DYE, "<gradient:#824622:#b5185c><b>Vampirisch",("vampiric")));
+        inventory.setItem(20, createSelectionItem(Material.ORANGE_DYE, "<gradient:#6a3e0a:#9d2323:#e5e814><b>Berserker",("berserker")));
+        inventory.setItem(21, createSelectionItem(Material.WHITE_DYE, "<gradient:#4cd98d:#77cd3b><b>Kerzen",("candles")));
+        inventory.setItem(22, createSelectionItem(Material.SUNFLOWER, HolyUtil.holyGradient + "<b>Heilig", ("holy")));
 
-        inventory.setItem(15, createSelectionItem(Material.GRAY_DYE, "<gradient:#b9c6bf:#a4b19b><b>Sonstiges",("else")));
-        inventory.setItem(16, createSelectionItem(Material.WHITE_DYE, "<gradient:#4cd98d:#77cd3b><b>Kerzen",("candles")));
-
-        inventory.setItem(24, createSelectionItem(Material.GOLD_INGOT, "<gradient:gold:red><b>Western", ("western")));
-        inventory.setItem(25, createSelectionItem(Material.SUNFLOWER, Util.holyGradient + "<b>Heilig", ("holy")));
+        inventory.setItem(16, createSelectionItem(Material.GRAY_DYE, "<gradient:#b9c6bf:#a4b19b><b>Sonstiges",("else")));
+        inventory.setItem(25, createSelectionItem(Material.GOLD_INGOT, "<gradient:gold:red><b>Western", ("western")));
 
         return inventory;
-
     }
     public static Inventory showOff(Player player, String tag, String name){
         Inventory inventory = Bukkit.createInventory(player, 36, MiniMessage.miniMessage().deserialize(name));
@@ -90,45 +89,41 @@ public class SpecialItemInventories {
                 inventory.setItem(15, UltimateCandle.create());
             }
             case "scifi" -> {
-                inventory.setItem(10, SpecialResources.SciFiFragment(1));
-                inventory.setItem(11, SpecialResources.SciFiBarren(1));
-                inventory.setItem(13, SciFiItems.Schwert());
-                inventory.setItem(14, SciFiItems.Axt());
-                inventory.setItem(15, SciFiItems.Bogen());
+                inventory.setItem(10, SciFiItems.Schwert());
+                inventory.setItem(11, SciFiItems.Axt());
+                inventory.setItem(12, SciFiItems.Bogen());
             }
             case "vampiric" -> {
-                inventory.setItem(10, Vampirisch.ComboHoe(player));
-                inventory.setItem(11, Vampirisch.EssenceBow(player));
-                inventory.setItem(12, Vampirisch.VampireCrown(player));
+                inventory.setItem(10, VampiricHoe.create(player));
+                inventory.setItem(11, VampiricBow.create(player));
+                inventory.setItem(12, VampiricHelmet.create(player));
             }
             case "berserker" -> {
                 inventory.setItem(10, Berserker.Axe(player));
                 inventory.setItem(11, Berserker.Tracker());
             }
             case "erfahren" -> {
-                inventory.setItem(10, SpecialResources.ErfahrenFragment(1));
-                inventory.setItem(11, SpecialResources.ErfahrenBarren(1));
-                inventory.setItem(13, ErfahrenItems.sword());
-                inventory.setItem(14, ErfahrenItems.Axt());
-                inventory.setItem(15, ErfahrenItems.bow());
+                inventory.setItem(10, ErfahrenItems.sword());
+                inventory.setItem(11, ErfahrenItems.Axt());
+                inventory.setItem(12, ErfahrenItems.bow());
             }
             case "explosive" -> {
-                inventory.setItem(10, SpecialResources.ExplosivPuder(1));
-                inventory.setItem(11, SpecialResources.ExplosivBarren(1));
-                inventory.setItem(13, Explosiv.Spitzhacke());
-                inventory.setItem(14, Explosiv.Angel());
+                inventory.setItem(10, Explosiv.Spitzhacke());
+                inventory.setItem(11, Explosiv.Angel());
             }
             case "sticky" -> {
-                inventory.setItem(10, SpecialResources.KlebrigFragment(1));
-                inventory.setItem(11, SpecialResources.KlebrigBarren(1));
-                inventory.setItem(13, Klebrig.Schwert());
-                inventory.setItem(14, Klebrig.Angel());
-                inventory.setItem(15, Klebrig.Bogen());
+                inventory.setItem(10, Klebrig.Schwert());
+                inventory.setItem(11, Klebrig.Angel());
+                inventory.setItem(12, Klebrig.Bogen());
             }
             case "holy" -> {
-                inventory.setItem(10, Feather.create());
-                inventory.setItem(11, Coin.create());
-                inventory.setItem(12, CookieBox.create());
+                inventory.setItem(10, HolyFeather.create());
+                inventory.setItem(11, HolyCoin.create());
+                inventory.setItem(12, HolyCookieBox.create());
+                inventory.setItem(13, HolyBackpack.create());
+                for(int i = 0; i < HolyArmor.create().length; i++){
+                    inventory.setItem(i + 19, HolyArmor.create()[i]);
+                }
             }
             case "else" -> inventory.setItem(10, UnsortableItems.loveStick());
 

@@ -9,8 +9,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import plugin.utils.itembuilder.Feather;
-import plugin.utils.itembuilder.SpecialResources;
+import plugin.utils.itembuilder.HolyFeather;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -170,10 +169,6 @@ public class Loot {
         legendaryDrops.add(Drop3);
         ItemStack Drop4 = new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 1);
         legendaryDrops.add(Drop4);
-        legendaryDrops.add(SpecialResources.SciFiFragment(1));
-        legendaryDrops.add(SpecialResources.KlebrigFragment(1));
-        legendaryDrops.add(SpecialResources.ExplosivPuder(1));
-        legendaryDrops.add(SpecialResources.ErfahrenFragment(1));
         legendaryDrops.add(new ItemStack(Material.APPLE, 3));
         legendaryDrops.add(new ItemStack(Material.COBWEB, 6));
         legendaryDrops.add(new ItemStack(Material.BOOK, 5));
@@ -206,11 +201,7 @@ public class Loot {
         mythicDrops.add(Drop3);
         ItemStack Drop4 = new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 3);
         mythicDrops.add(Drop4);
-        mythicDrops.add(SpecialResources.ErfahrenFragment(3));
-        mythicDrops.add(SpecialResources.ExplosivPuder(3));
-        mythicDrops.add(SpecialResources.KlebrigFragment(3));
-        mythicDrops.add(SpecialResources.SciFiFragment(3));
-        mythicDrops.add(Feather.create());
+        mythicDrops.add(HolyFeather.create());
 
         CrateBook book = new CrateBook(true, 4);
         mythicDrops.add(book.getBook());

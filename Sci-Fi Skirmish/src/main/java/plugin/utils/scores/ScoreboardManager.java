@@ -15,7 +15,7 @@ public class ScoreboardManager {
 
     Main plugin;
 
-    private final Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
+    private static final Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
 
     public ScoreboardManager(Main plugin) {
         this.plugin = plugin;
