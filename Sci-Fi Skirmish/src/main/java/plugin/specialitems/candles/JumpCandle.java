@@ -44,6 +44,12 @@ public class JumpCandle implements Listener{
 
     @EventHandler
     private void processEffect(PlayerInteractEvent event){
+        if(event.getItem() == null){
+            return;
+        }
+        if(event.getItem().getItemMeta() == null){
+            return;
+        }
 
         Player player = event.getPlayer();
 

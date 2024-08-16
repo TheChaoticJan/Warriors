@@ -16,14 +16,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class BlockEvents implements Listener {
-
-    private final Main plugin;
-
     public static ArrayList<Block> blocks = new ArrayList<>();
-
-    public BlockEvents(Main plugin) {
-        this.plugin = plugin;
-    }
 
     public static void addBlockToList(Block b){
         blocks.add(b);

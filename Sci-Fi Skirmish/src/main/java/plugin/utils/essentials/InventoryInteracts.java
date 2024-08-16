@@ -13,11 +13,11 @@ public class InventoryInteracts {
 
     public static void checkSpecialItemDrops(Player d) {
 
-        final String [] types = {"§eSci-Fi", "§eErfahren", "§eKlebrig", "§eExplosiv"};
-        final Material [] items = {Material.ENDER_PEARL, Material.EXPERIENCE_BOTTLE, Material.COBWEB, Material.TNT};
-        final int [] amounts = {0, 5, 3, 2};
+        final String [] types = {"§eSci-Fi", "§eErfahren"};
+        final Material [] items = {Material.ENDER_PEARL, Material.EXPERIENCE_BOTTLE};
+        final int [] amounts = {0, 5};
 
-        for(int i = 0; i <= types.length - 1; i++) {
+        for(int i = 0; i < types.length; i++) {
             if (d.getItemInHand().getItemMeta() != null) {
                 if (d.getItemInHand().getItemMeta().getLore() != null) {
                     if (d.getItemInHand().getItemMeta().getLore().contains(types[i])){
@@ -25,7 +25,7 @@ public class InventoryInteracts {
                         int random = (int) (Math.random() * 300) + 1;
                         if (random == 1) {
                             for(int k = 0; k <= amounts[i]; k++) {
-                                for (int l = 0; l <= 35; l++) {
+                                for (int l = 0; l < 36; l++) {
                                     if (d.getInventory().getItem(l) == null || Objects.requireNonNull(d.getInventory().getItem(l)).getType() == items[i] && Objects.requireNonNull(d.getInventory().getItem(l)).getAmount() <= 15) {
                                         bl = true;
                                     }
@@ -44,8 +44,6 @@ public class InventoryInteracts {
                             switch (i){
                                 case 0 -> new Bossbars().sciFiBar(d);
                                 case 1 -> new Bossbars().erfahrenBar(d);
-                                case 2 -> new Bossbars().klebrigBar(d);
-                                case 3 -> new Bossbars().explosivBar(d);
                             }
                         }
                     }

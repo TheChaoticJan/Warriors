@@ -10,7 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.persistence.PersistentDataType;
 import plugin.Main;
-import plugin.cratesystem.entities.Crate;
+import plugin.cratesystem.models.Crate;
 import plugin.models.PlayerStats;
 import plugin.models.PlayerCombatHandler;
 import plugin.models.TextHandler;

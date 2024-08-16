@@ -1,4 +1,4 @@
-package plugin.cratesystem;
+package plugin.cratesystem.models;
 
 import lombok.Getter;
 import org.bukkit.Color;
@@ -9,6 +9,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import plugin.cratesystem.CrateBook;
 import plugin.utils.itembuilder.HolyFeather;
 
 import java.util.ArrayList;
@@ -63,9 +64,6 @@ public class Loot {
         commonDrops.add(new ItemStack(Material.BOOK , 2));
         commonDrops.add(new ItemStack(Material.IRON_INGOT, 1));
         commonDrops.add(new ItemStack(Material.GOLD_NUGGET, 2));
-        commonDrops.add(new ItemStack(Material.AMETHYST_SHARD, 2));
-        commonDrops.add(new ItemStack(Material.GUNPOWDER, 2));
-        commonDrops.add(new ItemStack(Material.SCUTE));
         commonDrops.add(new ItemStack(Material.COBWEB, 1));
         commonDrops.add(new ItemStack(Material.APPLE));
         CrateBook book = new CrateBook(false, 1);
@@ -86,9 +84,6 @@ public class Loot {
         uncommonDrops.add(new ItemStack(Material.ARROW, 6));
 	    uncommonDrops.add(new ItemStack(Material.BOOK,2));
         uncommonDrops.add(new ItemStack(Material.IRON_INGOT, 3));
-        uncommonDrops.add(new ItemStack(Material.AMETHYST_SHARD, 4));
-        uncommonDrops.add(new ItemStack(Material.SCUTE, 4));
-        uncommonDrops.add(new ItemStack(Material.GUNPOWDER, 4));
         uncommonDrops.add(new ItemStack(Material.COBWEB, 2));
         uncommonDrops.add(new ItemStack(Material.STONE_SWORD));
 	    uncommonDrops.add(new ItemStack(Material.APPLE, 2));
@@ -140,13 +135,7 @@ public class Loot {
         Drop7.setItemMeta(SwordMeta);
         epicDrops.add(Drop7);
         ItemStack Drop8 = new ItemStack(Material.GOLD_NUGGET, 6);
-        ItemStack Drop9 = new ItemStack(Material.GUNPOWDER, 6);
-        ItemStack Drop10 = new ItemStack(Material.AMETHYST_SHARD, 6);
-        ItemStack Drop11 = new ItemStack(Material.SCUTE, 6);
         epicDrops.add(Drop8);
-        epicDrops.add(Drop9);
-        epicDrops.add(Drop10);
-        epicDrops.add(Drop11);
         ItemStack Drop12 = new ItemStack(Material.FISHING_ROD);
         ItemMeta drop12ItemMeta = Drop12.getItemMeta();
         drop12ItemMeta.addEnchant(Enchantment.DURABILITY, 3, true);
@@ -216,7 +205,6 @@ public class Loot {
         mythicDrops.add(Drop10);
         ItemStack Drop11 = new ItemStack(Material.COBWEB, 12);
         mythicDrops.add(Drop11);
-        ItemStack Drop12 = new ItemStack(Material.GRAY_CANDLE);
 
         return new ItemStack(mythicDrops.get(new Random().nextInt(mythicDrops.size())));
     }

@@ -5,7 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import plugin.cratesystem.entities.Crate;
+import plugin.cratesystem.models.Crate;
 
 public class SpawnCrateCommand implements CommandExecutor {
     @Override

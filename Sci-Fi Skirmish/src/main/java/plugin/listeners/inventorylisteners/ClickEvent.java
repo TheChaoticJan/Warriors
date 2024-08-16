@@ -19,6 +19,7 @@ import plugin.utils.inventorybuilder.SpecialItemInventories;
 import plugin.utils.itembuilder.InventoryEssentials;
 import plugin.utils.itembuilder.Western;
 
+import javax.management.ObjectName;
 import java.util.Objects;
 
 public class ClickEvent implements Listener {
@@ -30,41 +31,15 @@ public class ClickEvent implements Listener {
         if(e.getCurrentItem() == null){
             return;
         }
-
-        if(e.getView().getTitle().endsWith("§f")){
-            if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cZurück")){
-                p.openInventory(SpecialItemInventories.selection(p, "<gradient:#FF59F4:#BD51FF><b>Rezepte"));
-            }
-            e.setCancelled(true);
-        }
-
-        if(e.getView().title().equals(MiniMessage.miniMessage().deserialize("<rainbow><b>Specialitems"))){
-            if(e.getCurrentItem() == null || e.getCurrentItem().getType().equals(Material.WHITE_STAINED_GLASS_PANE)){
-                e.setCancelled(true);
-                return;
-            }
-            if(Objects.equals(e.getClickedInventory(), p.getInventory())){
-                e.setCancelled(true);
-            }else if(e.getCurrentItem().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "special"))){
-                p.openInventory(SpecialItemInventories.showOff(p, e.getCurrentItem().getItemMeta().getPersistentDataContainer().get(new NamespacedKey(Main.getInstance(), "special"), PersistentDataType.STRING), "<black><b>Wähle dein Item:"));
-            }
-        }
-        if(e.getView().getTitle().equalsIgnoreCase("§0§lWähle dein Item:")){
-            if(e.getCurrentItem() == null || e.getCurrentItem().getType().equals(Material.WHITE_STAINED_GLASS_PANE)){
-                e.setCancelled(true);
-                return;
-            }else if(e.getCurrentItem().equals(InventoryEssentials.back())){
-                p.openInventory(SpecialItemInventories.selection(p, "<rainbow><b>Specialitems"));
-                e.setCancelled(true);
-            }else{
-                p.getInventory().addItem(e.getCurrentItem());
-                e.setCancelled(true);
-            }
+        if(e.getCurrentItem() == InventoryEssentials.back()){
+            p.sendMessage("ja");
+            return;
         }
 
         if(e.getView().getTitle().contains("§8Inventar von ") || e.getView().getTitle().contains("§0Stats von")){
                 e.setCancelled(true);
         }
+
         if(e.getView().getTitle().equalsIgnoreCase("          §6Westernwars §0Kit")) {
             if(e.getCurrentItem() == null){
                 return;

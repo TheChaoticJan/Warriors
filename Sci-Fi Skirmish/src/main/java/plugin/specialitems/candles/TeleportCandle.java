@@ -49,6 +49,12 @@ public class TeleportCandle implements Listener{
     @EventHandler
     private void processEvent(PlayerInteractEvent event){
         Player player = event.getPlayer();
+        if(event.getItem() == null){
+            return;
+        }
+        if(event.getItem().getItemMeta() == null){
+            return;
+        }
         if(player.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "candle")) && player.getItemInHand().getType().equals(Material.GREEN_CANDLE) && event.getAction().isRightClick() && !Objects.equals(teleportCooldown.get(player.getUniqueId()), "teleport") && !player.isSneaking()){
             if(PlayerCombatHandler.getCombatStatusByPlayer(player).getCombatStatus()){
                 if(PlayerCombatHandler.getCombatStatusByPlayer(player).getLastAttacked() != null) {

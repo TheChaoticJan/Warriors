@@ -15,22 +15,19 @@ import plugin.commands.databasedependant.XPCommand;
 import plugin.commands.funcommands.SignCommand;
 import plugin.commands.funcommands.UwUCommand;
 import plugin.commands.inventorycommands.commoninventories.AnvilCommand;
-import plugin.commands.inventorycommands.commoninventories.SmithingTableCommand;
 import plugin.commands.inventorycommands.commoninventories.TrashCommand;
 import plugin.commands.inventorycommands.gui.KitCommand;
-import plugin.commands.inventorycommands.gui.SpecialitemCommand;
+import plugin.shop.ShopCommand;
+import plugin.specialitems.SpecialitemCommand;
 import plugin.commands.inventorycommands.commoninventories.WorkbenchCommand;
 import plugin.commands.moderationcommands.InvseeCommand;
 import plugin.commands.moderationcommands.VanishCommand;
 import plugin.commands.qolcommands.*;
-import plugin.cratesystem.entities.CrateDeathEvent;
-import plugin.cratesystem.entities.CrateHitEvent;
-import plugin.cratesystem.entities.Crate;
+import plugin.cratesystem.models.Crate;
 import plugin.cratesystem.SpawnCrateCommand;
 import plugin.database.Database;
 import plugin.listeners.blocklisteners.BlockEvents;
 import plugin.listeners.explosionlisteners.ExplodeEvent;
-import plugin.listeners.inventorylisteners.CandleClickEvent;
 import plugin.listeners.inventorylisteners.ClickEvent;
 import plugin.listeners.inventorylisteners.InfobarClick;
 import plugin.listeners.inventorylisteners.PerkClickEvent;
@@ -154,24 +151,19 @@ public final class Main extends JavaPlugin {
 
     private void registerEvents(){
         getServer().getPluginManager().registerEvents(new ClickEvent(), this);
-        getServer().getPluginManager().registerEvents(new BlockEvents(this), this);
+        getServer().getPluginManager().registerEvents(new BlockEvents(), this);
         getServer().getPluginManager().registerEvents(new ExplodeEvent(), this);
         getServer().getPluginManager().registerEvents(new PlayerGetHitEvent(this), this);
         getServer().getPluginManager().registerEvents(new JoinEvent(this), this);
         getServer().getPluginManager().registerEvents(new ChatEvent(), this);
         getServer().getPluginManager().registerEvents(new BowHitEvent(this), this);
         getServer().getPluginManager().registerEvents(new PlayerDeathEvent(), this);
-        getServer().getPluginManager().registerEvents(new CrateDeathEvent(this), this);
         getServer().getPluginManager().registerEvents(new RightClickEvent(this), this);
         getServer().getPluginManager().registerEvents(new DropEvent(), this);
         getServer().getPluginManager().registerEvents(new PlayerFishingEvent(), this);
-        getServer().getPluginManager().registerEvents(new CrateHitEvent(), this);
         getServer().getPluginManager().registerEvents(new InfobarClick(this), this);
         getServer().getPluginManager().registerEvents(new PerkClickEvent(this), this);
         getServer().getPluginManager().registerEvents(new MoveEvent(), this);
-        getServer().getPluginManager().registerEvents(new AnvilEvent(), this);
-        getServer().getPluginManager().registerEvents(new CandleClickEvent(), this);
-        getServer().getPluginManager().registerEvents(new PlayerRepairEvent(), this);
         getServer().getPluginManager().registerEvents(new LeaveEvent(), this);
 
         //functionality for the Candles
@@ -191,6 +183,8 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new VampiricBow(), this);
 
         getServer().getPluginManager().registerEvents(new SafeListener(), this);
+        getServer().getPluginManager().registerEvents(new InventoryUtils(), this);
+        getServer().getPluginManager().registerEvents(new Crate(), this);
     }
 
     private void registerCommands(){
@@ -213,10 +207,10 @@ public final class Main extends JavaPlugin {
         Objects.requireNonNull(getCommand("perks")).setExecutor(new PerkCommand(this));
         Objects.requireNonNull(getCommand("infobar")).setExecutor(new InfobarCommand(this));
         Objects.requireNonNull(getCommand("crate")).setExecutor(new SpawnCrateCommand());
-        Objects.requireNonNull(getCommand("smithingtable")).setExecutor(new SmithingTableCommand());
         Objects.requireNonNull(getCommand("nightvision")).setExecutor(new NightVisionCommand());
         Objects.requireNonNull(getCommand("setrank")).setExecutor(new SetRankCommand());
         Objects.requireNonNull(getCommand("safe")).setExecutor(new SafeCommand());
+        Objects.requireNonNull(getCommand("shop")).setExecutor(new ShopCommand());
     }
 
     private void setupTablist(){

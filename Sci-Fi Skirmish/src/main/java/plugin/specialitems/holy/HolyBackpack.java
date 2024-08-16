@@ -93,7 +93,8 @@ public class HolyBackpack implements Listener{
                 meta.getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "S"+i), PersistentDataType.STRING, Utils.itemStackToBase64(event.getInventory().getItem(i)));
                 stack.setItemMeta(meta);
             }
-                player.setItemInHand(stack);
+            player.setItemInHand(stack);
+            usedBackpack.remove(player);
         }
 
     }

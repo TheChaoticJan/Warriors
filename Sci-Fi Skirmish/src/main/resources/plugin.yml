@@ -20,6 +20,8 @@ commands:
     aliases: "v"
     permission: permission.mod
   stats:
+  shop:
+    aliases: 'laden'
   trash:
     aliases: "müll"
   xp:
@@ -31,8 +33,6 @@ commands:
   infobar:
   crate:
     permission: permission.mod
-  smithingtable:
-    aliases: 'st'
   nightvision:
     aliases: ['nv', 'nachtsicht']
   setrank:

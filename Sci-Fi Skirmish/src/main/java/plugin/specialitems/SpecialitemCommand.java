@@ -1,5 +1,6 @@
-package plugin.commands.inventorycommands.gui;
+package plugin.specialitems;
 
+import plugin.InventoryUtils;
 import plugin.utils.inventorybuilder.SpecialItemInventories;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -16,9 +17,7 @@ public class SpecialitemCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if(sender instanceof Player p){
-
-            p.openInventory(SpecialItemInventories.selection(p, "<rainbow><b>Specialitems"));
-
+            p.openInventory(SpecialItemInventories.selection(p, InventoryUtils.modInvName));
         }
         return true;
     }

@@ -1,17 +1,24 @@
 package plugin.utils.inventorybuilder;
 
+import com.destroystokyo.paper.profile.PlayerProfile;
+import com.destroystokyo.paper.profile.ProfileProperty;
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.persistence.PersistentDataType;
 import plugin.Main;
+import plugin.shop.ShopUtils;
 import plugin.specialitems.holy.*;
 import plugin.utils.itembuilder.*;
 import plugin.utils.itembuilder.HolyFeather;
@@ -21,115 +28,97 @@ import plugin.specialitems.vampiric.VampiricHelmet;
 import plugin.specialitems.vampiric.VampiricHoe;
 
 import java.util.ArrayList;
+import java.util.UUID;
+
 public class SpecialItemInventories {
-    private static ItemStack createSelectionItem(Material material, String name, String key){
-        ItemStack stack = new ItemStack(material);
-        ItemMeta meta = stack.getItemMeta();
-        meta.displayName(MiniMessage.miniMessage().deserialize(name));
-        meta.getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "special"), PersistentDataType.STRING, key);
-        meta.addEnchant(Enchantment.MENDING, 1 ,true);
-        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        ArrayList<String> lore = new ArrayList<>();
-        lore.add("§7§o*Click*");
-        meta.setLore(lore);
-        stack.setItemMeta(meta);
-        return stack;
-    }
+
+    private static final NamespacedKey key = new NamespacedKey(Main.getInstance(), "category");
+
     public static Inventory selection(Player p, String name){
-        Inventory inventory = Bukkit.createInventory(p,36 , MiniMessage.miniMessage().deserialize(name));
+        Inventory inventory = Bukkit.createInventory(p, InventoryType.HOPPER , MiniMessage.miniMessage().deserialize(name));
 
-        for(int i = 0; i <= 35; i++){
-            inventory.setItem(i, InventoryEssentials.glass());
+        for(int i = 0; i < 5; i++){
+            inventory.setItem(i, InventoryEssentials.bars());
         }
 
-        inventory.setItem(10, createSelectionItem(Material.BLUE_DYE, "<gradient:#008DFF:#C60BF9><b>Sci-Fi",("scifi")));
-        inventory.setItem(11, createSelectionItem(Material.YELLOW_DYE, "<gradient:#EBD77B:#BED556><b>Erfahren",("erfahren")));
-        inventory.setItem(12, createSelectionItem(Material.RED_DYE, "<gradient:#DD2D2D:#AA781C><b>Explosiv",("explosive")));
-        inventory.setItem(13, createSelectionItem(Material.LIME_DYE, "<gradient:#5ADD2D:#40AA1C><b>Klebrig",("sticky")));
+        ItemStack [] heads = heads();
 
-        inventory.setItem(19, createSelectionItem(Material.PURPLE_DYE, "<gradient:#824622:#b5185c><b>Vampirisch",("vampiric")));
-        inventory.setItem(20, createSelectionItem(Material.ORANGE_DYE, "<gradient:#6a3e0a:#9d2323:#e5e814><b>Berserker",("berserker")));
-        inventory.setItem(21, createSelectionItem(Material.WHITE_DYE, "<gradient:#4cd98d:#77cd3b><b>Kerzen",("candles")));
-        inventory.setItem(22, createSelectionItem(Material.SUNFLOWER, HolyUtil.holyGradient + "<b>Heilig", ("holy")));
-
-        inventory.setItem(16, createSelectionItem(Material.GRAY_DYE, "<gradient:#b9c6bf:#a4b19b><b>Sonstiges",("else")));
-        inventory.setItem(25, createSelectionItem(Material.GOLD_INGOT, "<gradient:gold:red><b>Western", ("western")));
-
+        for(int i = 1; i <= heads.length; i++){
+            ItemStack stack = heads[i-1];
+            ItemMeta meta = stack.getItemMeta();
+            meta.lore(lore(i));
+            meta.displayName(MiniMessage.miniMessage().deserialize(mainColor(i) + "<b><i:false><obf>a</obf> Kategorie " + i + " <obf>a</obf>"));
+            meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, i);
+            stack.setItemMeta(meta);
+            if(i != 4) {
+                inventory.setItem(i - 1, stack);
+            }else{
+                inventory.setItem(i, stack);
+            }
+        }
         return inventory;
     }
-    public static Inventory showOff(Player player, String tag, String name){
-        Inventory inventory = Bukkit.createInventory(player, 36, MiniMessage.miniMessage().deserialize(name));
-        for(int i = 0; i <= 34; i++){
-            inventory.setItem(i, InventoryEssentials.glass());
-            if(i == 9){
-                i = 25;
-            }
+
+    private static ItemStack [] heads() {
+        ItemStack category1 = new ItemStack(Material.PLAYER_HEAD);
+        SkullMeta category1ItemMeta = (SkullMeta) category1.getItemMeta();
+        PlayerProfile playerProfile = Bukkit.createProfile(UUID.fromString("a75e3f60-2242-4429-8ece-bcde77"), "Player");
+        playerProfile.setProperty(new ProfileProperty("textures", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTY1ZjRlZWVkMGQ3YmE1ZDI3NjM5ODE5YWJhMWRlY2IxZTUwZjU3YTI5Y2E4M2Y0N2QyMTExZWRjOTY0NjExNiJ9fX0="));
+        category1ItemMeta.setPlayerProfile(playerProfile);
+        category1.setItemMeta(category1ItemMeta);
+
+        ItemStack category2 = new ItemStack(Material.PLAYER_HEAD);
+        SkullMeta category2ItemMeta = (SkullMeta) category2.getItemMeta();
+        PlayerProfile playerProfile2 = Bukkit.createProfile(UUID.fromString("a75e3f60-2242-4429-8ece-bcde77"), "Player");
+        playerProfile2.setProperty(new ProfileProperty("textures", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGM3Yjk1MDQ4MjhmYmE5YWRjMTljOGZkNzViNzFlYWJlYzUzMzVkZGM1MWFjZGExNGU1OWEyZWQyZjcwZTRmMSJ9fX0="));
+        category2ItemMeta.setPlayerProfile(playerProfile2);
+        category2.setItemMeta(category2ItemMeta);
+
+        ItemStack category3 = new ItemStack(Material.PLAYER_HEAD);
+        SkullMeta category3ItemMeta = (SkullMeta) category3.getItemMeta();
+        PlayerProfile playerProfile3 = Bukkit.createProfile(UUID.fromString("a75e3f60-2242-4429-8ece-bcde77"), "Player");
+        playerProfile3.setProperty(new ProfileProperty("textures", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzYyNjc5ZjdkYzQzZmUzM2Y3MGM4NDhkZWZiNDJlY2Y2ZDI0OTUwMDY3MGQ3ZWRkYTJlOGJlOTg2YWM1ZjEwMSJ9fX0="));
+        category3ItemMeta.setPlayerProfile(playerProfile3);
+        category3.setItemMeta(category3ItemMeta);
+
+        ItemStack category4 = new ItemStack(Material.PLAYER_HEAD);
+        SkullMeta category4ItemMeta = (SkullMeta) category4.getItemMeta();
+        PlayerProfile playerProfile4 = Bukkit.createProfile(UUID.fromString("a75e3f60-2242-4429-8ece-bcde77"), "Player");
+        playerProfile4.setProperty(new ProfileProperty("textures", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWNhYWY2OTUzZTc5Y2UxYTE5MGQ5YjUzZDFlYWQ4OGExMTBmMjQxMTY5YmI1OThhMTdhMzhjNmQ5NzJlZmEyOSJ9fX0="));
+        category4ItemMeta.setPlayerProfile(playerProfile4);
+        category4.setItemMeta(category4ItemMeta);
+
+        return new ItemStack[]{category1, category2, category3, category4};
         }
 
-        inventory.setItem(17, InventoryEssentials.glass());
-        inventory.setItem(18, InventoryEssentials.glass());
-        inventory.setItem(35, InventoryEssentials.back());
-
-        switch (tag) {
-            case "western" -> {
-                inventory.setItem(10, Western.Schwert(player));
-                inventory.setItem(11, Western.Bogen(player));
-                inventory.setItem(12, Western.Rod(player));
-                inventory.setItem(13, Western.Picke(player));
-                inventory.setItem(19, Western.Helmet(player));
-                inventory.setItem(20, Western.Chestplate(player));
-                inventory.setItem(21, Western.Leggings(player));
-                inventory.setItem(22, Western.Boots(player));
-            }
-            case "candles" -> {
-                inventory.setItem(10, EmptyCandle.create());
-                inventory.setItem(12, JumpCandle.create());
-                inventory.setItem(13, RepairCandle.create());
-                inventory.setItem(14, TeleportCandle.create());
-                inventory.setItem(15, UltimateCandle.create());
-            }
-            case "scifi" -> {
-                inventory.setItem(10, SciFiItems.Schwert());
-                inventory.setItem(11, SciFiItems.Axt());
-                inventory.setItem(12, SciFiItems.Bogen());
-            }
-            case "vampiric" -> {
-                inventory.setItem(10, VampiricHoe.create(player));
-                inventory.setItem(11, VampiricBow.create(player));
-                inventory.setItem(12, VampiricHelmet.create(player));
-            }
-            case "berserker" -> {
-                inventory.setItem(10, Berserker.Axe(player));
-                inventory.setItem(11, Berserker.Tracker());
-            }
-            case "erfahren" -> {
-                inventory.setItem(10, ErfahrenItems.sword());
-                inventory.setItem(11, ErfahrenItems.Axt());
-                inventory.setItem(12, ErfahrenItems.bow());
-            }
-            case "explosive" -> {
-                inventory.setItem(10, Explosiv.Spitzhacke());
-                inventory.setItem(11, Explosiv.Angel());
-            }
-            case "sticky" -> {
-                inventory.setItem(10, Klebrig.Schwert());
-                inventory.setItem(11, Klebrig.Angel());
-                inventory.setItem(12, Klebrig.Bogen());
-            }
-            case "holy" -> {
-                inventory.setItem(10, HolyFeather.create());
-                inventory.setItem(11, HolyCoin.create());
-                inventory.setItem(12, HolyCookieBox.create());
-                inventory.setItem(13, HolyBackpack.create());
-                for(int i = 0; i < HolyArmor.create().length; i++){
-                    inventory.setItem(i + 19, HolyArmor.create()[i]);
-                }
-            }
-            case "else" -> inventory.setItem(10, UnsortableItems.loveStick());
-
-            default -> player.sendMessage("DA IST WAS FALSCH");
+    private static String mainColor(int type){
+        String mainColor;
+        switch (type){
+            case 1 -> mainColor = "<dark_purple>";
+            case 2 -> mainColor = "<blue>";
+            case 3 -> mainColor = "<aqua>";
+            case 4 -> mainColor = "<yellow>";
+            default -> mainColor = "<black>";
         }
-        return inventory;
+        return mainColor;
+    }
+
+    private static ArrayList<Component> lore(int type){
+
+        String mainColor = mainColor(type);
+
+        ArrayList<Component> lore = new ArrayList<>();
+        lore.add(Component.text(""));
+        lore.add(MiniMessage.miniMessage().deserialize("<i:false><white>Items der <b>" + mainColor + "Kategorie " + type));
+        lore.add(MiniMessage.miniMessage().deserialize("<i:false><white>benötigen folgendes Extraitem, "));
+        lore.add(MiniMessage.miniMessage().deserialize("<i:false><white>um gekauft zu werden:"));
+        if(type < 4) {
+            lore.add(MiniMessage.miniMessage().deserialize("  <i:false><dark_gray>▸ " + mainColor + "Bauplan Typ " + type));
+        }else{
+            lore.add(MiniMessage.miniMessage().deserialize("  <i:false><dark_gray>▸ <yellow>Segen" ));
+        }
+
+        return lore;
     }
 
 }

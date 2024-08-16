@@ -14,6 +14,14 @@ public class InventoryEssentials {
         return glass;
     }
 
+    public static ItemStack bars() {
+        ItemStack glass = new ItemStack(Material.IRON_BARS);
+        ItemMeta glassMeta = glass.getItemMeta();
+        glassMeta.setDisplayName("_".replace("_", " "));
+        glass.setItemMeta(glassMeta);
+        return glass;
+    }
+
     public static ItemStack buildingBlocks() {
         ItemStack BBlock = new ItemStack(Material.SANDSTONE);
 

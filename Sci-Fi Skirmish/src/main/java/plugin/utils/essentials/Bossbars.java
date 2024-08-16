@@ -41,34 +41,6 @@ public class Bossbars {
         }, 60); // 40 ticks = 2 seconds
     }
 
-    public void klebrigBar(Player player) {
-        if (bossBar != null) {
-            bossBar.removeAll();
-        }
-
-        bossBar = Bukkit.createBossBar("§x§5§A§D§D§2§D§lK§x§5§8§C§5§2§5§ll§x§5§7§A§C§1§E§le§x§5§5§9§4§1§6§lb§x§4§E§9§B§1§8§lr§x§4§7§A§3§1§A§li§x§4§0§A§A§1§C§lg §7§lDrop", BarColor.GREEN, BarStyle.SOLID);
-        bossBar.addPlayer(player);
-
-        Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
-            bossBar.removeAll();
-            bossBar = null;
-        }, 60); // 40 ticks = 2 seconds
-    }
-
-    public void explosivBar(Player player) {
-        if (bossBar != null) {
-            bossBar.removeAll();
-        }
-
-        bossBar = Bukkit.createBossBar("§x§D§D§2§D§2§D§lE§x§C§8§3§E§2§6§lx§x§B§3§4§F§2§0§lp§x§9§E§6§0§1§9§ll§x§9§7§6§A§1§7§lo§x§9§D§6§F§1§9§ls§x§A§4§7§3§1§A§li§x§A§A§7§8§1§C§lv §7§lDrop", BarColor.RED, BarStyle.SOLID);
-        bossBar.addPlayer(player);
-
-        Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
-            bossBar.removeAll();
-            bossBar = null;
-        }, 60); // 40 ticks = 2 seconds
-    }
-
     public void healBar(Player player, String value, int amount) {
         if (bossBar != null) {
             bossBar.removeAll();

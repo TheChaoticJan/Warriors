@@ -50,6 +50,12 @@ public class RepairCandle implements Listener{
     @EventHandler
     private void processEffect(PlayerInteractEvent event){
         Player player = event.getPlayer();
+        if(event.getItem() == null){
+            return;
+        }
+        if(event.getItem().getItemMeta() == null){
+            return;
+        }
         if(player.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "candle")) && player.getItemInHand().getType().equals(Material.YELLOW_CANDLE) && event.getAction().isRightClick() && !Objects.equals(healCooldown.get(player.getUniqueId()), "heal") && !player.isSneaking()){
             healCooldown.put(player.getUniqueId(), "heal");
             InventoryInteracts.healArmorPieces(player, 15);
