@@ -4,8 +4,8 @@
     <root id="archive" name="Sci-Fi Skirmish.jar">
       <element id="module-output" name="Sci-Fi Skirmish" />
       <element id="library" level="project" name="Maven: org.projectlombok:lombok:1.18.30" />
-      <element id="module-output" name="JansParadise" />
       <element id="library" level="project" name="Maven: org.projectlombok:lombok:1.18.32" />
+      <element id="module-output" name="Sci-Fi_Skirmish" />
     </root>
   </artifact>
 </component>

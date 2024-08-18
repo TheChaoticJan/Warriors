@@ -7,8 +7,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="JansParadise" />
+        <module name="Sci-Fi_Skirmish" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Sci-Fi Skirmish" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -8,7 +8,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.checkerframework.checker.units.qual.N;
 import plugin.Main;
+import plugin.Utils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,7 @@ public class ShopUtils {
     public static final NamespacedKey type_key = new NamespacedKey(Main.getInstance(), "type");
     public static final NamespacedKey type_amount = new NamespacedKey(Main.getInstance(), "type_prize");
     public static final NamespacedKey item_amount = new NamespacedKey(Main.getInstance(), "amount");
+    public static final NamespacedKey orginal = new NamespacedKey(Main.getInstance(), "original_item");
 
     public static ItemStack makeShopItem(ItemStack original, int xpPrize, int type, int specialsAmount, int amount){
         ItemMeta meta = original.getItemMeta();
@@ -32,6 +35,9 @@ public class ShopUtils {
         meta.getPersistentDataContainer().set(type_key, PersistentDataType.INTEGER, type);
         meta.getPersistentDataContainer().set(type_amount, PersistentDataType.INTEGER, specialsAmount);
         meta.getPersistentDataContainer().set(item_amount, PersistentDataType.INTEGER, amount);
+        try {
+            meta.getPersistentDataContainer().set(orginal, PersistentDataType.STRING, Utils.itemStackToBase64(original));
+        } catch (IOException e) {e.printStackTrace();}
 
         original.setItemMeta(meta);
         return original;

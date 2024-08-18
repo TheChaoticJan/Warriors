@@ -31,7 +31,7 @@ public class HolyCookieBox implements Listener {
 
         meta.displayName(HolyUtil.createName("Linas Keksdose"));
         meta.addEnchant(Enchantment.MENDING, 10, true);
-        meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER,new Random().nextInt(3, 17));
+        meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, 17);
 
         ArrayList<Component> lore = new ArrayList<>();
         lore.add(MiniMessage.miniMessage().deserialize(HolyUtil.holyGradient + "<i:false>Heilig"));

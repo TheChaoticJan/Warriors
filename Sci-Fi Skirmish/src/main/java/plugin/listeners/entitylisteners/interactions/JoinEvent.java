@@ -3,6 +3,7 @@ package plugin.listeners.entitylisteners.interactions;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -36,6 +37,8 @@ public class JoinEvent implements Listener {
         this.plugin = Main.getInstance();
 
         Player player = event.getPlayer();
+
+        Objects.requireNonNull(event.getPlayer().getAttribute(Attribute.GENERIC_ATTACK_SPEED)).setBaseValue(30);
 
         try{
         if(Main.getInstance().getDatabase().findPlayerStats(player) == null){
