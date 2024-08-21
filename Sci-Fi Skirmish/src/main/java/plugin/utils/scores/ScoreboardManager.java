@@ -25,7 +25,7 @@ public class ScoreboardManager {
 
         player.setPlayerListHeaderFooter("""
 
-                §8§m         §8[§x§0§0§8§D§F§F§lS§x§1§E§5§5§F§F§lc§x§3§D§1§C§F§F§li§x§6§4§0§2§F§E§l-§x§9§5§0§7§F§B§lF§x§C§6§0§B§F§9§li §x§0§0§8§D§F§F§lS§x§1§6§6§5§F§F§lk§x§2§B§3§C§F§F§li§x§4§1§1§4§F§F§lr§x§5§D§0§2§F§E§lm§x§8§0§0§5§F§C§li§x§A§3§0§8§F§B§ls§x§C§6§0§B§F§9§lh§8]§8§m        \s
+                §8§m         §8[§x§F§B§0§8§1§C§lW§x§F§7§1§B§2§5§la§x§F§4§2§D§2§D§lr§x§F§0§4§0§3§6§lr§x§E§D§5§3§3§F§li§x§E§9§6§6§4§8§lo§x§E§6§7§8§5§0§lr§x§E§2§8§B§5§9§ls§8]§m        \s
                 
                 §f""","");
     }
@@ -61,7 +61,7 @@ public class ScoreboardManager {
             }
             Objective objective;
             if (scoreboard1.getObjective(player.getName()) == null) {
-                objective = scoreboard1.registerNewObjective(player.getName(), "dummy", "  §x§0§0§8§D§F§F§lS§x§1§E§5§5§F§F§lc§x§3§D§1§C§F§F§li§x§6§4§0§2§F§E§l-§x§9§5§0§7§F§B§lF§x§C§6§0§B§F§9§li §x§0§0§8§D§F§F§lS§x§1§6§6§5§F§F§lk§x§2§B§3§C§F§F§li§x§4§1§1§4§F§F§lr§x§5§D§0§2§F§E§lm§x§8§0§0§5§F§C§li§x§A§3§0§8§F§B§ls§x§C§6§0§B§F§9§lh  ");
+                objective = scoreboard1.registerNewObjective(player.getName(), "dummy",   MiniMessage.miniMessage().deserialize(" <obf><red>a</obf> <gradient:red:gold><b>Warriors <obf><gold>a "));
             } else {
                 objective = scoreboard1.getObjective(player.getName());
             }

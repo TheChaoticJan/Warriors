@@ -40,6 +40,7 @@ import plugin.ranksystem.commands.SetRankCommand;
 import plugin.safe.SafeListener;
 import plugin.safe.SafeCommand;
 import plugin.specialitems.holy.HolyBackpack;
+import plugin.specialitems.royal.Scepter;
 import plugin.utils.itembuilder.HolyFeather;
 import plugin.specialitems.candles.JumpCandle;
 import plugin.specialitems.candles.RepairCandle;
@@ -185,6 +186,8 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new SafeListener(), this);
         getServer().getPluginManager().registerEvents(new InventoryUtils(), this);
         getServer().getPluginManager().registerEvents(new Crate(), this);
+
+        getServer().getPluginManager().registerEvents(new Scepter(), this);
     }
 
     private void registerCommands(){

@@ -73,7 +73,7 @@ public class BowHitEvent implements Listener {
                             }
                         }
 
-                        if (event.getEntity().getType().equals(EntityType.FISHING_HOOK) || event.getEntity().getType().equals(EntityType.SNOWBALL)) {
+                        if (event.getEntity().getType().equals(EntityType.FISHING_HOOK)) {
                             player.damage(0.1);
                             player.setVelocity(damager.getLocation().getDirection().setY(0.2).multiply(1));
                             if (event.getEntity().getType().equals(EntityType.SNOWBALL)) {

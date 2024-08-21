@@ -86,6 +86,9 @@ public class HolyFeather implements Listener{
     }
     @EventHandler
     private void rightClickEvent(PlayerInteractEvent event){
+        if(event.getPlayer().getItemInHand().getItemMeta() == null){
+            return;
+        }
         if(event.getAction().isRightClick() && event.getPlayer().getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "holy_feather"))){
             HolyFeather.processEffect(event.getPlayer());
         }

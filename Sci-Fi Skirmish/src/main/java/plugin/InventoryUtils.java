@@ -31,6 +31,7 @@ import plugin.specialitems.holy.HolyArmor;
 import plugin.specialitems.holy.HolyBackpack;
 import plugin.specialitems.holy.HolyCoin;
 import plugin.specialitems.holy.HolyCookieBox;
+import plugin.specialitems.royal.Scepter;
 import plugin.specialitems.vampiric.VampiricBow;
 import plugin.specialitems.vampiric.VampiricHelmet;
 import plugin.specialitems.vampiric.VampiricHoe;
@@ -321,7 +322,7 @@ public class InventoryUtils implements Listener {
                     inventory.setItem(27, JumpCandle.create());
                     inventory.setItem(28, RepairCandle.create());
                     inventory.setItem(29, TeleportCandle.create());
-                    inventory.setItem(30, UltimateCandle.create());
+
                 }
                 case 4 -> {
                     inventory.setItem(9, HolyFeather.create());
@@ -329,9 +330,13 @@ public class InventoryUtils implements Listener {
                     inventory.setItem(11, HolyCookieBox.create());
                     inventory.setItem(12, HolyBackpack.create());
 
-                    for (int i = 14; i < 14 + HolyArmor.create().length; i++) {
-                        inventory.setItem(i, HolyArmor.create()[i - 14]);
+                    for (int i = 18; i < 18 + HolyArmor.create().length; i++) {
+                        inventory.setItem(i, HolyArmor.create()[i - 18]);
                     }
+
+                    inventory.setItem(17, UltimateCandle.create());
+                    inventory.setItem(26, Scepter.create());
+
                 }
                 default -> {
                     player.sendMessage("DA IST WAS FALSCH");
@@ -378,11 +383,12 @@ public class InventoryUtils implements Listener {
                     inventory.setItem(10, ShopUtils.makeShopItem(HolyCoin.create(), 500, tag, 3, 1));
                     inventory.setItem(11, ShopUtils.makeShopItem(HolyCookieBox.create(), 300, tag, 3, 1));
                     inventory.setItem(12, ShopUtils.makeShopItem(HolyBackpack.create(), 1000, tag, 3, 1));
-                    for (int i = 14; i < 14 + HolyArmor.create().length; i++) {
-                        inventory.setItem(i, ShopUtils.makeShopItem(HolyArmor.create()[i - 14], 1150, tag,5, 1));
+                    for (int i = 18; i < 18 + HolyArmor.create().length; i++) {
+                        inventory.setItem(i, ShopUtils.makeShopItem(HolyArmor.create()[i - 18], 1150, tag,5, 1));
                     }
 
-                    inventory.setItem(27, ShopUtils.makeShopItem(UltimateCandle.create(), 2000, tag, 3, 1));
+                    inventory.setItem(17, ShopUtils.makeShopItem(UltimateCandle.create(), 2000, tag, 3, 1));
+                    inventory.setItem(26, ShopUtils.makeShopItem(Scepter.create(), 3000, tag, 5, 1));
                 }
                 default -> {
                     player.sendMessage("DA IST WAS FALSCH");

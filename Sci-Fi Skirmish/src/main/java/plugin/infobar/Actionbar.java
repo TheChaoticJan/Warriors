@@ -8,10 +8,6 @@ import java.util.Objects;
 
 public class Actionbar {
 
-    public Actionbar(){
-
-    }
-
     public static String buildActionbar(Player p, PlayerStats stats, int [] modules){
 
         Count counted = new Count(p);

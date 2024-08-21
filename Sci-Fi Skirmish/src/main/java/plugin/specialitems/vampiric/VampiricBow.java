@@ -54,6 +54,7 @@ public class VampiricBow implements Listener {
     private static void processEffect(ProjectileHitEvent event){
         if(event.getHitEntity() instanceof Player player){
             Player damager = (Player) event.getEntity().getShooter();
+            if(damager == null){return;}
             if (damager.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "EssenceBow"))) {
 
                 try {
