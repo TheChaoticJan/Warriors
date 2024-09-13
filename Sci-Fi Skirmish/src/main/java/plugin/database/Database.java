@@ -19,7 +19,7 @@ public class Database {
         String password = "";
 
         this.connection = DriverManager.getConnection(url, user, password);
-        System.out.println("\u001B[32m Erfolgreich mit der Datenbank verbunden!");
+        System.out.println("\u001B[32m Erfolgreich mit der Datenbank verbunden!\u001B[0m");
         return this.connection;
         }
 

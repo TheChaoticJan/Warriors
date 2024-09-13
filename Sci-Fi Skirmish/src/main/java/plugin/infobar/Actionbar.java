@@ -22,19 +22,19 @@ public class Actionbar {
             if(!(p.getInventory().getLeggings() == null) && !(p.getInventory().getBoots() == null)  && !(p.getInventory().getChestplate() == null)  && !(p.getInventory().getHelmet() == null)){
                 if(LDura <= HDura && LDura <= CDura && LDura <= BDura){
                     int i = p.getInventory().getLeggings().getType().getMaxDurability();
-                    Piece =  "§8<§4Hose§8>§c " + (i + (p.getInventory().getLeggings().getMaxItemUseDuration() - p.getInventory().getLeggings().getDurability()));
-
-                }else
-                if(BDura <= HDura && BDura <= CDura){
+                    Piece =  "§4§lHose §c" + (i + (p.getInventory().getLeggings().getMaxItemUseDuration() - p.getInventory().getLeggings().getDurability()));
+                }
+                else if(BDura <= HDura && BDura <= CDura){
                     int i = p.getInventory().getBoots().getType().getMaxDurability();
-                    Piece =  "§8<§4Schuhe§8>§c " + (i + (p.getInventory().getBoots().getMaxItemUseDuration() - p.getInventory().getBoots().getDurability()));
-                }else
-                if(CDura <= LDura && CDura <= BDura && CDura <= HDura) {
+                    Piece =  "§4§lSchuhe §c" + (i + (p.getInventory().getBoots().getMaxItemUseDuration() - p.getInventory().getBoots().getDurability()));
+                }
+                else if(CDura <= LDura && CDura <= BDura && CDura <= HDura) {
                     int i = p.getInventory().getChestplate().getType().getMaxDurability();
-                    Piece = "§8<§4Chest§8>§c " + (i + (p.getInventory().getChestplate().getMaxItemUseDuration() - p.getInventory().getChestplate().getDurability()));
-                }else{
+                    Piece = "§4§lChest §c" + (i + (p.getInventory().getChestplate().getMaxItemUseDuration() - p.getInventory().getChestplate().getDurability()));
+                }
+                else{
                     int i = p.getInventory().getHelmet().getType().getMaxDurability();
-                    Piece = "§8<§4Helm§8>§c " + (i + (p.getInventory().getHelmet().getMaxItemUseDuration() - p.getInventory().getHelmet().getDurability()));
+                    Piece = "§4§lHelm §c" + (i + (p.getInventory().getHelmet().getMaxItemUseDuration() - p.getInventory().getHelmet().getDurability()));
                 }
             }
             else {
@@ -46,13 +46,13 @@ public class Actionbar {
             }
 
         int mainHandDura = counted.getMainhanddura();
-        String mainhand = "§8<§bMainhand§8> §9" + mainHandDura;
+        String mainhand = "§b§lMainhand §9" + mainHandDura;
         
-        String clan = "§8<§6Konto§8> §e" + stats.getXp() + " §6✧";
-        String xp1 = "§8<§aXP§8> §2" + counted.getXp();
-        String pearls1 = "§8<§5Pearls§8> §x§D§6§5§B§E§9" + counted.getPearls();
-        String tnt1 = "§8<§x§9§E§1§B§5§0T§x§C§F§0§E§5§2N§x§F§F§0§0§5§3T§8> §x§C§F§0§E§5§2" + counted.getTnt();
-        String webs1 = "§8<§fWebs§8> §§x§C§2§F§A§E§F" + counted.getWebs();
+        String clan = "§6§lKonto §e" + stats.getXp() + " §6✧";
+        String xp1 = "§a§lXP §2" + counted.getXp();
+        String pearls1 = "§5§lPearls §x§D§6§5§B§E§9" + counted.getPearls();
+        String tnt1 = "§x§9§E§1§B§5§0§lT§x§C§F§0§E§5§2§lN§x§F§F§0§0§5§3§lT §x§C§F§0§E§5§2" + counted.getTnt();
+        String webs1 = "§f§lWebs §§x§C§2§F§A§E§F" + counted.getWebs();
 
         String [] pieces = {"", "", ""};
 

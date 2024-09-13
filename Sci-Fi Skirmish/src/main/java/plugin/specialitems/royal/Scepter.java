@@ -38,7 +38,7 @@ public class Scepter implements Listener{
         ItemStack stack = new ItemStack(Material.GOLDEN_HOE);
         ItemMeta meta = stack.getItemMeta();
 
-        meta.displayName(MiniMessage.miniMessage().deserialize("<i:false><obf><yellow>aa</obf> <gradient:yellow:aqua><b>Königliches Zepter <obf><aqua>aa</obf>"));
+        meta.displayName(RoyalUtil.createName("Königliches Zepter"));
 
         meta.addEnchant(Enchantment.MENDING, 1, false);
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
@@ -91,7 +91,6 @@ public class Scepter implements Listener{
             }
         }
     }
-
     @EventHandler
     private void onHit(ProjectileHitEvent event){
         if(event.getEntity().getType().equals(EntityType.SNOWBALL) && event.getHitEntity() != null && event.getEntity().getPersistentDataContainer().has(key)){

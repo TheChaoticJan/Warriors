@@ -5,22 +5,16 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
-import org.checkerframework.checker.units.qual.A;
-import org.checkerframework.checker.units.qual.C;
-import org.checkerframework.checker.units.qual.N;
 import plugin.models.PlayerStats;
-import plugin.shop.ShopCommand;
 import plugin.shop.ShopUtils;
 import plugin.specialitems.BuyingEssentials;
 import plugin.specialitems.candles.JumpCandle;
@@ -31,6 +25,8 @@ import plugin.specialitems.holy.HolyArmor;
 import plugin.specialitems.holy.HolyBackpack;
 import plugin.specialitems.holy.HolyCoin;
 import plugin.specialitems.holy.HolyCookieBox;
+import plugin.specialitems.royal.ChesterItem;
+import plugin.specialitems.royal.MagicStone;
 import plugin.specialitems.royal.Scepter;
 import plugin.specialitems.vampiric.VampiricBow;
 import plugin.specialitems.vampiric.VampiricHelmet;
@@ -42,7 +38,6 @@ import plugin.utils.itembuilder.HolyFeather;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Objects;
 
 public class InventoryUtils implements Listener {
@@ -65,6 +60,10 @@ public class InventoryUtils implements Listener {
         }
         if(event.getCurrentItem().getType().equals(InventoryEssentials.bars().getType())){
             event.setCancelled(true);
+            return;
+        }
+
+        if(event.getView().getTitle().endsWith("1") || event.getView().getTitle().endsWith("2") || event.getView().getTitle().endsWith("3")){
             return;
         }
 
@@ -104,7 +103,7 @@ public class InventoryUtils implements Listener {
             event.setCancelled(true);
         }
 
-        if(event.getView().getTitle().endsWith("!")){
+        if(event.getView().getTitle().endsWith("kaufen!")){
             player.openInventory(confirmBuy(event.getCurrentItem(), player));
             event.setCancelled(true);
         }
@@ -335,7 +334,9 @@ public class InventoryUtils implements Listener {
                     }
 
                     inventory.setItem(17, UltimateCandle.create());
-                    inventory.setItem(26, Scepter.create());
+                    inventory.setItem(24, Scepter.create());
+                    inventory.setItem(25, ChesterItem.create());
+                    inventory.setItem(26, MagicStone.create());
 
                 }
                 default -> {
@@ -388,7 +389,9 @@ public class InventoryUtils implements Listener {
                     }
 
                     inventory.setItem(17, ShopUtils.makeShopItem(UltimateCandle.create(), 2000, tag, 3, 1));
-                    inventory.setItem(26, ShopUtils.makeShopItem(Scepter.create(), 3000, tag, 5, 1));
+                    inventory.setItem(24, ShopUtils.makeShopItem(Scepter.create(), 3000, tag, 5, 1));
+                    inventory.setItem(25, ShopUtils.makeShopItem(ChesterItem.create(), 3000, tag, 5, 1));
+                    inventory.setItem(26, ShopUtils.makeShopItem(MagicStone.create(), 4000, tag, 5, 1));
                 }
                 default -> {
                     player.sendMessage("DA IST WAS FALSCH");

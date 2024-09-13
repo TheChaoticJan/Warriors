@@ -4,6 +4,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandMap;
+import org.bukkit.command.SimpleCommandMap;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -40,6 +43,8 @@ import plugin.ranksystem.commands.SetRankCommand;
 import plugin.safe.SafeListener;
 import plugin.safe.SafeCommand;
 import plugin.specialitems.holy.HolyBackpack;
+import plugin.specialitems.royal.ChesterItem;
+import plugin.specialitems.royal.MagicStone;
 import plugin.specialitems.royal.Scepter;
 import plugin.utils.itembuilder.HolyFeather;
 import plugin.specialitems.candles.JumpCandle;
@@ -55,8 +60,10 @@ import plugin.specialitems.vampiric.VampiricHoe;
 import plugin.utils.scores.ScoreboardManager;
 import plugin.listeners.entitylisteners.interactions.*;
 
+import java.lang.reflect.Field;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -65,9 +72,11 @@ public final class Main extends JavaPlugin {
     private ScoreboardManager tablistManager;
     public static Main instance;
     public ArrayList<UUID> VanishList = new ArrayList<>();
+
     public ScoreboardManager getTablistManager() {
         return tablistManager;
     }
+
     private Database database;
 
     @Override
@@ -99,7 +108,7 @@ public final class Main extends JavaPlugin {
                 if (getDatabase().findPlayerStats(player) == null) {
                     getDatabase().createPlayerStats(new PlayerStats(player));
                 }
-            }catch (SQLException e){
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
@@ -107,9 +116,9 @@ public final class Main extends JavaPlugin {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
             @Override
             public void run() {
-                for(Player player : Bukkit.getOnlinePlayers()) {
-                   Main.getInstance().getTablistManager().setAllPlayerTeams();
-                   Main.getInstance().getTablistManager().setScoreboard(player);
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    Main.getInstance().getTablistManager().setAllPlayerTeams();
+                    Main.getInstance().getTablistManager().setScoreboard(player);
                 }
             }
         }, 9, 9);
@@ -122,8 +131,16 @@ public final class Main extends JavaPlugin {
         }, 0, 3 * 20));
 
         setupTablist();
-        registerCommands();
-        registerEvents();
+
+        Bukkit.getScheduler().runTaskLater(this, new Runnable() {
+            @Override
+            public void run() {
+                unregisterAllUnwanted();
+                registerCommands();
+                registerEvents();
+            }
+        }, 20);
+
 
     }
 
@@ -150,7 +167,11 @@ public final class Main extends JavaPlugin {
 
     }
 
-    private void registerEvents(){
+    private void unregisterAllUnwanted() {
+        //TODO: Insert commands to be unregistered
+    }
+
+    private void registerEvents() {
         getServer().getPluginManager().registerEvents(new ClickEvent(), this);
         getServer().getPluginManager().registerEvents(new BlockEvents(), this);
         getServer().getPluginManager().registerEvents(new ExplodeEvent(), this);
@@ -188,9 +209,11 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new Crate(), this);
 
         getServer().getPluginManager().registerEvents(new Scepter(), this);
+        getServer().getPluginManager().registerEvents(new ChesterItem(), this);
+        getServer().getPluginManager().registerEvents(new MagicStone(), this);
     }
 
-    private void registerCommands(){
+    private void registerCommands() {
         Objects.requireNonNull(getCommand("heal")).setExecutor(new HealCommand());
         Objects.requireNonNull(getCommand("kit")).setExecutor(new KitCommand());
         Objects.requireNonNull(getCommand("sign")).setExecutor(new SignCommand());
@@ -216,10 +239,37 @@ public final class Main extends JavaPlugin {
         Objects.requireNonNull(getCommand("shop")).setExecutor(new ShopCommand());
     }
 
-    private void setupTablist(){
+    private void setupTablist() {
         tablistManager = new ScoreboardManager(this);
         tablistManager.registerAllTeams();
         tablistManager.removeAllPlayerTeams();
         tablistManager.setAllPlayerTeams();
+    }
+
+    private void unregisterCommand(String commandName) {
+        try {
+            // Access the command map
+            Field commandMapField = Bukkit.getServer().getClass().getDeclaredField("commandMap");
+            commandMapField.setAccessible(true);
+            CommandMap commandMap = (CommandMap) commandMapField.get(Bukkit.getServer());
+
+            // Access the known commands
+            Field knownCommandsField = SimpleCommandMap.class.getDeclaredField("knownCommands");
+            knownCommandsField.setAccessible(true);
+            Map<String, Command> knownCommands = (Map<String, Command>) knownCommandsField.get(commandMap);
+
+            // Unregister the command
+            if (knownCommands.containsKey(commandName)) {
+                Command command = knownCommands.get(commandName);
+                command.unregister(commandMap);
+                knownCommands.remove(commandName);
+                System.out.println("Successfully unregistered command: " + commandName);
+            } else {
+                System.out.println("Command " + commandName + " not found.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }
