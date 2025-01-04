@@ -1,10 +1,14 @@
 package plugin.infobar;
 
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bukkit.inventory.ItemStack;
 import plugin.models.PlayerStats;
 import plugin.utils.essentials.Count;
 import org.bukkit.entity.Player;
 
 import java.util.Objects;
+
+import static java.lang.Float.POSITIVE_INFINITY;
 
 public class Actionbar {
 
@@ -12,34 +16,43 @@ public class Actionbar {
 
         Count counted = new Count(p);
 
-        int HDura = counted.getHelmetDura();
-        int CDura = counted.getChestDura();
-        int LDura = counted.getLeggingsDura();
-        int BDura = counted.getBootsDura();
-
         String Piece;
+        int durability = (int) POSITIVE_INFINITY;
+        int pos = 0;
+        int temp = 0;
+        ItemStack lowest = null;
 
-            if(!(p.getInventory().getLeggings() == null) && !(p.getInventory().getBoots() == null)  && !(p.getInventory().getChestplate() == null)  && !(p.getInventory().getHelmet() == null)){
-                if(LDura <= HDura && LDura <= CDura && LDura <= BDura){
-                    int i = p.getInventory().getLeggings().getType().getMaxDurability();
-                    Piece =  "§4§lHose §c" + (i + (p.getInventory().getLeggings().getMaxItemUseDuration() - p.getInventory().getLeggings().getDurability()));
-                }
-                else if(BDura <= HDura && BDura <= CDura){
-                    int i = p.getInventory().getBoots().getType().getMaxDurability();
-                    Piece =  "§4§lSchuhe §c" + (i + (p.getInventory().getBoots().getMaxItemUseDuration() - p.getInventory().getBoots().getDurability()));
-                }
-                else if(CDura <= LDura && CDura <= BDura && CDura <= HDura) {
-                    int i = p.getInventory().getChestplate().getType().getMaxDurability();
-                    Piece = "§4§lChest §c" + (i + (p.getInventory().getChestplate().getMaxItemUseDuration() - p.getInventory().getChestplate().getDurability()));
-                }
-                else{
-                    int i = p.getInventory().getHelmet().getType().getMaxDurability();
-                    Piece = "§4§lHelm §c" + (i + (p.getInventory().getHelmet().getMaxItemUseDuration() - p.getInventory().getHelmet().getDurability()));
-                }
+        for(ItemStack stack : p.getInventory().getArmorContents()){
+
+            if(stack == null){
+                pos = -1;
+                break;
             }
-            else {
-                Piece ="§c" + Math.round(p.getHealth()/2) + " §c❤";
+
+            if(stack.getType().getMaxDurability() == 0){
+                continue;
             }
+
+            if(stack.getType().getMaxDurability() - stack.getDurability() < durability){
+                lowest = stack;
+                durability = stack.getType().getMaxDurability() - stack.getDurability();
+                pos = temp;
+            }
+            temp++;
+
+        }
+
+        switch (pos){
+            case 0 -> {Piece =  "§4§lSchuhe §c";}
+            case 1 -> {Piece =  "§4§lHose §c";}
+            case 2 -> {Piece = "§4§lChest §c";}
+            case 3 -> {Piece = "§4§lHelm §c";}
+            default -> Piece ="§c" + Math.round(p.getHealth()/2) + " §c❤";
+        }
+
+        if(!Piece.endsWith("§c❤")){
+            Piece += durability;
+        }
 
         if(Objects.equals(stats.getClan(), "")){
                 stats.setClan("§cClanlos");

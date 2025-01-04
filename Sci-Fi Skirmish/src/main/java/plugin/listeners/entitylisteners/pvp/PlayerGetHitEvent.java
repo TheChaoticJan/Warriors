@@ -188,7 +188,9 @@ public class PlayerGetHitEvent implements Listener{
                     }
                 }
 
-                damager.sendActionBar(Actionbar.buildActionbar(player,stats, stats1.getInfobarValues()));
+                if(stats1.getPerks()[4]) {
+                    damager.sendActionBar(Actionbar.buildActionbar(player, stats, stats1.getInfobarValues()));
+                }
 
             }catch (SQLException e){
                 e.printStackTrace();

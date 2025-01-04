@@ -18,41 +18,38 @@ public class InfobarInventories {
 
     public static Inventory edit(Player p, ArrayList<ItemStack> list, String name){
 
-        Inventory i = Bukkit.createInventory(p, 45, name);
+        Inventory inventory = Bukkit.createInventory(p, 45, name);
 
         ItemStack current = null;
-        if(name.endsWith("1")){
-            current = list.get(0);
-        }
-        if(name.endsWith("2")){
-            current = list.get(1);
-        }
-        if(name.endsWith("3")){
-            current = list.get(2);
-        }
-        i.setItem(0, InventoryEssentials.back());
 
-        for(int i1 = 1; i1<= 12; i1++){
-            i.setItem(i1, InventoryEssentials.glass());
+        for(int i = 0; i < 3; i++){
+            if(name.endsWith(String.valueOf(i + 1))){
+                current = list.get(i);
+            }
         }
-        i.setItem(13, current);
+        inventory.setItem(13, current);
+
+        inventory.setItem(0, InventoryEssentials.back());
+        for(int i1 = 1; i1<= 12; i1++){
+            inventory.setItem(i1, InventoryEssentials.glass());
+        }
 
         for(int i2 = 14; i2 <= 27; i2++){
-            i.setItem(i2, InventoryEssentials.glass());
+            inventory.setItem(i2, InventoryEssentials.glass());
         }
-        i.setItem(28, InfobarEssentials.Dura());
-        i.setItem(29, InfobarEssentials.XP());
-        i.setItem(30, InfobarEssentials.Enderpearl());
-        i.setItem(31, InfobarEssentials.Konto());
-        i.setItem(32, InfobarEssentials.tnt());
-        i.setItem(33, InfobarEssentials.Webs());
-        i.setItem(34, InfobarEssentials.MainHand());
+        inventory.setItem(28, InfobarEssentials.Dura());
+        inventory.setItem(29, InfobarEssentials.XP());
+        inventory.setItem(30, InfobarEssentials.Enderpearl());
+        inventory.setItem(31, InfobarEssentials.Konto());
+        inventory.setItem(32, InfobarEssentials.tnt());
+        inventory.setItem(33, InfobarEssentials.Webs());
+        inventory.setItem(34, InfobarEssentials.MainHand());
 
         for(int i3 = 35; i3 <= 44; i3++){
-            i.setItem(i3, InventoryEssentials.glass());
+            inventory.setItem(i3, InventoryEssentials.glass());
         }
 
-       return i;
+       return inventory;
     }
 
     public static Inventory introduction(Player p, PlayerStats stats){

@@ -4,6 +4,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
+import org.bukkit.boss.BossBar;
+import org.bukkit.boss.KeyedBossBar;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.SimpleCommandMap;
@@ -11,6 +13,7 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
+import org.jetbrains.annotations.NotNull;
 import plugin.commands.databasedependant.PerkCommand;
 import plugin.commands.databasedependant.StatsCommand;
 import plugin.commands.databasedependant.TopCommand;
@@ -20,7 +23,10 @@ import plugin.commands.funcommands.UwUCommand;
 import plugin.commands.inventorycommands.commoninventories.AnvilCommand;
 import plugin.commands.inventorycommands.commoninventories.TrashCommand;
 import plugin.commands.inventorycommands.gui.KitCommand;
+import plugin.moderation.CheckCPSCommand;
+import plugin.moderation.KickCommand;
 import plugin.shop.ShopCommand;
+import plugin.specialitems.uniques.IceSword;
 import plugin.specialitems.SpecialitemCommand;
 import plugin.commands.inventorycommands.commoninventories.WorkbenchCommand;
 import plugin.commands.moderationcommands.InvseeCommand;
@@ -44,30 +50,28 @@ import plugin.safe.SafeListener;
 import plugin.safe.SafeCommand;
 import plugin.specialitems.holy.HolyBackpack;
 import plugin.specialitems.royal.ChesterItem;
-import plugin.specialitems.royal.MagicStone;
-import plugin.specialitems.royal.Scepter;
+import plugin.specialitems.MagicStone;
+import plugin.specialitems.uniques.AssasinSword;
+import plugin.specialitems.vampiric.VampiricBoots;
 import plugin.utils.itembuilder.HolyFeather;
-import plugin.specialitems.candles.JumpCandle;
-import plugin.specialitems.candles.RepairCandle;
-import plugin.specialitems.candles.TeleportCandle;
-import plugin.specialitems.candles.UltimateCandle;
+import plugin.specialitems.uniques.SwiftSword;
 import plugin.specialitems.holy.HolyArmor;
 import plugin.specialitems.holy.HolyCoin;
 import plugin.specialitems.holy.HolyCookieBox;
 import plugin.specialitems.vampiric.VampiricBow;
 import plugin.specialitems.vampiric.VampiricHelmet;
 import plugin.specialitems.vampiric.VampiricHoe;
+import plugin.specialitems.TheFlower;
 import plugin.utils.scores.ScoreboardManager;
 import plugin.listeners.entitylisteners.interactions.*;
 
 import java.lang.reflect.Field;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 public final class Main extends JavaPlugin {
+
+
 
     private ScoreboardManager tablistManager;
     public static Main instance;
@@ -130,6 +134,8 @@ public final class Main extends JavaPlugin {
             }
         }, 0, 3 * 20));
 
+        VampiricBoots.start();
+
         setupTablist();
 
         Bukkit.getScheduler().runTaskLater(this, new Runnable() {
@@ -141,8 +147,9 @@ public final class Main extends JavaPlugin {
             }
         }, 20);
 
-
     }
+    
+
 
     public static Main getInstance() {
         return instance;
@@ -165,9 +172,16 @@ public final class Main extends JavaPlugin {
             block.setType(Material.AIR);
         }
 
+        for (@NotNull Iterator<KeyedBossBar> it = Bukkit.getBossBars(); it.hasNext(); ) {
+            BossBar bossbar = it.next();
+            bossbar.removeAll();
+            bossbar.setVisible(false);
+        }
+
     }
 
     private void unregisterAllUnwanted() {
+        unregisterCommand("minecraft:kick");
         //TODO: Insert commands to be unregistered
     }
 
@@ -188,17 +202,14 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new MoveEvent(), this);
         getServer().getPluginManager().registerEvents(new LeaveEvent(), this);
 
-        //functionality for the Candles
-        getServer().getPluginManager().registerEvents(new JumpCandle(), this);
-        getServer().getPluginManager().registerEvents(new RepairCandle(), this);
-        getServer().getPluginManager().registerEvents(new TeleportCandle(), this);
-        getServer().getPluginManager().registerEvents(new UltimateCandle(), this);
         //functionality for the holy Items
         getServer().getPluginManager().registerEvents(new HolyFeather(), this);
         getServer().getPluginManager().registerEvents(new HolyCoin(), this);
         getServer().getPluginManager().registerEvents(new HolyCookieBox(), this);
         getServer().getPluginManager().registerEvents(new HolyArmor(), this);
         getServer().getPluginManager().registerEvents(new HolyBackpack(), this);
+        getServer().getPluginManager().registerEvents(new SwiftSword(), this);
+
         //functionality for the vampiric Items
         getServer().getPluginManager().registerEvents(new VampiricHelmet(), this);
         getServer().getPluginManager().registerEvents(new VampiricHoe(), this);
@@ -208,9 +219,15 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new InventoryUtils(), this);
         getServer().getPluginManager().registerEvents(new Crate(), this);
 
-        getServer().getPluginManager().registerEvents(new Scepter(), this);
+        getServer().getPluginManager().registerEvents(new AssasinSword(), this);
         getServer().getPluginManager().registerEvents(new ChesterItem(), this);
         getServer().getPluginManager().registerEvents(new MagicStone(), this);
+
+        getServer().getPluginManager().registerEvents(new TheFlower(), this);
+
+       getServer().getPluginManager().registerEvents(new CheckCPSCommand(), this);
+       getServer().getPluginManager().registerEvents(new IceSword(), this);
+
     }
 
     private void registerCommands() {
@@ -237,6 +254,8 @@ public final class Main extends JavaPlugin {
         Objects.requireNonNull(getCommand("setrank")).setExecutor(new SetRankCommand());
         Objects.requireNonNull(getCommand("safe")).setExecutor(new SafeCommand());
         Objects.requireNonNull(getCommand("shop")).setExecutor(new ShopCommand());
+        Objects.requireNonNull(getCommand("kick")).setExecutor(new KickCommand());
+        Objects.requireNonNull(getCommand("cps")).setExecutor(new CheckCPSCommand());
     }
 
     private void setupTablist() {

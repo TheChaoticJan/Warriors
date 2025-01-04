@@ -1,4 +1,4 @@
-package plugin.specialitems.royal;
+package plugin.specialitems;
 
 import net.kyori.adventure.text.BuildableComponent;
 import net.kyori.adventure.text.Component;
@@ -22,6 +22,7 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.event.Listener;
 import plugin.Main;
 import plugin.infobar.InfobarEssentials;
+import plugin.specialitems.royal.RoyalUtil;
 import plugin.utils.itembuilder.InventoryEssentials;
 
 import java.util.ArrayList;
@@ -34,13 +35,13 @@ public class MagicStone implements Listener{
     private static final int startAmount = 3;
     private static final int loadAmount = 2;
     private static final int range = 9;
-    private static final String name = "Zauberstein";
+    private static final String name = "<i:false><light_purple><obf>a </obf><dark_purple>Zauberstein";
 
     public static final ItemStack create(){
         ItemStack stack = new ItemStack(Material.FLINT);
         ItemMeta meta = stack.getItemMeta();
 
-        meta.displayName(RoyalUtil.createName(name));
+        meta.displayName(MiniMessage.miniMessage().deserialize(name));
         correctName(meta, startAmount);
 
         meta.addEnchant(Enchantment.MENDING, 1, false);
@@ -48,9 +49,7 @@ public class MagicStone implements Listener{
         meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, startAmount);
 
         ArrayList<Component> lore = new ArrayList<>();
-        lore.add(MiniMessage.miniMessage().deserialize("<i:false><gradient:yellow:gold>Royal"));
-        lore.add(Component.text(""));
-        lore.add(MiniMessage.miniMessage().deserialize("<dark_gray>▸ <yellow>Die Zauberer sind auf deiner Seite!"));
+        lore.add(MiniMessage.miniMessage().deserialize("<dark_gray>▸ <light_purple>Die Zauberer sind auf deiner Seite!"));
         lore.add(MiniMessage.miniMessage().deserialize("  <i:false><white>Rechtsklickst du dieses Item"));
         lore.add(MiniMessage.miniMessage().deserialize("  <i:false><white>in die Luft, so teleportierst du"));
         lore.add(MiniMessage.miniMessage().deserialize("  <i:false><white>dich <green>" + range + " <white>Blöcke in die Richtung,"));
@@ -65,7 +64,7 @@ public class MagicStone implements Listener{
     }
 
     private static ItemMeta correctName(ItemMeta meta, int amount){
-        meta.displayName(RoyalUtil.createName("Zauberstein").append(Component.text(" §8[§5" + amount + "§8]")));
+        meta.displayName(MiniMessage.miniMessage().deserialize(name).append(Component.text(" §8[§5" + amount + "§8] §d§ka")));
         return meta;
     }
 

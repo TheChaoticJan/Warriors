@@ -9,6 +9,8 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Objects;
 
+import static java.lang.Float.POSITIVE_INFINITY;
+
 public class InventoryInteracts {
 
     public static void checkSpecialItemDrops(Player d) {
@@ -18,7 +20,9 @@ public class InventoryInteracts {
         final int [] amounts = {0, 5};
 
         for(int i = 0; i < types.length; i++) {
-            if (d.getItemInHand().getItemMeta() != null) {
+            if (d.getItemInHand().getItemMeta() == null) {
+                return;
+            }
                 if (d.getItemInHand().getItemMeta().getLore() != null) {
                     if (d.getItemInHand().getItemMeta().getLore().contains(types[i])){
                         boolean bl = false;
@@ -48,13 +52,13 @@ public class InventoryInteracts {
                         }
                     }
                 }
-            }
         }
     }
 
-    public static void healArmorPieces(Player player, int amount){
-        String value = "§cNichts";
 
+    public static void healArmorPieces(Player player, int amount){
+
+        String value = "§aNichts";
         Count counted = new Count(player);
 
         int HDura = counted.getHelmetDura();
@@ -68,42 +72,41 @@ public class InventoryInteracts {
             return;
         }
 
-        if (lessThanEach(HDura, new int[]{CDura, LDura, HDura})) {
-            if (player.getInventory().getHelmet() != null) {
-                player.getInventory().getHelmet().setDurability((short) (player.getInventory().getHelmet().getDurability() - amount));
-                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_USE, 20, 1);
-                value = "Helm";
+        ItemStack lowest = null;
+        int lowestDurability = (int) POSITIVE_INFINITY;
+        int pos = 0;
+        int temp = 0;
+
+        for(ItemStack stack : player.getInventory().getArmorContents()) {
+            if(stack == null){
+                break;
             }
-        }else if (lessThanEach(CDura, new int[]{LDura, HDura})) {
-            if (player.getInventory().getChestplate() != null) {
-                player.getInventory().getChestplate().setDurability((short) (player.getInventory().getChestplate().getDurability() - amount));
-                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_USE, 20, 1);
-                value = "Brustplatte";
+            if(stack.getType().getMaxDurability() == 0)
+            {
+                continue;
             }
-        }else if (LDura <= BDura) {
-            if (player.getInventory().getLeggings() != null) {
-                player.getInventory().getLeggings().setDurability((short) (player.getInventory().getLeggings().getDurability() - amount));
-                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_USE, 20, 1);
-                value = "Hose";
+            if(stack.getType().getMaxDurability() - stack.getDurability() < lowestDurability)
+            {
+                lowestDurability = stack.getType().getMaxDurability() - stack.getDurability();
+                lowest = stack;
+                pos = temp;
             }
-        }else{
-            if (player.getInventory().getBoots() != null) {
-                player.getInventory().getBoots().setDurability((short) (player.getInventory().getBoots().getDurability() - amount));
-                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_USE, 20, 1);
-                value = "Schuhe";
-            }
+            temp++;
         }
+
+        if(!(lowest == null)){
+            lowest.setDurability((short) (player.getInventory().getHelmet().getDurability() - amount));
+        }
+
+        switch (pos) {
+            case 0 -> {value = "Schuhe";}
+            case 1 -> {value = "Hose";}
+            case 2 -> {value = "Brustplatte";}
+            case 3 -> {value = "Helm";}
+            default -> {value = "§cNichts";}
+        }
+
         new Bossbars().healBar(player, value, amount);
     }
 
-    private static boolean lessThanEach(int i, int [] others){
-        boolean bl = true;
-        for(int other : others){
-            if (other < i) {
-                bl = false;
-                break;
-            }
-        }
-        return bl;
-    }
 }

@@ -17,17 +17,17 @@ import org.bukkit.persistence.PersistentDataType;
 import plugin.models.PlayerStats;
 import plugin.shop.ShopUtils;
 import plugin.specialitems.BuyingEssentials;
-import plugin.specialitems.candles.JumpCandle;
-import plugin.specialitems.candles.RepairCandle;
-import plugin.specialitems.candles.TeleportCandle;
-import plugin.specialitems.candles.UltimateCandle;
+import plugin.specialitems.uniques.IceSword;
+import plugin.specialitems.TheFlower;
+import plugin.specialitems.uniques.SwiftSword;
 import plugin.specialitems.holy.HolyArmor;
 import plugin.specialitems.holy.HolyBackpack;
 import plugin.specialitems.holy.HolyCoin;
 import plugin.specialitems.holy.HolyCookieBox;
 import plugin.specialitems.royal.ChesterItem;
-import plugin.specialitems.royal.MagicStone;
-import plugin.specialitems.royal.Scepter;
+import plugin.specialitems.MagicStone;
+import plugin.specialitems.uniques.AssasinSword;
+import plugin.specialitems.vampiric.VampiricBoots;
 import plugin.specialitems.vampiric.VampiricBow;
 import plugin.specialitems.vampiric.VampiricHelmet;
 import plugin.specialitems.vampiric.VampiricHoe;
@@ -308,19 +308,19 @@ public class InventoryUtils implements Listener {
                     inventory.setItem(19, ErfahrenItems.Axt());
                     inventory.setItem(20, ErfahrenItems.bow());
 
-                    inventory.setItem(27, UnsortableItems.loveStick());
+                    inventory.setItem(27, TheFlower.loveFlower());
                 }
                 case 3 -> {
                     inventory.setItem(9, VampiricHoe.create(player));
                     inventory.setItem(10, VampiricBow.create(player));
                     inventory.setItem(11, VampiricHelmet.create(player));
+                    inventory.setItem(12, VampiricBoots.create(player));
 
                     inventory.setItem(18, Berserker.Axe(player));
                     inventory.setItem(19, Berserker.Tracker());
+                    inventory.setItem(26, MagicStone.create());
 
-                    inventory.setItem(27, JumpCandle.create());
-                    inventory.setItem(28, RepairCandle.create());
-                    inventory.setItem(29, TeleportCandle.create());
+
 
                 }
                 case 4 -> {
@@ -333,10 +333,11 @@ public class InventoryUtils implements Listener {
                         inventory.setItem(i, HolyArmor.create()[i - 18]);
                     }
 
-                    inventory.setItem(17, UltimateCandle.create());
-                    inventory.setItem(24, Scepter.create());
-                    inventory.setItem(25, ChesterItem.create());
-                    inventory.setItem(26, MagicStone.create());
+                    inventory.setItem(17, SwiftSword.create());
+                    inventory.setItem(14, AssasinSword.create());
+                    inventory.setItem(15, ChesterItem.create());
+                    inventory.setItem(23, IceSword.createItem());
+
 
                 }
                 default -> {
@@ -365,7 +366,7 @@ public class InventoryUtils implements Listener {
                     inventory.setItem(19, ShopUtils.makeShopItem(ErfahrenItems.Axt(), 900, tag, 3, 1));
                     inventory.setItem(20, ShopUtils.makeShopItem(ErfahrenItems.bow(), 850, tag, 2, 1));
 
-                    inventory.setItem(27, ShopUtils.makeShopItem(UnsortableItems.loveStick(), 42, tag, 5, 1));
+                    inventory.setItem(27, ShopUtils.makeShopItem(TheFlower.loveFlower(), 42, tag, 5, 1));
                 }
                 case 3 -> {
                     inventory.setItem(9, ShopUtils.makeShopItem(VampiricHoe.create(player), 1500, tag, 4, 1));
@@ -374,10 +375,9 @@ public class InventoryUtils implements Listener {
 
                     inventory.setItem(18, ShopUtils.makeShopItem(Berserker.Axe(player), 2000, tag, 5, 1));
                     inventory.setItem(19, ShopUtils.makeShopItem(Berserker.Tracker(), 150, tag, 1, 1));
+                    inventory.setItem(26, ShopUtils.makeShopItem(MagicStone.create(), 2000, tag, 5, 1));
 
-                    inventory.setItem(27, ShopUtils.makeShopItem(JumpCandle.create(), 1000, tag, 3, 1));
-                    inventory.setItem(28, ShopUtils.makeShopItem(RepairCandle.create(), 1000, tag, 3, 1));
-                    inventory.setItem(29, ShopUtils.makeShopItem(TeleportCandle.create(), 1000, tag, 3, 1));
+                    inventory.setItem(27, ShopUtils.makeShopItem(SwiftSword.create(), 1000, tag, 3, 1));
                 }
                 case 4 -> {
                     inventory.setItem(9, ShopUtils.makeShopItem(HolyFeather.create(), 300, tag, 2, 3));
@@ -388,10 +388,9 @@ public class InventoryUtils implements Listener {
                         inventory.setItem(i, ShopUtils.makeShopItem(HolyArmor.create()[i - 18], 1150, tag,5, 1));
                     }
 
-                    inventory.setItem(17, ShopUtils.makeShopItem(UltimateCandle.create(), 2000, tag, 3, 1));
-                    inventory.setItem(24, ShopUtils.makeShopItem(Scepter.create(), 3000, tag, 5, 1));
+                    inventory.setItem(24, ShopUtils.makeShopItem(AssasinSword.create(), 3000, tag, 5, 1));
                     inventory.setItem(25, ShopUtils.makeShopItem(ChesterItem.create(), 3000, tag, 5, 1));
-                    inventory.setItem(26, ShopUtils.makeShopItem(MagicStone.create(), 4000, tag, 5, 1));
+
                 }
                 default -> {
                     player.sendMessage("DA IST WAS FALSCH");

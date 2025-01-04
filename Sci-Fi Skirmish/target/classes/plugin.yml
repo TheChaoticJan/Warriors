@@ -1,5 +1,5 @@
 name: Warriors
-version: "\u001B[35m Closed Beta\u001B[0m"
+version: "\u001B[35mClosed Beta\u001B[0m"
 main: plugin.Main
 api-version: 1.19
 commands:
@@ -25,7 +25,7 @@ commands:
   trash:
     aliases: "müll"
   xp:
-    aliases: "handel"
+    aliases: "erfahrungspunkte"
   modify:
     aliases: "modifizieren"
   top:
@@ -39,6 +39,12 @@ commands:
     permission: permission.mod
   safe:
     aliases: ['tr', 'tresor']
+  kick:
+    aliases: ['punish']
+    permission: permission.mod
+  cps:
+    permission: permission.mod
+
 permissions:
   permission.mod:
     default: op

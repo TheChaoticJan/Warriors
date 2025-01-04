@@ -1,5 +1,6 @@
 package plugin;
 
+import org.bukkit.Location;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
@@ -27,6 +28,29 @@ public class Utils {
 
         try {
             return (ItemStack) dataInput.readObject();
+        } catch (ClassNotFoundException e) {
+            throw new IOException("Unable to decode class type.", e);
+        } finally {
+            dataInput.close();
+        }
+    }
+
+    public static String LocationToBase64(Location item) throws IOException {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        BukkitObjectOutputStream dataOutput = new BukkitObjectOutputStream(outputStream);
+
+        dataOutput.writeObject(item);
+        dataOutput.close();
+
+        return Base64.getEncoder().encodeToString(outputStream.toByteArray());
+    }
+
+    public static Location LocationFromBase64(String data) throws IOException {
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64.getDecoder().decode(data));
+        BukkitObjectInputStream dataInput = new BukkitObjectInputStream(inputStream);
+
+        try {
+            return (Location) dataInput.readObject();
         } catch (ClassNotFoundException e) {
             throw new IOException("Unable to decode class type.", e);
         } finally {

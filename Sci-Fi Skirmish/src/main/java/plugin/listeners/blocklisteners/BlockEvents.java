@@ -79,12 +79,6 @@ public class BlockEvents implements Listener {
       }, 20 * 11);
 
         }
-        if(b.getBlockPlaced().getType() == Material.SANDSTONE){
-
-            Runnable runnable = () -> p.getInventory().setItem(8, Objects.requireNonNull(p.getInventory().getItem(8)).add(1));
-            
-            Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), runnable, 20 * 2);
-        }
         if(b.getBlockPlaced().getType() == Material.SANDSTONE || b.getBlockPlaced().getType() == Material.COBWEB){
             blocks.add(b.getBlock());
         }

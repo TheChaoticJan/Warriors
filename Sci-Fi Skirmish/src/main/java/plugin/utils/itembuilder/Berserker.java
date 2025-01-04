@@ -51,7 +51,6 @@ public class Berserker {
         return stack;
 
     }
-
     public static ItemStack Tracker(){
         ItemStack stack = new ItemStack(Material.COMPASS);
         CompassMeta meta = (CompassMeta) stack.getItemMeta();
