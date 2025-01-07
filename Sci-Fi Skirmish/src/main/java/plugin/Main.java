@@ -26,7 +26,7 @@ import plugin.commands.inventorycommands.gui.KitCommand;
 import plugin.moderation.CheckCPSCommand;
 import plugin.moderation.KickCommand;
 import plugin.shop.ShopCommand;
-import plugin.specialitems.uniques.IceSword;
+import plugin.specialitems.uniques.*;
 import plugin.specialitems.SpecialitemCommand;
 import plugin.commands.inventorycommands.commoninventories.WorkbenchCommand;
 import plugin.commands.moderationcommands.InvseeCommand;
@@ -51,16 +51,14 @@ import plugin.safe.SafeCommand;
 import plugin.specialitems.holy.HolyBackpack;
 import plugin.specialitems.royal.ChesterItem;
 import plugin.specialitems.MagicStone;
-import plugin.specialitems.uniques.AssasinSword;
 import plugin.specialitems.vampiric.VampiricBoots;
 import plugin.utils.itembuilder.HolyFeather;
-import plugin.specialitems.uniques.SwiftSword;
 import plugin.specialitems.holy.HolyArmor;
 import plugin.specialitems.holy.HolyCoin;
 import plugin.specialitems.holy.HolyCookieBox;
 import plugin.specialitems.vampiric.VampiricBow;
 import plugin.specialitems.vampiric.VampiricHelmet;
-import plugin.specialitems.vampiric.VampiricHoe;
+import plugin.specialitems.uniques.BloodyHoe;
 import plugin.specialitems.TheFlower;
 import plugin.utils.scores.ScoreboardManager;
 import plugin.listeners.entitylisteners.interactions.*;
@@ -212,7 +210,7 @@ public final class Main extends JavaPlugin {
 
         //functionality for the vampiric Items
         getServer().getPluginManager().registerEvents(new VampiricHelmet(), this);
-        getServer().getPluginManager().registerEvents(new VampiricHoe(), this);
+        getServer().getPluginManager().registerEvents(new BloodyHoe(), this);
         getServer().getPluginManager().registerEvents(new VampiricBow(), this);
 
         getServer().getPluginManager().registerEvents(new SafeListener(), this);
@@ -227,6 +225,7 @@ public final class Main extends JavaPlugin {
 
        getServer().getPluginManager().registerEvents(new CheckCPSCommand(), this);
        getServer().getPluginManager().registerEvents(new IceSword(), this);
+       getServer().getPluginManager().registerEvents(new TitanSword(), this);
 
     }
 
@@ -256,6 +255,7 @@ public final class Main extends JavaPlugin {
         Objects.requireNonNull(getCommand("shop")).setExecutor(new ShopCommand());
         Objects.requireNonNull(getCommand("kick")).setExecutor(new KickCommand());
         Objects.requireNonNull(getCommand("cps")).setExecutor(new CheckCPSCommand());
+        Objects.requireNonNull(getCommand("specialize")).setExecutor(new SpecializeCommand());
     }
 
     private void setupTablist() {

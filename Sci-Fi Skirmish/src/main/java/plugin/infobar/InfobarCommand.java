@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 public class InfobarCommand implements CommandExecutor, TabCompleter {
@@ -52,6 +53,6 @@ public class InfobarCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
-        return null;
+        return Collections.singletonList("");
     }
 }

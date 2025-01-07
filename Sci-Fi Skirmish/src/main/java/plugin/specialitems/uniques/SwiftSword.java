@@ -11,6 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import plugin.Main;
 import org.bukkit.event.Listener;
@@ -31,7 +32,7 @@ public class SwiftSword implements Listener, Unique{
         meta.getPersistentDataContainer().set(key, PersistentDataType.BYTE, (byte) 0);
         meta.getPersistentDataContainer().set(uniqueKey, PersistentDataType.BYTE, (byte) 0);
 
-        meta.displayName(MiniMessage.miniMessage().deserialize("<i:false><obf><#df91fc>a</obf> <gradient:#bd31ff:#d476f7><b>Flinker Dolch <obf><#df91fc>a"));
+        meta.displayName(MiniMessage.miniMessage().deserialize("<i:false><obf><#df91fc>a</obf> <gradient:#bd31ff:#d476f7><b>Flinker Dolch</b> <obf><#df91fc>a"));
 
         meta.addEnchant(Enchantment.DURABILITY, 4, true);
         meta.addEnchant(Enchantment.MENDING, 1, true);
@@ -59,15 +60,24 @@ public class SwiftSword implements Listener, Unique{
 
         Player player = event.getPlayer();
 
-        if(cooldownMap.getOrDefault(player.getUniqueId(), System.currentTimeMillis() - effectCooldown * 1000) > System.currentTimeMillis() - effectCooldown * 1000){return;}
-
         if(player.getItemInHand().getItemMeta().getPersistentDataContainer().has(key) && event.getAction().isRightClick())
         {
+
+            if(!isSpecialized(player.getPersistentDataContainer(), key)){
+                player.sendActionBar("§cDu hast die Verwendung dieser Waffe nicht gelernt!");
+                return;
+            }
+            if(cooldownMap.getOrDefault(player.getUniqueId(), System.currentTimeMillis() - effectCooldown * 1000) > System.currentTimeMillis() - effectCooldown * 1000){return;}
+
             player.setVelocity(player.getLocation().getDirection().add(player.getLocation().getDirection().multiply(0.4).setY(0.2)));
             player.playSound(player.getLocation(), Sound.ENTITY_BLAZE_SHOOT, 20, 1);
             player.setCooldown(Material.NETHERITE_SWORD, 20 * effectCooldown);
             player.getItemInHand().setDurability((short) (player.getItemInHand().getDurability() + 1));
+            cooldownMap.put(player.getUniqueId(), System.currentTimeMillis());
         }
     }
 
+    public Boolean isSpecialized(PersistentDataContainer container, NamespacedKey key) {
+        return container.has(key);
+    }
 }

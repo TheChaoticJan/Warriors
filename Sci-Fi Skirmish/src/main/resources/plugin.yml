@@ -44,6 +44,8 @@ commands:
     permission: permission.mod
   cps:
     permission: permission.mod
+  specialize:
+
 
 permissions:
   permission.mod:

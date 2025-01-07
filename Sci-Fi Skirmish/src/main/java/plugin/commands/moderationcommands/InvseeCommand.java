@@ -1,5 +1,6 @@
 package plugin.commands.moderationcommands;
 
+import net.kyori.adventure.text.Component;
 import plugin.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -52,13 +53,12 @@ public class InvseeCommand implements CommandExecutor, TabCompleter {
                 }
 
 
-                //Trennglas bauen
+                //creating a seperating Glass for visuals sake
                 ItemStack Glas = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
                 ItemMeta Glasmeta = Glas.getItemMeta();
-                Glasmeta.setDisplayName("_".replace("_", " "));
+                Glasmeta.displayName(Component.empty());
                 Glas.setItemMeta(Glasmeta);
 
-                //Trennglas benutzen
                 for(int i = 36; i <= 44; i++){
                     PlayerInv.setItem(i, Glas);
                 }

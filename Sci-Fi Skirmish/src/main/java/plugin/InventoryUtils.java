@@ -27,10 +27,11 @@ import plugin.specialitems.holy.HolyCookieBox;
 import plugin.specialitems.royal.ChesterItem;
 import plugin.specialitems.MagicStone;
 import plugin.specialitems.uniques.AssasinSword;
+import plugin.specialitems.uniques.TitanSword;
 import plugin.specialitems.vampiric.VampiricBoots;
 import plugin.specialitems.vampiric.VampiricBow;
 import plugin.specialitems.vampiric.VampiricHelmet;
-import plugin.specialitems.vampiric.VampiricHoe;
+import plugin.specialitems.uniques.BloodyHoe;
 import plugin.utils.inventorybuilder.SpecialItemInventories;
 import plugin.utils.itembuilder.*;
 import plugin.utils.itembuilder.HolyFeather;
@@ -311,12 +312,10 @@ public class InventoryUtils implements Listener {
                     inventory.setItem(27, TheFlower.loveFlower());
                 }
                 case 3 -> {
-                    inventory.setItem(9, VampiricHoe.create(player));
                     inventory.setItem(10, VampiricBow.create(player));
                     inventory.setItem(11, VampiricHelmet.create(player));
                     inventory.setItem(12, VampiricBoots.create(player));
 
-                    inventory.setItem(18, Berserker.Axe(player));
                     inventory.setItem(19, Berserker.Tracker());
                     inventory.setItem(26, MagicStone.create());
 
@@ -333,10 +332,13 @@ public class InventoryUtils implements Listener {
                         inventory.setItem(i, HolyArmor.create()[i - 18]);
                     }
 
-                    inventory.setItem(17, SwiftSword.create());
-                    inventory.setItem(14, AssasinSword.create());
-                    inventory.setItem(15, ChesterItem.create());
-                    inventory.setItem(23, IceSword.createItem());
+                    inventory.setItem(17, ChesterItem.create());
+
+                    inventory.setItem(27, SwiftSword.create());
+                    inventory.setItem(28, AssasinSword.create());
+                    inventory.setItem(29, IceSword.createItem());
+                    inventory.setItem(30, TitanSword.create());
+                    inventory.setItem(31, BloodyHoe.create(0));
 
 
                 }
@@ -369,11 +371,9 @@ public class InventoryUtils implements Listener {
                     inventory.setItem(27, ShopUtils.makeShopItem(TheFlower.loveFlower(), 42, tag, 5, 1));
                 }
                 case 3 -> {
-                    inventory.setItem(9, ShopUtils.makeShopItem(VampiricHoe.create(player), 1500, tag, 4, 1));
                     inventory.setItem(10, ShopUtils.makeShopItem(VampiricBow.create(player), 1200, tag, 4, 1));
                     inventory.setItem(11, ShopUtils.makeShopItem(VampiricHelmet.create(player), 1690, tag, 5, 1));
 
-                    inventory.setItem(18, ShopUtils.makeShopItem(Berserker.Axe(player), 2000, tag, 5, 1));
                     inventory.setItem(19, ShopUtils.makeShopItem(Berserker.Tracker(), 150, tag, 1, 1));
                     inventory.setItem(26, ShopUtils.makeShopItem(MagicStone.create(), 2000, tag, 5, 1));
 

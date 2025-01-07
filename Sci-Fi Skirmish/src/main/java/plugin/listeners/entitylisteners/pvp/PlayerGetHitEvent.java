@@ -63,16 +63,7 @@ public class PlayerGetHitEvent implements Listener{
             }
 
 
-            if(p.getItemInHand().getType() != Material.AIR) {
-                if (p.getItemInHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "berserker_axe"))) {
-                    Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-                        @Override
-                        public void run() {
-                            p.setVelocity(new Vector(0, 0, 0));
-                        }
-                    }, 1);
-                }
-            }
+
         }
 
     }

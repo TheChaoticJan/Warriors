@@ -65,6 +65,7 @@ public class Loot {
         commonDrops.add(new ItemStack(Material.IRON_INGOT, 1));
         commonDrops.add(new ItemStack(Material.GOLD_NUGGET, 2));
         commonDrops.add(new ItemStack(Material.COBWEB, 1));
+        commonDrops.add(new ItemStack(Material.SANDSTONE, 4));
         commonDrops.add(new ItemStack(Material.APPLE));
         CrateBook book = new CrateBook(false, 1);
         commonDrops.add(book.getBook());
@@ -87,6 +88,7 @@ public class Loot {
         uncommonDrops.add(new ItemStack(Material.COBWEB, 2));
         uncommonDrops.add(new ItemStack(Material.STONE_SWORD));
 	    uncommonDrops.add(new ItemStack(Material.APPLE, 2));
+        uncommonDrops.add(new ItemStack(Material.SANDSTONE, 6));
 
 	    CrateBook book = new CrateBook(false, 2);
         uncommonDrops.add(book.getBook());
@@ -103,8 +105,8 @@ public class Loot {
     public static ItemStack epicDrop(){
 
         ArrayList<ItemStack> epicDrops = new ArrayList<>();
-        ItemStack Drop1 = new ItemStack(Material.EXPERIENCE_BOTTLE, 8);
-        epicDrops.add(Drop1);
+
+        epicDrops.add(new ItemStack(Material.EXPERIENCE_BOTTLE, 8));
         ItemStack Drop2 = new ItemStack(Material.ENDER_PEARL, 2);
         epicDrops.add(Drop2);
         ItemStack Drop3 = new ItemStack(Material.TNT, 3);

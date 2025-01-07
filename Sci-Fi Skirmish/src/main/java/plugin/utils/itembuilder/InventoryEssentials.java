@@ -1,5 +1,6 @@
 package plugin.utils.itembuilder;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -9,7 +10,7 @@ public class InventoryEssentials {
     public static ItemStack glass() {
         ItemStack glass = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
         ItemMeta glassMeta = glass.getItemMeta();
-        glassMeta.setDisplayName("_".replace("_", " "));
+        glassMeta.displayName(Component.empty());
         glass.setItemMeta(glassMeta);
         return glass;
     }
@@ -17,20 +18,9 @@ public class InventoryEssentials {
     public static ItemStack bars() {
         ItemStack glass = new ItemStack(Material.IRON_BARS);
         ItemMeta glassMeta = glass.getItemMeta();
-        glassMeta.setDisplayName("_".replace("_", " "));
+        glassMeta.displayName(Component.empty());
         glass.setItemMeta(glassMeta);
         return glass;
-    }
-
-    public static ItemStack buildingBlocks() {
-        ItemStack BBlock = new ItemStack(Material.SANDSTONE);
-
-        ItemMeta BlockMeta = BBlock.getItemMeta();
-        BlockMeta.setDisplayName("§6§oBaublöcke");
-        BBlock.setItemMeta(BlockMeta);
-
-        return BBlock;
-
     }
 
     public static ItemStack back() {

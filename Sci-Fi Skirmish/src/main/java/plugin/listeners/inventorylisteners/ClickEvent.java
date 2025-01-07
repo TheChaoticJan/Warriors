@@ -82,8 +82,7 @@ public class ClickEvent implements Listener {
                      i.setItem(34, Arrows);
                      i.setItem(35, Arrows);
 
-                     i.setItem(8, InventoryEssentials.buildingBlocks());
-                     Objects.requireNonNull(i.getItem(8)).setAmount(32);
+                     i.setItem(8, new ItemStack(Material.SANDSTONE, 32));
 
                      i.setItem(0, Western.Schwert(p));
                      i.setItem(1, Western.Rod(p));

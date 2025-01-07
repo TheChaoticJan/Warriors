@@ -15,6 +15,7 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -38,7 +39,7 @@ public class AssasinSword implements Listener, Unique{
         meta.getPersistentDataContainer().set(key, PersistentDataType.BYTE, (byte) 0);
         meta.getPersistentDataContainer().set(uniqueKey, PersistentDataType.BYTE, (byte) 0);
 
-        meta.displayName(MiniMessage.miniMessage().deserialize("<i:false><obf><#e22c34>a</obf> <gradient:#b32a2a:#e22c34><b>Assasinensäbel <obf><#e22c34>a"));
+        meta.displayName(MiniMessage.miniMessage().deserialize("<i:false><obf><#e22c34>a</obf> <gradient:#b32a2a:#e22c34><b>Assasinensäbel</b> <obf><#e22c34>a"));
 
         meta.addEnchant(Enchantment.DURABILITY, 4, true);
         meta.addEnchant(Enchantment.MENDING, 1, true);
@@ -63,11 +64,17 @@ public class AssasinSword implements Listener, Unique{
 
     @EventHandler
     private void onThrow(PlayerInteractEvent event){
-        if(cooldownMap.getOrDefault(event.getPlayer().getUniqueId(), System.currentTimeMillis() - effectCooldown * 1000) > System.currentTimeMillis() - effectCooldown * 1000){return;}
 
         if(event.getAction().isRightClick() && event.getPlayer().getItemInHand().getItemMeta() != null) {
             if (event.getPlayer().getItemInHand().getItemMeta().getPersistentDataContainer().has(key)) {
                 Player player = event.getPlayer();
+
+                if(!isSpecialized(player.getPersistentDataContainer(), key)){
+                    player.sendActionBar("§cDu hast die Verwendung dieser Waffe nicht gelernt!");
+                    return;
+                }
+                if(cooldownMap.getOrDefault(event.getPlayer().getUniqueId(), System.currentTimeMillis() - effectCooldown * 1000) > System.currentTimeMillis() - effectCooldown * 1000){return;}
+
                 Snowball snowball = (Snowball) player.getWorld().spawnEntity(player.getLocation().add(0, 1.8, 0), EntityType.SNOWBALL);
                 snowball.setShooter(player);
                 snowball.setVelocity(player.getLocation().getDirection().multiply(2.3));
@@ -94,4 +101,9 @@ public class AssasinSword implements Listener, Unique{
             }
         }
     }
+
+    private Boolean isSpecialized(PersistentDataContainer container, NamespacedKey key) {
+        return container.has(key);
+    }
+
 }

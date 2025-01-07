@@ -21,9 +21,6 @@ public class RightClickEvent implements Listener{
         this.plugin = plugin;
     }
 
-    public static HashMap<UUID, Integer> checkChat = new HashMap<>();
-    public HashMap<UUID, String> lockCooldown = new HashMap<>();
-
     Main plugin;
 
     @EventHandler

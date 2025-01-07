@@ -40,7 +40,7 @@ public class SignCommand implements CommandExecutor, TabCompleter {
                     p.sendMessage("§cDu hast kein Item in der Hand!");
                     return true;
                 }
-                if (p.getItemInHand().getItemMeta().getLore() == null) {
+                if (p.getItemInHand().getItemMeta().lore() == null) {
                     p.getItemInHand().getItemMeta();
                     ArrayList<Component> lore = new ArrayList<>();
                     lore.add(Component.text(""));
