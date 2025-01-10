@@ -202,7 +202,6 @@ public class PerkInventories {
 
     public static Inventory confirmBuy(Player p, ItemStack price){
 
-        Component name = MiniMessage.miniMessage().deserialize("<rainbow>Kaufen?sfsdfsdfsfsdf</rainbow>");
         Inventory inventory = Bukkit.createInventory(p, 9, "§c§lPerk kaufen?");
         inventory.setItem(0, InventoryEssentials.glass());
         inventory.setItem(1, InventoryEssentials.glass());

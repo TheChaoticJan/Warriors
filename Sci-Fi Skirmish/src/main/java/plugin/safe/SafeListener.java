@@ -33,14 +33,15 @@ public class SafeListener implements Listener {
     }
 
     @EventHandler
-    private static void inventoryClose(InventoryCloseEvent event){
+    private static void inventoryClose(InventoryCloseEvent event) {
         Player player = (Player) event.getPlayer();
-        if(event.getView().title().equals(MiniMessage.miniMessage().deserialize("<b><red><u>TRESOR")))
-        for(int i = 0; i < 54; i++){
-            try {
-                player.getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "Slot" + i), PersistentDataType.STRING, Utils.itemStackToBase64(event.getInventory().getItem(i)));
-            } catch (IOException e) {
-                e.printStackTrace();
+        if (event.getView().title().equals(MiniMessage.miniMessage().deserialize("<b><red><u>TRESOR"))) {
+            for (int i = 0; i < 54; i++) {
+                try {
+                    player.getPersistentDataContainer().set(new NamespacedKey(Main.getInstance(), "Slot" + i), PersistentDataType.STRING, Utils.itemStackToBase64(event.getInventory().getItem(i)));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

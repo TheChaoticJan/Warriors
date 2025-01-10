@@ -10,7 +10,6 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.entity.EntityInteractEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -45,7 +44,7 @@ public class TheFlower implements Listener{
         lore.add(MiniMessage.miniMessage().deserialize("     <i:false><gradient:#EA21ED:#DA1B54>von einem wunderschönen Mädchen</gradient>"));
         lore.add(Component.text("§r                      §o§b§kaa §o§c❤ §b§kaa"));
         lore.add(Component.text(""));
-        lore.add(MiniMessage.miniMessage().deserialize("<i><gradient:white:yellow>Nele merkt sich deinen Lieblingsort!"));
+        lore.add(MiniMessage.miniMessage().deserialize("<i><gradient:white:yellow>     Nele merkt sich deinen Lieblingsort!"));
         lore.add(Component.text(""));
         lore.add(MiniMessage.miniMessage().deserialize(" <i:false>    <yellow>Rechtsklick: <gray>Teleportiert dich an "));
         lore.add(MiniMessage.miniMessage().deserialize("<i:false>     <gray>deinen Lieblingsort."));
