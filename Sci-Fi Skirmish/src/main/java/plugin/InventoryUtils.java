@@ -32,9 +32,11 @@ import plugin.specialitems.vampiric.VampiricBoots;
 import plugin.specialitems.vampiric.VampiricBow;
 import plugin.specialitems.vampiric.VampiricHelmet;
 import plugin.specialitems.uniques.BloodyHoe;
+import plugin.specialitems.western.Berserker;
+import plugin.specialitems.western.WesternItems;
 import plugin.utils.inventorybuilder.SpecialItemInventories;
 import plugin.utils.itembuilder.*;
-import plugin.utils.itembuilder.HolyFeather;
+import plugin.specialitems.holy.HolyFeather;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -286,30 +288,25 @@ public class InventoryUtils implements Listener {
         if(!shop){
             switch (tag) {
                 case 1 -> {
-                    inventory.setItem(9, Western.Schwert(player));
-                    inventory.setItem(10, Western.Bogen(player));
-                    inventory.setItem(11, Western.Rod(player));
-                    inventory.setItem(12, Western.Picke(player));
-                    inventory.setItem(14, Western.Helmet(player));
-                    inventory.setItem(15, Western.Chestplate(player));
-                    inventory.setItem(16, Western.Leggings(player));
-                    inventory.setItem(17, Western.Boots(player));
+                    inventory.setItem(9, WesternItems.Schwert(player));
+                    inventory.setItem(10, WesternItems.Bogen(player));
+                    inventory.setItem(11, WesternItems.Rod(player));
+                    inventory.setItem(12, WesternItems.Picke(player));
+                    inventory.setItem(14, WesternItems.Helmet(player));
+                    inventory.setItem(15, WesternItems.Chestplate(player));
+                    inventory.setItem(16, WesternItems.Leggings(player));
+                    inventory.setItem(17, WesternItems.Boots(player));
 
                     inventory.setItem(27, BuyingEssentials.createPlan(1));
                     inventory.setItem(28, BuyingEssentials.createPlan(2));
                     inventory.setItem(29, BuyingEssentials.createPlan(3));
                     inventory.setItem(30, BuyingEssentials.createBlessing());
+
+                    inventory.setItem(35, TheFlower.loveFlower());
                 }
                 case 2 -> {
-                    inventory.setItem(9, SciFiItems.Schwert());
-                    inventory.setItem(10, SciFiItems.Axt());
-                    inventory.setItem(11, SciFiItems.Bogen());
 
-                    inventory.setItem(18, ErfahrenItems.sword());
-                    inventory.setItem(19, ErfahrenItems.Axt());
-                    inventory.setItem(20, ErfahrenItems.bow());
 
-                    inventory.setItem(27, TheFlower.loveFlower());
                 }
                 case 3 -> {
                     inventory.setItem(10, VampiricBow.create(player));
@@ -350,23 +347,16 @@ public class InventoryUtils implements Listener {
         else{
             switch (tag) {
                 case 1 -> {
-                    inventory.setItem(9, ShopUtils.makeShopItem(Western.Schwert(player), 600, tag, 1, 1));
-                    inventory.setItem(10, ShopUtils.makeShopItem(Western.Bogen(player), 300, tag, 1, 1));
-                    inventory.setItem(11, ShopUtils.makeShopItem(Western.Rod(player), 400, tag, 1, 1));
-                    inventory.setItem(12, ShopUtils.makeShopItem(Western.Picke(player), 300, tag, 1, 1));
-                    inventory.setItem(14, ShopUtils.makeShopItem(Western.Helmet(player), 600, tag, 2, 1));
-                    inventory.setItem(15, ShopUtils.makeShopItem(Western.Chestplate(player), 630, tag, 2, 1));
-                    inventory.setItem(16, ShopUtils.makeShopItem(Western.Leggings(player), 620, tag, 2, 1));
-                    inventory.setItem(17, ShopUtils.makeShopItem(Western.Boots(player), 600, tag, 2, 1));
+                    inventory.setItem(9, ShopUtils.makeShopItem(WesternItems.Schwert(player), 600, tag, 1, 1));
+                    inventory.setItem(10, ShopUtils.makeShopItem(WesternItems.Bogen(player), 300, tag, 1, 1));
+                    inventory.setItem(11, ShopUtils.makeShopItem(WesternItems.Rod(player), 400, tag, 1, 1));
+                    inventory.setItem(12, ShopUtils.makeShopItem(WesternItems.Picke(player), 300, tag, 1, 1));
+                    inventory.setItem(14, ShopUtils.makeShopItem(WesternItems.Helmet(player), 600, tag, 2, 1));
+                    inventory.setItem(15, ShopUtils.makeShopItem(WesternItems.Chestplate(player), 630, tag, 2, 1));
+                    inventory.setItem(16, ShopUtils.makeShopItem(WesternItems.Leggings(player), 620, tag, 2, 1));
+                    inventory.setItem(17, ShopUtils.makeShopItem(WesternItems.Boots(player), 600, tag, 2, 1));
                 }
                 case 2 -> {
-                    inventory.setItem(9, ShopUtils.makeShopItem(SciFiItems.Schwert(), 800, tag, 2, 1));
-                    inventory.setItem(10, ShopUtils.makeShopItem(SciFiItems.Axt(), 900, tag, 3, 1));
-                    inventory.setItem(11, ShopUtils.makeShopItem(SciFiItems.Bogen(), 850, tag, 2, 1));
-
-                    inventory.setItem(18, ShopUtils.makeShopItem(ErfahrenItems.sword(), 800, tag, 2, 1));
-                    inventory.setItem(19, ShopUtils.makeShopItem(ErfahrenItems.Axt(), 900, tag, 3, 1));
-                    inventory.setItem(20, ShopUtils.makeShopItem(ErfahrenItems.bow(), 850, tag, 2, 1));
 
                     inventory.setItem(27, ShopUtils.makeShopItem(TheFlower.loveFlower(), 42, tag, 5, 1));
                 }

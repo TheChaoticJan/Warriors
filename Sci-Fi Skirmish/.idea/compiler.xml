@@ -8,10 +8,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Warriors" />
+        <module name="Sci-Fi Skirmish" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Sci-Fi Skirmish" target="17" />
-    </bytecodeTargetLevel>
   </component>
 </project>

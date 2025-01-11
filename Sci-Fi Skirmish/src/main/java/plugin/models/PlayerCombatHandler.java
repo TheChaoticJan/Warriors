@@ -19,7 +19,7 @@ public class PlayerCombatHandler{
     public static Map<Player, BossBar> playerBossBars = new HashMap<>();
     public static Map<Player, Integer> playerTaskIDs = new HashMap<>();
     private final Player player;
-    private static HashMap<Player, PlayerCombatHandler> playerMap = new HashMap<>();
+    private static final HashMap<Player, PlayerCombatHandler> playerMap = new HashMap<>();
     private @Getter @Setter Player lastAttacked;
     private @Getter @Setter Boolean combatStatus;
     private long timeStamp;

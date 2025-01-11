@@ -37,20 +37,10 @@ public class BowHitEvent implements Listener {
                 return;
             }
 
-                if (!damager.getItemInHand().getType().equals(Material.AIR)) {
-                    if (damager.getItemInHand().getItemMeta() != null) {
-                        if (damager.getItemInHand().getItemMeta() != null) {
-                            InventoryInteracts.checkSpecialItemDrops(damager);
-                        }
-                    }
-                }
-
-
                 if  (event.getHitEntity() instanceof Player player){
 
                     PlayerCombatHandler handler = PlayerCombatHandler.getCombatStatusByPlayer(damager);
                     handler.startCombat(player, false);
-
 
                     try {
 
@@ -76,9 +66,6 @@ public class BowHitEvent implements Listener {
                         if (event.getEntity().getType().equals(EntityType.FISHING_HOOK)) {
                             player.damage(0.1);
                             player.setVelocity(damager.getLocation().getDirection().setY(0.2).multiply(1));
-                            if (event.getEntity().getType().equals(EntityType.SNOWBALL)) {
-                                player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 60, 99));
-                            }
                         }
 
                         if (event.getEntity().getType().equals(EntityType.ARROW)) {

@@ -1,8 +1,6 @@
 package plugin.listeners.inventorylisteners;
 
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -12,14 +10,10 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
-import plugin.Main;
-import plugin.utils.inventorybuilder.SpecialItemInventories;
 import plugin.utils.itembuilder.InventoryEssentials;
-import plugin.utils.itembuilder.Western;
+import plugin.specialitems.western.WesternItems;
 
-import javax.management.ObjectName;
 import java.util.Objects;
 
 public class ClickEvent implements Listener {
@@ -84,14 +78,14 @@ public class ClickEvent implements Listener {
 
                      i.setItem(8, new ItemStack(Material.SANDSTONE, 32));
 
-                     i.setItem(0, Western.Schwert(p));
-                     i.setItem(1, Western.Rod(p));
-                     i.setItem(2, Western.Bogen(p));
-                     i.setItem(7, Western.Picke(p));
-                     i.setItem(39, Western.Helmet(p));
-                     i.setItem(38, Western.Chestplate(p));
-                     i.setItem(37, Western.Leggings(p));
-                     i.setItem(36, Western.Boots(p));
+                     i.setItem(0, WesternItems.Schwert(p));
+                     i.setItem(1, WesternItems.Rod(p));
+                     i.setItem(2, WesternItems.Bogen(p));
+                     i.setItem(7, WesternItems.Picke(p));
+                     i.setItem(39, WesternItems.Helmet(p));
+                     i.setItem(38, WesternItems.Chestplate(p));
+                     i.setItem(37, WesternItems.Leggings(p));
+                     i.setItem(36, WesternItems.Boots(p));
 
                      Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_ATTACK_SPEED)).setBaseValue(24);
                      p.closeInventory();

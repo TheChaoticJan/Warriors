@@ -1,4 +1,4 @@
-package plugin.utils.itembuilder;
+package plugin.specialitems.western;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;

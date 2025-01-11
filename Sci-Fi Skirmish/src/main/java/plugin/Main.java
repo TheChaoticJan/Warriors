@@ -52,7 +52,7 @@ import plugin.specialitems.holy.HolyBackpack;
 import plugin.specialitems.royal.ChesterItem;
 import plugin.specialitems.MagicStone;
 import plugin.specialitems.vampiric.VampiricBoots;
-import plugin.utils.itembuilder.HolyFeather;
+import plugin.specialitems.holy.HolyFeather;
 import plugin.specialitems.holy.HolyArmor;
 import plugin.specialitems.holy.HolyCoin;
 import plugin.specialitems.holy.HolyCookieBox;
@@ -60,6 +60,7 @@ import plugin.specialitems.vampiric.VampiricBow;
 import plugin.specialitems.vampiric.VampiricHelmet;
 import plugin.specialitems.uniques.BloodyHoe;
 import plugin.specialitems.TheFlower;
+import plugin.specialitems.western.WesternItems;
 import plugin.utils.scores.ScoreboardManager;
 import plugin.listeners.entitylisteners.interactions.*;
 
@@ -220,6 +221,8 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new AssasinSword(), this);
         getServer().getPluginManager().registerEvents(new ChesterItem(), this);
         getServer().getPluginManager().registerEvents(new MagicStone(), this);
+
+        getServer().getPluginManager().registerEvents(new WesternItems(), this);
 
         getServer().getPluginManager().registerEvents(new TheFlower(), this);
 

@@ -14,11 +14,10 @@ public class Database {
         if(connection != null){
             return connection;
         }
-        String url = "jdbc:mysql://localhost/stat_tracker";
-        String user = "root";
-        String password = "";
 
-        this.connection = DriverManager.getConnection(url, user, password);
+        String url = "jdbc:sqlite:../stat_tracker.db";
+
+        this.connection = DriverManager.getConnection(url);
         System.out.println("\u001B[32m Erfolgreich mit der Datenbank verbunden!\u001B[0m");
         return this.connection;
         }

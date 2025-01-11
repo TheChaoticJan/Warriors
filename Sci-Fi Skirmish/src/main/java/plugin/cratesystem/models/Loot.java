@@ -10,7 +10,7 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import plugin.cratesystem.CrateBook;
-import plugin.utils.itembuilder.HolyFeather;
+import plugin.specialitems.holy.HolyFeather;
 
 import java.util.ArrayList;
 import java.util.Random;

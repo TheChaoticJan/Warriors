@@ -1,4 +1,4 @@
-package plugin.utils.itembuilder;
+package plugin.specialitems.holy;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -14,7 +14,6 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import plugin.Main;
-import plugin.specialitems.holy.HolyUtil;
 import org.bukkit.event.Listener;
 
 import java.util.ArrayList;

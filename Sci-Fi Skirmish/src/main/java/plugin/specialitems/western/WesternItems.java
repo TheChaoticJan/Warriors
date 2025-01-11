@@ -1,20 +1,68 @@
-package plugin.utils.itembuilder;
+package plugin.specialitems.western;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
+import org.checkerframework.framework.qual.DefaultQualifier;
+import plugin.Main;
+import plugin.utils.essentials.Bossbars;
 
+import java.awt.*;
+import java.lang.reflect.Array;
+import java.nio.charset.MalformedInputException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
+import java.util.Objects;
+import java.util.Random;
 
-public class Western {
+public class WesternItems implements Listener {
+
+    private static final NamespacedKey key = new NamespacedKey(Main.getInstance(), "western");
 
     private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-    private static final String date = "§8• §7§oGefunden: §4§o" + simpleDateFormat.format(new Date());
+
+    private static BossBar bossBar;
+
+    private static ArrayList<Component> lore(){
+        ArrayList<Component> list = new ArrayList<>();
+        list.add(MiniMessage.miniMessage().deserialize("<i:false><gold>Western"));
+        list.add(Component.empty());
+        list.add(Component.text(""));
+
+        return list;
+    }
+
+    private static void sendBossBar(Player player) {
+
+        if(bossBar != null){
+            bossBar.removeAll();
+        }
+
+        bossBar = Bukkit.createBossBar("§6§lWestern §c§lDrop", BarColor.PURPLE, BarStyle.SOLID);
+        bossBar.addPlayer(player);
+
+        Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
+            bossBar.removeAll();
+            bossBar = null;
+        }, 60); // 40 ticks = 2 seconds
+    }
 
     public static ItemStack Schwert(Player p){
         ItemStack Sword = new ItemStack(Material.DIAMOND_SWORD);
@@ -23,14 +71,9 @@ public class Western {
         SwordMeta.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
         SwordMeta.addEnchant(Enchantment.DURABILITY, 3, true);
         SwordMeta.addEnchant(Enchantment.MENDING, 1, true);
-        ArrayList<String> SwordLore = new ArrayList<>();
-        SwordLore.add("");
-        SwordLore.add("§8• §7Erhalten vom §6Western§7-§4Gott§7...");
-        SwordLore.add("   §7» Dieses Schwert gab dir der §6Western§7-§4Gott§7,");
-        SwordLore.add("   §7  um deine Gegner in die §4Hölle §7zu combo`n!");
-        SwordLore.add("");
-        SwordLore.add(date);
-        SwordMeta.setLore(SwordLore);
+
+        SwordMeta.getPersistentDataContainer().set(key, PersistentDataType.BYTE, (byte) 0);
+
         if(!(p.getName().endsWith("s"))) {
             SwordMeta.setDisplayName("§c§kaa §4§l" + p.getName() + "`s §6§lSäbel §c§kaa");
         }
@@ -47,16 +90,7 @@ public class Western {
         RodMeta.setUnbreakable(true);
         RodMeta.addEnchant(Enchantment.DURABILITY, 1, true);
         RodMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        RodMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-        ArrayList<String> RodLore = new ArrayList<>();
-        RodLore.add("");
-        RodLore.add("§8• §7Erhalten vom §6Western§7-§4Gott§7...");
-        RodLore.add("   §7» Diese Angel ist unzerstörber, so ");
-        RodLore.add("   §7  wie es der §6Western§7-§4Gott §7wollte!");
-        RodLore.add("");
-        RodLore.add(date);
-        RodLore.add("");
-        RodMeta.setLore(RodLore);
+
         if(!(p.getName().endsWith("s"))) {
             RodMeta.setDisplayName("§c§kaa §4§l" + p.getName() + "`s §6§lRod §c§kaa");
         }
@@ -74,14 +108,7 @@ public class Western {
         PickMeta.addEnchant(Enchantment.DIG_SPEED, 100, true);
         PickMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         PickMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-        ArrayList<String> PickLore = new ArrayList<>();
-        PickLore.add("");
-        PickLore.add("§8• §7Erhalten vom §6Western§7-§4Gott§7...");
-        PickLore.add("   §7» Diese Spitzhacke ist unzerstörbar und ");
-        PickLore.add("   §7  gut geignet §6Sandstein §7abzubauen!");
-        PickLore.add("");
-        PickLore.add(date);
-        PickMeta.setLore(PickLore);
+
         if(!(p.getName().endsWith("s"))) {
             PickMeta.setDisplayName("§c§kaa §4§l" + p.getName() + "`s §6§lSandsteinpicke §c§kaa");
         }
@@ -100,15 +127,7 @@ public class Western {
         bowmeta.addEnchant(Enchantment.MENDING, 1, true);
         bowmeta.addEnchant(Enchantment.ARROW_FIRE, 2, true);
         bowmeta.addEnchant(Enchantment.ARROW_KNOCKBACK,2, true);
-        ArrayList<String> BowLore = new ArrayList<>();
-        BowLore.add("");
-        BowLore.add("§8• §7Erhalten vom §6Western§7-§4Gott§7...");
-        BowLore.add("    §7» Dieser Bogen wurde vom §6Western§7-§4Gott");
-        BowLore.add("   §7   geschaffen, um das §6spammen §7zu meistern!");
-        BowLore.add("");
-        BowLore.add(date);
-        BowLore.add("");
-        bowmeta.setLore(BowLore);
+
         if(!(p.getName().endsWith("s"))) {
             bowmeta.setDisplayName("§c§kaa §4§l" + p.getName() + "`s §6§lBowspammer §c§kaa");
         }
@@ -183,4 +202,66 @@ public class Western {
         Boots.setItemMeta(meta4);
         return Boots;
     }
+
+    @EventHandler
+    private void bowHitEvent(ProjectileHitEvent event) {
+
+        if(event.getEntity().getShooter() instanceof Player player){
+
+            if(player.getInventory().getItemInMainHand().getType() == Material.AIR){return;}
+            if(!player.getInventory().getItemInMainHand().hasItemMeta()){return;}
+            if(player.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(key)){
+                checkItemDrops(player);
+            }
+        }
+
+    }
+
+    @EventHandler
+    private void playerApplyDamageEvent(EntityDamageByEntityEvent event) {
+
+        if(event.getDamager() instanceof Player player){
+
+            if(player.getInventory().getItemInMainHand().getType() == Material.AIR){return;}
+            if(!player.getInventory().getItemInMainHand().hasItemMeta()){return;}
+            if(player.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(key)){
+                checkItemDrops(player);
+            }
+
+        }
+
+    }
+    private static void checkItemDrops(Player player) {
+
+        boolean bl = false;
+        final Material [] items = {Material.ENDER_PEARL, Material.EXPERIENCE_BOTTLE, Material.TNT, Material.COBWEB};
+        final int [] amounts = {1, 4, 3, 2};
+
+        int random = (int) (Math.random() * 300) + 1;
+        if (random == 1) {
+
+            //Selecting which random ItemStack to drop
+            int randomDrop = new Random().nextInt(0, 3);
+            Material material = items[randomDrop];
+            int amount = amounts[randomDrop];
+
+
+            for (int l = 0; l < 36; l++) {
+                if (player.getInventory().getItem(l) == null || Objects.requireNonNull(player.getInventory().getItem(l)).getType() == material && Objects.requireNonNull(player.getInventory().getItem(l)).getAmount() <= 15) {
+                    bl = true;
+                }
+            }
+            if (bl) {
+                player.getInventory().addItem(new ItemStack(material, amount));
+            } else {
+                int x = player.getLocation().getBlockX();
+                int y = player.getLocation().getBlockY();
+                int z = player.getLocation().getBlockZ();
+                player.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), new ItemStack(material, amount));
+            }
+
+            sendBossBar(player);
+        }
+    }
 }
+

@@ -11,6 +11,8 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 import plugin.Main;
@@ -27,7 +29,6 @@ import java.util.*;
 public class Crate implements Listener{
 
     public Crate(){}
-
     private int maxHealth;
     public static final String name = "<gradient:#FFE259:#FFA751>Nachschubkiste <dark_gray>» <gray>???";
     private @Getter String rarity;
@@ -35,7 +36,7 @@ public class Crate implements Listener{
     private static HashMap<String, Crate> keyMap = new HashMap<>();
     private @Getter ArmorStand stand;
 
-    public Crate( Entity player, int x, float y, int z){
+    public Crate(Entity player, int x, float y, int z){
 
         String key = TextHandler.generateRandomString(8);
         this.maxHealth = new Random().nextInt((120 - 80) + 1) + 80;
@@ -89,16 +90,21 @@ public class Crate implements Listener{
     }
 
     @EventHandler
-    public void DeathEvent(EntityRemoveFromWorldEvent event){
+    public void deathEvent(EntityRemoveFromWorldEvent event){
+
         if(event.getEntity() instanceof ArmorStand stand) {
 
+            if(event.getEntity().getCustomName() == null){return;}
             @NotNull String playerName = Objects.requireNonNull(event.getEntity().getCustomName());
             Player p = Bukkit.getServer().getPlayerExact(playerName);
 
             if (p == null) {
                 return;
             }
-            event.getEntity().getPassengers().clear();
+
+            if(!event.getEntity().getPassengers().isEmpty()) {
+                event.getEntity().getPassengers().clear();
+            }
 
             Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> {
                 int i = 5;
@@ -109,8 +115,6 @@ public class Crate implements Listener{
 
             }, 20 * 30);
 
-
-            Entity e = event.getEntity();
 
             PlayerStats stats = null;
             try {
@@ -127,16 +131,16 @@ public class Crate implements Listener{
             }
 
 
-            int x = e.getLocation().getBlockX();
-            double y = e.getLocation().getBlockY() + 1.7;
-            int z = e.getLocation().getBlockZ();
+            int x = stand.getLocation().getBlockX();
+            double y = stand.getLocation().getBlockY() + 1.7;
+            int z = stand.getLocation().getBlockZ();
 
             Crate crate = Crate.getCrateByKey(event.getEntity().getPersistentDataContainer().get(new NamespacedKey(Main.getInstance(), "key"), PersistentDataType.STRING));
 
             p.sendActionBar(MiniMessage.miniMessage().deserialize("<dark_gray><<red>Tot<dark_gray>> " + TextHandler.get("crate") + " <dark_gray>▸ " + TextHandler.get(crate.getRarity())));
 
             for(ItemStack stack : crate.getLootTable()) {
-                Item item = e.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), stack);
+                Item item = stand.getWorld().dropItem(new Location(Bukkit.getWorld("world"), x, y, z), stack);
                 if (item.getItemStack().getType().equals(Material.ENCHANTED_BOOK)) {
                     item.setCustomName(item.getItemStack().getItemMeta().getDisplayName());
                     item.setCustomNameVisible(true);
@@ -164,6 +168,15 @@ public class Crate implements Listener{
             }
         }
     }
+
+    @EventHandler
+    private void rightClickArmorStandEvent(PlayerArmorStandManipulateEvent event){
+
+            if(event.getRightClicked().getPersistentDataContainer().has(new NamespacedKey(Main.getInstance(), "key"))){
+                event.setCancelled(true);
+            }
+
+        }
 
 
     @EventHandler

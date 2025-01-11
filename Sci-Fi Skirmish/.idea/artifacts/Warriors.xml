@@ -4,6 +4,7 @@
     <root id="archive" name="Warriors.jar">
       <element id="library" level="project" name="Maven: org.projectlombok:lombok:1.18.32" />
       <element id="module-output" name="Warriors" />
+      <element id="module-output" name="Sci-Fi Skirmish" />
     </root>
   </artifact>
 </component>
