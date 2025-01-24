@@ -15,7 +15,7 @@ public class Database {
             return connection;
         }
 
-        String url = "jdbc:sqlite:../stat_tracker.db";
+        String url = "jdbc:sqlite:stat_tracker.db";
 
         this.connection = DriverManager.getConnection(url);
         System.out.println("\u001B[32m Erfolgreich mit der Datenbank verbunden!\u001B[0m");

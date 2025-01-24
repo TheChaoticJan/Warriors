@@ -9,7 +9,6 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
@@ -46,8 +45,6 @@ public class TitanSword implements Listener, Unique{
 
         meta.displayName(MiniMessage.miniMessage().deserialize("<i:false><#9d2323><obf>a</obf><gradient:#824622:#b5185c> <b>Titanensäbel</b> <#9d2323><obf>a"));
 
-
-        meta.setUnbreakable(true);
         meta.addEnchant(Enchantment.DURABILITY, 4, true);
         meta.addEnchant(Enchantment.MENDING, 1, true);
 
