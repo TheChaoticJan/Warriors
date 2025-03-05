@@ -38,6 +38,24 @@ public class JoinEvent implements Listener {
 
         Player player = event.getPlayer();
 
+        try {
+            PlayerStats stats = this.plugin.getDatabase().findPlayerStats(player);
+
+            if (stats == null) {
+                stats = new PlayerStats(player);
+                this.plugin.getDatabase().createPlayerStats(stats);
+            }
+
+            for (Player p : Bukkit.getOnlinePlayers()) {
+                Main.getInstance().getTablistManager().setTablist(p);
+                Main.getInstance().getTablistManager().setScoreboard(p);
+            }
+            Main.getInstance().getTablistManager().setAllPlayerTeams();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         Objects.requireNonNull(event.getPlayer().getAttribute(Attribute.GENERIC_ATTACK_SPEED)).setBaseValue(30);
 
         try{
@@ -82,23 +100,7 @@ public class JoinEvent implements Listener {
 
         }
 
-        try {
-            PlayerStats stats = this.plugin.getDatabase().findPlayerStats(player);
 
-            if (stats == null) {
-                stats = new PlayerStats(player);
-                this.plugin.getDatabase().createPlayerStats(stats);
-            }
-
-            for (Player p : Bukkit.getOnlinePlayers()) {
-                Main.getInstance().getTablistManager().setTablist(p);
-                Main.getInstance().getTablistManager().setScoreboard(p);
-            }
-            Main.getInstance().getTablistManager().setAllPlayerTeams();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
 

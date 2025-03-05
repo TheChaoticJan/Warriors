@@ -15,6 +15,7 @@ import plugin.models.TextHandler;
 import plugin.ranksystem.models.RankHandler;
 
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class ChatEvent implements Listener {
 
@@ -103,6 +104,11 @@ public class ChatEvent implements Listener {
             }
 
             String rank = TextHandler.setRankGradient(stats.getRank()) + event.getPlayer().getName() + " </gradient><gray>▸<white>";
+
+            if(!Objects.equals(stats.getClan(), "")){
+                rank = TextHandler.setRankGradient(stats.getRank()) + event.getPlayer().getName() + " </gradient><dark_gray>[<yellow>" + stats.getClan() + "<dark_gray>] <gray>▸<white>";
+            }
+
 
             if (event.getMessage().startsWith("!tc") && RankHandler.isTeamler(stats.getRank())) {
                 event.setCancelled(true);

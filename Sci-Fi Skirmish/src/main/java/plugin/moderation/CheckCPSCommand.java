@@ -10,6 +10,7 @@ import org.bukkit.entity.Display;
 import org.bukkit.entity.LargeFireball;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -77,6 +78,14 @@ public class CheckCPSCommand implements Listener, CommandExecutor, TabCompleter 
             leftClickCounts.put(playerId, leftClickCounts.getOrDefault(playerId, 0) + 1);
         }
 
+    }
+
+    @EventHandler
+    public void onPlayerHit(EntityDamageByEntityEvent event) {
+        Player player = (Player) event.getDamager();
+        UUID playerId = player.getUniqueId();
+
+            leftClickCounts.put(playerId, leftClickCounts.getOrDefault(playerId, 0) + 1);
     }
 
     private void toggleActionBarUpdater(Player sender, Player toCheck) {

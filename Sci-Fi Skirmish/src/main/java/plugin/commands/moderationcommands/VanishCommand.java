@@ -1,5 +1,8 @@
 package plugin.commands.moderationcommands;
 
+import net.kyori.adventure.text.Component;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.Team;
 import plugin.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -25,7 +28,9 @@ public class VanishCommand implements CommandExecutor, TabCompleter {
         @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
 
-                if(sender instanceof Player p){
+        if(sender instanceof Player p){
+
+
             if(plugin.VanishList.contains(p.getUniqueId())){
                 for(Player people : Bukkit.getOnlinePlayers()){
                     people.showPlayer(plugin, p);
@@ -36,6 +41,7 @@ public class VanishCommand implements CommandExecutor, TabCompleter {
                 p.sendActionBar("§7Vanish §8» §cDeaktiviert");
                 p.setPlayerListName(p.getDisplayName());
                 p.setCustomNameVisible(true);
+
             }else{
                 for(Player people : Bukkit.getOnlinePlayers()){
 
@@ -49,7 +55,6 @@ public class VanishCommand implements CommandExecutor, TabCompleter {
                         exception.printStackTrace();
                     }
 
-
                 }
                 p.setInvulnerable(true);
                 p.setAllowFlight(true);
@@ -59,7 +64,6 @@ public class VanishCommand implements CommandExecutor, TabCompleter {
             }
 
         }
-
 
         return true;
     }

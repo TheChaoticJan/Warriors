@@ -45,6 +45,7 @@ commands:
   cps:
     permission: permission.mod
   specialize:
+  createclan:
 
 permissions:
   permission.mod:

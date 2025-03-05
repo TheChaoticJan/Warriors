@@ -13,6 +13,7 @@ public class PlayerStats {
     private @Getter @Setter String name;
     private @Getter @Setter String rank;
     private @Getter @Setter String clan;
+    private @Getter @Setter String clan_rank;
     private @Getter @Setter int xp;
     private @Getter @Setter int deaths;
     private @Getter @Setter int kills;
@@ -21,7 +22,7 @@ public class PlayerStats {
     private @Getter @Setter boolean [] perks; //sorted as: first, second, third, ...
     private @Getter @Setter int [] infobarValues; // sorted as: first, second, third
 
-    public PlayerStats(Player player, String rank, String clan, int xp, int deaths, int kills, int [] crates, boolean [] perks, int [] infobarValues) {
+    public PlayerStats(Player player, String rank, String clan, String clan_rank, int xp, int deaths, int kills, int [] crates, boolean [] perks, int [] infobarValues) {
         this.uuid = player.getUniqueId().toString();
         this.name = player.getName();
         this.rank = rank;
@@ -29,12 +30,13 @@ public class PlayerStats {
         this.deaths = deaths;
         this.kills = kills;
         this.clan = clan;
+        this.clan_rank = clan_rank;
         this.crates = crates;
         this.perks = perks;
         this.infobarValues = infobarValues;
     }
 
-    public PlayerStats(OfflinePlayer player, String rank, String clan, int xp, int deaths, int kills, int [] crates, boolean [] perks, int [] infobarValues) {
+    public PlayerStats(OfflinePlayer player, String rank, String clan, String clan_rank, int xp, int deaths, int kills, int [] crates, boolean [] perks, int [] infobarValues) {
         this.uuid = player.getUniqueId().toString();
         this.name = player.getName();
         this.rank = rank;
@@ -42,6 +44,7 @@ public class PlayerStats {
         this.deaths = deaths;
         this.kills = kills;
         this.clan = clan;
+        this.clan_rank = clan_rank;
         this.crates = crates;
         this.perks = perks;
         this.infobarValues = infobarValues;
@@ -55,6 +58,7 @@ public class PlayerStats {
         this.kills = 0;
         this.deaths = 0;
         this.clan = "";
+        this.clan_rank = "";
         this.crates = new int[]{0, 0, 0, 0, 0};
         this.perks = new boolean[]{false, false, false, false, false, false};
         this.infobarValues = new int[]{1, 2, 3};

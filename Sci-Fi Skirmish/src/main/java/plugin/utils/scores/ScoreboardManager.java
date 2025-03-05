@@ -105,6 +105,7 @@ public class ScoreboardManager {
 
     public void removeAllPlayerTeams(){
 
+
         for(Team team : scoreboard.getTeams()) {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (team.hasPlayer(player)) {
