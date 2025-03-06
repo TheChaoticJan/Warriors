@@ -46,6 +46,7 @@ commands:
     permission: permission.mod
   specialize:
   createclan:
+  deleteclan:
 
 permissions:
   permission.mod:

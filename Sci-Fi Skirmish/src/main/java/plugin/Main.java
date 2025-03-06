@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
+import plugin.clans.commands.DeleteClanCommand;
 import plugin.commands.databasedependant.PerkCommand;
 import plugin.commands.databasedependant.StatsCommand;
 import plugin.commands.databasedependant.TopCommand;
@@ -260,7 +261,9 @@ public final class Main extends JavaPlugin {
         Objects.requireNonNull(getCommand("kick")).setExecutor(new KickCommand());
         Objects.requireNonNull(getCommand("cps")).setExecutor(new CheckCPSCommand());
         Objects.requireNonNull(getCommand("specialize")).setExecutor(new SpecializeCommand());
+
         Objects.requireNonNull(getCommand("createclan")).setExecutor(new CreateClanCommand());
+        Objects.requireNonNull(getCommand("deleteclan")).setExecutor(new DeleteClanCommand());
     }
 
     private void setupTablist() {

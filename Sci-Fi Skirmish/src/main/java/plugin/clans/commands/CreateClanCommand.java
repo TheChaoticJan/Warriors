@@ -14,6 +14,7 @@ import plugin.models.PlayerStats;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class CreateClanCommand implements CommandExecutor, TabCompleter {
     @Override
@@ -39,12 +40,15 @@ public class CreateClanCommand implements CommandExecutor, TabCompleter {
                 return true;
             }
 
-            Main.getInstance().getDatabase().safeClan(name, tag, 0);
-            sender.sendMessage("§aDu hast Erfolgreich den Clan §6" + name + " §8[§e" + tag + "§8] §aerstellt");
-
             try
             {
               PlayerStats stats =  Main.getInstance().getDatabase().findPlayerStats(player);
+
+              if(!Objects.equals(stats.getClan(), "")){
+                  player.sendMessage("§cDu kannst keinen neuen Clan erstellen, solange du Teil eines Clans bist!");
+                  return true;
+              }
+
               stats.setClan(tag);
               stats.setClan_rank("Leader");
               Main.getInstance().getDatabase().updatePlayerStats(stats);
@@ -53,6 +57,9 @@ public class CreateClanCommand implements CommandExecutor, TabCompleter {
             {
                 throw new RuntimeException(e);
             }
+
+            Main.getInstance().getDatabase().safeClan(name, tag, 0);
+            sender.sendMessage("§aDu hast erfolgreich den Clan §6" + name + " §8[§e" + tag + "§8] §aerstellt!");
 
         }
         return true;

@@ -245,8 +245,29 @@ public class Database {
         }
         catch (SQLException e)
         {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
+    }
+
+    public void deleteClan(String tag)
+    {
+        try
+        {
+            PreparedStatement statement = getConnection().prepareStatement("DELETE FROM clans WHERE `tag` = ?");
+            statement.setString(1, tag);
+            statement.executeUpdate();
+
+            statement = getConnection().prepareStatement("UPDATE player_stats SET `clan`='' WHERE `clan` = ?");
+            statement.setString(1, tag);
+            statement.executeUpdate();
+
+            statement.close();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
 }
